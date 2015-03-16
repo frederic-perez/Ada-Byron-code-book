@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<sked>
+  <version>2</version>
+  <flight>
+    <carrier>BA</carrier>
+    <number>4001</number>
+    <date>2011-07-21</date>
+  </flight>
+  <flight cancelled="true">
+    <carrier>BA</carrier>
+    <number>4002</number>
+    <date>2011-07-21</date>
+  </flight>
+</sked>
