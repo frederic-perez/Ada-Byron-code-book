@@ -12,7 +12,7 @@
 int
 main(int /*argc*/, char* argv[])
 {
-	std::cout << __func__ << " started!\n" << std::endl;
+	std::cout << __func__ << " started...\n" << std::endl;
 
 	namespace ABcb = Ada_Byron_code_book;
 	
@@ -33,6 +33,8 @@ main(int /*argc*/, char* argv[])
 	std::clog << "ABcb::ParseXML " << (succeeded ? "succeeded" : "failed")
 		<< std::endl;
 
+	std::cout << '\n' << __func__ << " finished!\n" << std::endl;
+	
 	return EXIT_SUCCESS;
 }
 
