@@ -3,9 +3,9 @@
 This "book" gathers a collection of C++ code snippets ready to be used as examples or reused in your own projects. The name Ada Byron in the repository title is a homage to the first software programmer ([Wikipedia entry](http://en.wikipedia.org/wiki/Ada_Lovelace)).
 
 I use to build binaries for these settings:
-- Windows 8.1: vs12 (Visual Studio 2013)
-- Ubuntu: g++ 4.8.2, clang++ 3.4.1
-- Apple OS X: LLVM
+- Microsoft Windows 8.1: Visual Studio 12 2013 Win64
+- Linux Ubuntu: g++ 4.8.2, clang++ 3.4.1
+- Apple OS X: Xcode 6.2 (LLVM, clang++) 64-bit
 
 The "book" uses C++11 features, and includes:
 - Boost examples, using both just headers and installed components:
