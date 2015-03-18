@@ -1,5 +1,7 @@
 // --
 
+#pragma once
+
 // Based on the example by Andrzej Krzemienski
 // in https://akrzemi1.wordpress.com/examples/parsing-xml/
 
