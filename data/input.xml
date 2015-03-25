@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<sked>
+<flights>
   <version>2</version>
   <flight>
     <carrier>BA</carrier>
@@ -11,4 +11,4 @@
     <number>4002</number>
     <date>2011-07-21</date>
   </flight>
-</sked>
+</flights>
