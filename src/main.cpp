@@ -5,6 +5,7 @@
 
 #include "algorithm-string-pool.h"
 #include "aux-raw.h"
+#include "aux-spy.h"
 #include "filesystem-pool.h"
 #include "lexical-cast-pool.h"
 #include "xml-parser.h"
@@ -15,6 +16,10 @@ main(int /*argc*/, char* argv[])
 	std::cout << __func__ << " started...\n" << std::endl;
 
 	namespace ABcb = Ada_Byron_code_book;
+
+	std::cout << "Using Boost version ";
+	ABcb::spy::BoostVersion(std::cout);
+	std::cout << '\n' << std::endl;
 	
 	const std::string exeFile = argv[0];
 	ABcb::ExamplesOfFileSystem(exeFile);

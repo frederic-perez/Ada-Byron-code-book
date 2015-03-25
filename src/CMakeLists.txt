@@ -21,6 +21,7 @@ endif ()
 
 set(SRC_LIST
 	aux-raw.h
+	aux-spy.cpp aux-spy.h
 	algorithm-string-pool.cpp algorithm-string-pool.h
 	main.cpp
 	filesystem-pool.cpp filesystem-pool.h
