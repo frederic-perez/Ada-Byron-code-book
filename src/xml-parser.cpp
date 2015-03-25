@@ -16,11 +16,12 @@
 #endif
 #include <vector>
 
-//#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
 #ifdef XML_DATE_TRANSLATOR_20150325
 #include <boost/date_time/gregorian/gregorian.hpp>
 #endif
+//#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+#include <boost/version.hpp>
 
 #include "aux-raw.h"
 #include "XML-parser.h"
@@ -110,8 +111,7 @@ read(std::istream& a_is, Flights& a_flights)
 	read_xml(a_is, pt);
 	 
 	// traverse pt
-	for (const ptree::value_type& v : pt.get_child("flights")) 
-	{
+	for (const ptree::value_type& v : pt.get_child("flights")) {
 		if (v.first == "flight") {
 			Flight f;
 			f.carrier = v.second.get<std::string>("carrier");
@@ -139,7 +139,13 @@ write(const Flights& a_flights, std::ostream& a_os)
 		if (flight.cancelled)
 			node.put("<xmlattr>.cancelled", true);
 	}
-	write_xml(a_os, pt);
+
+#if BOOST_VERSION >= 105700
+	boost::property_tree::xml_writer_settings<std::string> settings('\t', 1);
+#else
+	boost::property_tree::xml_writer_settings<char> settings('\t', 1);
+#endif
+	write_xml(a_os, pt, settings); //write_xml(a_os, pt);
 }
 
 } // namespace
