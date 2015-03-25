@@ -17,9 +17,8 @@ main(int /*argc*/, char* argv[])
 
 	namespace ABcb = Ada_Byron_code_book;
 
-	std::cout << "Using Boost version ";
-	ABcb::spy::BoostVersion(std::cout);
-	std::cout << '\n' << std::endl;
+	std::cout << "Using Boost version " << ABcb::spy::BoostVersion << '\n'
+		<< std::endl;
 	
 	const std::string exeFile = argv[0];
 	ABcb::ExamplesOfFileSystem(exeFile);

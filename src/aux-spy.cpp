@@ -6,14 +6,15 @@
 
 namespace ABcb = Ada_Byron_code_book;
 
-void
+std::ostream&
 ABcb::spy::BoostVersion(std::ostream& a_os)
 {
-	a_os
-		<< BOOST_VERSION / 100000 << "."  // major version
-		<< BOOST_VERSION / 100 % 1000 << "."  // minior version
-		<< BOOST_VERSION % 100                // patch level
-		<< std::flush;
+	return 
+		a_os
+			<< BOOST_VERSION / 100000 << "."  // major version
+			<< BOOST_VERSION / 100 % 1000 << "."  // minior version
+			<< BOOST_VERSION % 100                // patch level
+			<< std::flush;
 }
 
 // -- eof
