@@ -13,13 +13,16 @@
 #include "aux-raw.h"
 #include "XML-parser.h"
 
-#ifdef DATETRANSLATOR
+//#include <boost/property_tree/ptree.hpp>
+#include <boost/property_tree/xml_parser.hpp>
+
+#ifdef XML_DATE_TRANSLATOR_20150325
 
 namespace boost {
 namespace property_tree {
  
 template<> struct translator_between<std::string, Date> {
-		typedef DateTranslator type;
+		typedef XML_DATE_TRANSLATOR_20150325 type;
 };
 
 } // namespace property_tree
@@ -29,7 +32,7 @@ template<> struct translator_between<std::string, Date> {
 
 namespace {
 
-Sked
+Flights
 read(std::istream& is)
 {
 	// populate tree structure pt
@@ -38,7 +41,7 @@ read(std::istream& is)
 	read_xml(is, pt);
 	 
 	// traverse pt
-	Sked ans;
+	Flights ans;
 	for (const ptree::value_type& v : pt.get_child("sked")) {
 		if (v.first == "flight") {
 			Flight f;
@@ -53,7 +56,7 @@ read(std::istream& is)
 }
  
 void
-write(Sked sked, std::ostream & os)
+write(Flights sked, std::ostream & os)
 {
 	using boost::property_tree::ptree;
 	ptree pt;
@@ -81,7 +84,7 @@ Ada_Byron_code_book::ParseXML(
 	std::clog << __func__ << " started..." << std::endl;
 	try {
 		std::ifstream input(a_inputFilename);
-		Sked sked = read(input);
+		Flights sked = read(input);
 		std::clog << "  ParseXML: Read(\"" << a_inputFilename << "\") finished"
 			<< std::endl;
 		std::ofstream output(a_outputFilename);

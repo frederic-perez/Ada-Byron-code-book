@@ -10,18 +10,19 @@
 // This demonstrates how to use Boost.PropertyTree
 // to read and write XML files.
 
-#include <locale>
-#include <string>
+#undef XML_DATE_TRANSLATOR_20150325
 
-#undef DATETRANSLATOR
-#ifdef DATETRANSLATOR
+#ifdef XML_DATE_TRANSLATOR_20150325
+#include <locale>
+#endif
+#include <string>
+#include <vector>
+
+#ifdef XML_DATE_TRANSLATOR_20150325
 #include <boost/date_time/gregorian/gregorian.hpp>
 #endif
 
-#include <boost/property_tree/ptree.hpp>
-#include <boost/property_tree/xml_parser.hpp>
-
-#ifdef DATETRANSLATOR
+#ifdef XML_DATE_TRANSLATOR_20150325
 typedef boost::gregorian::date Date;
 #else
 typedef std::string Date;
@@ -35,11 +36,11 @@ struct Flight
 	bool cancelled;
 };
  
-typedef std::vector<Flight> Sked;
+typedef std::vector<Flight> Flights;
 
-#ifdef DATETRANSLATOR
+#ifdef XML_DATE_TRANSLATOR_20150325
 
-class DateTranslator
+class XML_DATE_TRANSLATOR_20150325
 {
 	typedef boost::date_time::date_facet<Date, char> tOFacet;
 	typedef boost::date_time::date_input_facet<Date, char> tIFacet;
@@ -55,7 +56,7 @@ public:
 	typedef std::string internal_type;
 	typedef Date external_type;
 	 
-	DateTranslator() : locale_(isoDateLocale()) {}
+	XML_DATE_TRANSLATOR_20150325() : locale_(isoDateLocale()) {}
 	 
 	boost::optional<external_type>
 	get_value(internal_type const& v)
