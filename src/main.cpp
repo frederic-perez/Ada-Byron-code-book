@@ -20,7 +20,10 @@ main(int /*argc*/, char* argv[])
 
 	std::cout
 		<< "Using Boost version " << ABcb::spy::BoostVersion << '\n'
+		<< "Using Clang version " << ABcb::spy::ClangVersion << '\n'
 		<< "Using GNU g++ version " << ABcb::spy::GNUGppVersion << '\n'
+		<< "Using Visual Studio C/C++ compiler version "
+			<< ABcb::spy::VisualStudioCppCompilerVersion << '\n'
 		<< std::endl;
 
 	ABcb::cpp11::TryBadCode();
