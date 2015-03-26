@@ -23,6 +23,7 @@ set(SRC_LIST
 	aux-raw.h
 	aux-spy.cpp aux-spy.h
 	algorithm-string-pool.cpp algorithm-string-pool.h
+	cpp11-pool.cpp cpp11-pool.h
 	main.cpp
 	filesystem-pool.cpp filesystem-pool.h
 	lexical-cast-pool.cpp lexical-cast-pool.h

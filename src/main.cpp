@@ -6,6 +6,7 @@
 #include "algorithm-string-pool.h"
 #include "aux-raw.h"
 #include "aux-spy.h"
+#include "cpp11-pool.h"
 #include "filesystem-pool.h"
 #include "lexical-cast-pool.h"
 #include "xml-parser.h"
@@ -17,9 +18,15 @@ main(int /*argc*/, char* argv[])
 
 	namespace ABcb = Ada_Byron_code_book;
 
-	std::cout << "Using Boost version " << ABcb::spy::BoostVersion << '\n'
+	std::cout
+		<< "Using Boost version " << ABcb::spy::BoostVersion << '\n'
+		<< "Using GNU g++ version " << ABcb::spy::GNUGppVersion << '\n'
 		<< std::endl;
-	
+
+	ABcb::cpp11::TryBadCode();
+	ABcb::cpp11::TestIfAConstParameterCanBeModified(42);
+	ABcb::cpp11::UsingTuple();
+
 	const std::string exeFile = argv[0];
 	ABcb::ExamplesOfFileSystem(exeFile);
 	std::cout << std::endl;
