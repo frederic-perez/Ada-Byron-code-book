@@ -9,6 +9,7 @@
 #include "cpp11-pool.h"
 #include "filesystem-pool.h"
 #include "lexical-cast-pool.h"
+#include "preprocessor-pool.h"
 #include "xml-parser.h"
 
 int
@@ -24,6 +25,8 @@ main(int /*argc*/, char* argv[])
 		<< "Using GNU g++ version " << ABcb::spy::GNUGppVersion << '\n'
 		<< "Using Visual Studio C/C++ compiler version "
 			<< ABcb::spy::VisualStudioCppCompilerVersion << '\n'
+		<< "List of preprocessor defines:\n"
+			<< ABcb::spy::ListOfPreprocessorDefines
 		<< std::endl;
 
 	ABcb::cpp11::TryBadCode();

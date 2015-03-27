@@ -3,6 +3,7 @@
 #include <boost/version.hpp>
 
 #include "aux-spy.h"
+#include "preprocessor-pool.h"
 
 namespace ABcb = Ada_Byron_code_book;
 

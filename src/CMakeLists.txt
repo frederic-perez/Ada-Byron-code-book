@@ -27,6 +27,7 @@ set(SRC_LIST
 	main.cpp
 	filesystem-pool.cpp filesystem-pool.h
 	lexical-cast-pool.cpp lexical-cast-pool.h
+	preprocessor-pool.cpp preprocessor-pool.h
 	xml-parser.cpp xml-parser.h
 )
 
