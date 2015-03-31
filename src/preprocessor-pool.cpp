@@ -34,8 +34,9 @@ ABcb::spy::ListOfPreprocessorDefines(std::ostream& a_os)
 #ifdef _MSC_VER
 			<< pad << "_MSC_VER = " << _MSC_VER << '\n'
 #endif
-#ifdef MY_GNUGPP_VERSION
-			<< pad << "MY_GNUGPP_VERSION = " << MY_GNUGPP_VERSION << '\n'
+#ifdef ADA_BYRON__GNUGPP_VERSION
+			<< pad << "ADA_BYRON__GNUGPP_VERSION = " << ADA_BYRON__GNUGPP_VERSION
+			<< '\n'
 #endif
 			<< std::flush;
 }

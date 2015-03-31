@@ -39,10 +39,10 @@ ABcb::spy::GNUGppVersion(std::ostream& a_os)
 {
 	return 
 		a_os
-#ifdef MY_GNUGPP_VERSION
-			<< MY_GNUGPP_VERSION / 10000 << '.'	// major version
-			<< MY_GNUGPP_VERSION / 100 % 100 << '.'	// minor version
-			<< MY_GNUGPP_VERSION % 100	// patch level
+#ifdef ADA_BYRON__GNUGPP_VERSION
+			<< ADA_BYRON__GNUGPP_VERSION / 10000 << '.'	// major version
+			<< ADA_BYRON__GNUGPP_VERSION / 100 % 100 << '.'	// minor version
+			<< ADA_BYRON__GNUGPP_VERSION % 100	// patch level
 #else
 			<< "[not applicable]"
 #endif
