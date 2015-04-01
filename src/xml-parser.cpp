@@ -32,7 +32,7 @@ class DateTranslator
 {
 	typedef boost::date_time::date_facet<Date, char> tOFacet;
 	typedef boost::date_time::date_input_facet<Date, char> tIFacet;
-	std::locale locale_;
+	std::locale d_locale;
 
 	static std::locale isoDateLocale() {
 		std::locale loc = std::locale(loc, new tIFacet("%Y-%m-%d"));
@@ -44,13 +44,13 @@ public:
 	typedef std::string internal_type;
 	typedef Date external_type;
 
-	DateTranslator() : locale_(isoDateLocale()) {}
+	DateTranslator() : d_locale(isoDateLocale()) {}
 
 	boost::optional<external_type>
 		get_value(internal_type const& v)
 	{
 		std::istringstream stream(v);
-		stream.imbue(locale_);
+		stream.imbue(d_locale);
 		external_type vAns;
 		if (stream >> vAns)
 			return vAns;
@@ -62,7 +62,7 @@ public:
 		put_value(external_type const& v)
 	{
 		std::ostringstream ans;
-		ans.imbue(locale_);
+		ans.imbue(d_locale);
 		ans << v;
 		return ans.str();
 	}
@@ -90,11 +90,9 @@ typedef std::vector<Flight> Flights;
 
 namespace boost {
 namespace property_tree {
- 
 template<> struct translator_between<std::string, Date> {
-		typedef XML_DATE_TRANSLATOR_20150325 type;
+	typedef XML_DATE_TRANSLATOR_20150325 type;
 };
-
 } // namespace property_tree
 } // namespace boost
 
@@ -109,7 +107,7 @@ read(std::istream& a_is, Flights& a_flights)
 	using boost::property_tree::ptree;
 	ptree pt;
 	read_xml(a_is, pt);
-	 
+
 	// traverse pt
 	for (const ptree::value_type& v : pt.get_child("flights")) {
 		if (v.first == "flight") {
@@ -122,15 +120,15 @@ read(std::istream& a_is, Flights& a_flights)
 		}
 	}
 }
- 
+
 void
 write(const Flights& a_flights, std::ostream& a_os)
 {
 	using boost::property_tree::ptree;
 	ptree pt;
-	 
+
 	pt.add("flights.version", 3);
-	 
+
 	for (const auto& flight : a_flights) {
 		ptree& node = pt.add("flights.flight", "");
 		node.put("carrier", flight.carrier);

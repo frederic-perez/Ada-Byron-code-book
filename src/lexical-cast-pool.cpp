@@ -11,7 +11,7 @@ void
 Ada_Byron_code_book::ExamplesOfLexicalCast(const std::string& a_string)
 {
 	std::clog << __func__ << " started..." << std::endl;
-	
+
 	using boost::lexical_cast;
 	using boost::bad_lexical_cast;
 
@@ -23,7 +23,7 @@ Ada_Byron_code_book::ExamplesOfLexicalCast(const std::string& a_string)
 	const int valueIntL = lexical_cast<int>(a_string);
 	std::cout << pad << "lexical_cast<int>(\"" << a_string << "\") is "
 		<< valueIntL << std::endl;
-	
+
 	const short valueShortS = static_cast<short>(stoi(a_string));
 	std::cout << pad << "stoi(\"" << a_string << "\") is "
 		<< valueShortS << std::endl;
@@ -32,7 +32,7 @@ Ada_Byron_code_book::ExamplesOfLexicalCast(const std::string& a_string)
 		std::cout << pad << "lexical_cast<short>(\"" << a_string << "\") is "
 			<< valueShortL << std::endl;
 	} catch (const boost::bad_lexical_cast& e) {
-		std::cerr << pad << "Exception caught: " << e.what() << "\n";
+		std::cerr << pad << "Exception caught: " << e.what() << '\n';
 	}
 
 	std::clog << __func__ << " finished." << std::endl;
