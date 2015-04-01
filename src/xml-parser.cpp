@@ -47,7 +47,7 @@ public:
 	DateTranslator() : d_locale(isoDateLocale()) {}
 
 	boost::optional<external_type>
-		get_value(internal_type const& v)
+	get_value(internal_type const& v)
 	{
 		std::istringstream stream(v);
 		stream.imbue(d_locale);
@@ -59,7 +59,7 @@ public:
 	}
 
 	boost::optional<internal_type>
-		put_value(external_type const& v)
+	put_value(external_type const& v)
 	{
 		std::ostringstream ans;
 		ans.imbue(d_locale);
@@ -90,9 +90,11 @@ typedef std::vector<Flight> Flights;
 
 namespace boost {
 namespace property_tree {
+
 template<> struct translator_between<std::string, Date> {
 	typedef XML_DATE_TRANSLATOR_20150325 type;
 };
+
 } // namespace property_tree
 } // namespace boost
 
