@@ -1,5 +1,9 @@
 ## Ada Byron's code book
 
+<p align="center">
+  <img src="https://dl.dropboxusercontent.com/u/1068081/Shared-images/Ada_Byron_aged_seventeen_1832--Cr-Ed-200x200.png?raw=true" alt="Ada Byron from the Wikipedia"/>
+</p>
+
 This "book" gathers a collection of C++ code snippets ready to be used as examples or reused in your own projects. The name Ada Byron in the repository title is a homage to the first software programmer ([Wikipedia entry](http://en.wikipedia.org/wiki/Ada_Lovelace)).
 
 I use to build binaries for these settings:
