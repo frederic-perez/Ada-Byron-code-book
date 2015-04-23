@@ -20,7 +20,7 @@ else ()
 endif ()
 
 set(SRC_LIST
-	aux-raw.h
+	aux-raw.cpp aux-raw.h
 	aux-spy.cpp aux-spy.h
 	algorithm-string-pool.cpp algorithm-string-pool.h
 	cpp11-pool.cpp cpp11-pool.h

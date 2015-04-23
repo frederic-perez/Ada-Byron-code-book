@@ -33,6 +33,9 @@ main(int /*argc*/, char* argv[])
 	ABcb::cpp11::TestIfAConstParameterCanBeModified(42);
 	ABcb::cpp11::UsingTuple();
 
+	ABcb::raw::ExamplesOfRaw();
+	std::cout << std::endl;
+
 	const std::string exeFile = argv[0];
 	ABcb::ExamplesOfFileSystem(exeFile);
 	std::cout << std::endl;

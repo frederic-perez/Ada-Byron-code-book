@@ -15,4 +15,22 @@
 #define __func__ __FUNCTION__
 #endif
 
+namespace Ada_Byron_code_book {
+
+namespace raw {
+
+template<typename T>
+void
+WipeOut(T& a_t)
+{
+	a_t.clear();
+	T().swap(a_t);
+}
+
+void ExamplesOfRaw();
+
+} // namespace spy
+
+} // namespace Ada_Byron_code_book
+
 // -- eof
