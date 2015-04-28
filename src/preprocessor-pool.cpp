@@ -22,11 +22,25 @@ ABcb::spy::ListOfPreprocessorDefines(std::ostream& a_os)
 #else
 		false;
 #endif
+	const bool defined_WIN32 =
+#if defined(_WIN32)
+		true;
+#else
+		false;
+#endif
+	const bool defined_WIN64 =
+#if defined(_WIN64)
+		true;
+#else
+		false;
+#endif
 
 	return
 		a_os
 			<< std::boolalpha
 			<< pad << "defined(__clang__): " << definedClang << '\n'
+			<< pad << "defined(_WIN32): " << defined_WIN32 << '\n'
+			<< pad << "defined(_WIN64): " << defined_WIN64 << '\n'
 			<< pad << "defined(WIN32): " << definedWIN32 << '\n'
 #ifdef __GNUG__
 			<< pad << "__GNUG__ = " << __GNUG__ << '\n'
