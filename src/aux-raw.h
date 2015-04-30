@@ -19,6 +19,11 @@ namespace Ada_Byron_code_book {
 
 namespace raw {
 
+template<typename T, size_t N>
+size_t
+ArraySize(const T(&)[N])
+{	return N; }
+
 template<typename T>
 void
 WipeOut(T& a_t)
