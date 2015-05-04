@@ -6,6 +6,7 @@
 #include "algorithm-string-pool.h"
 #include "aux-raw.h"
 #include "aux-spy.h"
+#include "cli-parser.h"
 #include "cpp11-pool.h"
 #include "filesystem-pool.h"
 #include "lexical-cast-pool.h"
@@ -13,7 +14,7 @@
 #include "xml-parser.h"
 
 int
-main(int /*argc*/, char* argv[])
+main(int argc, char* argv[])
 {
 	std::cout << __func__ << " started...\n" << std::endl;
 
@@ -28,6 +29,12 @@ main(int /*argc*/, char* argv[])
 		<< "List of preprocessor defines:\n"
 			<< ABcb::spy::ListOfPreprocessorDefines
 		<< std::endl;
+
+	 bool succeeded = ABcb::cli::ParseCommandLine(argc, argv);
+	 if (!succeeded)
+		 return EXIT_FAILURE;
+
+	ABcb::cli::OutputRunInfoAndParsedCommandLine();
 
 	ABcb::cpp11::TryBadCode();
 	ABcb::cpp11::TestIfAConstParameterCanBeModified(42);
@@ -49,7 +56,7 @@ main(int /*argc*/, char* argv[])
 
 	const std::string filenameIn = "input.xml";
 	const std::string filenameOut = "output.xml";
-	const bool succeeded = ABcb::ParseXML(filenameIn, filenameOut);
+	succeeded = ABcb::ParseXML(filenameIn, filenameOut);
 	std::clog << "ABcb::ParseXML " << (succeeded ? "succeeded" : "failed")
 		<< std::endl;
 

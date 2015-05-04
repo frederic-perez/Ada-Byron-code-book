@@ -8,6 +8,16 @@
 
 namespace ABcb = Ada_Byron_code_book;
 
+char
+ABcb::raw::SystemSlash()
+{
+#if defined(__CYGWIN__) || defined(__GNUC__)
+	return '/';
+#else
+	return '\\';
+#endif
+}
+
 namespace {
 
 template<typename T>

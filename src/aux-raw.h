@@ -32,6 +32,9 @@ WipeOut(T& a_t)
 	T().swap(a_t);
 }
 
+char
+SystemSlash();
+
 void ExamplesOfRaw();
 
 } // namespace spy

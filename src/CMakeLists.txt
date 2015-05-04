@@ -8,7 +8,7 @@ else()
 endif()
 set(Boost_USE_MULTITHREADED ON)
 # find_package(Boost) # <-- Use this simple line for using only headers
-find_package(Boost COMPONENTS system filesystem)
+find_package(Boost COMPONENTS program_options system filesystem)
 if (Boost_FOUND)
 	message(STATUS "Boost found:")
 	include_directories(${Boost_INCLUDE_DIRS})
@@ -21,8 +21,10 @@ endif ()
 
 set(SRC_LIST
 	aux-raw.cpp aux-raw.h
+	aux-raw-compiler-warnings-off.h aux-raw-compiler-warnings-on.h
 	aux-spy.cpp aux-spy.h
 	algorithm-string-pool.cpp algorithm-string-pool.h
+	cli-parser.cpp cli-parser.h
 	cpp11-pool.cpp cpp11-pool.h
 	main.cpp
 	filesystem-pool.cpp filesystem-pool.h
