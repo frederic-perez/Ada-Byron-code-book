@@ -49,6 +49,11 @@ const std::string usageParameterExamples =
 	"\n\n" // ie. a new example starts here
 	"  --input-sig C:\\\\tmp\\\\discreteProfile.sig --cut-off 2.5";
 
+
+// Helping function
+//
+bool CheckArguments(const boost::program_options::variables_map&);
+
 } // namespace cli
 
 } // namespace Ada_Byron_code_book
@@ -187,7 +192,6 @@ ABcb::cli::ParseCommandLine(int argc, char** argv)
 		return false;
 	}
 
-	bool CheckArguments(const po::variables_map&);
 	const bool succeeded = CheckArguments(vm);
 	if (!succeeded) {
 		std::cerr << odFull;
@@ -223,12 +227,10 @@ ParseBoolean(
 } // namespace
 
 bool
-CheckArguments(const boost::program_options::variables_map& a_vm)
+ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 {
 	if (a_vm.count("help"))
 		return false; // force a error so the usage is shown automatically
-
-	using namespace ABcb::cli;
 
 	if (a_vm.count("cut-off")) {
 		if (cutOff <= 0.)
