@@ -2,6 +2,7 @@
 
 set(SRC_LIST
 	input.xml
+	rf_00.txt
 )
 
 install(FILES ${SRC_LIST}

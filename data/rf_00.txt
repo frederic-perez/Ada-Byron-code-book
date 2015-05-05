@@ -1,0 +1,3 @@
+--input-file input.txt
+--cut-off 0.42
+--platonic-solid octahedron
