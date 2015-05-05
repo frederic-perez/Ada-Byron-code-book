@@ -26,8 +26,8 @@ ProgramName();
 bool
 ParseCommandLine(int argc, char** argv);
 
-void
-OutputRunInfoAndParsedCommandLine();
+std::ostream&
+ParsedCommandLine(std::ostream&);
 
 } // namespace cli
 

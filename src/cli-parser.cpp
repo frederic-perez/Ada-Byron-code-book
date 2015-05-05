@@ -287,34 +287,33 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 
 #define OutputWithCare(a_string) (a_string.empty() ? "[empty]" : a_string)
 
-void
-ABcb::cli::OutputRunInfoAndParsedCommandLine()
+std::ostream&
+ABcb::cli::ParsedCommandLine(std::ostream& a_os)
 {
-	//AuxRaw::OutputRunInfo(std::cout, progname);
-
-	std::cout << '\n' << progname
+	a_os << progname
 		<< " was called with the following options:\n\n";
 
 	// 1) File selection
 	//
-	std::cout << "File selection:\n"
+	a_os << "File selection:\n"
 		<< "  --input-file " << OutputWithCare(filenameIn) << '\n';
-	std::cout << '\n';
+	a_os << '\n';
 
 	// 2) Operation flags/parameters
 	//
-	std::cout << "Operation flags/parameters:\n";
-	std::cout
+	a_os << "Operation flags/parameters:\n";
+	a_os
 		<< "  --cut-off " << cutOff << '\n'
 		<< "  --platonic-solid " << platonicSolid << '\n';
-	std::cout << '\n';
+	a_os << '\n';
 
 	// 3) Informative output
 	//
-	std::cout << "Informative output:\n"
-		<< "  --verbose " << (verbose ? "on" : "off") << "\n\n";
+	a_os << "Informative output:\n"
+		<< "  --verbose " << (verbose ? "on" : "off") << '\n';
 
-	std::cout << std::flush;
+	a_os << std::flush;
+	return a_os;
 }
 
 // -- eof

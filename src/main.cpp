@@ -16,25 +16,14 @@
 int
 main(int argc, char* argv[])
 {
-	std::cout << __func__ << " started...\n" << std::endl;
-
 	namespace ABcb = Ada_Byron_code_book;
-
-	std::cout
-		<< "Using Boost version " << ABcb::spy::BoostVersion << '\n'
-		<< "Using Clang version " << ABcb::spy::ClangVersion << '\n'
-		<< "Using GNU g++ version " << ABcb::spy::GNUGppVersion << '\n'
-		<< "Using Visual Studio C/C++ compiler version "
-			<< ABcb::spy::VisualStudioCppCompilerVersion << '\n'
-		<< "List of preprocessor defines:\n"
-			<< ABcb::spy::ListOfPreprocessorDefines
-		<< std::endl;
 
 	bool succeeded = ABcb::cli::ParseCommandLine(argc, argv);
 	if (!succeeded)
 		return EXIT_FAILURE;
 
-	ABcb::cli::OutputRunInfoAndParsedCommandLine();
+	std::cout << ABcb::spy::RunInfo(ABcb::cli::ProgramName()) << '\n'
+		<< ABcb::cli::ParsedCommandLine << std::endl;
 
 	ABcb::cpp11::TryBadCode();
 	ABcb::cpp11::TestIfAConstParameterCanBeModified(42);
@@ -60,8 +49,6 @@ main(int argc, char* argv[])
 	std::clog << "ABcb::ParseXML " << (succeeded ? "succeeded" : "failed")
 		<< std::endl;
 
-	std::cout << '\n' << __func__ << " finished!\n" << std::endl;
-	
 	return EXIT_SUCCESS;
 }
 
