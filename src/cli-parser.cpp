@@ -5,6 +5,7 @@
 
 #include "aux-raw-compiler-warnings-off.h"
 
+	#include <boost/algorithm/string.hpp>
 	#include <boost/program_options.hpp>
 	#include <boost/tokenizer.hpp>
 
@@ -36,6 +37,7 @@ std::string filenameIn;
 // 2) Operation flags/parameters
 //
 double cutOff = .8;
+PlatonicSolidType platonicSolid = ePlatonicSolidUndefined;
 
 // 3) Informative output
 //
@@ -43,12 +45,13 @@ std::string consoleOutputFilename;
 bool verbose = false;
 std::string verboseCLI;
 const std::string usageParameterExamples =
-	"  --input-sig C:\\\\tmp\\\\3DI\\\\discreteProfile.sig --cut-off 0.8"
+	"  --input-file C:\\\\tmp\\\\input.txt --cut-off 0.8"
+		" --platonic-solid octahedron"
 	"\n\n" // ie. a new example starts here
-	"  --input-sig C:\\\\tmp\\\\3DI\\\\discreteProfile.sig --cut-off 2.5"
+	"  --input-file C:\\\\tmp\\\\input2.txt --cut-off 2.5"
+		" --platonic-solid hexahedron"
 	"\n\n" // ie. a new example starts here
-	"  --input-sig C:\\\\tmp\\\\discreteProfile.sig --cut-off 2.5";
-
+	"  --input-file C:\\\\tmp\\\\input3.txt --cut-off 2.5";
 
 // Helping function
 //
@@ -93,7 +96,11 @@ ABcb::cli::ParseCommandLine(int argc, char** argv)
 		od.add_options()
 			("cut-off",
 			po::value<double>(&cutOff),
-			"{ on | off }");
+			"{ on | off }")
+			("platonic-solid",			
+			po::value<std::string>(), //po::value<PlatonicSolidType>(&platonicSolid),
+			"{ tetrahedron | octahedron | icosahedron | hexahedron | dodecahedron }")
+			;
 		odFull.add(od);
 	}
 
@@ -224,6 +231,28 @@ ParseBoolean(
 	return true;
 }
 
+ABcb::PlatonicSolidType
+GetPlatonicSolid(const std::string& a_text)
+{
+	using namespace ABcb;
+	size_t i = ePlatonicSolidType_First;
+	for (; i <= ePlatonicSolidType_Last && a_text != platonicSolidText[i]; ++i);
+	if (i <= ePlatonicSolidType_Last)
+		return static_cast<PlatonicSolidType>(i);
+	return ePlatonicSolidUndefined;
+}
+
+std::ostream&
+operator<<(std::ostream& a_os, ABcb::PlatonicSolidType a_rhs)
+{
+	using namespace ABcb;
+	if (a_rhs > ePlatonicSolidType_Last)
+		a_os << platonicSolidText[ePlatonicSolidType_First];
+	else
+		a_os << platonicSolidText[a_rhs];
+	return a_os;
+}
+
 } // namespace
 
 bool
@@ -235,7 +264,17 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 	if (a_vm.count("cut-off")) {
 		if (cutOff <= 0.)
 			return
-			OutputErrorAndReturnFalse("The cut-off parameter must be positive");
+				OutputErrorAndReturnFalse("The cut-off parameter must be positive");
+	}
+
+	if (a_vm.count("platonic-solid")) {
+		const std::string& text = a_vm["platonic-solid"].as<std::string>();
+		platonicSolid = GetPlatonicSolid(text);
+		if (platonicSolid == ePlatonicSolidUndefined) {
+			const std::string message =
+				"Unknown platonic-solid parameter '" + text + "'";
+			return OutputErrorAndReturnFalse(message);
+		}
 	}
 
 	if (a_vm.count("verbose")) {
@@ -266,7 +305,8 @@ ABcb::cli::OutputRunInfoAndParsedCommandLine()
 	//
 	std::cout << "Operation flags/parameters:\n";
 	std::cout
-		<< "  --cut-off " << cutOff << '\n';
+		<< "  --cut-off " << cutOff << '\n'
+		<< "  --platonic-solid " << platonicSolid << '\n';
 	std::cout << '\n';
 
 	// 3) Informative output
