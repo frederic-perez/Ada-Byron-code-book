@@ -97,7 +97,7 @@ ABcb::cli::ParseCommandLine(int argc, char** argv)
 			("cut-off",
 			po::value<double>(&cutOff),
 			"{ on | off }")
-			("platonic-solid",			
+			("platonic-solid",
 			po::value<std::string>(), //po::value<PlatonicSolidType>(&platonicSolid),
 			"{ tetrahedron | octahedron | icosahedron | hexahedron | dodecahedron }")
 			;

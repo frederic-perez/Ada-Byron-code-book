@@ -30,9 +30,9 @@ main(int argc, char* argv[])
 			<< ABcb::spy::ListOfPreprocessorDefines
 		<< std::endl;
 
-	 bool succeeded = ABcb::cli::ParseCommandLine(argc, argv);
-	 if (!succeeded)
-		 return EXIT_FAILURE;
+	bool succeeded = ABcb::cli::ParseCommandLine(argc, argv);
+	if (!succeeded)
+		return EXIT_FAILURE;
 
 	ABcb::cli::OutputRunInfoAndParsedCommandLine();
 
