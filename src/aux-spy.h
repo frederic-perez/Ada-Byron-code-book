@@ -5,6 +5,8 @@
 #include <ostream>
 #include <string>
 
+#include <boost/noncopyable.hpp>
+
 namespace Ada_Byron_code_book {
 
 namespace spy {
@@ -30,12 +32,12 @@ namespace Ada_Byron_code_book {
 
 namespace spy {
 
-class RunInfo { 
+class RunInfo : boost::noncopyable {
 public:
 	RunInfo(const std::string& a_progname) : d_progname(a_progname) {}
-	friend std::ostream& ::operator<<(std::ostream&, const RunInfo&);
+	const std::string& GetProgName() const { return d_progname; }
 private:
-	std::string d_progname;
+	const std::string d_progname;
 };
 
 } // spy

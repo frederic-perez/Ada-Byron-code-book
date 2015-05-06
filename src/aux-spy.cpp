@@ -139,7 +139,7 @@ std::ostream&
 operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
 {
 	using namespace ABcb::spy;
-	a_os << '\n' << a_runInfo.d_progname
+	a_os << '\n' << a_runInfo.GetProgName()
 		<< " started at " << HostName << " on " << LocalTime //< LocalTime adds \n
 		<< "Using Boost version " << BoostVersion << '\n'
 		<< "Using Clang version " << ClangVersion << '\n'
