@@ -136,7 +136,7 @@ ABcb::spy::LocalTime(std::ostream& a_os)
 }
 
 std::ostream&
-operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
+ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
 {
 	using namespace ABcb::spy;
 	a_os << '\n' << a_runInfo.GetProgName()

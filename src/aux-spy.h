@@ -20,17 +20,7 @@ std::ostream& HostName(std::ostream&);
 std::ostream& LocalTime(std::ostream&);
 
 class RunInfo; // To be used like std::cout << RunInfo("my-progname") << ...
-
-} // namespace spy
-
-} // namespace Ada_Byron_code_book
-
-std::ostream&
-operator<<(std::ostream&, const Ada_Byron_code_book::spy::RunInfo&);
-
-namespace Ada_Byron_code_book {
-
-namespace spy {
+std::ostream& operator<<(std::ostream&, const RunInfo&);
 
 class RunInfo : boost::noncopyable {
 public:
