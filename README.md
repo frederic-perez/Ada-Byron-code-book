@@ -27,11 +27,14 @@ Some interesting C++11-related URLs:
 - http://blog.feabhas.com/2014/03/demystifying-c-lambdas/
 
 When committing changes, we use common prefixes. From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix):
-- BUG: a change made to fix a runtime issue (crash, segmentation fault, exception, or incorrect result),
-- COMP: a fix for a compilation issue (error or warning),
-- ENH: new functionality added to the project,
-- PERF: a performance improvement,
-- STYLE: a change that does not impact the logic or execution of the code (improve coding style, comments, documentation).
+
+| Prefix | What          |
+| ------ |:--------------|
+| BUG    | a change made to fix a runtime issue (crash, segmentation fault, exception, or incorrect result) |
+| COM    | a fix for a compilation issue (error or warning) |
+| ENH    | new functionality added to the project |
+| PERF   | a performance improvement |
+| STYLE  | a change that does not impact the logic or execution of the code (coding style, comments, doc.) |
 
 Example commit messages:
 - Bad: BUG: Check pointer validity before dereferencing -> implementation detail, self-explanatory (by looking at the code)
