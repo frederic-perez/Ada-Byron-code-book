@@ -36,7 +36,8 @@ std::string filenameIn;
 
 // 2) Operation flags/parameters
 //
-double cutOff = .8;
+double inputDouble = 42.666;
+double inputPositiveDouble = .8;
 PlatonicSolidType platonicSolid = ePlatonicSolidUndefined;
 
 // 3) Informative output
@@ -45,13 +46,13 @@ std::string consoleOutputFilename;
 bool verbose = false;
 std::string verboseCLI;
 const std::string usageParameterExamples =
-	"  --input-file C:\\\\tmp\\\\input.txt --cut-off 0.8"
+	"  --input-file C:\\\\tmp\\\\input.txt --input-positive-double 0.8"
 		" --platonic-solid octahedron"
 	"\n\n" // ie. a new example starts here
-	"  --input-file C:\\\\tmp\\\\input2.txt --cut-off 2.5"
+	"  --input-file C:\\\\tmp\\\\input2.txt --input-positive-double 2.5"
 		" --platonic-solid hexahedron"
 	"\n\n" // ie. a new example starts here
-	"  --input-file C:\\\\tmp\\\\input3.txt --cut-off 2.5";
+	"  --input-file C:\\\\tmp\\\\input3.txt --input-positive-double 2.5";
 
 // Helping function
 //
@@ -94,9 +95,12 @@ ABcb::cli::ParseCommandLine(int argc, char** argv)
 		//
 		po::options_description od("Operation flags/parameters", 160, 80);
 		od.add_options()
-			("cut-off",
-			po::value<double>(&cutOff),
-			"{ on | off }")
+			("input-double",
+			po::value<double>(&inputDouble),
+			"<double> # \texample to get any double value")
+			("input-positive-double",
+			po::value<double>(&inputPositiveDouble),
+			"<positive double> # \texample to check the input is positive")
 			("platonic-solid",
 			po::value<std::string>(), //po::value<PlatonicSolidType>(&platonicSolid),
 			"{ tetrahedron | octahedron | icosahedron | hexahedron | dodecahedron }")
@@ -261,10 +265,11 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 	if (a_vm.count("help"))
 		return false; // force a error so the usage is shown automatically
 
-	if (a_vm.count("cut-off")) {
-		if (cutOff <= 0.)
+	if (a_vm.count("input-positive-double")) {
+		if (inputPositiveDouble <= 0.)
 			return
-				OutputErrorAndReturnFalse("The cut-off parameter must be positive");
+				OutputErrorAndReturnFalse(
+					"The input-positive-double parameter must be positive");
 	}
 
 	if (a_vm.count("platonic-solid")) {
@@ -303,7 +308,8 @@ ABcb::cli::ParsedCommandLine(std::ostream& a_os)
 	//
 	a_os << "Operation flags/parameters:\n";
 	a_os
-		<< "  --cut-off " << cutOff << '\n'
+		<< "  --input-double " << inputDouble << '\n'
+		<< "  --input-positive-double " << inputPositiveDouble << '\n'
 		<< "  --platonic-solid " << platonicSolid << '\n';
 	a_os << '\n';
 

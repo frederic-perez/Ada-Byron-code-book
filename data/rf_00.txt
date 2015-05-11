@@ -1,3 +1,4 @@
 --input-file input.txt
---cut-off 0.42
+--input-double -0.1
+--input-positive-double 0.2
 --platonic-solid octahedron
