@@ -34,7 +34,13 @@ ABcb::spy::ListOfPreprocessorDefines(std::ostream& a_os)
 #else
 		false;
 #endif
-
+	const bool definedNDEBUG =
+#if defined(NDEBUG)
+	true;
+#else
+	false;
+#endif
+	
 	return
 		a_os
 			<< std::boolalpha
@@ -42,6 +48,7 @@ ABcb::spy::ListOfPreprocessorDefines(std::ostream& a_os)
 			<< pad << "defined(_WIN32): " << defined_WIN32 << '\n'
 			<< pad << "defined(_WIN64): " << defined_WIN64 << '\n'
 			<< pad << "defined(WIN32): " << definedWIN32 << '\n'
+			<< pad << "defined(NDEBUG): " << definedNDEBUG << '\n'
 #ifdef __GNUG__
 			<< pad << "__GNUG__ = " << __GNUG__ << '\n'
 #endif
