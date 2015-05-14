@@ -31,7 +31,7 @@ When committing changes, we use common prefixes. From an [Slicer entry](https://
 | Prefix | What          |
 | ------ |:--------------|
 | BUG    | a change made to fix a runtime issue (crash, segmentation fault, exception, or incorrect result) |
-| COM    | a fix for a compilation issue (error or warning) |
+| COM    | a fix for a compilation issue, error or warning (we include C++11 enhancements here) |
 | ENH    | new functionality added to the project |
 | PERF   | a performance improvement |
 | STYLE  | a change that does not impact the logic or execution of the code (coding style, comments, doc.) |
