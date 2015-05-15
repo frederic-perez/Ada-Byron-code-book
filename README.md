@@ -43,3 +43,7 @@ Example commit messages:
 - Good: ENH: Add float image outputs in module X
 - Bad: COMP: Typo in cmake variable -> implementation detail, self-explanatory
 - Good: COMP: Fix compilation error with Numpy on Visual Studio 
+
+- - -
+
+*Note: To render a GitHub webpage containing code with a tab size of 2 spaces, append to its URL "?ts=2"*
