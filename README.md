@@ -26,12 +26,12 @@ Some interesting C++11-related URLs:
 - http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html
 - http://blog.feabhas.com/2014/03/demystifying-c-lambdas/
 
-When committing changes, we use common prefixes. From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix):
+When committing changes, we use common prefixes--see for example a [list of ITK changes](http://kitware.com/blog/home/post/881). From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix):
 
 | Prefix | What          |
 | ------ |:--------------|
 | BUG    | a change made to fix a runtime issue (crash, segmentation fault, exception, or incorrect result) |
-| COM    | a fix for a compilation issue, error or warning (we include C++11 enhancements here) |
+| COMP  | a fix for a compilation issue, error or warning (we include C++11 enhancements here) |
 | ENH    | new functionality added to the project |
 | PERF   | a performance improvement |
 | STYLE  | a change that does not impact the logic or execution of the code (coding style, comments, doc.) |
