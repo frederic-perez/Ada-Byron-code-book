@@ -38,7 +38,7 @@ std::string filenameIn;
 //
 double inputDouble = 42.666;
 double inputPositiveDouble = .8;
-PlatonicSolidType platonicSolid = ePlatonicSolidUndefined;
+PlatonicSolidType platonicSolid = PlatonicSolidType::eUndefined;
 
 // 3) Informative output
 //
@@ -239,21 +239,22 @@ ABcb::PlatonicSolidType
 GetPlatonicSolid(const std::string& a_text)
 {
 	using namespace ABcb;
-	size_t i = ePlatonicSolidType_First;
+	uint8_t i = ePlatonicSolidType_First;
 	for (; i <= ePlatonicSolidType_Last && a_text != platonicSolidText[i]; ++i);
 	if (i <= ePlatonicSolidType_Last)
 		return static_cast<PlatonicSolidType>(i);
-	return ePlatonicSolidUndefined;
+	return PlatonicSolidType::eUndefined;
 }
 
 std::ostream&
 operator<<(std::ostream& a_os, ABcb::PlatonicSolidType a_rhs)
 {
 	using namespace ABcb;
-	if (a_rhs > ePlatonicSolidType_Last)
+	const uint8_t i = static_cast<uint8_t>(a_rhs);
+	if (i > ePlatonicSolidType_Last)
 		a_os << platonicSolidText[ePlatonicSolidType_First];
 	else
-		a_os << platonicSolidText[a_rhs];
+		a_os << platonicSolidText[i];
 	return a_os;
 }
 
@@ -275,7 +276,7 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 	if (a_vm.count("platonic-solid")) {
 		const std::string& text = a_vm["platonic-solid"].as<std::string>();
 		platonicSolid = GetPlatonicSolid(text);
-		if (platonicSolid == ePlatonicSolidUndefined) {
+		if (platonicSolid == PlatonicSolidType::eUndefined) {
 			const std::string message =
 				"Unknown platonic-solid parameter '" + text + "'";
 			return OutputErrorAndReturnFalse(message);
