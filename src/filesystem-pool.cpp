@@ -20,7 +20,26 @@ Ada_Byron_code_book::ExamplesOfFileSystem(const std::string& a_filename)
 
 	const std::string pad = "  ";
 
+	// Preferred separator and directories
+
+	const path::value_type slash = path::preferred_separator;
+	std::cout << pad << "path::preferred_separator (system slash) is \'"
+		<< static_cast<char>(slash) << '\'' << std::endl;
+
+	path path1 = "C:\\Windows\\System32";
+	std::cout << pad << "path1: " << path1 << " becomes (after make_preferred) ";
+	path1.make_preferred();
+	std::cout << path1 << " which "
+		<< (exists(path1) ? "exists" : "does not exist") << std::endl;
+
+	path path2 = "/usr/include/./clang";
+	std::cout << pad << "path2: " << path2 << " becomes (after make_preferred) ";
+	path2.make_preferred();
+	std::cout << path2 << " which "
+		<< (exists(path2) ? "exists" : "does not exist") << std::endl;
+
 	// "Testing" an invented filename
+
 	const std::string inventedFilename =
 		"invented-filename-to-check-if-it-exists.yuk";
 	std::cout << pad << '\"' << inventedFilename << '\"';
@@ -55,6 +74,9 @@ Ada_Byron_code_book::ExamplesOfFileSystem(const std::string& a_filename)
 	const bool isDirectory = is_directory(currentDir);
 	std::cout << pad << "is_directory(" << currentDir << ") = " << std::boolalpha
 		<< isDirectory << std::endl;
+	const path fullPathCD = system_complete(dot);
+	std::cout << pad << "full path of " << currentDir << " = " << fullPathCD
+		<< std::endl;
 
 	if (isDirectory) {
 		std::cout << pad
