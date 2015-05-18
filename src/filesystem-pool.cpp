@@ -23,14 +23,14 @@ Ada_Byron_code_book::ExamplesOfFileSystem(const std::string& a_filename)
 	const std::string inventedFilename =
 		"invented-filename-to-check-if-it-exists.yuk";
 	std::cout << pad << '\"' << inventedFilename << '\"';
-	if (boost::filesystem::exists(inventedFilename))
+	if (exists(inventedFilename))
 		std::cout << " exists" << std::endl;
 	else 
 		std::cout << " does not exist" << std::endl;
 
 	// "Testing" a_filename
 
-	if (!boost::filesystem::exists(a_filename)) { // Bail out ASAP
+	if (!exists(a_filename)) { // Bail out ASAP
 		std::cout << " does not exist" << std::endl;
 		std::clog << __func__ << " aborted." << std::endl;
 		return;
