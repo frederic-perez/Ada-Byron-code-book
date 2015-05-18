@@ -14,6 +14,7 @@ void
 Ada_Byron_code_book::ExamplesOfFileSystem(const std::string& a_filename)
 {
 	std::clog << __func__ << " started..." << std::endl;
+	std::cout << std::endl;
 
 	using namespace boost::filesystem;
 
@@ -56,8 +57,10 @@ Ada_Byron_code_book::ExamplesOfFileSystem(const std::string& a_filename)
 		<< isDirectory << std::endl;
 
 	if (isDirectory) {
-		std::cout << pad << "Directory contents:" << std::endl;
-		const std::string eol = "\n";
+		std::cout << pad
+			<< "Directory " << currentDir << " contents:\n" + pad + pad
+			<< std::flush;
+		const std::string eol = "\n" + pad + pad;
 		std::copy(
 			directory_iterator(currentDir), directory_iterator(),
 			std::ostream_iterator<directory_entry>(std::cout, eol.c_str()));
@@ -65,7 +68,7 @@ Ada_Byron_code_book::ExamplesOfFileSystem(const std::string& a_filename)
 			// to a path by the path stream inserter
 		std::cout << std::flush;
 	}
-
+	std::cout << std::endl;
 	std::clog << __func__ << " finished." << std::endl;
 }
 
