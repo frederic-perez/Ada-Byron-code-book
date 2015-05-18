@@ -31,7 +31,7 @@ When committing changes, we use common prefixes--see for example a [list of ITK 
 | Prefix | What          |
 | ------ |:--------------|
 | BUG    | a change made to fix a runtime issue (crash, segmentation fault, exception, or incorrect result) |
-| COMP  | a fix for a compilation issue, error or warning (we include C++11 enhancements here) |
+| COMP   | a fix for a compilation issue (including minor C++ or C++11 improvements), error or warning  |
 | ENH    | new functionality added to the project |
 | PERF   | a performance improvement |
 | STYLE  | a change that does not impact the logic or execution of the code (coding style, comments, doc.) |
