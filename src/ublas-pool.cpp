@@ -34,31 +34,31 @@ CrossProduct(const VectorD3& a_v1, const VectorD3& a_v2)
 const std::string pad = "  ";
 
 double
-GetSliceLocation()
+GetSliceLocation(
+	const VectorD3& a_vecX,
+	const VectorD3& a_vecY,
+	const VectorD3& a_point)
 {
-	const VectorD3 vector_x({ 1., 2., 3. });
-	const VectorD3 vector_y({ 4., 5., 6. });
-
-	std::cout << pad << __func__ << ": vector_x = " << vector_x << '\n';
-	std::cout << pad << __func__ << ": vector_y = " << vector_y << '\n';
-	const VectorD3 vector_z = CrossProduct(vector_x, vector_y);
-	std::cout << pad << __func__ << ": vector_z = " << vector_z << '\n';
+	std::cout << pad << __func__ << ": a_vecX = " << a_vecX << '\n';
+	std::cout << pad << __func__ << ": vector_y = " << a_vecY << '\n';
+	const VectorD3 vecZ = CrossProduct(a_vecX, a_vecY);
+	std::cout << pad << __func__ << ": vecZ = " << vecZ << '\n';
 
 	bnu::matrix<double> orientation(4, 4);
 
-	orientation.at_element(0, 0) = vector_x[0];
-	orientation.at_element(1, 0) = vector_x[1];
-	orientation.at_element(2, 0) = vector_x[2];
+	orientation.at_element(0, 0) = a_vecX[0];
+	orientation.at_element(1, 0) = a_vecX[1];
+	orientation.at_element(2, 0) = a_vecX[2];
 	orientation.at_element(3, 0) = 0.;
 
-	orientation.at_element(0, 1) = vector_y[0];
-	orientation.at_element(1, 1) = vector_y[1];
-	orientation.at_element(2, 1) = vector_y[2];
+	orientation.at_element(0, 1) = a_vecY[0];
+	orientation.at_element(1, 1) = a_vecY[1];
+	orientation.at_element(2, 1) = a_vecY[2];
 	orientation.at_element(3, 1) = 0.;
 
-	orientation.at_element(0, 2) = vector_z[0];
-	orientation.at_element(1, 2) = vector_z[1];
-	orientation.at_element(2, 2) = vector_z[2];
+	orientation.at_element(0, 2) = vecZ[0];
+	orientation.at_element(1, 2) = vecZ[1];
+	orientation.at_element(2, 2) = vecZ[2];
 	orientation.at_element(3, 2) = 0.;
 
 	orientation.at_element(0, 3) = 0.;
@@ -68,8 +68,8 @@ GetSliceLocation()
 
 	std::cout << pad << __func__ << ": orientation = " << orientation << '\n';
 	
-	const VectorD3 imagePos({ 1., 1., 1. });
-	const bnu::vector<double> result = prod(orientation, imagePos);
+	const //VectorD3
+		bnu::vector<double> result = prod(a_point, orientation);
 	std::cout << pad << __func__ << ": result = " << result << '\n';
 
 	return result[2];
@@ -81,9 +81,22 @@ void
 Ada_Byron_code_book::ExamplesOfUblas()
 {
 	std::clog << __func__ << " started..." << std::endl;
-
-	const double location = GetSliceLocation();
-	std::cout << pad << __func__ << ": location = " << location << std::endl;
+	
+	{	// Simple example
+		const VectorD3 vecX({ 1., 0., 0. });
+		const VectorD3 vecY({ 0., 0., -1. });
+		const VectorD3 imagePos({ -105.80165, -201.29752, 227.30165 });
+		const double location = GetSliceLocation(vecX, vecY, imagePos);
+		std::cout << pad << __func__ << ": location = " << location << std::endl;
+	}
+	
+	{	// A more difficult example
+		const VectorD3 vecX({ 1., 0., 0. });
+		const VectorD3 vecY({ 0., -0.033155151, -0.99945021 });
+		const VectorD3 imagePos({ -95.202782, -71.037422, 206.67741 });
+		const double location = GetSliceLocation(vecX, vecY, imagePos);
+		std::cout << pad << __func__ << ": location = " << location << std::endl;
+	}
 
 	std::clog << __func__ << " finished." << std::endl;
 }
