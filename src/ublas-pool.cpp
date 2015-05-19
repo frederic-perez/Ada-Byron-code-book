@@ -17,18 +17,19 @@ namespace bnu = boost::numeric::ublas;
 
 namespace {
 
-typedef bnu::vector<double, std::array<double, 3>> VectorD3;
-typedef bnu::matrix<double, bnu::row_major, std::array<double, 4>> MatrixD3;
+typedef bnu::fixed_vector<double, 3> VectorD3;
+typedef bnu::fixed_matrix<double, 3, 3> MatrixD33;
 
 VectorD3
 CrossProduct(const VectorD3& a_v1, const VectorD3& a_v2)
 {
 	return
-		VectorD3({
-			a_v1[1] * a_v2[2] - a_v2[1] * a_v1[2],
-			a_v1[2] * a_v2[0] - a_v2[2] * a_v1[0],
-			a_v1[0] * a_v2[1] - a_v2[0] * a_v1[1]
-		});
+		VectorD3(
+			VectorD3::array_type{{
+				a_v1[1] * a_v2[2] - a_v2[1] * a_v1[2],
+				a_v1[2] * a_v2[0] - a_v2[2] * a_v1[0],
+				a_v1[0] * a_v2[1] - a_v2[0] * a_v1[1]
+			}});
 }
 
 const std::string pad = "  ";
@@ -40,36 +41,19 @@ GetSliceLocation(
 	const VectorD3& a_point)
 {
 	std::cout << pad << __func__ << ": a_vecX = " << a_vecX << '\n';
-	std::cout << pad << __func__ << ": vector_y = " << a_vecY << '\n';
+	std::cout << pad << __func__ << ": a_vecY = " << a_vecY << '\n';
 	const VectorD3 vecZ = CrossProduct(a_vecX, a_vecY);
 	std::cout << pad << __func__ << ": vecZ = " << vecZ << '\n';
 
-	bnu::matrix<double> orientation(4, 4);
-
-	orientation.at_element(0, 0) = a_vecX[0];
-	orientation.at_element(1, 0) = a_vecX[1];
-	orientation.at_element(2, 0) = a_vecX[2];
-	orientation.at_element(3, 0) = 0.;
-
-	orientation.at_element(0, 1) = a_vecY[0];
-	orientation.at_element(1, 1) = a_vecY[1];
-	orientation.at_element(2, 1) = a_vecY[2];
-	orientation.at_element(3, 1) = 0.;
-
-	orientation.at_element(0, 2) = vecZ[0];
-	orientation.at_element(1, 2) = vecZ[1];
-	orientation.at_element(2, 2) = vecZ[2];
-	orientation.at_element(3, 2) = 0.;
-
-	orientation.at_element(0, 3) = 0.;
-	orientation.at_element(1, 3) = 0.;
-	orientation.at_element(2, 3) = 0.;
-	orientation.at_element(3, 3) = 1.;
+	const MatrixD33 orientation(
+		MatrixD33::array_type{ {
+			a_vecX[0], a_vecY[0], vecZ[0],
+			a_vecX[1], a_vecY[1], vecZ[1],
+			a_vecX[2], a_vecY[2], vecZ[2] } });
 
 	std::cout << pad << __func__ << ": orientation = " << orientation << '\n';
 	
-	const //VectorD3
-		bnu::vector<double> result = prod(a_point, orientation);
+	const VectorD3 result = prod(a_point, orientation);
 	std::cout << pad << __func__ << ": result = " << result << '\n';
 
 	return result[2];
@@ -82,21 +66,17 @@ Ada_Byron_code_book::ExamplesOfUblas()
 {
 	std::clog << __func__ << " started..." << std::endl;
 	
-	{	// Simple example
-		const VectorD3 vecX({ 1., 0., 0. });
-		const VectorD3 vecY({ 0., 0., -1. });
-		const VectorD3 imagePos({ -105.80165, -201.29752, 227.30165 });
-		const double location = GetSliceLocation(vecX, vecY, imagePos);
-		std::cout << pad << __func__ << ": location = " << location << std::endl;
-	}
+	// Simple example
+	GetSliceLocation(
+		VectorD3::array_type{ { 1., 0., 0. } },
+		VectorD3::array_type{ { 0., 0., -1. } },
+		VectorD3::array_type{ { -105.80165, -201.29752, 227.30165 } });
 	
-	{	// A more difficult example
-		const VectorD3 vecX({ 1., 0., 0. });
-		const VectorD3 vecY({ 0., -0.033155151, -0.99945021 });
-		const VectorD3 imagePos({ -95.202782, -71.037422, 206.67741 });
-		const double location = GetSliceLocation(vecX, vecY, imagePos);
-		std::cout << pad << __func__ << ": location = " << location << std::endl;
-	}
+	// A more difficult example
+	GetSliceLocation(
+		VectorD3::array_type{ { 1., 0., 0. } },
+		VectorD3::array_type{ { 0., -0.033155151, -0.99945021 } },
+		VectorD3::array_type{ { -95.202782, -71.037422, 206.67741 } });
 
 	std::clog << __func__ << " finished." << std::endl;
 }
