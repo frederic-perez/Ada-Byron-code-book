@@ -11,6 +11,7 @@
 #include "filesystem-pool.h"
 #include "lexical-cast-pool.h"
 #include "preprocessor-pool.h"
+#include "ublas-pool.h"
 #include "xml-parser.h"
 
 int
@@ -41,6 +42,9 @@ main(int argc, char* argv[])
 	std::cout << std::endl;
 	
 	ABcb::ExamplesOfAlgorithmsString();
+	std::cout << std::endl;
+
+	ABcb::ExamplesOfUblas();
 	std::cout << std::endl;
 
 	const std::string filenameIn = "input.xml";

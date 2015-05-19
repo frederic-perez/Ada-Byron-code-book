@@ -33,6 +33,7 @@
 	#pragma GCC diagnostic ignored "-Wignored-qualifiers"
 	#pragma GCC diagnostic ignored "-Wredundant-decls"
 	#pragma GCC diagnostic ignored "-Wshadow"
+	#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 	#pragma GCC diagnostic ignored "-Wunused-variable"
 #endif
 
