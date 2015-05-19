@@ -26,14 +26,14 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 	std::string name = "  Alan Turing  ";
 	Output("Name (original)", name);
 	
-	using namespace boost::algorithm;
-	to_lower(name);
+	namespace ba = boost::algorithm;
+	ba::to_lower(name);
 	Output("Name (after to_lower)", name);
-	to_upper(name);
+	ba::to_upper(name);
 	Output("Name (after to_upper)", name);
-	trim_right(name);
+	ba::trim_right(name);
 	Output("Name (after trim_right)", name);
-	trim(name);
+	ba::trim(name);
 	Output("Name (after trim)", name);
 	name.erase(remove_if(name.begin(), name.end(), isspace), name.end());
 	Output("Name (after isspace removal)", name);
