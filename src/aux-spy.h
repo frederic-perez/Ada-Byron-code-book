@@ -17,6 +17,7 @@ std::ostream& GNUGppVersion(std::ostream&);
 std::ostream& VisualStudioCppCompilerVersion(std::ostream&);
 
 std::ostream& HostName(std::ostream&);
+std::ostream& UserName(std::ostream&);
 std::ostream& LocalTime(std::ostream&);
 
 class RunInfo; // To be used like std::cout << RunInfo("my-progname") << ...

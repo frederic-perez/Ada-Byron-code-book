@@ -113,6 +113,28 @@ ABcb::spy::HostName(std::ostream& a_os)
 	return a_os << GetHostName() << std::flush;
 }
 
+namespace {
+
+std::string
+GetUserName()
+{
+	const char* username = getenv("USER");
+	if (username)
+		return username;
+
+	if (!username)
+		username = getenv("USERNAME");
+	return username ? username : "unknown-username";
+}
+
+} // namespace
+
+std::ostream&
+ABcb::spy::UserName(std::ostream& a_os)
+{
+	return a_os << GetUserName() << std::flush;
+}
+
 std::ostream&
 ABcb::spy::LocalTime(std::ostream& a_os)
 {
@@ -140,7 +162,8 @@ ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
 {
 	using namespace ABcb::spy;
 	a_os << '\n' << a_runInfo.GetProgName()
-		<< " started at " << HostName << " on " << LocalTime //< LocalTime adds \n
+		<< " was launched by " << UserName << " at " << HostName
+		<< " on " << LocalTime //< LocalTime adds \n
 		<< "Using Boost version " << BoostVersion << '\n'
 		<< "Using Clang version " << ClangVersion << '\n'
 		<< "Using GNU g++ version " << GNUGppVersion << '\n'
