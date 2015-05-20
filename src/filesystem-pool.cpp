@@ -59,11 +59,15 @@ Ada_Byron_code_book::ExamplesOfFileSystem(const std::string& a_filename)
 	std::cout << pad << '\"' << a_filename << '\"' << " has a file_size of "
 		<< bf::file_size(a_filename) << " bytes" << std::endl;
 
-	std::cout << pad << '\"' << a_filename << '\"';
-	const bf::path myPath1(a_filename);
-	if (myPath1.has_extension())
-		std::cout << " has the extension " << myPath1.extension();
-	else
+	bf::path myPath1("/usr/include/assert.h");
+	std::cout << pad << "Path " << myPath1;
+	if (myPath1.has_extension()) {
+		std::cout << " has the extension " << myPath1.extension() << std::endl;
+		myPath1.replace_extension(".new_extension");
+		std::cout << pad << "Path " << myPath1
+			<< " now (after replace_extension) has the extension "
+			<< myPath1.extension();
+	} else
 		std::cout << " does not have any extension";
 	std::cout << std::endl;
 
