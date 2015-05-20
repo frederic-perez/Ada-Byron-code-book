@@ -21,14 +21,14 @@ typedef bnu::fixed_vector<double, 3> VectorD3;
 typedef bnu::fixed_matrix<double, 3, 3> MatrixD33;
 
 VectorD3
-CrossProduct(const VectorD3& a_v1, const VectorD3& a_v2)
+operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)
 {
 	return
 		VectorD3(
 			VectorD3::array_type{{
-				a_v1[1] * a_v2[2] - a_v2[1] * a_v1[2],
-				a_v1[2] * a_v2[0] - a_v2[2] * a_v1[0],
-				a_v1[0] * a_v2[1] - a_v2[0] * a_v1[1]
+				a_lhs[1] * a_rhs[2] - a_rhs[1] * a_lhs[2],
+				a_lhs[2] * a_rhs[0] - a_rhs[2] * a_lhs[0],
+				a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]
 			}});
 }
 
@@ -42,7 +42,7 @@ GetSliceLocation(
 {
 	std::cout << pad << __func__ << ": a_vecX = " << a_vecX << '\n';
 	std::cout << pad << __func__ << ": a_vecY = " << a_vecY << '\n';
-	const VectorD3 vecZ = CrossProduct(a_vecX, a_vecY);
+	const VectorD3 vecZ = a_vecX ^ a_vecY;
 	std::cout << pad << __func__ << ": vecZ = " << vecZ << '\n';
 
 	const MatrixD33 orientation(
