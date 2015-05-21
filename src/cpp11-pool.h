@@ -11,6 +11,7 @@ namespace cpp11 {
 void TryBadCode();
 void TestIfAConstParameterCanBeModified(const int);
 void UsingTuple();
+void AlgorithmExamples();
 
 } // namespace cpp11
 
