@@ -13,6 +13,9 @@
 #include "aux-raw.h"
 #include "ublas-pool.h"
 
+namespace ABcb = Ada_Byron_code_book;
+using ABcb::raw::pad;
+
 namespace bnu = boost::numeric::ublas;
 
 namespace {
@@ -31,8 +34,6 @@ operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)
 				a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]
 			}});
 }
-
-const std::string pad = "  ";
 
 double
 GetSliceLocation(
@@ -62,7 +63,7 @@ GetSliceLocation(
 } // namespace
 
 void
-Ada_Byron_code_book::ExamplesOfUblas()
+ABcb::ExamplesOfUblas()
 {
 	std::clog << __func__ << " started..." << std::endl;
 	

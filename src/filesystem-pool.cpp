@@ -10,15 +10,16 @@
 #include "aux-raw.h"
 #include "filesystem-pool.h"
 
+namespace ABcb = Ada_Byron_code_book;
+using ABcb::raw::pad;
+
 void
-Ada_Byron_code_book::ExamplesOfFileSystem(const std::string& a_filename)
+ABcb::ExamplesOfFileSystem(const std::string& a_filename)
 {
 	std::clog << __func__ << " started..." << std::endl;
 	std::cout << std::endl;
 
 	namespace bf = boost::filesystem;
-
-	const std::string pad = "  ";
 
 	// Preferred separator and directories
 

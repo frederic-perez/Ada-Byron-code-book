@@ -8,12 +8,13 @@
 #include "aux-raw.h"
 #include "lexical-cast-pool.h"
 
+namespace ABcb = Ada_Byron_code_book;
+using ABcb::raw::pad;
+
 void
-Ada_Byron_code_book::ExamplesOfLexicalCast(const std::string& a_string)
+ABcb::ExamplesOfLexicalCast(const std::string& a_string)
 {
 	std::clog << __func__ << " started..." << std::endl;
-
-	const std::string pad = "  ";
 
 	// First, old way, which so far does not work properly -- TODO: Fix this
 

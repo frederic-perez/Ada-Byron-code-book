@@ -79,12 +79,12 @@ ABcb::cpp11::UsingTuple()
 
 	typedef std::tuple<int, std::string, bool> MyTuple;
 	const size_t N = std::tuple_size<MyTuple>::value;
-	std::clog << "  The size of MyTuple is " << N << std::endl;
+	std::clog << pad << "The size of MyTuple is " << N << std::endl;
 
 	const MyTuple t1{ 16, "Test", true };
-	std::cout << "  Type of get<1>(t1) = " << typeid(std::get<1>(t1)).name()
+	std::cout << pad << "Type of get<1>(t1) = " << typeid(std::get<1>(t1)).name()
 		<< std::endl;
-	std::cout << "  t1 = ";
+	std::cout << pad << "t1 = ";
 	print(t1);
 	std::cout << std::endl;
 

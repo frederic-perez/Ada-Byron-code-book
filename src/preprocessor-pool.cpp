@@ -2,14 +2,15 @@
 
 #include <string>
 
+#include "aux-raw.h"
 #include "preprocessor-pool.h"
 
 namespace ABcb = Ada_Byron_code_book;
+using ABcb::raw::pad;
 
 std::ostream&
 ABcb::spy::ListOfPreprocessorDefines(std::ostream& a_os)
 {
-	const std::string pad = "  ";
 	const bool definedClang =
 #ifdef __clang__
 		true;
