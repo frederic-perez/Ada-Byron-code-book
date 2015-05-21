@@ -5,6 +5,7 @@
 #include <vector>
 
 #include "aux-raw.h"
+#include "aux-spy.h"
 
 namespace ABcb = Ada_Byron_code_book;
 
@@ -35,21 +36,6 @@ Output(const T* a_t, size_t a_size, const std::string& a_name)
 	}
 }
 
-template<typename T>
-void
-Output(const T& a_t, const std::string& a_name)
-{
-	std::cout << a_name << " = ";
-	if (a_t.empty())
-		std::cout << "[empty]" << std::endl;
-	else {
-		std::cout << "{ ";
-		for (auto value : a_t)
-			std::cout << value << ' ';
-		std::cout << '}' << std::endl;
-	}
-}
-
 } // namespace
 
 void
@@ -64,9 +50,9 @@ ABcb::raw::ExamplesOfRaw()
 		pad + "myCArray (after construction)");
 
 	std::vector<int> myVector{ 4, 3, 2, 1 };
-	Output(myVector, pad + "myVector (after construction)");
+	spy::Output(std::cout, myVector, pad + "myVector (after construction)");
 	ABcb::raw::WipeOut(myVector);
-	Output(myVector, pad + "myVector (after WipeOut call)");
+	spy::Output(std::cout, myVector, pad + "myVector (after WipeOut call)");
 
 	std::clog << __func__ << " finished." << std::endl;
 }

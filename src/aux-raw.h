@@ -37,7 +37,9 @@ SystemSlash();
 
 void ExamplesOfRaw();
 
-} // namespace spy
+const std::string pad = "  ";
+
+} // namespace raw
 
 } // namespace Ada_Byron_code_book
 

@@ -31,6 +31,25 @@ private:
 	const std::string d_progname;
 };
 
+template<typename T>
+std::ostream&
+Output(
+	std::ostream& a_os,
+	const T& a_container,
+	const std::string& a_containerName)
+{
+	a_os << a_containerName << " = ";
+	if (a_container.empty())
+		a_os << "[empty]" << std::endl;
+	else {
+		a_os << "{ ";
+		for (auto value : a_container)
+			a_os << value << ' ';
+		a_os << '}' << std::endl;
+	}
+	return a_os;
+}
+
 } // spy
 
 } // Ada_Byron_code_book
