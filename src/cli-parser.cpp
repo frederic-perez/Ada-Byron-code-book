@@ -251,10 +251,10 @@ operator<<(std::ostream& a_os, ABcb::PlatonicSolidType a_rhs)
 {
 	using namespace ABcb;
 	const uint8_t i = static_cast<uint8_t>(a_rhs);
-	if (i > ePlatonicSolidType_Last)
-		a_os << platonicSolidText[ePlatonicSolidType_First];
+	if (i >= platonicSolidText.size())
+		a_os << "[Error: Wrong PlatonicSolidType]";
 	else
-		a_os << platonicSolidText[i];
+		a_os << platonicSolidText.at(i);
 	return a_os;
 }
 

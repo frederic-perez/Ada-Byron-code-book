@@ -42,7 +42,7 @@ Output(
 	if (a_container.empty())
 		a_os << "[empty]" << std::endl;
 	else {
-		a_os << "{ ";
+		a_os << "[" << a_container.size() << "]{ ";
 		for (auto value : a_container)
 			a_os << value << ' ';
 		a_os << '}' << std::endl;
