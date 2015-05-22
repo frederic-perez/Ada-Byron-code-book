@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <array>
 #include <cstdint>
 #include <string>
 
@@ -17,9 +18,9 @@ const uint8_t ePlatonicSolidType_First =
 	static_cast<uint8_t>(PlatonicSolidType::eTetrahedron);
 const uint8_t ePlatonicSolidType_Last =
 	static_cast<uint8_t>(PlatonicSolidType::eDodecahedron);
-const char* const platonicSolidText[] = {
+const std::array<const char*, 6> platonicSolidText{ {
 	"undefined",
-	"tetrahedron", "octahedron", "icosahedron", "hexahedron", "dodecahedron" };
+	"tetrahedron", "octahedron", "icosahedron", "hexahedron", "dodecahedron" } };
 
 namespace cli {
 
