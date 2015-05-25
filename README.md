@@ -46,4 +46,11 @@ Example commit messages:
 
 - - -
 
+On Hungarian notation: _"Notations that incorporate type information in variable names have mixed utility in type-unsafe languages (notably C), are possible but have no benefits (only drawbacks) in object-oriented languages, and are impossible in generic programming. Therefore, no C++ coding standard should require Hungarian notation, though a C++ coding standard might legitimately choose to ban it."_ (from C++ Coding Standards: 101 Rules, Guidelines, and Best Practices, by Herb Sutter and Andrei Alexandrescu
+
+
+
+
+- - -
+
 *Note: To render a GitHub webpage containing code with a tab size of 2 spaces, append to its URL "?ts=2"*
