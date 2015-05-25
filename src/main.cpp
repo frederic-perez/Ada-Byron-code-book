@@ -11,6 +11,7 @@
 #include "filesystem-pool.h"
 #include "lexical-cast-pool.h"
 #include "preprocessor-pool.h"
+#include "promotions-pool.h"
 #include "ublas-pool.h"
 #include "xml-parser.h"
 
@@ -43,6 +44,9 @@ main(int argc, char* argv[])
 	std::cout << std::endl;
 	
 	ABcb::ExamplesOfAlgorithmsString();
+	std::cout << std::endl;
+
+	ABcb::ExamplesOfPromotions();
 	std::cout << std::endl;
 
 	ABcb::ExamplesOfUblas();

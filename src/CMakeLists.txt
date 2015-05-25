@@ -30,6 +30,7 @@ set(SRC_LIST
 	filesystem-pool.cpp filesystem-pool.h
 	lexical-cast-pool.cpp lexical-cast-pool.h
 	preprocessor-pool.cpp preprocessor-pool.h
+	promotions-pool.cpp promotions-pool.h
 	ublas-pool.cpp ublas-pool.h
 	xml-parser.cpp xml-parser.h
 )
