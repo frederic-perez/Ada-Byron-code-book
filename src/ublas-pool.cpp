@@ -27,12 +27,11 @@ VectorD3
 operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)
 {
 	return
-		VectorD3(
-			VectorD3::array_type{{
+		VectorD3::array_type{{
 				a_lhs[1] * a_rhs[2] - a_rhs[1] * a_lhs[2],
 				a_lhs[2] * a_rhs[0] - a_rhs[2] * a_lhs[0],
 				a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]
-			}});
+		}};
 }
 
 double
