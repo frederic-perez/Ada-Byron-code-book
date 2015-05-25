@@ -48,7 +48,7 @@ Example commit messages:
 
 On Hungarian notation: _"Notations that incorporate type information in variable names have mixed utility in type-unsafe languages (notably C), are possible but have no benefits (only drawbacks) in object-oriented languages, and are impossible in generic programming. Therefore, no C++ coding standard should require Hungarian notation, though a C++ coding standard might legitimately choose to ban it."_ (from C++ Coding Standards: 101 Rules, Guidelines, and Best Practices, by Herb Sutter and Andrei Alexandrescu
 
-Example: Do not write <code>std::string sName; int iCount;</code> but simple <code>std::string name; int count;</code>
+Example: Do not write <code>std::string sName; int iCount;</code> but just write <code>std::string name; int count;</code>
 
 
 - - -
