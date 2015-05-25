@@ -14,13 +14,12 @@ enum class PlatonicSolidType : uint8_t {
 	eUndefined,
 	eTetrahedron, eOctahedron, eIcosahedron, eHexahedron, eDodecahedron
 };
-const uint8_t ePlatonicSolidType_First =
-	static_cast<uint8_t>(PlatonicSolidType::eTetrahedron);
-const uint8_t ePlatonicSolidType_Last =
-	static_cast<uint8_t>(PlatonicSolidType::eDodecahedron);
 const std::array<const char*, 6> platonicSolidText{ {
 	"undefined",
 	"tetrahedron", "octahedron", "icosahedron", "hexahedron", "dodecahedron" } };
+const uint8_t ePlatonicSolidType_First = 1;
+const uint8_t ePlatonicSolidType_Last =
+	static_cast<uint8_t>(platonicSolidText.size() - 1);
 
 namespace cli {
 
