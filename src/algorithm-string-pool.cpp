@@ -57,7 +57,7 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 	// Code adapted from http://www.panix.com/~jrr/boost/string.htm on 05.26.2015
 	std::vector<std::string> tokens;
 	ba::split(tokens, line, ba::is_any_of(","));
-	struct Trim { void operator()(std::string& a_s) { ba::trim(a_s); } };
+	struct Trim { void operator()(std::string& a_s) const { ba::trim(a_s); } };
 	for_each(tokens.begin(), tokens.end(), Trim());
 	const std::string instanceCleaned = ba::join(tokens, ",");
 	Output("line (after blanks around commas removal)", instanceCleaned);
