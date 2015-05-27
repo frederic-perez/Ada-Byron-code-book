@@ -39,6 +39,10 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 	Output("name (after trim_right)", name);
 	ba::trim(name);
 	Output("name (after trim)", name);
+	if (ba::iequals(name, "AlAn TuRiNg"))
+		Output("iequals(name, \"AlAn TuRiNg\") returns true, with name", name);
+	else
+		Output("iequals(name, \"AlAn TuRiNg\") returns false, witn name", name);
 	name.erase(remove_if(name.begin(), name.end(), ::isspace), name.end());
 	Output("name (after isspace removal)", name);
 	name.erase(
