@@ -42,7 +42,7 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 	name.erase(remove_if(name.begin(), name.end(), ::isspace), name.end());
 	Output("name (after isspace removal)", name);
 	name.erase(
-		remove_if(name.begin(), name.end(), boost::is_any_of("LN")),
+		remove_if(name.begin(), name.end(), ba::is_any_of("LN")),
 		name.end());
 	Output("name (after is_any_of(\"LN\") removal)", name);
 
@@ -52,8 +52,8 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 	// store result into a vector of strings
 	// Code adapted from http://www.panix.com/~jrr/boost/string.htm on 05.26.2015
 	std::vector<std::string> tokens;
-	boost::split(tokens, line, boost::is_any_of(","));
-	struct Trim { void operator()(std::string& a_s) { boost::trim(a_s); } };
+	ba::split(tokens, line, ba::is_any_of(","));
+	struct Trim { void operator()(std::string& a_s) { ba::trim(a_s); } };
 	for_each(tokens.begin(), tokens.end(), Trim());
 	const std::string instanceCleaned = ba::join(tokens, ",");
 	Output("line (after blanks around commas removal)", instanceCleaned);
