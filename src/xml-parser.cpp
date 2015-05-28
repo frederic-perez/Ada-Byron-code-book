@@ -160,7 +160,7 @@ Ada_Byron_code_book::ParseXML(
 		std::ifstream input(a_inputFilename);
 		Flights flights;
 		read(input, flights);
-		const std::string pad = "  ";
+		using raw::pad;
 		std::clog << pad << __func__ << ": Read(\"" << a_inputFilename
 			<< "\") finished" << std::endl;
 		std::ofstream output(a_outputFilename);

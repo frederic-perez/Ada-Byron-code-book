@@ -43,7 +43,6 @@ ABcb::raw::ExamplesOfRaw()
 {
 	std::clog << __func__ << " started..." << std::endl;
 
-	const std::string pad = "  ";
 	const double myCArray[3] = { 1., 2., 3. };
 	Output(
 		myCArray, ABcb::raw::ArraySize(myCArray),

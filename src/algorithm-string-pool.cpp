@@ -14,8 +14,9 @@ namespace {
 
 void
 Output(const std::string& a_description, const std::string& a_value) {
-	const std::string pad = "  ";
-	std::cout << pad << a_description << ": \"" << a_value << "\"" << std::endl;
+	using Ada_Byron_code_book::raw::pad;
+	std::cout << pad << a_description << ": \"" << a_value << "\""
+		<< std::endl;
 }
 	
 } // namespace
