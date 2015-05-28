@@ -13,13 +13,26 @@
 namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;
 
+namespace bf = boost::filesystem;
+
+namespace {
+
+void
+DoSomeStuff(bf::path& a_path, const std::string& a_label) {
+	std::cout << pad << a_label << ": " << a_path
+		<< " becomes (after make_preferred) ";
+	a_path.make_preferred();
+	std::cout << a_path << " which "
+		<< (bf::exists(a_path) ? "exists" : "does not exist") << std::endl;
+}
+
+} // namespace
+
 void
 ABcb::ExamplesOfFileSystem(const std::string& a_filename)
 {
 	std::clog << __func__ << " started..." << std::endl;
 	std::cout << std::endl;
-
-	namespace bf = boost::filesystem;
 
 	// Preferred separator and directories
 
@@ -27,17 +40,11 @@ ABcb::ExamplesOfFileSystem(const std::string& a_filename)
 	std::cout << pad << "path::preferred_separator (system slash) is \'"
 		<< static_cast<char>(slash) << '\'' << std::endl;
 
-	bf::path path1 = "C:\\Windows\\System32";
-	std::cout << pad << "path1: " << path1 << " becomes (after make_preferred) ";
-	path1.make_preferred();
-	std::cout << path1 << " which "
-		<< (bf::exists(path1) ? "exists" : "does not exist") << std::endl;
+	bf::path path1 = bf::path("C:\\Windows") / "System32"; // operator/
+	DoSomeStuff(path1, "path1");
 
-	bf::path path2 = "/usr/include/./clang";
-	std::cout << pad << "path2: " << path2 << " becomes (after make_preferred) ";
-	path2.make_preferred();
-	std::cout << path2 << " which "
-		<< (bf::exists(path2) ? "exists" : "does not exist") << std::endl;
+	bf::path path2 = bf::path("/usr") / "include" / "." / "clang"; // operator/
+	DoSomeStuff(path2, "path2");
 
 	// "Testing" an invented filename
 
