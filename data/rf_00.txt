@@ -2,3 +2,4 @@
 --input-double -0.1
 --input-positive-double 0.2
 --platonic-solid octahedron
+--color green
