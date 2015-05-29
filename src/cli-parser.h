@@ -8,20 +8,21 @@
 
 namespace Ada_Byron_code_book {
 
-// The PlatonicSolidType definition and helpers
-//
-enum class PlatonicSolidType : uint8_t {
-	eUndefined,
-	eTetrahedron, eOctahedron, eIcosahedron, eHexahedron, eDodecahedron
+namespace PlatonicSolid { // The PlatonicSolidType definition and helpers
+
+enum class Enum : uint8_t {
+	undefined,
+	tetrahedron, octahedron, icosahedron, hexahedron, dodecahedron
 };
-const std::array<const char*, 6> platonicSolidText{ {
+const std::array<const char*, 6> enumText{ {
 	"undefined",
 	"tetrahedron", "octahedron", "icosahedron", "hexahedron", "dodecahedron" } };
-std::string GetString(PlatonicSolidType);
+Enum GetEnum(const std::string&);
+std::string GetString(Enum);
 
-// The Color definition and helpers
-//
-namespace Color {
+} // namespace PlatonicSolid
+
+namespace Color { // The Color definition and helpers
 
 enum class Enum : uint8_t {
 	undefined,
@@ -33,7 +34,7 @@ const std::array<const char*, 4> enumText{ {
 Enum GetEnum(const std::string&);
 std::string GetString(Enum);
 
-}
+} // namespace Color
 
 namespace cli {
 

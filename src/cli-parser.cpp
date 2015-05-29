@@ -38,7 +38,7 @@ std::string filenameIn;
 //
 double inputDouble = 42.666;
 double inputPositiveDouble = .8;
-PlatonicSolidType platonicSolid = PlatonicSolidType::eUndefined;
+PlatonicSolid::Enum platonicSolid = PlatonicSolid::Enum::undefined;
 Color::Enum colorEnum = Color::Enum::undefined;
 
 // 3) Informative output
@@ -239,37 +239,15 @@ ParseBoolean(
 	return true;
 }
 
-ABcb::PlatonicSolidType
-GetPlatonicSolid(const std::string& a_text)
-{
-	using namespace ABcb;
-	const uint8_t ePlatonicSolidType_First = 1;
-	const uint8_t ePlatonicSolidType_Last =
-		static_cast<uint8_t>(platonicSolidText.size() - 1);
-	uint8_t i = ePlatonicSolidType_First;
-	for (; i <= ePlatonicSolidType_Last && a_text != platonicSolidText[i]; ++i);
-	if (i <= ePlatonicSolidType_Last)
-		return static_cast<PlatonicSolidType>(i);
-	return PlatonicSolidType::eUndefined;
-}
-
 } // namespace
 
-std::string
-ABcb::GetString(PlatonicSolidType a_enum)
-{	return platonicSolidText.at(static_cast<uint8_t>(a_enum)); }
-
-namespace Ada_Byron_code_book {
-
-namespace Color {
-
-const uint8_t first = 1;
-const uint8_t last = static_cast<uint8_t>(enumText.size() - 1);
-
 auto
-GetEnum(const std::string& a_text)
+ABcb::PlatonicSolid::GetEnum(const std::string& a_text)
 -> Enum
 {
+	using namespace ABcb;
+	const uint8_t first = 1;
+	const uint8_t last = static_cast<uint8_t>(enumText.size() - 1);
 	uint8_t i = first;
 	for (; i <= last && a_text != enumText[i]; ++i);
 	if (i <= last)
@@ -278,12 +256,25 @@ GetEnum(const std::string& a_text)
 }
 
 std::string
-GetString(Enum a_enum)
+ABcb::PlatonicSolid::GetString(Enum a_enum)
 {	return enumText.at(static_cast<uint8_t>(a_enum)); }
 
-} // namespace Color
+auto
+ABcb::Color::GetEnum(const std::string& a_text)
+-> Enum
+{
+	const uint8_t first = 1;
+	const uint8_t last = static_cast<uint8_t>(enumText.size() - 1);
+	uint8_t i = first;
+	for (; i <= last && a_text != enumText[i]; ++i);
+	if (i <= last)
+		return static_cast<Enum>(i);
+	return Enum::undefined;
+}
 
-} // namespace Ada_Byron_code_book
+std::string
+ABcb::Color::GetString(Enum a_enum)
+{	return enumText.at(static_cast<uint8_t>(a_enum)); }
 
 bool
 ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
@@ -300,8 +291,8 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 
 	if (a_vm.count("platonic-solid")) {
 		const std::string& text = a_vm["platonic-solid"].as<std::string>();
-		platonicSolid = GetPlatonicSolid(text);
-		if (platonicSolid == PlatonicSolidType::eUndefined) {
+		platonicSolid = PlatonicSolid::GetEnum(text);
+		if (platonicSolid == PlatonicSolid::Enum::undefined) {
 			const std::string message =
 				"Unknown platonic-solid parameter '" + text + "'";
 			return OutputErrorAndReturnFalse(message);
