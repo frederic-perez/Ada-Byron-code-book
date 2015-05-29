@@ -4,7 +4,6 @@
 
 #include <array>
 #include <cstdint>
-#include <iostream>
 #include <string>
 
 namespace Ada_Byron_code_book {
@@ -18,9 +17,7 @@ enum class PlatonicSolidType : uint8_t {
 const std::array<const char*, 6> platonicSolidText{ {
 	"undefined",
 	"tetrahedron", "octahedron", "icosahedron", "hexahedron", "dodecahedron" } };
-const uint8_t ePlatonicSolidType_First = 1;
-const uint8_t ePlatonicSolidType_Last =
-	static_cast<uint8_t>(platonicSolidText.size() - 1);
+std::string GetString(PlatonicSolidType);
 
 // The Color definition and helpers
 //
@@ -52,7 +49,5 @@ ParsedCommandLine(std::ostream&);
 } // namespace cli
 
 } // namespace Ada_Byron_code_book
-
-std::ostream& operator<<(std::ostream&, Ada_Byron_code_book::Color::Enum);
 
 // -- eof

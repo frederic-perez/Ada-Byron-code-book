@@ -243,6 +243,9 @@ ABcb::PlatonicSolidType
 GetPlatonicSolid(const std::string& a_text)
 {
 	using namespace ABcb;
+	const uint8_t ePlatonicSolidType_First = 1;
+	const uint8_t ePlatonicSolidType_Last =
+		static_cast<uint8_t>(platonicSolidText.size() - 1);
 	uint8_t i = ePlatonicSolidType_First;
 	for (; i <= ePlatonicSolidType_Last && a_text != platonicSolidText[i]; ++i);
 	if (i <= ePlatonicSolidType_Last)
@@ -250,19 +253,11 @@ GetPlatonicSolid(const std::string& a_text)
 	return PlatonicSolidType::eUndefined;
 }
 
-std::ostream&
-operator<<(std::ostream& a_os, ABcb::PlatonicSolidType a_rhs)
-{
-	using namespace ABcb;
-	const uint8_t i = static_cast<uint8_t>(a_rhs);
-	if (i >= platonicSolidText.size())
-		a_os << "[Error: Wrong PlatonicSolidType]";
-	else
-		a_os << platonicSolidText.at(i);
-	return a_os;
-}
-
 } // namespace
+
+std::string
+ABcb::GetString(PlatonicSolidType a_enum)
+{	return platonicSolidText.at(static_cast<uint8_t>(a_enum)); }
 
 namespace Ada_Byron_code_book {
 
@@ -289,18 +284,6 @@ GetString(Enum a_enum)
 } // namespace Color
 
 } // namespace Ada_Byron_code_book
-
-std::ostream&
-operator<<(std::ostream& a_os, ABcb::Color::Enum a_rhs)
-{
-	using namespace ABcb::Color;
-	const uint8_t i = static_cast<uint8_t>(a_rhs);
-	if (i >= enumText.size())
-		a_os << "[Error: Wrong Color::Enum]";
-	else
-		a_os << enumText.at(i);
-	return a_os;
-}
 
 bool
 ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
@@ -363,8 +346,8 @@ ABcb::cli::ParsedCommandLine(std::ostream& a_os)
 	a_os
 		<< "  --input-double " << inputDouble << '\n'
 		<< "  --input-positive-double " << inputPositiveDouble << '\n'
-		<< "  --platonic-solid " << platonicSolid << '\n'
-		<< "  --color " << colorEnum << '\n';
+		<< "  --platonic-solid " << GetString(platonicSolid) << '\n'
+		<< "  --color " << Color::GetString(colorEnum) << '\n';
 	a_os << '\n';
 
 	// 3) Informative output
