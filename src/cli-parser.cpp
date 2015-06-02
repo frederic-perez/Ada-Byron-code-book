@@ -39,7 +39,7 @@ std::string filenameIn;
 double inputDouble = 42.666;
 double inputPositiveDouble = .8;
 PlatonicSolid::Enum platonicSolid = PlatonicSolid::Enum::undefined;
-Color::Enum colorEnum = Color::Enum::undefined;
+Color::Enum color = Color::Enum::undefined;
 
 // 3) Informative output
 //
@@ -301,8 +301,8 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 
 	if (a_vm.count("color")) {
 		const std::string& text = a_vm["color"].as<std::string>();
-		colorEnum = Color::GetEnum(text);
-		if (colorEnum == Color::Enum::undefined) {
+		color = Color::GetEnum(text);
+		if (color == Color::Enum::undefined) {
 			const std::string message =
 				"Unknown color parameter '" + text + "'";
 			return OutputErrorAndReturnFalse(message);
@@ -338,7 +338,7 @@ ABcb::cli::ParsedCommandLine(std::ostream& a_os)
 		<< "  --input-double " << inputDouble << '\n'
 		<< "  --input-positive-double " << inputPositiveDouble << '\n'
 		<< "  --platonic-solid " << GetString(platonicSolid) << '\n'
-		<< "  --color " << Color::GetString(colorEnum) << '\n';
+		<< "  --color " << Color::GetString(color) << '\n';
 	a_os << '\n';
 
 	// 3) Informative output
