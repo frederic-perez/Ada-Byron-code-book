@@ -59,6 +59,16 @@ const std::string usageParameterExamples =
 //
 bool CheckArguments(const boost::program_options::variables_map&);
 
+// Miscellany
+
+std::string
+GetSetOfDefinedString(const std::vector<std::string>& a_definedStrings)
+{
+	std::ostringstream oss;
+	oss << '{' << boost::algorithm::join(a_definedStrings, ", ") << '}';
+	return oss.str();
+}
+
 } // namespace cli
 
 } // namespace Ada_Byron_code_book
@@ -104,10 +114,10 @@ ABcb::cli::ParseCommandLine(int argc, char** argv)
 			"<positive double> # \texample to check the input is positive")
 			("platonic-solid",
 			po::value<std::string>(), //po::value<PlatonicSolid>(&platonicSolid),
-			"{ tetrahedron | octahedron | icosahedron | hexahedron | dodecahedron }")
+			GetSetOfDefinedString(PlatonicSolid::GetDefinedStrings()).c_str())
 			("color",
 			po::value<std::string>(),
-			"{ red | green | blue }")
+			GetSetOfDefinedString(Color::GetDefinedStrings()).c_str())
 			;
 		odFull.add(od);
 	}
@@ -119,7 +129,7 @@ ABcb::cli::ParseCommandLine(int argc, char** argv)
 			("help", "# \tOutput help on the usage, then exit")
 			("verbose",
 			po::value<std::string>(&verboseCLI),
-			"{ on | off }")
+			"{on, off}")
 			("usage-examples",
 			"# \tOutput example parameters, help on the usage, then exit");
 		odFull.add(od);
@@ -241,13 +251,24 @@ ParseBoolean(
 
 } // namespace
 
+namespace Ada_Byron_code_book {
+
+namespace PlatonicSolid {
+const uint8_t first = 1;
+const uint8_t last = static_cast<uint8_t>(enumText.size() - 1);
+} // namespace PlatonicSolid
+
+namespace Color {
+const uint8_t first = 1;
+const uint8_t last = static_cast<uint8_t>(enumText.size() - 1);
+} // namespace Color
+
+} // namespace Ada_Byron_code_book
+
 auto
 ABcb::PlatonicSolid::GetEnum(const std::string& a_text)
 -> Enum
 {
-	using namespace ABcb;
-	const uint8_t first = 1;
-	const uint8_t last = static_cast<uint8_t>(enumText.size() - 1);
 	uint8_t i = first;
 	for (; i <= last && a_text != enumText[i]; ++i);
 	if (i <= last)
@@ -259,12 +280,20 @@ std::string
 ABcb::PlatonicSolid::GetString(Enum a_enum)
 {	return enumText.at(static_cast<uint8_t>(a_enum)); }
 
+std::vector<std::string>
+ABcb::PlatonicSolid::GetDefinedStrings()
+{
+	std::vector<std::string> result;
+	uint8_t i = first;
+	for (; i <= last; ++i)
+		result.push_back(enumText[i]);
+	return result;
+}
+
 auto
 ABcb::Color::GetEnum(const std::string& a_text)
 -> Enum
 {
-	const uint8_t first = 1;
-	const uint8_t last = static_cast<uint8_t>(enumText.size() - 1);
 	uint8_t i = first;
 	for (; i <= last && a_text != enumText[i]; ++i);
 	if (i <= last)
@@ -275,6 +304,16 @@ ABcb::Color::GetEnum(const std::string& a_text)
 std::string
 ABcb::Color::GetString(Enum a_enum)
 {	return enumText.at(static_cast<uint8_t>(a_enum)); }
+
+std::vector<std::string>
+ABcb::Color::GetDefinedStrings()
+{
+	std::vector<std::string> result;
+	uint8_t i = first;
+	for (; i <= last; ++i)
+		result.push_back(enumText[i]);
+	return result;
+}
 
 bool
 ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)

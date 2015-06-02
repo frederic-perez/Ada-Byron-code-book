@@ -5,6 +5,7 @@
 #include <array>
 #include <cstdint>
 #include <string>
+#include <vector>
 
 namespace Ada_Byron_code_book {
 
@@ -19,6 +20,7 @@ const std::array<const char*, 6> enumText{ {
 	"tetrahedron", "octahedron", "icosahedron", "hexahedron", "dodecahedron" } };
 Enum GetEnum(const std::string&);
 std::string GetString(Enum);
+std::vector<std::string> GetDefinedStrings();
 
 } // namespace PlatonicSolid
 
@@ -33,6 +35,7 @@ const std::array<const char*, 4> enumText{ {
 	"red", "green", "blue" } };
 Enum GetEnum(const std::string&);
 std::string GetString(Enum);
+std::vector<std::string> GetDefinedStrings();
 
 } // namespace Color
 
