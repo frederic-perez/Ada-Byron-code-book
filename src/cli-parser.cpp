@@ -103,7 +103,7 @@ ABcb::cli::ParseCommandLine(int argc, char** argv)
 			po::value<double>(&inputPositiveDouble),
 			"<positive double> # \texample to check the input is positive")
 			("platonic-solid",
-			po::value<std::string>(), //po::value<PlatonicSolidType>(&platonicSolid),
+			po::value<std::string>(), //po::value<PlatonicSolid>(&platonicSolid),
 			"{ tetrahedron | octahedron | icosahedron | hexahedron | dodecahedron }")
 			("color",
 			po::value<std::string>(),

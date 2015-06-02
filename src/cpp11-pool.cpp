@@ -82,8 +82,8 @@ ABcb::cpp11::UsingTuple()
 	std::clog << pad << "The size of MyTuple is " << N << std::endl;
 
 	const MyTuple t1{ 16, "Test", true };
-	std::cout << pad << "Type of get<1>(t1) = " << typeid(std::get<1>(t1)).name()
-		<< std::endl;
+	std::cout << pad << "typeid of get<1>(t1) = "
+		<< typeid(std::get<1>(t1)).name() << std::endl;
 	std::cout << pad << "t1 = ";
 	print(t1);
 	std::cout << std::endl;

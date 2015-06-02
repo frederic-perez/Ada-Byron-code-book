@@ -8,7 +8,7 @@
 
 namespace Ada_Byron_code_book {
 
-namespace PlatonicSolid { // The PlatonicSolidType definition and helpers
+namespace PlatonicSolid { // An enum class and related stuff
 
 enum class Enum : uint8_t {
 	undefined,
@@ -22,7 +22,7 @@ std::string GetString(Enum);
 
 } // namespace PlatonicSolid
 
-namespace Color { // The Color definition and helpers
+namespace Color { // An enum class and related stuff
 
 enum class Enum : uint8_t {
 	undefined,
