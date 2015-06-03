@@ -38,7 +38,7 @@ Output(
 	const T& a_container,
 	const std::string& a_containerName)
 {
-	a_os << a_containerName << " = ";
+	a_os << (a_containerName.empty() ? "[unnamed]" : a_containerName) << " = ";
 	if (a_container.empty())
 		a_os << "[empty]" << std::endl;
 	else {
