@@ -3,3 +3,4 @@
 --input-positive-double 0.2
 --platonic-solid octahedron
 --color green
+--fruit orange
