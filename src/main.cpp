@@ -3,6 +3,8 @@
 #include <iostream>
 #include <string>
 
+#include <boost/preprocessor.hpp>
+
 #include "algorithm-string-pool.h"
 #include "aux-raw.h"
 #include "aux-spy.h"
@@ -61,6 +63,9 @@ main(int argc, char* argv[])
 		<< std::endl << std::endl;
 
 	ABcb::GurusTest({ "Waits", "Stroustrup" });
+#define SEQUENCE (Mercury)(Oldfield)(Springsteen)
+#define TO_STR(unused,data,elem) BOOST_PP_STRINGIZE(elem),
+	ABcb::GurusTest({ BOOST_PP_SEQ_FOR_EACH(TO_STR, ~, SEQUENCE) });
 
 	return EXIT_SUCCESS;
 }
