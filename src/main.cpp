@@ -13,6 +13,7 @@
 #include "preprocessor-pool.h"
 #include "promotions-pool.h"
 #include "ublas-pool.h"
+#include "under-construction.h"
 #include "xml-parser.h"
 
 int
@@ -57,7 +58,10 @@ main(int argc, char* argv[])
 	const std::string filenameOut = "output.xml";
 	succeeded = ABcb::ParseXML(filenameIn, filenameOut);
 	std::clog << "ABcb::ParseXML " << (succeeded ? "succeeded" : "failed")
-		<< std::endl;
+		<< std::endl << std::endl;
+
+	ABcb::GuruTest("Waits");
+	ABcb::GuruTest("Stroustrup");
 
 	return EXIT_SUCCESS;
 }
