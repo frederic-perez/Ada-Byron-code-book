@@ -50,10 +50,14 @@ ABcb::Guru::GetDefinedStrings()
 	return result;
 }
 
+namespace {
+
 void
-ABcb::GuruTest(const std::string& a_text)
+GuruTest(const std::string& a_text)
 {
+	using namespace ABcb;
 	Guru::Enum guru = Guru::GetEnum(a_text);
+	using raw::pad;
 	if (guru == Guru::Enum::undefined) {
 		const std::string message =
 			"Unknown guru parameter '" + a_text + "'";
@@ -62,12 +66,22 @@ ABcb::GuruTest(const std::string& a_text)
 		std::vector<std::string> definedStrings = Guru::GetDefinedStrings();
 		oss << '{' << boost::algorithm::join(definedStrings, ", ") << '}';
 		const std::string setOfDefinedStrings = oss.str();
-		
-		std::cerr << __FUNCTION__ << ": " << message << '\n'
-			<< raw::pad << "--guru arg\t" << setOfDefinedStrings << '\n';
+
+		std::cerr << pad << __FUNCTION__ << ": " << message << '\n'
+			<< pad << pad << "--guru arg\t" << setOfDefinedStrings << '\n';
 
 	} else
-		std::cout << __FUNCTION__ << ": guru = " << a_text << std::endl;
+		std::cout << pad << __FUNCTION__ << ": guru = " << a_text << std::endl;
+}
+
+} // namespace
+
+void
+ABcb::GurusTest(std::initializer_list<std::string> a_args)
+{
+	std::cout << __FUNCTION__ << " called" << std::endl;
+	for (auto text : a_args)
+		GuruTest(text);
 }
 
 // -- eof

@@ -44,7 +44,7 @@ main(int argc, char* argv[])
 	const std::string inputValue = "1234567890";
 	ABcb::ExamplesOfLexicalCast(inputValue);
 	std::cout << std::endl;
-	
+
 	ABcb::ExamplesOfAlgorithmsString();
 	std::cout << std::endl;
 
@@ -60,8 +60,7 @@ main(int argc, char* argv[])
 	std::clog << "ABcb::ParseXML " << (succeeded ? "succeeded" : "failed")
 		<< std::endl << std::endl;
 
-	ABcb::GuruTest("Waits");
-	ABcb::GuruTest("Stroustrup");
+	ABcb::GurusTest({ "Waits", "Stroustrup" });
 
 	return EXIT_SUCCESS;
 }

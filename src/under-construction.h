@@ -4,6 +4,7 @@
 
 #include <array>
 #include <cstdint>
+#include <initializer_list>
 #include <string>
 #include <vector>
 
@@ -30,7 +31,7 @@ std::vector<std::string> GetDefinedStrings();
 
 } // namespace Fruit
 
-void GuruTest(const std::string&);
+void GurusTest(std::initializer_list<std::string>);
 
 /*
 #define PROJECT_PREFIX_DO_EVIL_TO_STR(unused,data,elem) BOOST_PP_STRINGIZE(elem),
