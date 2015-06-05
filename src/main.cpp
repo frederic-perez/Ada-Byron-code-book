@@ -31,6 +31,7 @@ main(int argc, char* argv[])
 	ABcb::cpp11::TestIfAConstParameterCanBeModified(42);
 	ABcb::cpp11::UsingTuple();
 	ABcb::cpp11::AlgorithmExamples();
+	ABcb::cpp11::MiscellanyExamples();
 
 	ABcb::raw::ExamplesOfRaw();
 	std::cout << std::endl;

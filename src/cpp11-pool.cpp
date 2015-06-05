@@ -115,4 +115,15 @@ ABcb::cpp11::AlgorithmExamples()
 	std::clog << __func__ << " finished." << std::endl;
 }
 
+void
+ABcb::cpp11::MiscellanyExamples()
+{
+	std::clog << __func__ << " started..." << std::endl;
+
+	std::cout << pad << "PrintList (variadic template function): ";
+	PrintList(1, 2, 'c', "Hello, world!", 666.);
+
+	std::clog << __func__ << " finished." << std::endl;
+}
+
 // -- eof
