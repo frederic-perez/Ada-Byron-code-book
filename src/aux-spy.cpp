@@ -3,6 +3,8 @@
 #include <ctime>
 #if defined(__GNUG__)
 #include <unistd.h>
+// '- unistd.h is not part of standard C so standard C++ in turn doesn't
+// include it with the other c... headers--that's why we cannot write <cunistd>
 #endif
 
 #include <boost/version.hpp>

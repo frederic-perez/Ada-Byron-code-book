@@ -1,4 +1,4 @@
-// -- Examples on how to use boost::lexical_cast
+// -- Examples on how to use some C++11 functionalities
 
 #pragma once
 
