@@ -25,6 +25,7 @@ set(SRC_LIST
 	aux-spy.cpp aux-spy.h
 	algorithm-string-pool.cpp algorithm-string-pool.h
 	cli-parser.cpp cli-parser.h
+	concurrency.cpp concurrency.h
 	cpp11-pool.cpp cpp11-pool.h
 	main.cpp
 	filesystem-pool.cpp filesystem-pool.h

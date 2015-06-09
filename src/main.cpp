@@ -9,6 +9,7 @@
 #include "aux-raw.h"
 #include "aux-spy.h"
 #include "cli-parser.h"
+#include "concurrency.h"
 #include "cpp11-pool.h"
 #include "filesystem-pool.h"
 #include "lexical-cast-pool.h"
@@ -61,6 +62,9 @@ main(int argc, char* argv[])
 	succeeded = ABcb::ParseXML(filenameIn, filenameOut);
 	std::clog << "ABcb::ParseXML " << (succeeded ? "succeeded" : "failed")
 		<< std::endl << std::endl;
+
+	ABcb::ExamplesOfConcurrency();
+	std::cout << std::endl;
 
 	ABcb::GurusTest({ "Waits", "Stroustrup" });
 #define SEQUENCE (Mercury)(Oldfield)(Springsteen)
