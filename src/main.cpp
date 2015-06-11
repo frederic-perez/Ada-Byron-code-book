@@ -66,10 +66,9 @@ main(int argc, char* argv[])
 	ABcb::ExamplesOfConcurrency();
 	std::cout << std::endl;
 
-	ABcb::GurusTest({ "Waits", "Stroustrup" });
-#define SEQUENCE (Mercury)(Oldfield)(Springsteen)
-#define TO_STR(unused,data,elem) BOOST_PP_STRINGIZE(elem),
-	ABcb::GurusTest({ BOOST_PP_SEQ_FOR_EACH(TO_STR, ~, SEQUENCE) });
+	ABcb::GurusTest({ "Bjarne_Stroustrup", "John_Doe", "Andrew_Koenig" });
+	ABcb::GurusTest(
+		{ BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, (Annie_Lennox)(Mike_Oldfield)) });
 
 	return EXIT_SUCCESS;
 }

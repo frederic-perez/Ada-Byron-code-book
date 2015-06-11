@@ -23,13 +23,14 @@ namespace Guru { // An enum class and related stuff
 // Code originarily based on
 // http://www.gamedev.net/topic/437852-c-enum-names-as-strings/
 
-#define SEQUENCE (undefined)(Alexandrescu)(Koenig)(Meyers)(Stroustrup)(Sutter)
-ABcb_DECLARE_ENUM_AND_ENUMTEXT(SEQUENCE)
+ABcb_DECLARE_ENUM_AND_ENUMTEXT(\
+	(undefined)\
+	(Andrei_Alexandrescu)(Andrew_Koenig)(Bruce_Eckel)(Bjarne_Stroustrup)\
+	(Herb_Sutter)(Ira_Pohl)(Scott_Meyers)
+)
 Enum GetEnum(const std::string&);
 std::string GetString(Enum);
 std::vector<std::string> GetDefinedStrings();
-
-#undef SEQUENCE
 
 } // namespace Fruit
 
