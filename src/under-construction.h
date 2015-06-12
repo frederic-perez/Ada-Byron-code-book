@@ -32,9 +32,36 @@ Enum GetEnum(const std::string&);
 std::string GetString(Enum);
 std::vector<std::string> GetDefinedStrings();
 
-} // namespace Fruit
+} // namespace Guru
 
 void GurusTest(std::initializer_list<std::string>);
+
+// First attempt at creating a template class for enhanced enum classes
+
+template<typename Enum>
+class EnumENH
+{
+	int d_i;
+	Enum GetEnum(const std::string&) {
+		return Enum::undefined;
+	}
+};
+
+template<typename Enum>
+auto
+GetEnum(const std::string& a_text)
+-> Enum
+{
+	//uint8_t i = first;
+	//for (; i <= last && a_text != enumText[i]; ++i);
+	//if (i <= last)
+	//	return static_cast<Enum>(i);
+	return Enum::undefined;
+}
+
+enum class FooBar : uint8_t { undefined, foo, bar };
+
+using ConcreteType = EnumENH<FooBar>;
 
 } // namespace Ada_Byron_code_book
 
