@@ -1,6 +1,6 @@
 --input-file input.txt
---input-double -0.1
---input-positive-double 0.2
+--input-double -.1
+--input-positive-double .2
 --platonic-solid octahedron
 --color green
 --fruit orange
