@@ -24,7 +24,7 @@
 #include <boost/version.hpp>
 
 #include "aux-raw.h"
-#include "XML-parser.h"
+#include "xml-parser.h"
 
 #ifdef XML_DATE_TRANSLATOR_20150325
 
