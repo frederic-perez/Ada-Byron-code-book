@@ -37,8 +37,8 @@ std::vector<std::string> GetDefinedStrings();
 void GurusTest(std::initializer_list<std::string>);
 
 // First attempt at creating a template class for enhanced enum classes
-
-template<typename Enum>
+#ifdef FPCX_WORK_IN_PROGESS_20150616
+template<typename Enum, size_t N, std::string> //, const std::array<const char*, N>& e>
 class EnumENH
 {
 	int d_i;
@@ -58,10 +58,17 @@ GetEnum(const std::string& a_text)
 	//	return static_cast<Enum>(i);
 	return Enum::undefined;
 }
+#endif
 
 enum class FooBar : uint8_t { undefined, foo, bar };
+const std::string text = "foo and bar";
+namespace { const std::string s = "abc"; }
+const std::array<const char*, 3> fooBarText{{ "undefined", "foo", "bar" }};
 
-using ConcreteType = EnumENH<FooBar>;
+#ifdef FPCX_WORK_IN_PROGESS_20150616
+//using ConcreteType = EnumENH<FooBar, 3, s>; //, fooBarText > ;
+using ConcreteType = EnumENH<FooBar, 3, "string">; //, fooBarText > ;
+#endif
 
 } // namespace Ada_Byron_code_book
 
