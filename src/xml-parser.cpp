@@ -30,8 +30,8 @@
 
 class DateTranslator
 {
-	typedef boost::date_time::date_facet<Date, char> tOFacet;
-	typedef boost::date_time::date_input_facet<Date, char> tIFacet;
+	using tOFacet = boost::date_time::date_facet<Date, char>;
+	using tIFacet = boost::date_time::date_input_facet<Date, char>;
 	std::locale d_locale;
 
 	static std::locale isoDateLocale() {
@@ -41,8 +41,8 @@ class DateTranslator
 	}
 
 public:
-	typedef std::string internal_type;
-	typedef Date external_type;
+	using internal_type = std::string;
+	using external_type = Date;
 
 	DateTranslator() : d_locale(isoDateLocale()) {}
 
@@ -71,9 +71,9 @@ public:
 #endif
 
 #ifdef XML_DATE_TRANSLATOR_20150325
-typedef boost::gregorian::date Date;
+using Date = boost::gregorian::date;
 #else
-typedef std::string Date;
+using Date = std::string;
 #endif
 
 struct Flight
@@ -84,7 +84,7 @@ struct Flight
 	bool cancelled;
 };
 
-typedef std::vector<Flight> Flights;
+using Flights = std::vector<Flight>;
 
 #ifdef XML_DATE_TRANSLATOR_20150325
 
@@ -92,7 +92,7 @@ namespace boost {
 namespace property_tree {
 
 template<> struct translator_between<std::string, Date> {
-	typedef XML_DATE_TRANSLATOR_20150325 type;
+	using type = XML_DATE_TRANSLATOR_20150325 type;
 };
 
 } // namespace property_tree

@@ -20,8 +20,8 @@ namespace bnu = boost::numeric::ublas;
 
 namespace {
 
-typedef bnu::fixed_vector<double, 3> VectorD3;
-typedef bnu::fixed_matrix<double, 3, 3> MatrixD33;
+using VectorD3 = bnu::fixed_vector<double, 3>;
+using MatrixD33 = bnu::fixed_matrix<double, 3, 3>;
 
 VectorD3
 operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)

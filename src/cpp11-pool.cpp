@@ -77,7 +77,7 @@ ABcb::cpp11::UsingTuple()
 {
 	std::clog << __func__ << " started..." << std::endl;
 
-	typedef std::tuple<int, std::string, bool> MyTuple;
+	using MyTuple = std::tuple<int, std::string, bool>;
 	const size_t N = std::tuple_size<MyTuple>::value;
 	std::clog << pad << "The size of MyTuple is " << N << std::endl;
 
