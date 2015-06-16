@@ -58,14 +58,12 @@ GetEnum(const std::string& a_text)
 	//	return static_cast<Enum>(i);
 	return Enum::undefined;
 }
-#endif
 
 enum class FooBar : uint8_t { undefined, foo, bar };
-const std::string text = "foo and bar";
+const std::string fooAndBarText = "foo and bar";
 namespace { const std::string s = "abc"; }
 const std::array<const char*, 3> fooBarText{{ "undefined", "foo", "bar" }};
 
-#ifdef FPCX_WORK_IN_PROGESS_20150616
 //using ConcreteType = EnumENH<FooBar, 3, s>; //, fooBarText > ;
 using ConcreteType = EnumENH<FooBar, 3, "string">; //, fooBarText > ;
 #endif
