@@ -1,5 +1,6 @@
 // -- Examples on how to use boost::algorithm::string
 
+#include <algorithm>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -17,6 +18,42 @@ Output(const std::string& a_description, const std::string& a_value) {
 	using Ada_Byron_code_book::raw::pad;
 	std::cout << pad << a_description << ": \"" << a_value << "\""
 		<< std::endl;
+}
+
+void
+Output(const std::string& a_description, const std::wstring& a_value) {
+	using Ada_Byron_code_book::raw::pad;
+	std::cout << pad << a_description << ": \"" << std::flush;
+	std::wcout << a_value << std::flush;
+	std::cout << "\"" << std::endl;
+}
+
+void
+ourToLower(std::string& a_text)
+{
+	std::transform(a_text.begin(), a_text.end(), a_text.begin(), ::tolower);
+	for (auto& c : a_text) {
+		switch (c) {
+		case 'À': c = 'à'; break;
+		case 'È': c = 'è'; break;
+		case 'Ì': c = 'ì'; break;
+		case 'Ò': c = 'ò'; break;
+		case 'Ù': c = 'ù'; break;
+		case 'Á': c = 'á'; break;
+		case 'É': c = 'é'; break;
+		case 'Í': c = 'í'; break;
+		case 'Ó': c = 'ó'; break;
+		case 'Ú': c = 'ú'; break;
+		case 'Ä': c = 'ä'; break;
+		case 'Ë': c = 'ë'; break;
+		case 'Ï': c = 'ï'; break;
+		case 'Ö': c = 'ö'; break;
+		case 'Ü': c = 'ü'; break;
+		case 'Ç': c = 'ç'; break;
+		case 'Ñ': c = 'ñ'; break;
+		default:;
+		}
+	}
 }
 	
 } // namespace
@@ -50,6 +87,16 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 		remove_if(name.begin(), name.end(), ba::is_any_of("LN")),
 		name.end());
 	Output("name (after is_any_of(\"LN\") removal)", name);
+
+	//std::wstring special = L"CAFÉ BJÖRK ÀÈÌÒÙ ÁÉÍÓÚ ÄËÏÖÜ ÇÑ"; // TODO
+	std::string special = "CAFÉ BJÖRK ÀÈÌÒÙ ÁÉÍÓÚ ÄËÏÖÜ ÇÑ";
+	Output(">>> special (original)", special);
+	ourToLower(special);
+	Output(">>> special (after ourToLower)", special);
+	const std::string specialK = "café björk àèìòù áéíóú äëïöü çñ";
+	const bool equal = special == specialK;
+	std::cout << raw::pad << ">>> special == \"" << specialK << "\" is "
+		<< std::boolalpha << equal << std::endl;
 
 	const std::string line = "aa bb , cc dd , ee , gg,hh, ii ,kk";
 	Output("line (original)", line);
