@@ -5,6 +5,10 @@
 #include <string>
 #include <vector>
 
+#ifdef _MSC_VER
+#include <atlstr.h>
+#endif
+
 #include <boost/algorithm/string.hpp>
 #include <boost/range/algorithm/remove_if.hpp>
 
@@ -31,6 +35,11 @@ Output(const std::string& a_description, const std::wstring& a_value) {
 void
 ourToLower(std::string& a_text)
 {
+#ifdef _MSC_VER
+	CStringA text = a_text.c_str();
+	text.MakeLower();
+	a_text = text.GetBuffer();
+#else
 	std::transform(a_text.begin(), a_text.end(), a_text.begin(), ::tolower);
 	for (auto& c : a_text) {
 		switch (c) {
@@ -54,6 +63,7 @@ ourToLower(std::string& a_text)
 		default:;
 		}
 	}
+#endif
 }
 	
 } // namespace
@@ -89,11 +99,11 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 	Output("name (after is_any_of(\"LN\") removal)", name);
 
 	//std::wstring special = L"CAFÉ BJÖRK ÀÈÌÒÙ ÁÉÍÓÚ ÄËÏÖÜ ÇÑ"; // TODO
-	std::string special = "CAFÉ BJÖRK ÀÈÌÒÙ ÁÉÍÓÚ ÄËÏÖÜ ÇÑ";
+	std::string special = "CAFÉ BJÖRK ÀÈÌÒÙ ÁÉÍÓÚ ÄËÏÖÜ ÇÑ L·L";
 	Output(">>> special (original)", special);
 	ourToLower(special);
 	Output(">>> special (after ourToLower)", special);
-	const std::string specialK = "café björk àèìòù áéíóú äëïöü çñ";
+	const std::string specialK = "café björk àèìòù áéíóú äëïöü çñ l·l";
 	const bool equal = special == specialK;
 	std::cout << raw::pad << ">>> special == \"" << specialK << "\" is "
 		<< std::boolalpha << equal << std::endl;
