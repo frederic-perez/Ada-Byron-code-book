@@ -119,7 +119,7 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 	ba::to_lower(narrow);
 	Output("   narrow (after ba::to_lower)", narrow);
 	std::transform(narrow.begin(), narrow.end(), narrow.begin(), ::tolower);
-	Output("   narrow (after ::towlower)", narrow);
+	Output("   narrow (after ::tolower)", narrow);
 
 	const wchar_t* raw_utf16{ L"CAF\u00C9 BJ\u00D6RK" };
 	std::wstring wide = raw_utf16;
