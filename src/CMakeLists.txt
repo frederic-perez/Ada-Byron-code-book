@@ -8,7 +8,7 @@ else()
 endif()
 set(Boost_USE_MULTITHREADED ON)
 # find_package(Boost) # <-- Use this simple line for using only headers
-find_package(Boost COMPONENTS program_options system filesystem)
+find_package(Boost COMPONENTS program_options system filesystem locale)
 if (Boost_FOUND)
 	message(STATUS "Boost found:")
 	include_directories(${Boost_INCLUDE_DIRS})

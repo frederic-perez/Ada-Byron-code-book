@@ -10,6 +10,7 @@
 #endif
 
 #include <boost/algorithm/string.hpp>
+#include <boost/locale.hpp>
 #include <boost/range/algorithm/remove_if.hpp>
 
 #include "aux-raw.h"
@@ -77,6 +78,15 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 	std::clog << pad << "sizeof(char) = " << sizeof(char) << '\n'
 		<< pad << "sizeof(wchar_t) = " << sizeof(wchar_t) << std::endl;
 
+	namespace bl = boost::locale;
+	std::locale loc("");
+	std::locale::global(loc);
+	std::locale conv_loc = boost::locale::util::create_info(loc, loc.name());
+	// See
+	// www.boost.org/doc/libs/1_57_0/libs/locale/doc/html/locale_information.html
+	std::cout << pad << "locale: The name code is "
+		<< std::use_facet<bl::info>(conv_loc).name() << std::endl;
+
 	std::string name = "  Alan Turing 42  ";
 	Output("%% name (original)", name);
 	name.erase(boost::remove_if(name, ::isdigit), name.end());
@@ -120,6 +130,14 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 	Output("   narrow (after ba::to_lower)", narrow);
 	std::transform(narrow.begin(), narrow.end(), narrow.begin(), ::tolower);
 	Output("   narrow (after ::tolower)", narrow);
+	ba::to_upper_copy(narrow);
+	Output("   narrow (after ba::to_upper_copy)", narrow);
+	try {
+		bl::to_lower(narrow);
+		Output("   narrow (after bl::to_lower)", narrow);
+	} catch (const std::bad_cast& e) {
+		std::cerr << pad << "   Error (bl::to_lower): " << e.what() << '\n';
+	}
 
 	const wchar_t* raw_utf16{ L"CAF\u00C9 BJ\u00D6RK" };
 	std::wstring wide = raw_utf16;
