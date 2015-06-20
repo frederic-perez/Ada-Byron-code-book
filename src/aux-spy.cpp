@@ -1,5 +1,7 @@
 // -- 
 
+// TODO 1. Ditch the contents of when!defined BOOST_FOR_CURRENT_TIME
+
 #define FPCX_USING_BOOST_FOR_CURRENT_TIME_20150619
 #if !defined(FPCX_USING_BOOST_FOR_CURRENT_TIME_20150619)
 #include <ctime>
