@@ -1,6 +1,7 @@
 // -- 
 
 // TODO 1. Ditch the contents of when!defined BOOST_FOR_CURRENT_TIME
+// TODO 2. Get rid of the guard itself
 
 #define FPCX_USING_BOOST_FOR_CURRENT_TIME_20150619
 #if !defined(FPCX_USING_BOOST_FOR_CURRENT_TIME_20150619)
