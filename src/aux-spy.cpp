@@ -1,13 +1,6 @@
 // -- 
 
-// TODO 1. Ditch the contents of when!defined BOOST_FOR_CURRENT_TIME
-// TODO 2. Get rid of the guard itself
-
-#define FPCX_USING_BOOST_FOR_CURRENT_TIME_20150619
-
-#ifdef FPCX_USING_BOOST_FOR_CURRENT_TIME_20150619
 #include <boost/date_time/posix_time/posix_time.hpp>
-#endif
 #include <boost/version.hpp>
 
 #include "aux-spy.h"
@@ -139,9 +132,8 @@ ABcb::spy::UserName(std::ostream& a_os)
 }
 
 std::ostream&
-ABcb::spy::LocalTime(std::ostream& a_os)
+ABcb::spy::LocalDate(std::ostream& a_os)
 {
-#ifdef FPCX_USING_BOOST_FOR_CURRENT_TIME_20150619
 	namespace pt = boost::posix_time;
 	const pt::ptime now = pt::second_clock::local_time();
 
@@ -150,14 +142,21 @@ ABcb::spy::LocalTime(std::ostream& a_os)
 	oss << date.day_of_week() << ", "
 		<< date.month() << ' ' << date.day() << ", " << date.year();
 	a_os << oss.str() << std::flush;
+	return a_os;
+}
 
-	oss.str("");
+std::ostream&
+ABcb::spy::LocalTime(std::ostream& a_os)
+{
+	namespace pt = boost::posix_time;
+	const pt::ptime now = pt::second_clock::local_time();
+
+	std::stringstream oss;
 	pt::time_facet* const f = new pt::time_facet("%H:%M:%S");
 	oss.imbue(std::locale(oss.getloc(), f));
 	oss << now;
 
-	a_os << ", at " << oss.str() << std::endl;
-#endif
+	a_os << oss.str() << std::flush;
 	return a_os;
 }
 
@@ -167,7 +166,7 @@ ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
 	using namespace ABcb::spy;
 	a_os << '\n' << a_runInfo.GetProgName()
 		<< " was launched by " << UserName << " at " << HostName
-		<< " on " << LocalTime //< LocalTime adds \n
+		<< " on " << LocalDate << ", at " << LocalTime << '\n'
 		<< "Using Boost version " << BoostVersion << '\n'
 		<< "Using Clang version " << ClangVersion << '\n'
 		<< "Using GNU g++ version " << GNUGppVersion << '\n'
