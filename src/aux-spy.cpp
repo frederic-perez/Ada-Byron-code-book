@@ -4,14 +4,6 @@
 // TODO 2. Get rid of the guard itself
 
 #define FPCX_USING_BOOST_FOR_CURRENT_TIME_20150619
-#if !defined(FPCX_USING_BOOST_FOR_CURRENT_TIME_20150619)
-#include <ctime>
-	#if defined(__GNUG__)
-	#include <unistd.h>
-// '- unistd.h is not part of standard C so standard C++ in turn doesn't
-// include it with the other c... headers--that's why we cannot write <cunistd>
-	#endif
-#endif
 
 #ifdef FPCX_USING_BOOST_FOR_CURRENT_TIME_20150619
 #include <boost/date_time/posix_time/posix_time.hpp>
@@ -155,34 +147,17 @@ ABcb::spy::LocalTime(std::ostream& a_os)
 
 	std::stringstream oss;
 	const pt::ptime::date_type date = now.date();
-	oss << date.month() << ' ' << date.day() << ", " << date.year();
-	a_os << oss.str() << ' ' << std::flush;
+	oss << date.day_of_week() << ", "
+		<< date.month() << ' ' << date.day() << ", " << date.year();
+	a_os << oss.str() << std::flush;
 
 	oss.str("");
 	pt::time_facet* const f = new pt::time_facet("%H:%M:%S");
 	oss.imbue(std::locale(oss.getloc(), f));
 	oss << now;
 
-	a_os << oss.str() << std::endl;
-#else
-
-	const time_t theTime_t = time(NULL);
-	//strcat(GLBox::d_comments, asctime(localtime(&theTime_t)));
-	// \__ realloc() of already freed area, or addresss outside of heap
-
-#if defined(_MSC_VER)
-#pragma warning(disable : 4996) // function or variable may be unsafe
+	a_os << ", at " << oss.str() << std::endl;
 #endif
-
-	struct tm* const theLocalTime =
-		localtime(&theTime_t); // <-- Caution: This inserts \n at end!
-	a_os << asctime(theLocalTime) << std::flush; // asctime: obsolete function
-#endif
-
-#if defined(_MSC_VER)
-#pragma warning(default : 4996) // function or variable may be unsafe
-#endif
-
 	return a_os;
 }
 
