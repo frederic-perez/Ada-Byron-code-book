@@ -76,12 +76,24 @@ using Date = boost::gregorian::date;
 using Date = std::string;
 #endif
 
-struct Flight
+class Flight
 {
-	std::string carrier;
-	unsigned number;
-	Date date;
-	bool cancelled;
+public:
+	Flight(
+		const std::string& a_carrier,
+		unsigned a_number,
+		const Date& a_date,
+		bool a_cancelled)
+	: d_carrier(a_carrier),
+		d_number(a_number),
+		d_date(a_date),
+		d_cancelled(a_cancelled)
+	{}
+
+	std::string d_carrier;
+	unsigned d_number;
+	Date d_date;
+	bool d_cancelled;
 };
 
 using Flights = std::vector<Flight>;
@@ -113,12 +125,12 @@ read(std::istream& a_is, Flights& a_flights)
 	// traverse pt
 	for (const ptree::value_type& v : pt.get_child("flights")) {
 		if (v.first == "flight") {
-			Flight f;
-			f.carrier = v.second.get<std::string>("carrier");
-			f.number = v.second.get<unsigned>("number");
-			f.date = v.second.get<Date>("date");
-			f.cancelled = v.second.get("<xmlattr>.cancelled", false);
-			a_flights.push_back(f);
+			const std::string carrier = v.second.get<std::string>("carrier");
+			const unsigned number = v.second.get<unsigned>("number");
+			const Date date = v.second.get<Date>("date");
+			const bool cancelled = v.second.get("<xmlattr>.cancelled", false);
+			const Flight flight(carrier, number, date, cancelled);
+			a_flights.push_back(flight);
 		}
 	}
 }
@@ -133,10 +145,10 @@ write(const Flights& a_flights, std::ostream& a_os)
 
 	for (const auto& flight : a_flights) {
 		ptree& node = pt.add("flights.flight", "");
-		node.put("carrier", flight.carrier);
-		node.put("number", flight.number);
-		node.put("date", flight.date);
-		if (flight.cancelled)
+		node.put("carrier", flight.d_carrier); // TODO: Add and use inspectors!
+		node.put("number", flight.d_number);
+		node.put("date", flight.d_date);
+		if (flight.d_cancelled)
 			node.put("<xmlattr>.cancelled", true);
 	}
 
