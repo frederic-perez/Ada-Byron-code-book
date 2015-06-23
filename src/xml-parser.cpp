@@ -19,6 +19,7 @@
 #ifdef XML_DATE_TRANSLATOR_20150325
 #include <boost/date_time/gregorian/gregorian.hpp>
 #endif
+#include <boost/filesystem.hpp>
 //#include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/version.hpp>
@@ -117,6 +118,7 @@ namespace {
 void
 read(std::istream& a_is, Flights& a_flights)
 {
+using Ada_Byron_code_book::raw::pad;
 	// populate tree structure pt
 	using boost::property_tree::ptree;
 	ptree pt;
@@ -124,15 +126,25 @@ read(std::istream& a_is, Flights& a_flights)
 
 	// traverse pt
 	for (const ptree::value_type& v : pt.get_child("flights")) {
+std::clog << pad << __func__ << ":L" << __LINE__ << std::endl;
 		if (v.first == "flight") {
-			const std::string carrier = v.second.get<std::string>("carrier");
-			const unsigned number = v.second.get<unsigned>("number");
-			const Date date = v.second.get<Date>("date");
-			const bool cancelled = v.second.get("<xmlattr>.cancelled", false);
-			const Flight flight(carrier, number, date, cancelled);
-			a_flights.push_back(flight);
+			try {
+std::clog << pad << __func__ << ":L" << __LINE__ << std::endl;
+				const std::string carrier = v.second.get<std::string>("carrier");
+				const unsigned number = v.second.get<unsigned>("number");
+				const Date date = v.second.get<Date>("date");
+				const bool cancelled = v.second.get("<xmlattr>.cancelled", false);
+				const Flight flight(carrier, number, date, cancelled);
+				a_flights.push_back(flight);
+			} catch (const std::exception& e) {
+				std::cerr << pad << __func__ << ": std::exception caught: "
+					<< e.what() << std::endl;
+				return;
+			}
+std::clog << pad << __func__ << ":L" << __LINE__ << std::endl;
 		}
 	}
+std::clog << pad << __func__ << ":L" << __LINE__ << std::endl;
 }
 
 void
@@ -168,11 +180,26 @@ Ada_Byron_code_book::ParseXML(
 	const std::string& a_outputFilename)
 {
 	std::clog << __func__ << " started..." << std::endl;
+	using raw::pad;
+	namespace bf = boost::filesystem;
+	if (bf::exists(a_inputFilename))
+		std::clog << pad << __func__ << ": Reading " << a_inputFilename
+			<< std::endl;
+	else {
+		std::cerr << pad << __func__ << ": " << a_inputFilename << " does not exist"
+			<< std::endl;
+		return false;
+	}
 	try {
 		std::ifstream input(a_inputFilename);
 		Flights flights;
-		read(input, flights);
-		using raw::pad;
+		try {
+			read(input, flights);
+		} catch (const std::exception& e) {
+			std::cerr << pad << __func__ << ": Exception by 'read' caught: "
+				<< e.what() << std::endl;
+			return false;
+		}
 		std::clog << pad << __func__ << ": Read(\"" << a_inputFilename
 			<< "\") finished" << std::endl;
 		std::ofstream output(a_outputFilename);
@@ -180,6 +207,7 @@ Ada_Byron_code_book::ParseXML(
 		std::clog << pad << __func__ << ": Writing of \"" << a_outputFilename
 			<< "\" finished" << std::endl;
 	} catch (...) {
+		std::cerr << pad << __func__ << ": Exception ... caught" << std::endl;
 		return false;
 	}
 	std::clog << __func__ << " finished." << std::endl;
