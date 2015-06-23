@@ -122,26 +122,25 @@ using Ada_Byron_code_book::raw::pad;
 	// populate tree structure pt
 	using boost::property_tree::ptree;
 	ptree pt;
-	read_xml(a_is, pt);
+	read_xml(a_is, pt); // TODO: Study: read_xml(a_is, pt, 0, std::locale());
 
 	// traverse pt
-	for (const ptree::value_type& v : pt.get_child("flights")) {
-std::clog << pad << __func__ << ":L" << __LINE__ << std::endl;
-		if (v.first == "flight") {
+	for (const ptree::value_type& pairStringPtree : pt.get_child("flights")) {
+		if (pairStringPtree.first == "flight") {
+			const ptree& tree = pairStringPtree.second;
+			const std::string carrier = tree.get<std::string>("carrier");
+			unsigned number = 0;
 			try {
-std::clog << pad << __func__ << ":L" << __LINE__ << std::endl;
-				const std::string carrier = v.second.get<std::string>("carrier");
-				const unsigned number = v.second.get<unsigned>("number");
-				const Date date = v.second.get<Date>("date");
-				const bool cancelled = v.second.get("<xmlattr>.cancelled", false);
-				const Flight flight(carrier, number, date, cancelled);
-				a_flights.push_back(flight);
+				number = tree.get<unsigned>("number");
 			} catch (const std::exception& e) {
 				std::cerr << pad << __func__ << ": std::exception caught: "
 					<< e.what() << std::endl;
 				return;
 			}
-std::clog << pad << __func__ << ":L" << __LINE__ << std::endl;
+				const Date date = tree.get<Date>("date");
+				const bool cancelled = tree.get("<xmlattr>.cancelled", false);
+				const Flight flight(carrier, number, date, cancelled);
+				a_flights.push_back(flight);
 		}
 	}
 std::clog << pad << __func__ << ":L" << __LINE__ << std::endl;
