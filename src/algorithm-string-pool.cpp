@@ -118,6 +118,15 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 	Output("   special (after ourToLower)", special);
 	const std::string specialK = "café björk àèìòù áéíóú äëïöü çñ l·l";
 	const bool equal = special == specialK;
+	// '- NOTE on comparing std::string objects:
+	//		Use operator== (or operator!=) instead of writing obfuscated code
+	//		like
+	//			strcmp(a_date.c_str(), date2.c_str()) == 0
+	//		See
+	//			http://en.cppreference.com/w/cpp/string/basic_string/operator_cmp
+	//		std::string::operator==:
+	//			Simpler, shorter, faster, easier to maintain. Period.
+
 	std::cout << pad << "   special == \"" << specialK << "\" is "
 		<< std::boolalpha << equal << std::endl;
 
