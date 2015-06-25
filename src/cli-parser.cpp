@@ -2,7 +2,7 @@
 
 #include <fstream>
 #include <iostream>
-#include <sstream>
+#include <sstream> // std::ostringstream oss
 
 #include "aux-raw-compiler-warnings-off.h"
 

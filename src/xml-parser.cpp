@@ -116,29 +116,30 @@ template<> struct translator_between<std::string, Date> {
 namespace {
 
 void
-read(std::istream& a_is, Flights& a_flights)
+Read(std::istream& a_istream, Flights& a_flights)
 {
 using Ada_Byron_code_book::raw::pad;
 	// populate tree structure pt
 	using boost::property_tree::ptree;
 	ptree pt;
-	read_xml(a_is, pt); // TODO: Study: read_xml(a_is, pt, 0, std::locale());
+	read_xml(a_istream, pt);
+	// '- TODO: Study: read_xml(a_istream, pt, 0, std::locale());
 
 	// traverse pt
 	for (const ptree::value_type& pairStringPtree : pt.get_child("flights")) {
 		if (pairStringPtree.first == "flight") {
-			const ptree& tree = pairStringPtree.second;
-			const std::string carrier = tree.get<std::string>("carrier");
+			const ptree& subtree = pairStringPtree.second;
+			const std::string carrier = subtree.get<std::string>("carrier");
 			unsigned number = 0;
 			try {
-				number = tree.get<unsigned>("number");
+				number = subtree.get<unsigned>("number");
 			} catch (const std::exception& e) {
 				std::cerr << pad << __func__ << ": std::exception caught: "
 					<< e.what() << std::endl;
 				return;
 			}
-				const Date date = tree.get<Date>("date");
-				const bool cancelled = tree.get("<xmlattr>.cancelled", false);
+				const Date date = subtree.get<Date>("date");
+				const bool cancelled = subtree.get("<xmlattr>.cancelled", false);
 				const Flight flight(carrier, number, date, cancelled);
 				a_flights.push_back(flight);
 		}
@@ -147,7 +148,7 @@ std::clog << pad << __func__ << ":L" << __LINE__ << std::endl;
 }
 
 void
-write(const Flights& a_flights, std::ostream& a_os)
+Write(const Flights& a_flights, std::ostream& a_ostream)
 {
 	using boost::property_tree::ptree;
 	ptree pt;
@@ -168,7 +169,7 @@ write(const Flights& a_flights, std::ostream& a_os)
 #else
 	boost::property_tree::xml_writer_settings<char> settings('\t', 1);
 #endif
-	write_xml(a_os, pt, settings); //write_xml(a_os, pt);
+	write_xml(a_ostream, pt, settings); //write_xml(a_ostream, pt);
 }
 
 } // namespace
@@ -193,16 +194,16 @@ Ada_Byron_code_book::ParseXML(
 		std::ifstream input(a_inputFilename);
 		Flights flights;
 		try {
-			read(input, flights);
+			Read(input, flights);
 		} catch (const std::exception& e) {
-			std::cerr << pad << __func__ << ": Exception by 'read' caught: "
+			std::cerr << pad << __func__ << ": Exception by 'Read' caught: "
 				<< e.what() << std::endl;
 			return false;
 		}
 		std::clog << pad << __func__ << ": Read(\"" << a_inputFilename
 			<< "\") finished" << std::endl;
 		std::ofstream output(a_outputFilename);
-		write(flights, output);
+		Write(flights, output);
 		std::clog << pad << __func__ << ": Writing of \"" << a_outputFilename
 			<< "\" finished" << std::endl;
 	} catch (...) {
