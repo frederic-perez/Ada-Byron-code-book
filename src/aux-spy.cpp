@@ -1,5 +1,7 @@
 // -- 
 
+#include <sstream>
+
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/version.hpp>
 
@@ -137,7 +139,7 @@ ABcb::spy::LocalDate(std::ostream& a_os)
 	namespace pt = boost::posix_time;
 	const pt::ptime now = pt::second_clock::local_time();
 
-	std::stringstream oss;
+	std::ostringstream oss;
 	const pt::ptime::date_type date = now.date();
 	oss << date.day_of_week() << ", "
 		<< date.month() << ' ' << date.day() << ", " << date.year();
@@ -151,7 +153,7 @@ ABcb::spy::LocalTime(std::ostream& a_os)
 	namespace pt = boost::posix_time;
 	const pt::ptime now = pt::second_clock::local_time();
 
-	std::stringstream oss;
+	std::ostringstream oss;
 	pt::time_facet* const f = new pt::time_facet("%H:%M:%S");
 	oss.imbue(std::locale(oss.getloc(), f));
 	oss << now;
