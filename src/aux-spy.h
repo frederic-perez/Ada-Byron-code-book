@@ -7,6 +7,8 @@
 
 #include <boost/noncopyable.hpp>
 
+// TODO: Add SpyLine macro for debugging purposes
+
 namespace Ada_Byron_code_book {
 
 namespace spy {
