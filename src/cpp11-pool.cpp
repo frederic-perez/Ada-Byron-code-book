@@ -31,12 +31,27 @@ ABcb::cpp11::TryBadCode()
 	double* const baz = new double[3];
 	baz[0] = 42.;
 
-#define FPCX_ADDRESS_SANITIZER_20150629
-#ifdef FPCX_ADDRESS_SANITIZER_20150629
-	// Does "sanitizer" work?
+#ifdef ASAN_TEST
+	/*
+	
+	Within CMake we can do set particular flags (working for Ubuntu):
+
+		CMAKE_CXX_FLAGS: -DASAN_TEST -fsanitize=address -fno-omit-frame-pointer
+
+	and we get at running time error messages like:
+
+		=================================================================
+		==5162== ERROR: AddressSanitizer: heap-use-after-free on address ...
+		READ of size 4 at 0x602e0001fc64 thread T0
+		...
+
+	*/
+
 	int* const array = new int[100];
 	delete[] array;
-	std::cout << "array[1] is " << array[1] << std::endl; // BOOM
+	std::cout << __func__ << ": array[1] is " << array[1] << std::endl; // BOOM
+#else
+	std::clog << __func__ << ": Note: ASAN_TEST was not defined" << std::endl;
 #endif
 }
 
