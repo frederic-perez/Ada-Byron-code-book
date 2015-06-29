@@ -30,6 +30,14 @@ ABcb::cpp11::TryBadCode()
 
 	double* const baz = new double[3];
 	baz[0] = 42.;
+
+#define FPCX_ADDRESS_SANITIZER_20150629
+#ifdef FPCX_ADDRESS_SANITIZER_20150629
+	// Does "sanitizer" work?
+	int* const array = new int[100];
+	delete[] array;
+	std::cout << "array[1] is " << array[1] << std::endl; // BOOM
+#endif
 }
 
 void
