@@ -26,11 +26,11 @@ Some interesting C++11-related URLs:
 - http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html
 - http://blog.feabhas.com/2014/03/demystifying-c-lambdas/
 
-### Quality code
-
+### Code Analysis
 We strive to maintain a certain quality on the code by taking advantage of some tools:
 - Cppcheck - A tool for static C/C++ code analysis. Being myself a fan of portable apps, I particularly use the version from [PortableApps.com](http://portableapps.com/apps/development/cppcheck-portable).
-- "Analyze > Run Code Analysis on Only Ada-Byron-code-book" on Microsoft Windows 8.1: Visual Studio 12 2013 Win64
+- "Analyze > Run Code Analysis on Only Ada-Byron-code-book" when using Microsoft Windows 8.1: Visual Studio 12 2013 Win64
+- "Product > Analyze" when using Apple OS X: Xcode 6.2 (LLVM, clang++) 64-bit
 
 ### Commits
 
