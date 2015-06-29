@@ -26,6 +26,14 @@ Some interesting C++11-related URLs:
 - http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html
 - http://blog.feabhas.com/2014/03/demystifying-c-lambdas/
 
+### Quality code
+
+We strive to maintain a certain quality on the code by taking advantage of some tools:
+- Cppcheck - A tool for static C/C++ code analysis. Being myself a fan of portable apps, I particularly use the version from [PortableApps.com](http://portableapps.com/apps/development/cppcheck-portable).
+- "Analyze > Run Code Analysis on Only Ada-Byron-code-book" on Microsoft Windows 8.1: Visual Studio 12 2013 Win64
+
+### Commits
+
 When committing changes, we use common prefixes--see for example a [list of ITK changes](http://kitware.com/blog/home/post/881). From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix):
 
 | Prefix | What          |
@@ -44,7 +52,7 @@ Example commit messages:
 - Bad: COMP: Typo in cmake variable -> implementation detail, self-explanatory
 - Good: COMP: Fix compilation error with Numpy on Visual Studio 
 
-- - -
+### Miscellaneous notes
 
 Advices on Hungarian notation, from well-known C++ gurus:
 - _"Notations that incorporate type information in variable names have mixed utility in type-unsafe languages (notably C), are possible but have no benefits (only drawbacks) in object-oriented languages, and are impossible in generic programming. Therefore, no C++ coding standard should require Hungarian notation, though a C++ coding standard might legitimately choose to ban it."_ (from C++ Coding Standards: 101 Rules, Guidelines, and Best Practices, by Herb Sutter and Andrei Alexandrescu)
