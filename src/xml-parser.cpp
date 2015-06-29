@@ -25,6 +25,7 @@
 #include <boost/version.hpp>
 
 #include "aux-raw.h"
+#include "aux-spy.h"
 #include "xml-parser.h"
 
 #ifdef XML_DATE_TRANSLATOR_20150325
@@ -127,6 +128,7 @@ using Ada_Byron_code_book::raw::pad;
 
 	// traverse pt
 	for (const ptree::value_type& pairStringPtree : pt.get_child("flights")) {
+SpyLine
 		if (pairStringPtree.first == "flight") {
 			const ptree& subtree = pairStringPtree.second;
 			const std::string carrier = subtree.get<std::string>("carrier");
@@ -144,7 +146,6 @@ using Ada_Byron_code_book::raw::pad;
 				a_flights.push_back(flight);
 		}
 	}
-std::clog << pad << __func__ << ":L" << __LINE__ << std::endl;
 }
 
 void

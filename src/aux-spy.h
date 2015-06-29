@@ -7,8 +7,11 @@
 
 #include <boost/noncopyable.hpp>
 
-// TODO: Add SpyLine macro for debugging purposes
 // TODO: Possibly extend SpyLine with Boost's PP for extra information
+
+#define SpyLine \
+	std::cerr << "@@@@ " << __FILE__ << ':' << __func__ << ":L" << __LINE__ \
+		<< '\n';
 
 namespace Ada_Byron_code_book {
 
