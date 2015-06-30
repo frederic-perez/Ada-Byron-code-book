@@ -57,6 +57,31 @@ Output(
 	return a_os;
 }
 
+template<typename TClock>
+class Timer : boost::noncopyable {
+	//
+	// Based on the example under
+	// http://www.boost.org/doc/libs/1_47_0/doc/html/chrono/users_guide.html
+	// #chrono.users_guide.examples.time_point.a_tiny_program_that_times_how_
+	// long_until_a_key_is_struck
+	//
+	// Examples
+	// --------
+	//	Timer<boost::chrono::system_clock> t1;
+	//	Timer<boost::chrono::steady_clock> t2; // GCC duplicate?
+	//	Timer<boost::chrono::high_resolution_clock> t3;
+	//
+public:
+	Timer();
+	double Seconds() const;
+
+	void Reset();
+
+protected:
+	typename TClock::duration Elapsed() const;
+	typename TClock::time_point d_start;
+};
+
 } // spy
 
 } // Ada_Byron_code_book

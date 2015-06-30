@@ -1,5 +1,6 @@
 // --
 
+#include <chrono>
 #include <iostream>
 #include <string>
 
@@ -30,6 +31,8 @@ main(int argc, char* argv[])
 
 	std::cout << ABcb::spy::RunInfo(ABcb::cli::ProgramName()) << '\n'
 		<< ABcb::cli::ParsedCommandLine << std::endl;
+
+	ABcb::spy::Timer<std::chrono::high_resolution_clock> timerHQ;
 
 	ABcb::cpp11::TryBadCode();
 	ABcb::cpp11::TestIfAConstParameterCanBeModified(42);
@@ -69,6 +72,10 @@ main(int argc, char* argv[])
 	ABcb::GurusTest({ "Bjarne_Stroustrup", "John_Doe", "Andrew_Koenig" });
 	ABcb::GurusTest(
 		{ BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, (Annie_Lennox)(Mike_Oldfield)) });
+
+	const double timeElapsed = timerHQ.Seconds();
+	std::clog << '\n' << __func__ << " finishes. Time elapsed: " << timeElapsed
+		<< " seconds" << std::endl;
 
 	return EXIT_SUCCESS;
 }

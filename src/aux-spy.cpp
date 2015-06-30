@@ -1,5 +1,6 @@
 // -- 
 
+#include <chrono>
 #include <sstream>
 
 #include <boost/date_time/posix_time/posix_time.hpp>
@@ -177,5 +178,36 @@ ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
 		<< "List of preprocessor defines:\n" << ListOfPreprocessorDefines;
 	return a_os;
 }
+
+template <typename TClock>
+ABcb::spy::Timer<TClock>::Timer()
+: d_start(TClock::now())
+{}
+
+template <typename TClock>
+typename TClock::duration
+ABcb::spy::Timer<TClock>::Elapsed() const
+{
+	return TClock::now() - d_start;
+}
+
+template <typename TClock>
+double
+ABcb::spy::Timer<TClock>::Seconds() const
+{
+	return
+		Elapsed().count() * ((double)TClock::period::num / TClock::period::den);
+}
+
+template <typename TClock>
+void
+ABcb::spy::Timer<TClock>::Reset()
+{
+	d_start = TClock::now();
+}
+
+//template class ABcb::spy::Timer<std::chrono::system_clock>;
+//template class ABcb::spy::Timer<std::chrono::steady_clock>; // GCC duplicate?
+template class ABcb::spy::Timer<std::chrono::high_resolution_clock>;
 
 // -- eof
