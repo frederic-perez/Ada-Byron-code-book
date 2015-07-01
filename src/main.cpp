@@ -1,6 +1,7 @@
 // --
 
 #include <chrono>
+#include <iomanip>
 #include <iostream>
 #include <string>
 
@@ -74,8 +75,10 @@ main(int argc, char* argv[])
 		{ BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, (Annie_Lennox)(Mike_Oldfield)) });
 
 	const double timeElapsed = timerHQ.Seconds();
-	std::clog << '\n' << __func__ << " finishes. Time elapsed: " << timeElapsed
-		<< " seconds" << std::endl;
+	const auto previousPrecision = std::clog.precision(2);
+	std::clog << '\n' << __func__ << " finishes. Time elapsed: "
+		<< timeElapsed << " seconds" 
+		<< std::setprecision(previousPrecision) << std::endl;
 
 	return EXIT_SUCCESS;
 }
