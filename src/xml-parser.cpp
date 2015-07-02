@@ -9,6 +9,7 @@
 // to read and write XML files.
 
 #undef XML_DATE_TRANSLATOR_20150325
+// TODO: Give XML_DATE_TRANSLATOR_20150325 a try
 
 #include <iostream>
 #ifdef XML_DATE_TRANSLATOR_20150325
