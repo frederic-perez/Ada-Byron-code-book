@@ -10,6 +10,8 @@
 
 #include <boost/preprocessor.hpp>
 
+// TODO: (iss) Parse point cloud (ASCII) file as a 1st example (3DI)
+
 #define ABcb_TO_STR(unused,data,elem) BOOST_PP_STRINGIZE(elem),
 #define ABcb_DECLARE_ENUM_AND_ENUMTEXT(sequence) \
 enum class Enum : uint8_t { BOOST_PP_SEQ_ENUM(sequence) }; \
