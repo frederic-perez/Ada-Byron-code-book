@@ -19,6 +19,8 @@ The "book" uses C++11 features, and includes:
   - XML parsing
 - (In the future it will contain code ported from my Evernote's notes)
 
+### C++11
+
 Some interesting C++11-related URLs:
 - http://en.wikipedia.org/wiki/C%2B%2B11
 - http://herbsutter.com/elements-of-modern-c-style/
