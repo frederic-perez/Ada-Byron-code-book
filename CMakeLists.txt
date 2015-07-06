@@ -7,6 +7,8 @@ project(Ada-Byron-code-book)
 message(STATUS "CMAKE_C_PLATFORM_ID is ${CMAKE_C_PLATFORM_ID}")
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
 
+# TODO: Changes to get concurrency test working for Ubuntu + clang++
+
 if("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
 	if(MSVC)
 		message(STATUS "Entering Windows/MSVC branch.")
