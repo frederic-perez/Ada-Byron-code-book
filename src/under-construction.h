@@ -39,7 +39,7 @@ std::vector<std::string> GetDefinedStrings();
 void GurusTest(std::initializer_list<std::string>);
 
 // First attempt at creating a template class for enhanced enum classes
-#ifdef FPCX_WORK_IN_PROGESS_20150616
+#ifdef ADA_BYRON_WORK_IN_PROGRESS_20150616
 template<typename Enum, size_t N, std::string> //, const std::array<const char*, N>& e>
 class EnumENH
 {
