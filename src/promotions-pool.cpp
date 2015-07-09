@@ -38,8 +38,8 @@ ABcb::ExamplesOfPromotions()
 	Output("0 - static_cast<int>(2u)", 0 - static_cast<int>(2u));
 	Output("0 - size_t(2)", 0 - size_t(2));
 
-#undef FPCX_TRYING_STATIC_ASSERT_20150525
-#ifdef FPCX_TRYING_STATIC_ASSERT_20150525
+#undef ADA_BYRON_TRYING_STATIC_ASSERT_20150525
+#ifdef ADA_BYRON_TRYING_STATIC_ASSERT_20150525
 	const auto idx = static_cast<int>(0) - static_cast<int>(2);
 	Output(
 		"static_cast<int>(0) - static_cast<int>(2)",
