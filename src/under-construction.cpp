@@ -14,6 +14,8 @@
 
 namespace ABcb = Ada_Byron_code_book;
 
+// TODO: Add point cloud binary file I/O
+
 #undef ADA_BYRON_PARSING_WITH_ISTRINGSTREAM_IS_EASY_20150626
 #ifdef ADA_BYRON_PARSING_WITH_ISTRINGSTREAM_IS_EASY_20150626
 // TODO
