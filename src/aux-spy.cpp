@@ -166,6 +166,8 @@ ABcb::spy::LocalTime(std::ostream& a_os)
 std::ostream&
 ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
 {
+// TODO: Follow this structure for time output: "The final decision is scheduled
+// to come at 12:45 ET Dec. 7."
 	using namespace ABcb::spy;
 	a_os << '\n' << a_runInfo.GetProgName()
 		<< " was launched by " << UserName << " at " << HostName
