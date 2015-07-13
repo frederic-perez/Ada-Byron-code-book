@@ -7,8 +7,6 @@ project(Ada-Byron-code-book)
 message(STATUS "CMAKE_C_PLATFORM_ID is ${CMAKE_C_PLATFORM_ID}")
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
 
-# TODO: Changes to get concurrency test working for Ubuntu + clang++
-
 if("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
 	if(MSVC)
 		message(STATUS "Entering Windows/MSVC branch.")
@@ -32,6 +30,7 @@ elseif("${CMAKE_SYSTEM_NAME}" MATCHES "Linux")
 	else()
 		message(STATUS "Entering Linux/else branch. We assume clang++.")
 		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -std=c++11")
+		set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -pthread")
 	endif()
 elseif("${CMAKE_SYSTEM_NAME}" MATCHES "Darwin")
 	message(STATUS "Entering Darwin branch. We assume clang++.")
