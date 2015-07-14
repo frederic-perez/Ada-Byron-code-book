@@ -8,8 +8,7 @@
 // This demonstrates how to use Boost.PropertyTree
 // to read and write XML files.
 
-#undef XML_DATE_TRANSLATOR_20150325
-// TODO: Give XML_DATE_TRANSLATOR_20150325 a try
+#define XML_DATE_TRANSLATOR_20150325
 
 #include <iostream>
 #ifdef XML_DATE_TRANSLATOR_20150325
@@ -31,6 +30,8 @@
 
 #ifdef XML_DATE_TRANSLATOR_20150325
 
+using Date = boost::gregorian::date;
+
 class DateTranslator
 {
 	using tOFacet = boost::date_time::date_facet<Date, char>;
@@ -38,7 +39,8 @@ class DateTranslator
 	std::locale d_locale;
 
 	static std::locale isoDateLocale() {
-		std::locale loc = std::locale(loc, new tIFacet("%Y-%m-%d"));
+		std::locale loc; // default ctor first
+		loc = std::locale(loc, new tIFacet("%Y-%m-%d"));
 		loc = std::locale(loc, new tOFacet("%Y-%m-%d"));
 		return loc;
 	}
@@ -107,7 +109,7 @@ namespace boost {
 namespace property_tree {
 
 template<> struct translator_between<std::string, Date> {
-	using type = XML_DATE_TRANSLATOR_20150325 type;
+	using type = DateTranslator;
 };
 
 } // namespace property_tree
