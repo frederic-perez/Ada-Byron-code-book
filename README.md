@@ -61,11 +61,17 @@ Example commit messages:
 
 ### Miscellaneous notes
 
+Advice on **unnecessary comments**:
+- Avoid (or remove) unnecessary comments! For example, from C++ Gotchas: Avoiding Common Problems in Coding and Design, by Stephen C. Dewhurst: Gotcha #1: Excessive Commenting: _"If a maintainer has to be reminded of the meaning of the <code>public:</code> label [for example with the comment <code>// Public Interface</code>], you don't want that person maintaining your code."_
+
 Why C++ does not have a **<code>super</code> keyword**, and we do not promote creating any proxy for that:
 - See the most voted answer of this [StackOverflow's thread](http://stackoverflow.com/questions/180601/using-super-in-c).
 
-Advice on **unnecessary comments**:
-- Avoid (or remove) unnecessary comments! For example, from C++ Gotchas: Avoiding Common Problems in Coding and Design, by Stephen C. Dewhurst: Gotcha #1: Excessive Commenting: _"If a maintainer has to be reminded of the meaning of the <code>public:</code> label [for example with the comment <code>// Public Interface</code>], you don't want that person maintaining your code."_
+Do not write **<code>using namespace [std]</code>** in header files or before an <code>#include</code>:
+- From Programming, Principles and Practice Using C++, by Stroustrup: _"Be restrained in the use or <code>using</code> directives. The notational convenience offered by a <code>using</code> directive is achieved at the cost or potential name clashes. In particular, avoid <code>using</code> directives in header files."_
+- From Thinking in C++, 2nd ed. Vol. 1, by Eckel: _"Thus, if you start putting <code>using</code> directives in header files, it’s very easy to end up “turning off” namespaces practically everywhere, and thereby neutralizing the beneficial effects of namespaces.In short: don’t put <code>using</code> directives in header files."_
+- From Industrial Strength C++, by Henricson and Nyquist: _"A <code>using</code> declaration or a <code>using</code> directive in the global scope is not recommended inside header files, since it will make names globally accessible to all files that include that header."_
+- From C++ Coding Standards: 101 Rules, Guidelines, and Best Practices, by Sutter and Alexandrescu: _"Rule 59: Don't write namespace usings in a header file or before an <code>#include</code>."_
 
 Advices on **Hungarian notation**, from well-known C++ gurus:
 - _"Notations that incorporate type information in variable names have mixed utility in type-unsafe languages (notably C), are possible but have no benefits (only drawbacks) in object-oriented languages, and are impossible in generic programming. Therefore, no C++ coding standard should require Hungarian notation, though a C++ coding standard might legitimately choose to ban it."_ (from C++ Coding Standards: 101 Rules, Guidelines, and Best Practices, by Herb Sutter and Andrei Alexandrescu)
