@@ -61,10 +61,13 @@ Example commit messages:
 
 ### Miscellaneous notes
 
-Why C++ does not have a <code>super</code> keyword, and we do not promote creating any proxy for that:
+Why C++ does not have a **<code>super</code> keyword**, and we do not promote creating any proxy for that:
 - See the most voted answer of this [StackOverflow's thread](http://stackoverflow.com/questions/180601/using-super-in-c).
 
-Advices on Hungarian notation, from well-known C++ gurus:
+Advice on **unnecessary comments**:
+- Avoid (or remove) unnecessary comments! For example, from C++ Gotchas: Avoiding Common Problems in Coding and Design, by Stephen C. Dewhurst: Gotcha #1: Excessive Commenting: _"If a maintainer has to be reminded of the meaning of the <code>public:</code> label [for example with the comment <code>// Public Interface</code>], you don't want that person maintaining your code."_
+
+Advices on **Hungarian notation**, from well-known C++ gurus:
 - _"Notations that incorporate type information in variable names have mixed utility in type-unsafe languages (notably C), are possible but have no benefits (only drawbacks) in object-oriented languages, and are impossible in generic programming. Therefore, no C++ coding standard should require Hungarian notation, though a C++ coding standard might legitimately choose to ban it."_ (from C++ Coding Standards: 101 Rules, Guidelines, and Best Practices, by Herb Sutter and Andrei Alexandrescu)
 - _"Additionally, never attempt to encode a variable's type in its name. For instance, calling an integer index iIndex is actively damaging to understanding and maintaining the code. First, a name should describe a program entity's abstract meaning, not how it's implemented (data abstraction can apply even to predefined types). Second, in the common case that the variable's type changes, just as common is that its name doesn't change in sync. The variable's name then becomes an effective source of misinformation about its type."_ (from C++ Gotchas: Avoiding Common Problems in Coding and Design, by Stephen C. Dewhurst; Gotcha #8: Failure to Distinguish Access and Visibility) 
 - Examples: Ditch <code>std::string sName; int iIndex;</code> and write instead <code>std::string name; int index;</code>
