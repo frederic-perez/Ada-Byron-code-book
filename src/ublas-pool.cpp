@@ -26,12 +26,21 @@ using MatrixD33 = bnu::fixed_matrix<double, 3, 3>;
 VectorD3
 operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)
 {
+#if defined(_MSC_VER)
+	const VectorD3::array_type result{{
+		a_lhs[1] * a_rhs[2] - a_rhs[1] * a_lhs[2],
+		a_lhs[2] * a_rhs[0] - a_rhs[2] * a_lhs[0],
+		a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]
+	}};
+	return result;
+#else
 	return
 		VectorD3::array_type{{
-				a_lhs[1] * a_rhs[2] - a_rhs[1] * a_lhs[2],
-				a_lhs[2] * a_rhs[0] - a_rhs[2] * a_lhs[0],
-				a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]
+			a_lhs[1] * a_rhs[2] - a_rhs[1] * a_lhs[2],
+			a_lhs[2] * a_rhs[0] - a_rhs[2] * a_lhs[0],
+			a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]
 		}};
+#endif
 }
 
 double
@@ -53,7 +62,15 @@ GetSliceLocation(
 
 	std::cout << pad << __func__ << ": orientation = " << orientation << '\n';
 	
+#if defined(_MSC_VER)
+	const auto resultTmp2 = prod(a_point, orientation);
+	const VectorD3::array_type resultAT{{
+		resultTmp2(0), resultTmp2(1), resultTmp2(2)
+	}};
+	const VectorD3 result{{ resultAT }};
+#else
 	const VectorD3 result = prod(a_point, orientation);
+#endif
 	std::cout << pad << __func__ << ": result = " << result << '\n';
 
 	return result[2];
@@ -67,16 +84,30 @@ ABcb::ExamplesOfUblas()
 	std::clog << __func__ << " started..." << std::endl;
 	
 	// Simple example
+#if defined(_MSC_VER)
+	const VectorD3::array_type p1{ { 1., 0., 0. } };
+	const VectorD3::array_type p2{ { 0., 0., -1. } };
+	const VectorD3::array_type p3{ { -105.80165, -201.29752, 227.30165 } };
+	GetSliceLocation(p1, p2, p3);
+#else
 	GetSliceLocation(
 		VectorD3::array_type{ { 1., 0., 0. } },
 		VectorD3::array_type{ { 0., 0., -1. } },
 		VectorD3::array_type{ { -105.80165, -201.29752, 227.30165 } });
-	
+#endif
+
 	// A more difficult example
+#if defined(_MSC_VER)
+	const VectorD3::array_type p4{ { 1., 0., 0. } };
+	const VectorD3::array_type p5{ { 0., -0.033155151, -0.99945021 } };
+	const VectorD3::array_type p6{ { -95.202782, -71.037422, 206.67741 } };
+	GetSliceLocation(p4, p5, p6);
+#else
 	GetSliceLocation(
 		VectorD3::array_type{ { 1., 0., 0. } },
 		VectorD3::array_type{ { 0., -0.033155151, -0.99945021 } },
 		VectorD3::array_type{ { -95.202782, -71.037422, 206.67741 } });
+#endif
 
 	std::clog << __func__ << " finished." << std::endl;
 }
