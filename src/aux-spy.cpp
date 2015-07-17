@@ -164,6 +164,20 @@ ABcb::spy::LocalTime(std::ostream& a_os)
 }
 
 std::ostream&
+ABcb::spy::SizeOfs(std::ostream& a_os)
+{
+	const std::string pad = "  ";
+	a_os
+		<< pad << "sizeof(char) = " << sizeof(char) << '\n'
+		<< pad << "sizeof(wchar_t) = " << sizeof(wchar_t) << '\n'
+		<< pad << "sizeof(int) = " << sizeof(int) << '\n'
+		<< pad << "sizeof(float) = " << sizeof(float) << '\n'
+		<< pad << "sizeof(double) = " << sizeof(double) << '\n'
+		<< pad << "sizeof(size_t) = " << sizeof(double) << '\n';
+	return a_os;
+}
+
+std::ostream&
 ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
 {
 	using namespace ABcb::spy;
@@ -175,7 +189,8 @@ ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
 		<< "Using GNU g++ version " << GNUGppVersion << '\n'
 		<< "Using Visual Studio C/C++ compiler version "
 			<< VisualStudioCppCompilerVersion << '\n'
-		<< "List of preprocessor defines:\n" << ListOfPreprocessorDefines;
+		<< "List of preprocessor defines:\n" << ListOfPreprocessorDefines
+		<< "sizeof some POD types:\n" << SizeOfs;
 	return a_os;
 }
 
