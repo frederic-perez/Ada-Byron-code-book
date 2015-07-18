@@ -32,6 +32,7 @@ ABcb::cpp11::TryBadCode()
 	baz[0] = 42.;
 
 #ifdef ASAN_TEST
+// TODO: Output (in execution) offending source code symbols
 	/*
 	
 	Within CMake we can do set particular flags (working for Ubuntu):
