@@ -95,6 +95,12 @@ public:
 		d_cancelled(a_cancelled)
 	{}
 
+	const std::string& GetCarrier() const { return d_carrier;  }
+	unsigned GetNumber() const { return d_number; }
+	const Date& GetDate() const { return d_date; }
+	bool IsCancelled() const { return d_cancelled; }
+
+private:
 	std::string d_carrier;
 	unsigned d_number;
 	Date d_date;
@@ -161,10 +167,10 @@ Write(const Flights& a_flights, std::ostream& a_ostream)
 
 	for (const auto& flight : a_flights) {
 		ptree& node = pt.add("flights.flight", "");
-		node.put("carrier", flight.d_carrier); // TODO: Add and use inspectors!
-		node.put("number", flight.d_number);
-		node.put("date", flight.d_date);
-		if (flight.d_cancelled)
+		node.put("carrier", flight.GetCarrier());
+		node.put("number", flight.GetNumber());
+		node.put("date", flight.GetDate());
+		if (flight.IsCancelled())
 			node.put("<xmlattr>.cancelled", true);
 	}
 
