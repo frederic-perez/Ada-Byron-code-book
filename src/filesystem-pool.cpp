@@ -46,14 +46,16 @@ ABcb::ExamplesOfFileSystem(const std::string& a_filename)
 	bf::path path2 = bf::path("/usr") / "include" / "." / "clang"; // operator/
 	DoSomeStuff(path2, "path2");
 
-	// "Testing" an invented filename
+	// "Testing" and invented file (random file)
 
-	const std::string inventedFilename =
-		"invented-filename-to-check-if-it-exists.yuk";
-	std::cout << pad << '\"' << inventedFilename << '\"';
-	if (bf::exists(inventedFilename))
+	const bf::path randomPath =
+		bf::unique_path(
+			bf::path(
+				"invented-filename-to-check-if-it-exists-%%%%-%%%%-%%%%-%%%%.yuk"));
+	std::cout << pad << '\"' << randomPath.string() << '\"';
+	if (bf::exists(randomPath))
 		std::cout << " exists" << std::endl;
-	else 
+	else
 		std::cout << " does not exist" << std::endl;
 
 	// "Testing" a_filename
