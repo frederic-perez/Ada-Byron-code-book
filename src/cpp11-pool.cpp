@@ -1,10 +1,18 @@
 // -- Examples on how to use C++11 features, and some other stuff
 
 #include <algorithm>
+#include <array>
 #include <iostream>
+#include <sstream>
 #include <tuple>
 #include <typeinfo>
 #include <vector>
+
+#include "aux-raw-compiler-warnings-off.h"
+
+	#include <boost/algorithm/string.hpp>
+
+#include "aux-raw-compiler-warnings-on.h"
 
 #include "aux-raw.h"
 #include "aux-spy.h"
@@ -139,6 +147,77 @@ ABcb::cpp11::AlgorithmExamples()
 	std::clog << __func__ << " finished." << std::endl;
 }
 
+namespace {
+
+template<size_t N>
+class Point {
+public:
+	/*
+	Point(const std::array<double, N>& a_array)
+	: d_array(a_array)
+	{
+		//static_assert(N == a_array.size(), "..."); // TODO: Can this be "fixed"?
+	}
+	*/
+
+	Point(std::initializer_list<double> a_args)
+	: d_array()
+	{
+		if (d_array.size() != a_args.size()) { // Verify right size
+			std::cerr << __func__ << ": a_args.size()=" << a_args.size()
+				<< " does not match N=" << N << std::endl;
+			throw 666; // TODO: Use a better std exception
+		}
+
+		size_t i = 0;
+		for (auto it = begin(a_args); it != end(a_args); ++it, ++i)
+			d_array[i] = *it;
+	}
+
+	double
+	Length() const
+	{
+		double accSquared = 0.;
+		for (auto value : d_array)
+			accSquared += value*value;
+		return sqrt(accSquared);
+	}
+
+	template<size_t n>
+	friend std::ostream& operator<<(std::ostream&, const Point<n>&);
+
+private:
+	std::array<double, N> d_array;
+};
+
+template<size_t N>
+std::ostream&
+operator<<(std::ostream& a_os, const Point<N>& a_point)
+{
+	// 1st, the size of the Point
+	//
+	a_os << '[' << a_point.d_array.size() << ']';
+
+	// 2nd, the actual contents
+	//
+	std::ostringstream oss;
+	std::vector<std::string> valuesAsStrings;
+	for (auto value : a_point.d_array) {
+		oss << value;
+		valuesAsStrings.push_back(oss.str());
+		oss.str("");
+	}
+	oss << '(' << boost::algorithm::join(valuesAsStrings, ", ") << ')';
+	a_os << oss.str();
+
+	return a_os;
+}
+
+using Point2 = Point<2>;
+using Point3 = Point<3>;
+
+}
+
 void
 ABcb::cpp11::MiscellanyExamples()
 {
@@ -146,6 +225,22 @@ ABcb::cpp11::MiscellanyExamples()
 
 	std::cout << pad << "PrintList (variadic template function): ";
 	PrintList(1, 2, 'c', "Hello, world!", 666.);
+
+	const Point2 point2a{ 2., 3. };
+	const Point3 point3a{ 5., 7., 11. };
+	std::cout << pad << "point2a = " << point2a << "    Length() = "
+		<< point2a.Length() << std::endl;
+	std::cout << pad << "point3a = " << point3a << "    Length() = "
+		<< point3a.Length() << std::endl;
+
+	/*
+	const Point3 point2b{{ 2., 3. } };
+	const Point3 point3b{{ 5., 7., 11. }};
+	std::cout << pad << "point2b = " << point2b << "    Length() = "
+		<< point2b.Length() << std::endl;
+	std::cout << pad << "point3b = " << point3b << "    Length() = "
+		<< point3b.Length() << std::endl;
+	*/
 
 	std::clog << __func__ << " finished." << std::endl;
 }
