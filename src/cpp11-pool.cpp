@@ -154,14 +154,11 @@ namespace {
 template<size_t N>
 class Point {
 public:
-	/*
-	Point(const std::array<double, N>& a_array)
-	: d_array(a_array)
-	{
-		//static_assert(N == a_array.size(), "..."); // TODO: Can this be "fixed"?
-	}
-	*/
 
+	// Note: There is a nice discussion in
+	// stackoverflow.com/questions/5438671/static-assert-on-initializer-listsize
+	// to try to add a static_assert in the ctor, but alas, we did not succeed.
+	//
 	Point(std::initializer_list<double> a_args)
 	: d_array()
 	{
