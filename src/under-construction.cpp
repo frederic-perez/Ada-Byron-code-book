@@ -88,7 +88,7 @@ GuruTest(const std::string& a_text)
 		const std::string setOfDefinedStrings = oss.str();
 
 		std::cerr << pad << __FUNCTION__ << ": " << message << '\n'
-			<< pad << pad << "--guru arg\t" << setOfDefinedStrings << '\n';
+			<< pad << pad << "--guru arg " << setOfDefinedStrings << '\n';
 
 	} else
 		std::cout << pad << __FUNCTION__ << ": guru = " << a_text << std::endl;
