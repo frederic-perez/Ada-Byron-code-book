@@ -97,9 +97,10 @@ struct TuplePrinter<Tuple, 1> {
 template<class... Args>
 void print(const std::tuple<Args...>& t)
 {
-	std::cout << "{ ";
-	TuplePrinter<decltype(t), sizeof...(Args)>::print(t);
-	std::cout << " }";
+	const size_t N = sizeof...(Args);
+	std::cout << '[' << N << "]{";
+	TuplePrinter<decltype(t), N>::print(t);
+	std::cout << '}';
 }
 // end helper function
 

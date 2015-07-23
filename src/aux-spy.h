@@ -50,9 +50,13 @@ Output(
 	if (a_container.empty())
 		a_os << "[empty]" << std::endl;
 	else {
-		a_os << "[" << a_container.size() << "]{ ";
-		for (auto value : a_container)
-			a_os << value << ' ';
+		const size_t N = a_container.size();
+		a_os << "[" << N << "]{";
+		for (size_t i = 0; i < N; ++i) {
+			a_os << a_container[i];
+			if (i < N - 1)
+				a_os << ", ";
+		}
 		a_os << '}' << std::endl;
 	}
 	return a_os;

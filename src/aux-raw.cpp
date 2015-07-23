@@ -29,9 +29,12 @@ Output(const T* a_t, size_t a_size, const std::string& a_name)
 	if (a_size == 0)
 		std::cout << "[empty]" << std::endl;
 	else {
-		std::cout << "[" << a_size << "]{ ";
-		for (size_t i=0; i < a_size; ++i)
-			std::cout << a_t[i] << ' ';
+		std::cout << "[" << a_size << "]{";
+		for (size_t i = 0; i < a_size; ++i) {
+			std::cout << a_t[i];
+			if (i < a_size-1)
+				std::cout << ", ";
+		}
 		std::cout << '}' << std::endl;
 	}
 }
