@@ -48,13 +48,36 @@ Output(
 {
 	a_os << (a_containerName.empty() ? "[unnamed]" : a_containerName) << " = ";
 	if (a_container.empty())
-		a_os << "[empty]" << std::endl;
+		a_os << "[0]{}" << std::endl;
 	else {
 		const size_t N = a_container.size();
 		a_os << "[" << N << "]{";
 		for (size_t i = 0; i < N; ++i) {
 			a_os << a_container[i];
 			if (i < N - 1)
+				a_os << ", ";
+		}
+		a_os << '}' << std::endl;
+	}
+	return a_os;
+}
+
+template<typename T>
+std::ostream&
+Output(
+	std::ostream& a_os,
+	const T* a_oldCArray,
+	size_t a_size,
+	const std::string& a_name)
+{
+	a_os << (a_name.empty() ? "[unnamed]" : a_name) << " = ";
+	if (a_size == 0)
+		a_os << "[0]{}" << std::endl;
+	else {
+		a_os << "[" << a_size << "]{";
+		for (size_t i = 0; i < a_size; ++i) {
+			a_os << a_oldCArray[i];
+			if (i < a_size - 1)
 				a_os << ", ";
 		}
 		a_os << '}' << std::endl;

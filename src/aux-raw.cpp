@@ -19,36 +19,14 @@ ABcb::raw::SystemSlash()
 #endif
 }
 
-namespace {
-
-template<typename T>
-void
-Output(const T* a_t, size_t a_size, const std::string& a_name)
-{
-	std::cout << a_name << " = ";
-	if (a_size == 0)
-		std::cout << "[empty]" << std::endl;
-	else {
-		std::cout << "[" << a_size << "]{";
-		for (size_t i = 0; i < a_size; ++i) {
-			std::cout << a_t[i];
-			if (i < a_size-1)
-				std::cout << ", ";
-		}
-		std::cout << '}' << std::endl;
-	}
-}
-
-} // namespace
-
 void
 ABcb::raw::ExamplesOfRaw()
 {
 	std::clog << __func__ << " started..." << std::endl;
 
-	const double myCArray[3] = { 1., 2., 3. };
-	Output(
-		myCArray, ABcb::raw::ArraySize(myCArray),
+	const double myCArray[] = { 1., 2., 3. };
+	spy::Output(
+		std::cout, myCArray, ABcb::raw::ArraySize(myCArray),
 		pad + "myCArray (after construction)");
 
 	std::vector<int> myVector{ 4, 3, 2, 1 };
