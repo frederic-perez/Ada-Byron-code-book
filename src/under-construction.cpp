@@ -15,6 +15,7 @@
 namespace ABcb = Ada_Byron_code_book;
 
 // TODO: Add point cloud binary file I/O
+// TODO: Add example point cloud file in data folder
 // TODO: Move point cloud-related code to new source files
 // TODO: Point cloud file: endianness control
 
