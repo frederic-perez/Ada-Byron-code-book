@@ -152,7 +152,7 @@ ABcb::cpp11::AlgorithmExamples()
 namespace {
 
 template<size_t N>
-class Point {
+class Point { // TODO: s/Point/Vector
 public:
 
 	// Note: There is a nice discussion in
