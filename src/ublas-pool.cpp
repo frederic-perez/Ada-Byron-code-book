@@ -23,16 +23,23 @@ namespace {
 using VectorD3 = bnu::fixed_vector<double, 3>;
 using MatrixD33 = bnu::fixed_matrix<double, 3, 3>;
 
+/*
 VectorD3
 operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)
 {
 #if defined(_MSC_VER)
+	#if (_MSC_VER >= 1900)
+	const bnu::fixed_vector<double, 3>
+		v(a_lhs[0], a_rhs[0], 666.); // TODO
+	return v;
+	#else
 	const VectorD3::array_type result{{
 		a_lhs[1] * a_rhs[2] - a_rhs[1] * a_lhs[2],
 		a_lhs[2] * a_rhs[0] - a_rhs[2] * a_lhs[0],
 		a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]
 	}};
 	return result;
+	#endif
 #else
 	return
 		VectorD3::array_type{{
@@ -42,6 +49,7 @@ operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)
 		}};
 #endif
 }
+*/
 
 double
 GetSliceLocation(
@@ -51,6 +59,10 @@ GetSliceLocation(
 {
 	std::cout << pad << __func__ << ": a_vecX = " << a_vecX << '\n';
 	std::cout << pad << __func__ << ": a_vecY = " << a_vecY << '\n';
+#if defined(_MSC_VER) && (_MSC_VER >= 1900)
+	std::cout << pad << __func__ << ": a_point = " << a_point << '\n';
+	return 666.; // TODO
+#else
 	const VectorD3 vecZ = a_vecX ^ a_vecY;
 	std::cout << pad << __func__ << ": vecZ = " << vecZ << '\n';
 
@@ -74,6 +86,7 @@ GetSliceLocation(
 	std::cout << pad << __func__ << ": result = " << result << '\n';
 
 	return result[2];
+#endif
 }
 
 } // namespace
