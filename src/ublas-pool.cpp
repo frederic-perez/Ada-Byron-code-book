@@ -23,33 +23,27 @@ namespace {
 using VectorD3 = bnu::fixed_vector<double, 3>;
 using MatrixD33 = bnu::fixed_matrix<double, 3, 3>;
 
+#if defined(_MSC_VER) && (_MSC_VER >= 1900)
 /*
 VectorD3
-operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)
+operator^(const VectorD3& a_lhs, const VectorD3& a_rhs) // TODO for vs14
 {
-#if defined(_MSC_VER)
-	#if (_MSC_VER >= 1900)
 	const bnu::fixed_vector<double, 3>
 		v(a_lhs[0], a_rhs[0], 666.); // TODO
 	return v;
-	#else
-	const VectorD3::array_type result{{
-		a_lhs[1] * a_rhs[2] - a_rhs[1] * a_lhs[2],
-		a_lhs[2] * a_rhs[0] - a_rhs[2] * a_lhs[0],
-		a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]
-	}};
-	return result;
-	#endif
+}
+*/
 #else
+VectorD3
+operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)
+{
 	return
 		VectorD3::array_type{{
 			a_lhs[1] * a_rhs[2] - a_rhs[1] * a_lhs[2],
 			a_lhs[2] * a_rhs[0] - a_rhs[2] * a_lhs[0],
-			a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]
-		}};
-#endif
+			a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]}};
 }
-*/
+#endif
 
 double
 GetSliceLocation(
