@@ -153,17 +153,17 @@ ABcb::cpp11::AlgorithmExamples()
 	std::clog << __func__ << " finished." << std::endl;
 }
 
-namespace {
+namespace Euclidean {
 
 template<size_t N>
-class Point { // TODO: s/Point/Vector
+class Vector {
 public:
 
 	// Note: There is a nice discussion in
 	// stackoverflow.com/questions/5438671/static-assert-on-initializer-listsize
 	// to try to add a static_assert in the ctor, but alas, we did not succeed.
 	//
-	Point(std::initializer_list<double> a_args)
+	Vector(std::initializer_list<double> a_args)
 	: d_array()
 	{
 		if (d_array.size() != a_args.size()) { // Verify right size
@@ -187,7 +187,7 @@ public:
 	}
 
 	template<size_t n>
-	friend std::ostream& operator<<(std::ostream&, const Point<n>&);
+	friend std::ostream& operator<<(std::ostream&, const Vector<n>&);
 
 private:
 	std::array<double, N> d_array;
@@ -195,17 +195,17 @@ private:
 
 template<size_t N>
 std::ostream&
-operator<<(std::ostream& a_os, const Point<N>& a_point)
+operator<<(std::ostream& a_os, const Vector<N>& a_vector)
 {
 	// 1st, the size of the Point
 	//
-	a_os << '[' << a_point.d_array.size() << ']';
+	a_os << '[' << a_vector.d_array.size() << ']';
 
 	// 2nd, the actual contents
 	//
 	std::ostringstream oss;
 	std::vector<std::string> valuesAsStrings;
-	for (auto value : a_point.d_array) {
+	for (auto value : a_vector.d_array) {
 		oss << value;
 		valuesAsStrings.push_back(oss.str());
 		oss.str("");
@@ -216,10 +216,10 @@ operator<<(std::ostream& a_os, const Point<N>& a_point)
 	return a_os;
 }
 
-using Point2 = Point<2>;
-using Point3 = Point<3>;
+using Vector2 = Vector<2>;
+using Vector3 = Vector<3>;
 
-}
+} // namespace Euclidean
 
 void
 ABcb::cpp11::MiscellanyExamples()
@@ -229,21 +229,17 @@ ABcb::cpp11::MiscellanyExamples()
 	std::cout << pad << "PrintList (variadic template function): ";
 	PrintList(1, 2, 'c', "Hello, world!", 666.);
 
-	const Point2 point2a{ 2., 3. };
-	const Point3 point3a{ 5., 7., 11. };
-	std::cout << pad << "point2a = " << point2a << "    Length() = "
-		<< point2a.Length() << std::endl;
-	std::cout << pad << "point3a = " << point3a << "    Length() = "
-		<< point3a.Length() << std::endl;
+	const Euclidean::Vector2 vector2{ 2., 3. };
+	std::cout
+		<< pad << "vector2 typeid name = " << typeid(vector2).name() << '\n'
+		<< pad << "vector2 = " << vector2 << "    Length() = "
+		<< vector2.Length() << std::endl;
 
-	/*
-	const Point3 point2b{{ 2., 3. } };
-	const Point3 point3b{{ 5., 7., 11. }};
-	std::cout << pad << "point2b = " << point2b << "    Length() = "
-		<< point2b.Length() << std::endl;
-	std::cout << pad << "point3b = " << point3b << "    Length() = "
-		<< point3b.Length() << std::endl;
-	*/
+	const Euclidean::Vector3 vector3{ 5., 7., 11. };
+	std::cout
+		<< pad << "vector3 typeid name = " << typeid(vector3).name() << '\n'
+		<< pad << "vector3 = " << vector3 << "    Length() = "
+		<< vector3.Length() << std::endl;
 
 	std::clog << __func__ << " finished." << std::endl;
 }
