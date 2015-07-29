@@ -232,12 +232,16 @@ ABcb::cpp11::MiscellanyExamples()
 	const Euclidean::Vector2 vector2{ 2., 3. };
 	std::cout
 		<< pad << "vector2 typeid name = " << typeid(vector2).name() << '\n'
+		<< pad << "vector2 spy::TypeName of its decltype = "
+			<< spy::TypeName<decltype(vector2)>() << '\n'
 		<< pad << "vector2 = " << vector2 << "    Length() = "
 		<< vector2.Length() << std::endl;
 
 	const Euclidean::Vector3 vector3{ 5., 7., 11. };
 	std::cout
 		<< pad << "vector3 typeid name = " << typeid(vector3).name() << '\n'
+		<< pad << "vector3 spy::TypeName of its decltype = "
+			<< spy::TypeName<decltype(vector3)>() << '\n'
 		<< pad << "vector3 = " << vector3 << "    Length() = "
 		<< vector3.Length() << std::endl;
 

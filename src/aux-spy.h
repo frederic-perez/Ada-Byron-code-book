@@ -2,8 +2,13 @@
 
 #pragma once
 
+#ifndef _MSC_VER
+	#include <cxxabi.h>
+#endif
+#include <memory>
 #include <ostream>
 #include <string>
+#include <type_traits>
 
 #include <boost/noncopyable.hpp>
 
@@ -109,6 +114,36 @@ protected:
 	typename TClock::duration Elapsed() const;
 	typename TClock::time_point d_start;
 };
+
+template<class T>
+std::string
+TypeName()
+{
+	// Credits to 
+	// http://stackoverflow.com/questions/81870/print-variable-type-in-c
+	//
+	typedef typename std::remove_reference<T>::type TR;
+	std::unique_ptr<char, void(*)(void*)>
+		own(
+#ifndef _MSC_VER
+			abi::__cxa_demangle(typeid(TR).name(), nullptr,	nullptr, nullptr),
+#else
+			nullptr,
+#endif
+			std::free);
+	std::string r = own != nullptr ? own.get() : typeid(TR).name();
+#include "aux-raw-compiler-warnings-off.h"
+	if (std::is_const<TR>::value)
+		r += " const";
+	if (std::is_volatile<TR>::value)
+		r += " volatile";
+	if (std::is_lvalue_reference<T>::value)
+		r += "&";
+	else if (std::is_rvalue_reference<T>::value)
+		r += "&&";
+#include "aux-raw-compiler-warnings-on.h"
+	return r;
+}
 
 } // spy
 
