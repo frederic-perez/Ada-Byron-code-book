@@ -167,9 +167,11 @@ public:
 	: d_array()
 	{
 		if (d_array.size() != a_args.size()) { // Verify right size
-			std::cerr << __func__ << ": a_args.size()=" << a_args.size()
-				<< " does not match N=" << N << std::endl;
-			throw 666; // TODO: Use a better std exception
+			std::ostringstream oss;
+			oss << __func__ << ": a_args.size()=" << a_args.size()
+				<< " does not match N=" << N;
+			const std::string what = oss.str();
+			throw std::length_error(what);
 		}
 
 		size_t i = 0;
