@@ -180,7 +180,7 @@ public:
 	}
 
 	double
-	Length() const
+	Length() const // TODO: rename to Magnitude
 	{
 		double accSquared = 0.;
 		for (auto value : d_array)
