@@ -163,7 +163,7 @@ public:
 	// stackoverflow.com/questions/5438671/static-assert-on-initializer-listsize
 	// to try to add a static_assert in the ctor, but alas, we did not succeed.
 	//
-	Vector(std::initializer_list<double> a_args)
+	explicit Vector(std::initializer_list<double> a_args)
 	: d_array()
 	{
 		if (d_array.size() != a_args.size()) { // Verify right size
@@ -180,7 +180,7 @@ public:
 	}
 
 	double
-	Length() const // TODO: rename to Magnitude
+	Norm() const // Synonyms: length, magnitude, norm
 	{
 		double accSquared = 0.;
 		for (auto value : d_array)
@@ -236,16 +236,16 @@ ABcb::cpp11::MiscellanyExamples()
 		<< pad << "vector2 typeid name = " << typeid(vector2).name() << '\n'
 		<< pad << "vector2 spy::TypeName of its decltype = "
 			<< spy::TypeName<decltype(vector2)>() << '\n'
-		<< pad << "vector2 = " << vector2 << "    Length() = "
-		<< vector2.Length() << std::endl;
+		<< pad << "vector2 = " << vector2 << " | Norm() = " << vector2.Norm()
+		<< std::endl;
 
 	const Euclidean::Vector3 vector3{ 5., 7., 11. };
 	std::cout
 		<< pad << "vector3 typeid name = " << typeid(vector3).name() << '\n'
 		<< pad << "vector3 spy::TypeName of its decltype = "
 			<< spy::TypeName<decltype(vector3)>() << '\n'
-		<< pad << "vector3 = " << vector3 << "    Length() = "
-		<< vector3.Length() << std::endl;
+		<< pad << "vector3 = " << vector3 << " | Norm() = " << vector3.Norm()
+		<< std::endl;
 
 	std::clog << __func__ << " finished." << std::endl;
 }
