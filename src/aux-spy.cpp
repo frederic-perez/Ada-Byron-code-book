@@ -59,8 +59,21 @@ ABcb::spy::VisualStudioCppCompilerVersion(std::ostream& a_os)
 	return
 		a_os
 #ifdef _MSC_VER
-		<< _MSC_VER / 100 << '.'	// major version
-		<< _MSC_VER / 10000 % 100	// minor version
+		<< _MSC_VER << " (Visual Studio "
+	#if _MSC_VER == 1900
+		<< 2015
+	#elif _MSC_VER == 1800
+		<< 2013
+	#elif _MSC_VER == 1700
+		<< 2012
+	#elif _MSC_VER == 1600
+		<< 2010
+	#elif _MSC_VER == 1500
+		<< 2008
+	#else
+		<< "older than 2008"
+	#endif
+		<< ")"
 #else
 		<< "[not applicable]"
 #endif
