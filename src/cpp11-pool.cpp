@@ -158,35 +158,15 @@ namespace Euclidean {
 template<size_t N>
 class Vector {
 public:
+	explicit Vector(std::initializer_list<double>);
 
-	// Note: There is a nice discussion in
-	// stackoverflow.com/questions/5438671/static-assert-on-initializer-listsize
-	// to try to add a static_assert in the ctor, but alas, we did not succeed.
-	//
-	explicit Vector(std::initializer_list<double> a_args)
-	: d_array()
-	{
-		if (d_array.size() != a_args.size()) { // Verify right size
-			std::ostringstream oss;
-			oss << __func__ << ": a_args.size()=" << a_args.size()
-				<< " does not match N=" << N;
-			const std::string what = oss.str();
-			throw std::length_error(what);
-		}
+	double operator[](size_t a_idx) const { return d_array[a_idx]; }
+	double& operator[](size_t a_idx) { return d_array[a_idx]; }
 
-		size_t i = 0;
-		for (auto it = begin(a_args); it != end(a_args); ++it, ++i)
-			d_array[i] = *it;
-	}
+	// Note: Here we follow the advice of Scott Meyers, mec++, item22
+	Vector& operator+=(const Vector& a_rhs);
 
-	double
-	Norm() const // Synonyms: length, magnitude, norm
-	{
-		double accSquared = 0.;
-		for (auto value : d_array)
-			accSquared += value*value;
-		return sqrt(accSquared);
-	}
+	double Norm() const; // Synonyms: length, magnitude, norm
 
 	template<size_t n>
 	friend std::ostream& operator<<(std::ostream&, const Vector<n>&);
@@ -194,6 +174,53 @@ public:
 private:
 	std::array<double, N> d_array;
 };
+
+template<size_t N>
+Vector<N>::Vector(std::initializer_list<double> a_args)
+: d_array()
+{
+	// Note: There is a nice discussion in
+	// stackoverflow.com/questions/5438671/static-assert-on-initializer-listsize
+	// to try to add a static_assert in the ctor, but alas, we did not succeed.
+	//
+	if (d_array.size() != a_args.size()) { // Verify right size
+		std::ostringstream oss;
+		oss << __func__ << ": a_args.size()=" << a_args.size()
+			<< " does not match N=" << N;
+		const std::string what = oss.str();
+		throw std::length_error(what);
+	}
+
+	size_t i = 0;
+	for (auto it = begin(a_args); it != end(a_args); ++it, ++i)
+		d_array[i] = *it;
+}
+
+template<size_t N>
+Vector<N>&
+Vector<N>::operator+=(const Vector<N>& a_rhs)
+{
+	for (size_t i = 0; i < N; ++i)
+		d_array[i] += a_rhs.d_array[i];
+	return *this;
+}
+
+template<size_t N>
+double
+Vector<N>::Norm() const // Synonyms: length, magnitude, norm
+{
+	double accSquared = 0.;
+	for (auto value : d_array)
+		accSquared += value*value;
+	return sqrt(accSquared);
+}
+
+template<size_t N>
+const Vector<N>
+operator+(const Vector<N>& a_lhs, const Vector<N>& a_rhs)
+{
+	return Vector<N>(a_lhs) += a_rhs;
+}
 
 template<size_t N>
 std::ostream&
@@ -236,15 +263,37 @@ ABcb::cpp11::MiscellanyExamples()
 		<< pad << "vector2 typeid name = " << typeid(vector2).name() << '\n'
 		<< pad << "vector2 spy::TypeName of its decltype = "
 			<< spy::TypeName<decltype(vector2)>() << '\n'
-		<< pad << "vector2 = " << vector2 << " | Norm() = " << vector2.Norm()
+		<< pad << "vector2 = " << vector2 
+		<< " | vector2[0] = " << vector2[0]
+		<< " | Norm() = " << vector2.Norm()
 		<< std::endl;
 
-	const Euclidean::Vector3 vector3{ 5., 7., 11. };
+	const Euclidean::Vector3 vector3a{ 5., 7., 11. };
 	std::cout
-		<< pad << "vector3 typeid name = " << typeid(vector3).name() << '\n'
-		<< pad << "vector3 spy::TypeName of its decltype = "
-			<< spy::TypeName<decltype(vector3)>() << '\n'
-		<< pad << "vector3 = " << vector3 << " | Norm() = " << vector3.Norm()
+		<< pad << "vector3a typeid name = " << typeid(vector3a).name() << '\n'
+		<< pad << "vector3a spy::TypeName of its decltype = "
+			<< spy::TypeName<decltype(vector3a)>() << '\n'
+		<< pad << "vector3a = " << vector3a
+		<< " | vector3a[0] = " << vector3a[0]
+		<< " | Norm() = " << vector3a.Norm()
+		<< std::endl;
+	const Euclidean::Vector3 vector3b{ -4., -6., -10. };
+	std::cout
+		<< pad << "vector3b typeid name = " << typeid(vector3b).name() << '\n'
+		<< pad << "vector3b spy::TypeName of its decltype = "
+		<< spy::TypeName<decltype(vector3b)>() << '\n'
+		<< pad << "vector3b = " << vector3b
+		<< " | vector3b[0] = " << vector3b[0]
+		<< " | Norm() = " << vector3b.Norm()
+		<< std::endl;
+	const Euclidean::Vector3 vector3c = vector3a + vector3b;
+	std::cout
+		<< pad << "vector3c typeid name = " << typeid(vector3c).name() << '\n'
+		<< pad << "vector3c spy::TypeName of its decltype = "
+		<< spy::TypeName<decltype(vector3c)>() << '\n'
+		<< pad << "vector3c = " << vector3c
+		<< " | vector3c[0] = " << vector3c[0]
+		<< " | Norm() = " << vector3c.Norm()
 		<< std::endl;
 
 	std::clog << __func__ << " finished." << std::endl;
