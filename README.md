@@ -39,7 +39,10 @@ We strive to maintain a certain quality on the code by taking advantage of some 
 - "Analyze > Run Code Analysis on Only Ada-Byron-code-book" when using Microsoft Windows 8.1: Visual Studio 12 2013 Win64
 - "Product > Analyze" when using Apple OS X: Xcode 6.2 (LLVM, clang++) 64-bit
 - (Just starting...) In g++ and clang++, address/thread/memory sanitizer (AKA [ASan](https://code.google.com/p/address-sanitizer/), TSan, MSan)--for example, for Asan, with the flags <code>-fsanitize=address -fno-omit-frame-pointer</code>
-- TODO: Cloud-based [Coverity Scan](http://www.coverity.com/products/coverity-scan/) for the Open Source Community
+- TODO (try this): Cloud-based [Coverity Scan](http://www.coverity.com/products/coverity-scan/) for the Open Source Community
+
+Other tools related to code analysis:
+- TODO (try this): [C-Reduce](http://embed.cs.utah.edu/creduce/) _"takes a large C or C++ program that has a property of interest (such as triggering a compiler bug) and automatically produces a much smaller C/C++ program that has the same property."_
 
 ### Commits
 
