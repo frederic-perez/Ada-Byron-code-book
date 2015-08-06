@@ -41,14 +41,25 @@ ABcb::Euclidean::ExamplesOfVector()
 		<< " | vector3b[0] = " << vector3b[0]
 		<< " | Norm() = " << vector3b.Norm()
 		<< std::endl;
-	const Vector3 vector3c = vector3a + vector3b;
+	const Vector3 vector3plus = vector3a + vector3b;
 	std::cout
-		<< pad << "vector3c typeid name = " << typeid(vector3c).name() << '\n'
-		<< pad << "vector3c spy::TypeName of its decltype = "
-		<< spy::TypeName<decltype(vector3c)>() << '\n'
-		<< pad << "vector3c = " << vector3c
-		<< " | vector3c[0] = " << vector3c[0]
-		<< " | Norm() = " << vector3c.Norm()
+		<< pad << "vector3plus typeid name = "
+			<< typeid(vector3plus).name() << '\n'
+		<< pad << "vector3plus spy::TypeName of its decltype = "
+		<< spy::TypeName<decltype(vector3plus)>() << '\n'
+		<< pad << "vector3plus = " << vector3plus
+		<< " | vector3plus[0] = " << vector3plus[0]
+		<< " | Norm() = " << vector3plus.Norm()
+		<< std::endl;
+	const Vector3 vector3minus = vector3a - vector3b;
+	std::cout
+		<< pad << "vector3minus typeid name = "
+			<< typeid(vector3minus).name() << '\n'
+		<< pad << "vector3minus spy::TypeName of its decltype = "
+		<< spy::TypeName<decltype(vector3minus)>() << '\n'
+		<< pad << "vector3minus = " << vector3minus
+		<< " | vector3minus[0] = " << vector3minus[0]
+		<< " | Norm() = " << vector3minus.Norm()
 		<< std::endl;
 
 	std::clog << __func__ << " finished." << std::endl;

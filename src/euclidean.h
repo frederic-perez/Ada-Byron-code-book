@@ -11,7 +11,7 @@
 
 #include "aux-raw-compiler-warnings-off.h"
 
-#include <boost/algorithm/string.hpp>
+	#include <boost/algorithm/string.hpp>
 
 #include "aux-raw-compiler-warnings-on.h"
 
@@ -31,6 +31,7 @@ public:
 
 	// Note: Here we follow the advice of Scott Meyers, mec++, item22
 	Vector& operator+=(const Vector& a_rhs);
+	Vector& operator-=(const Vector& a_rhs);
 
 	double Norm() const; // Synonyms: length, magnitude, norm
 
@@ -72,6 +73,15 @@ Vector<N>::operator+=(const Vector<N>& a_rhs)
 }
 
 template<size_t N>
+Vector<N>&
+Vector<N>::operator-=(const Vector<N>& a_rhs)
+{
+	for (size_t i = 0; i < N; ++i)
+		d_array[i] -= a_rhs.d_array[i];
+	return *this;
+}
+
+template<size_t N>
 double
 Vector<N>::Norm() const // Synonyms: length, magnitude, norm
 {
@@ -86,6 +96,13 @@ const Vector<N>
 operator+(const Vector<N>& a_lhs, const Vector<N>& a_rhs)
 {
 	return Vector<N>(a_lhs) += a_rhs;
+}
+
+template<size_t N>
+const Vector<N>
+operator-(const Vector<N>& a_lhs, const Vector<N>& a_rhs)
+{
+	return Vector<N>(a_lhs) -= a_rhs;
 }
 
 template<size_t N>
