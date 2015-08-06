@@ -28,6 +28,7 @@ set(SRC_LIST
 	cli-parser.cpp cli-parser.h
 	concurrency.cpp concurrency.h
 	cpp11-pool.cpp cpp11-pool.h
+	euclidean.cpp euclidean.h
 	main.cpp
 	filesystem-pool.cpp filesystem-pool.h
 	lexical-cast-pool.cpp lexical-cast-pool.h

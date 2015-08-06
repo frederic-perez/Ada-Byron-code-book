@@ -13,6 +13,7 @@
 #include "cli-parser.h"
 #include "concurrency.h"
 #include "cpp11-pool.h"
+#include "euclidean.h"
 #include "filesystem-pool.h"
 #include "lexical-cast-pool.h"
 #include "preprocessor-pool.h"
@@ -40,6 +41,10 @@ main(int argc, char* argv[])
 	ABcb::cpp11::UsingTuple();
 	ABcb::cpp11::AlgorithmExamples();
 	ABcb::cpp11::MiscellanyExamples();
+	std::cout << std::endl;
+
+	ABcb::Euclidean::ExamplesOfVector();
+	std::cout << std::endl;
 
 	ABcb::raw::ExamplesOfRaw();
 	std::cout << std::endl;
