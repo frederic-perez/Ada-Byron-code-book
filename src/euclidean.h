@@ -29,9 +29,10 @@ public:
 	double operator[](size_t a_idx) const { return d_array[a_idx]; }
 	double& operator[](size_t a_idx) { return d_array[a_idx]; }
 
-	// Note: Here we follow the advice of Scott Meyers, mec++, item22
-	Vector& operator+=(const Vector& a_rhs);
-	Vector& operator-=(const Vector& a_rhs);
+	// Note: Here we follow the advice of Scott Meyers, mec++, item 22
+	Vector& operator+=(const Vector&);
+	Vector& operator-=(const Vector&);
+	Vector& operator*=(double);
 
 	double Norm() const; // Synonyms: length, magnitude, norm
 
@@ -82,6 +83,15 @@ Vector<N>::operator-=(const Vector<N>& a_rhs)
 }
 
 template<size_t N>
+Vector<N>&
+Vector<N>::operator*=(double a_rhs)
+{
+	for (size_t i = 0; i < N; ++i)
+		d_array[i] *= a_rhs;
+	return *this;
+}
+
+template<size_t N>
 double
 Vector<N>::Norm() const // Synonyms: length, magnitude, norm
 {
@@ -103,6 +113,20 @@ const Vector<N>
 operator-(const Vector<N>& a_lhs, const Vector<N>& a_rhs)
 {
 	return Vector<N>(a_lhs) -= a_rhs;
+}
+
+template<size_t N>
+const Vector<N>
+operator*(const Vector<N>& a_lhs, double a_rhs)
+{
+	return Vector<N>(a_lhs) *= a_rhs;
+}
+
+template<size_t N>
+const Vector<N>
+operator*(double a_lhs, const Vector<N>& a_rhs)
+{
+	return Vector<N>(a_rhs) *= a_lhs;
 }
 
 template<size_t N>
