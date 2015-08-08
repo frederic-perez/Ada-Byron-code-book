@@ -29,7 +29,7 @@ public:
 	double operator[](size_t a_idx) const { return d_array[a_idx]; }
 	double& operator[](size_t a_idx) { return d_array[a_idx]; }
 
-	// Note: Here we follow the advice of Scott Meyers, mec++, item 22
+	// Note: Here we follow the advice of Scott Meyers, mec++, Item 22, Consider using op= instead of stand-alone op
 	Vector& operator+=(const Vector&);
 	Vector& operator-=(const Vector&);
 	Vector& operator*=(double);
