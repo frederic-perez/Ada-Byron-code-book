@@ -24,7 +24,7 @@ The "book" uses C++11 features, and includes:
   - XML parsing
 - (In the future it will contain code ported from my Evernote's notes)
 
-### C++11
+### Reference material
 
 Some interesting C++11-related URLs:
 - http://en.wikipedia.org/wiki/C%2B%2B11
@@ -32,6 +32,9 @@ Some interesting C++11-related URLs:
 - http://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html
 - http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html
 - http://blog.feabhas.com/2014/03/demystifying-c-lambdas/
+
+A never complete list of great C++ references (books, etc.):
+- (mec++)
 
 ### Code analysis
 We strive to maintain a certain quality on the code by taking advantage of some tools:
