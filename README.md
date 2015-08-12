@@ -34,7 +34,7 @@ Some interesting C++11-related URLs:
 - http://blog.feabhas.com/2014/03/demystifying-c-lambdas/
 
 A never complete list of great C++ references (books, etc.):
-- (mec++)
+- Scott Meyers, More Efficient C++ (mec++, for short)
 
 ### Code analysis
 We strive to maintain a certain quality on the code by taking advantage of some tools:
