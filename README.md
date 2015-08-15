@@ -36,6 +36,7 @@ Some interesting C++11-related URLs:
 A never complete list of great C++ references (books, etc.):
 - Scott Meyers, More Efficient C++ -- 35 New Ways to Improve Your Programs and Designs (mec++, for short), 1996.
 - Andrew Koenig, Barbara Moo, Ruminations on C++ -- A Decade of Programming Insight and Experience, 1997. (I particulalarly love Chapter 4, Checklist for class authors.)
+- Bjarne Stroustrup, The C++ Programming Language - Third Edition, 1997.
 
 ### Code analysis
 We strive to maintain a certain quality on the code by taking advantage of some tools:
