@@ -34,9 +34,9 @@ Some interesting C++11-related URLs:
 - http://blog.feabhas.com/2014/03/demystifying-c-lambdas/
 
 A never complete list of great C++ references (books, etc.):
-- Scott Meyers, More Efficient C++ -- 35 New Ways to Improve Your Programs and Designs (mec++, for short), 1996.
-- Andrew Koenig, Barbara Moo, Ruminations on C++ -- A Decade of Programming Insight and Experience, 1997. (I particulalarly love Chapter 4, Checklist for class authors.)
-- Bjarne Stroustrup, The C++ Programming Language - Third Edition, 1997.
+- Scott Meyers, More Efficient C++ -- 35 New Ways to Improve Your Programs and Designs (mec++, for short), Addison-Wesley Professional Computing Series, 1996.
+- Andrew Koenig, Barbara Moo, Ruminations on C++ -- A Decade of Programming Insight and Experience, Addison-Wesley, 1997. (I particulalarly love Chapter 4, Checklist for class authors.)
+- Bjarne Stroustrup, The C++ Programming Language - Third Edition, Addison-Wesley, 1997.
 
 ### Code analysis
 We strive to maintain a certain quality on the code by taking advantage of some tools:
