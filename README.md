@@ -33,7 +33,7 @@ Some interesting C++11-related URLs:
 - http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html
 - http://blog.feabhas.com/2014/03/demystifying-c-lambdas/
 
-A never complete list of great C++ references (books, etc.):
+A never complete list of great C++ references (selected books, etc.):
 - Scott Meyers, More Efficient C++ -- 35 New Ways to Improve Your Programs and Designs (mec++, for short), Addison-Wesley Professional Computing Series, 1996.
 - Andrew Koenig, Barbara Moo, Ruminations on C++ -- A Decade of Programming Insight and Experience, Addison-Wesley, 1997. (I particulalarly love Chapter 4, Checklist for class authors.)
 - Bjarne Stroustrup, The C++ Programming Language - Third Edition, Addison-Wesley, 1997.
