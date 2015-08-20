@@ -28,7 +28,7 @@ The "book" uses C++11 features, and includes:
 
 Some interesting C++11-related URLs:
 - [Wikipedia's C++11 entry](http://en.wikipedia.org/wiki/C%2B%2B11)
-- http://herbsutter.com/elements-of-modern-c-style/
+- Herb Sutter's post on [Elements of modern style](http://herbsutter.com/elements-of-modern-c-style/)
 - http://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html
 - http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html
 - http://blog.feabhas.com/2014/03/demystifying-c-lambdas/
