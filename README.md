@@ -27,7 +27,7 @@ The "book" uses C++11 features, and includes:
 ### Reference material
 
 Some interesting C++11-related URLs:
-- [Wikipedia's C++11 entry](http://en.wikipedia.org/wiki/C%2B%2B11)
+- Wikipedia's [C++11](http://en.wikipedia.org/wiki/C%2B%2B11) entry
 - Herb Sutter's post on [Elements of modern style](http://herbsutter.com/elements-of-modern-c-style/)
 - http://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html
 - http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html
