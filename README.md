@@ -32,7 +32,7 @@ Some interesting C++11-related URLs:
 - http://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html
 - http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html
 - http://blog.feabhas.com/2014/03/demystifying-c-lambdas/
-- https://isocpp.org/blog/2012/12/c11-a-cheat-sheet-alex-sinyakov
+- Alex Sinyakov's [C++11 cheat sheet](https://isocpp.org/blog/2012/12/c11-a-cheat-sheet-alex-sinyakov)
 
 A never complete list of great C++ references (selected books, etc.):
 - Scott Meyers, More Efficient C++ -- 35 New Ways to Improve Your Programs and Designs (mec++, for short), Addison-Wesley Professional Computing Series, 1996.
