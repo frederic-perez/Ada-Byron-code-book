@@ -29,12 +29,15 @@ public:
 	double operator[](size_t a_idx) const { return d_array[a_idx]; }
 	double& operator[](size_t a_idx) { return d_array[a_idx]; }
 
-	// Note: Here we follow the advice of Scott Meyers, More Effective C++ (mec++), Item 22, Consider using op= instead of stand-alone op
+	double Norm() const; // Synonyms: length, magnitude, norm
+
+	// Note: Here we follow the advice of Scott Meyers, More Effective C++
+	// (mec++), Item 22, Consider using op= instead of stand-alone op
+	//
 	Vector& operator+=(const Vector&);
 	Vector& operator-=(const Vector&);
 	Vector& operator*=(double);
-
-	double Norm() const; // Synonyms: length, magnitude, norm
+	Vector& operator/=(double);
 
 	template<size_t n>
 	friend std::ostream& operator<<(std::ostream&, const Vector<n>&);
@@ -45,7 +48,7 @@ private:
 
 template<size_t N>
 Vector<N>::Vector(std::initializer_list<double> a_args)
-	: d_array()
+: d_array()
 {
 	// Note: There is a nice discussion in
 	// stackoverflow.com/questions/5438671/static-assert-on-initializer-listsize
@@ -62,6 +65,16 @@ Vector<N>::Vector(std::initializer_list<double> a_args)
 	size_t i = 0;
 	for (auto it = begin(a_args); it != end(a_args); ++it, ++i)
 		d_array[i] = *it;
+}
+
+template<size_t N>
+double
+Vector<N>::Norm() const // Synonyms: length, magnitude, norm
+{
+	double accSquared = 0.;
+	for (auto value : d_array)
+		accSquared += value*value;
+	return sqrt(accSquared);
 }
 
 template<size_t N>
@@ -92,13 +105,12 @@ Vector<N>::operator*=(double a_rhs)
 }
 
 template<size_t N>
-double
-Vector<N>::Norm() const // Synonyms: length, magnitude, norm
+Vector<N>&
+Vector<N>::operator/=(double a_rhs)
 {
-	double accSquared = 0.;
-	for (auto value : d_array)
-		accSquared += value*value;
-	return sqrt(accSquared);
+	for (size_t i = 0; i < N; ++i)
+		d_array[i] /= a_rhs;
+	return *this;
 }
 
 template<size_t N>
@@ -129,6 +141,20 @@ operator*(double a_lhs, const Vector<N>& a_rhs)
 	return Vector<N>(a_rhs) *= a_lhs;
 }
 
+template<size_t N>
+const Vector<N>
+operator/(const Vector<N>& a_lhs, double a_rhs)
+{
+	return Vector<N>(a_lhs) /= a_rhs;
+}
+
+template<size_t N>
+const Vector<N>
+operator/(double a_lhs, const Vector<N>& a_rhs)
+{
+	return Vector<N>(a_rhs) /= a_lhs;
+}
+	
 template<size_t N>
 std::ostream&
 operator<<(std::ostream& a_os, const Vector<N>& a_vector)
