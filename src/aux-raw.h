@@ -21,6 +21,8 @@ namespace Ada_Byron_code_book {
 
 namespace raw {
 
+// Note: Recall that for std::array<> objects you must use the size() inspector
+//
 template<typename T, size_t N>
 size_t
 ArraySize(const T(&)[N])
