@@ -24,6 +24,7 @@ void ExamplesOfVector();
 template<size_t N>
 class Vector {
 public:
+	explicit Vector(double); // All elements will be set the input argument
 	explicit Vector(std::initializer_list<double>);
 
 	double operator[](size_t a_idx) const { return d_array[a_idx]; }
@@ -45,6 +46,14 @@ public:
 private:
 	std::array<double, N> d_array;
 };
+
+template<size_t N>
+Vector<N>::Vector(double a_value)
+: d_array()
+{
+	for (auto& value : d_array)
+		value = a_value;
+}
 
 template<size_t N>
 Vector<N>::Vector(std::initializer_list<double> a_args)
