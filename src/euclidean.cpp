@@ -34,6 +34,9 @@ ABcb::Euclidean::ExamplesOfVector()
 {
 	std::clog << __func__ << " started..." << std::endl;
 
+	const Vector2 vector2default;
+	DoAndOutputStuff(vector2default, "vector2default");
+
 	const Vector2 vector2ones(1.);
 	DoAndOutputStuff(vector2ones, "vector2ones");
 

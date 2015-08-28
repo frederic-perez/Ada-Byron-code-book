@@ -25,6 +25,7 @@ template<size_t N>
 class Vector {
 public:
 	explicit Vector(double); // All elements will be set the input argument
+	Vector() : Vector(0.) {} // Delegating constructor
 	explicit Vector(std::initializer_list<double>);
 
 	double operator[](size_t a_idx) const { return d_array[a_idx]; }
