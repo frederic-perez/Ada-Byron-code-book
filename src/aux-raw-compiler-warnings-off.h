@@ -5,6 +5,8 @@
 // since we want these preprocessor command to be included in <<every>> client
 // file that does include this file.
 
+// TODO: Abort compilation when parsing this "warnings off" file by using a static_assert in conjunction with smart preprocessing directives
+
 // Companion file to ...-off.h is ...-on.h
 //
 // Right usage of these headers
