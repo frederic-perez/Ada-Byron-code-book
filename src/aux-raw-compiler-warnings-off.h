@@ -23,7 +23,11 @@
 
 // Stuff to forbid a bad usage of these headers
 //
+#if defined(AuxRawCompilerWarningsOff)
+#error AuxRawCompilerWarningsOff already defined (two calls of the off.h file?)
+#else
 #define AuxRawCompilerWarningsOff
+#endif
 
 #if defined(__GNUC__)
 	// See http://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
