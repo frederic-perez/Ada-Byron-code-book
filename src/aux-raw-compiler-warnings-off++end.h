@@ -11,8 +11,6 @@
 	#undef AuxRawCompilerWarningsOff
 #endif
 
-// TODO: In order to make the use of the coupled headers less error prone, rename them to ..--begin.h and end.h. This simple policy allows quick inspection of their correctly sorted usage by searching for the string " aux-raw-warnings-control--."
-
 #if defined(__GNUC__)
 	// See http://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
 	// Further reading:
