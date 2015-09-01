@@ -132,7 +132,7 @@ TypeName()
 #endif
 			std::free);
 	std::string r = own != nullptr ? own.get() : typeid(TR).name();
-#include "aux-raw-compiler-warnings-off.h"
+#include "aux-raw-compiler-warnings-off++begin.h"
 	if (std::is_const<TR>::value)
 		r += " const";
 	if (std::is_volatile<TR>::value)
@@ -141,7 +141,7 @@ TypeName()
 		r += "&";
 	else if (std::is_rvalue_reference<T>::value)
 		r += "&&";
-#include "aux-raw-compiler-warnings-on.h"
+#include "aux-raw-compiler-warnings-off++end.h"
 	return r;
 }
 

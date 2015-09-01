@@ -3,11 +3,11 @@
 #include <iostream>
 #include <sstream>
 
-#include "aux-raw-compiler-warnings-off.h"
+#include "aux-raw-compiler-warnings-off++begin.h"
 
 	#include <boost/algorithm/string.hpp>
 
-#include "aux-raw-compiler-warnings-on.h"
+#include "aux-raw-compiler-warnings-off++end.h"
 
 #include "aux-raw.h"
 #include "under-construction.h"

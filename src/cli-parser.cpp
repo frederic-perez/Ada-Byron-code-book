@@ -4,13 +4,13 @@
 #include <iostream>
 #include <sstream> // std::ostringstream oss
 
-#include "aux-raw-compiler-warnings-off.h"
+#include "aux-raw-compiler-warnings-off++begin.h"
 
 	#include <boost/algorithm/string.hpp>
 	#include <boost/program_options.hpp>
 	#include <boost/tokenizer.hpp>
 
-#include "aux-raw-compiler-warnings-on.h"
+#include "aux-raw-compiler-warnings-off++end.h"
 
 #include "aux-raw.h"
 #include "cli-parser.h"
