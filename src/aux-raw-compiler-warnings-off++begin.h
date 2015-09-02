@@ -5,26 +5,26 @@
 // since we want these preprocessor command to be included in <<every>> client
 // file that does include this file.
 
-// Companion file to ...-off.h is ...-on.h
+// Companion file to ...++begin.h is ...++end.h
 //
 // Right usage of these headers
 // ============================
-// #include <aux-raw-compiler-warnings-off.h>
+// #include <aux-raw-compiler-warnings-off++begin.h>
 //   #include ...
-// #include <aux-raw-compiler-warnings-on.h>
+// #include <aux-raw-compiler-warnings-on++end.h>
 //
 // Wrong usage of these headers
 // ============================
-// #include <aux-raw-compiler-warnings-on.h>
+// #include <aux-raw-compiler-warnings-off++end.h>
 //   #include ...
-// #include <aux-raw-compiler-warnings-off.h>
+// #include <aux-raw-compiler-warnings-off++begin.h>
 
 // Stuff to forbid a bad usage of these headers
 //
-#if defined(AuxRawCompilerWarningsOff)
-#error AuxRawCompilerWarningsOff already defined (two calls of the off.h file?)
+#if defined(AuxRawCompilerWarningsOffBegin)
+#error AuxRawCompilerWarningsOffBegin already defined (two ++begin.h includes?)
 #else
-#define AuxRawCompilerWarningsOff
+#define AuxRawCompilerWarningsOffBegin
 #endif
 
 #if defined(__GNUC__)

@@ -1,14 +1,14 @@
 // --
 
-// IMPORTANT: See notes in the companion header file ...-off.h
+// IMPORTANT: See notes in the companion header file ...-off++begin.h
 //            (They are not replicated here for maintenance reasons.)
 
 // Stuff to forbid a bad usage of these headers
 //
-#if !defined(AuxRawCompilerWarningsOff)
-	#error AuxRawCompilerWarningsOff.h has to be included BEFORE the ...on.h file
+#if !defined(AuxRawCompilerWarningsOffBegin)
+	#error File ...++begin.h has to be included BEFORE the ...++end.h file
 #else
-	#undef AuxRawCompilerWarningsOff
+	#undef AuxRawCompilerWarningsOffBegin
 #endif
 
 #if defined(__GNUC__)
