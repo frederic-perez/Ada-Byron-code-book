@@ -7,7 +7,14 @@ project(Ada-Byron-code-book)
 message(STATUS "CMAKE_C_PLATFORM_ID is ${CMAKE_C_PLATFORM_ID}")
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
 
-# TODO: Add SITE_NAME stuff
+if(CMAKE_MAJOR_VERSION LESS 3)
+	SITE_NAME(MyHostname)
+else()
+	cmake_host_system_information(RESULT MyHostname QUERY HOSTNAME)
+endif()
+MESSAGE(STATUS "Your host name (MyHostname variable) is ${MyHostname}")
+# SET(CTEST_SITE ${MyHostname})
+# SET(SITE ${CTEST_SITE}) # For Visual Studio to use the right value
 
 if("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
 	if(MSVC)
