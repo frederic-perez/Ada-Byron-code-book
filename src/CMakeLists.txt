@@ -52,7 +52,7 @@ add_executable(${PROJECT_NAME} ${SRC_LIST})
 
 target_link_libraries(${PROJECT_NAME}
 	${Boost_LIBRARIES}
-#	${Boost_LIBRARIES} ${OpenIGTLink_LIBRARIES}
+#	Other required 3rd party libraries would appear below
 )
 
 set(TARGET_NAME ${PROJECT_NAME}Targets)
