@@ -52,7 +52,9 @@ add_executable(${PROJECT_NAME} ${SRC_LIST})
 
 target_link_libraries(${PROJECT_NAME}
 	${Boost_LIBRARIES}
-#	Other required 3rd party libraries would appear below
+#	Other required 3rd party libraries would appear below (examples commented):
+#	${ITK_LIBRARIES}
+#	${VTK_LIBRARIES}
 )
 
 set(TARGET_NAME ${PROJECT_NAME}Targets)
