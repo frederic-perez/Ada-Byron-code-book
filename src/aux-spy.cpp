@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/c_local_time_adjustor.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/version.hpp>
 
@@ -219,7 +220,10 @@ GetArgv0Info(const std::string& a_argv0)
 		//
 		const std::time_t theTime_t = bf::last_write_time(fullArgv0);
 		namespace pt = boost::posix_time;
-		const pt::ptime thePtime = pt::from_time_t(theTime_t);
+		const pt::ptime thePtime =
+			// pt::from_time_t(theTime_t); <-- Does not work properly for Darwin
+			boost::date_time::c_local_adjustor<pt::ptime>::utc_to_local(
+				pt::from_time_t(theTime_t));
 		const pt::ptime::date_type date = thePtime.date();
 		oss << " on " << date.day_of_week() << ", " << date.month() << ' '
 			<< date.day() << ", " << date.year();
@@ -239,7 +243,6 @@ GetCurrentDirInfo()
 {
 	const std::string dot = ".";
 	const bf::path currentDir(dot);
-	const bool isDirectory = is_directory(currentDir);
 	const bf::path fullPathCD = bf::system_complete(bf::canonical(dot));
 	std::ostringstream oss;
 	oss << "The full path of the current directory is " << fullPathCD;
