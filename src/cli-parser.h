@@ -69,8 +69,8 @@ enum enum_ { BOOST_PP_SEQ_ENUM(elements) };                 \
 
 namespace cli {
 
-std::string
-ProgramName();
+std::string Argv0();
+std::string ProgramName();
 
 bool
 ParseCommandLine(int argc, char** argv);

@@ -31,7 +31,8 @@ main(int argc, char* argv[])
 	if (!succeeded)
 		return EXIT_FAILURE;
 
-	std::cout << ABcb::spy::RunInfo(ABcb::cli::ProgramName()) << '\n'
+	std::cout
+		<< ABcb::spy::RunInfo(ABcb::cli::Argv0(), ABcb::cli::ProgramName()) << '\n'
 		<< ABcb::cli::ParsedCommandLine << std::endl;
 
 	ABcb::spy::Timer<std::chrono::high_resolution_clock> timerHQ;

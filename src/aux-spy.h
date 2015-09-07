@@ -38,9 +38,16 @@ std::ostream& operator<<(std::ostream&, const RunInfo&);
 
 class RunInfo : boost::noncopyable {
 public:
-	explicit RunInfo(const std::string& a_progname) : d_progname(a_progname) {}
+	explicit RunInfo(
+		const std::string& a_argv0,
+		const std::string& a_progname)
+	: d_argv0(a_argv0), d_progname(a_progname)
+	{}
+
+	const std::string& GetArgv0() const { return d_argv0; }
 	const std::string& GetProgName() const { return d_progname; }
 private:
+	const std::string d_argv0;
 	const std::string d_progname;
 };
 

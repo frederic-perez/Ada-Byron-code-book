@@ -19,9 +19,14 @@ namespace ABcb = Ada_Byron_code_book;
 
 namespace {
 
+char* argv0 = 0;
 char* progname = 0;
 
 }
+
+std::string
+ABcb::cli::Argv0()
+{	return argv0; }
 
 std::string
 ABcb::cli::ProgramName()
@@ -78,6 +83,7 @@ GetSetOfDefinedString(const std::vector<std::string>& a_definedStrings)
 bool
 ABcb::cli::ParseCommandLine(int argc, char** argv)
 {
+	argv0 = argv[0];
 	if ((progname = (char *)strrchr(argv[0], ABcb::raw::SystemSlash())) == NULL)
 		progname = argv[0];
 	else

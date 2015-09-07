@@ -4,6 +4,7 @@
 #include <sstream>
 
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/filesystem.hpp>
 #include <boost/version.hpp>
 
 #include "aux-spy.h"
@@ -176,10 +177,15 @@ ABcb::spy::LocalTime(std::ostream& a_os)
 	return a_os;
 }
 
+namespace {
+
+const std::string pad = "  ";
+
+} // namespace
+
 std::ostream&
 ABcb::spy::SizeOfs(std::ostream& a_os)
 {
-	const std::string pad = "  ";
 	a_os
 		<< pad << "sizeof(char) = " << sizeof(char) << '\n'
 		<< pad << "sizeof(wchar_t) = " << sizeof(wchar_t) << '\n'
@@ -190,13 +196,70 @@ ABcb::spy::SizeOfs(std::ostream& a_os)
 	return a_os;
 }
 
+namespace {
+
+namespace bf = boost::filesystem;
+
+std::string
+GetArgv0Info(const std::string& a_argv0)
+{
+	const bf::path fullArgv0 =
+		bf::system_complete(bf::canonical(bf::path(a_argv0)));
+
+	std::ostringstream oss;
+	oss << "The full argv[0]:\n"
+		<< pad << "is " << fullArgv0 << ",\n";
+	if (bf::exists(fullArgv0)) {
+		oss << pad << "which " << (bf::is_regular(fullArgv0) ? "is" : "is not")
+			<< " a regular file, created";
+
+		// TODO: ADD " at 'HOSTNAME'"
+
+		// Day of the week, month, day, year
+		//
+		const std::time_t theTime_t = bf::last_write_time(fullArgv0);
+		namespace pt = boost::posix_time;
+		const pt::ptime thePtime = pt::from_time_t(theTime_t);
+		const pt::ptime::date_type date = thePtime.date();
+		oss << " on " << date.day_of_week() << ", " << date.month() << ' '
+			<< date.day() << ", " << date.year();
+
+		// Hours, minutes and seconds
+		//
+		pt::time_facet* const f = new pt::time_facet("%H:%M:%S");
+		oss.imbue(std::locale(oss.getloc(), f));
+		oss << ", at " << thePtime;
+	} else
+		oss << "(which does not seem to exist)";
+	return oss.str();
+}
+
+std::string
+GetCurrentDirInfo()
+{
+	const std::string dot = ".";
+	const bf::path currentDir(dot);
+	const bool isDirectory = is_directory(currentDir);
+	const bf::path fullPathCD = bf::system_complete(bf::canonical(dot));
+	std::ostringstream oss;
+	oss << "The full path of the current directory is " << fullPathCD;
+	return oss.str();
+}
+
+} // namespace
+
 std::ostream&
 ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
 {
+	const std::string argv0Info = GetArgv0Info(a_runInfo.GetArgv0());
+	const std::string currentDirInfo = GetCurrentDirInfo();
+
 	using namespace ABcb::spy;
 	a_os << '\n' << a_runInfo.GetProgName()
 		<< " was launched by " << UserName << " at " << HostName
 		<< " on " << LocalDate << ", at " << LocalTime << '\n'
+		<< argv0Info << '\n'
+		<< currentDirInfo << '\n'
 		<< "Using Boost version " << BoostVersion << '\n'
 		<< "Using Clang version " << ClangVersion << '\n'
 		<< "Using GNU g++ version " << GNUGppVersion << '\n'
