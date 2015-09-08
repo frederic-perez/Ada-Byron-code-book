@@ -6,6 +6,7 @@
 #include <boost/date_time/c_local_time_adjustor.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/preprocessor.hpp>
 #include <boost/version.hpp>
 
 #include "aux-spy.h"
@@ -214,7 +215,12 @@ GetArgv0Info(const std::string& a_argv0)
 		oss << pad << "which " << (bf::is_regular(fullArgv0) ? "is" : "is not")
 			<< " a regular file, created";
 
-		// TODO: ADD " at 'HOSTNAME'"
+#if defined(CMAKE_MYUSERNAME)
+		oss << " by " << BOOST_PP_STRINGIZE(CMAKE_MYUSERNAME) << ',';
+#endif
+#if defined(CMAKE_MYHOSTNAME)
+		oss << " at " << BOOST_PP_STRINGIZE(CMAKE_MYHOSTNAME) << ',';
+#endif
 
 		// Day of the week, month, day, year
 		//
