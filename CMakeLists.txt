@@ -72,6 +72,13 @@ endif()
 
 message(STATUS "CMAKE_CXX_FLAGS are:" ${CMAKE_CXX_FLAGS})
 
+option(BUILD_TESTING "Build the testing tree" ON)
+if(BUILD_TESTING)
+	enable_testing()
+	include(CTest)
+	# '- to build Continuous, Experimental, etc., and enables dashboard scripting
+endif(BUILD_TESTING)
+
 add_subdirectory(src)
 add_subdirectory(data)
 
