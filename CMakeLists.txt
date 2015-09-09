@@ -36,7 +36,7 @@ if("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
 		message(STATUS "Entering Windows/MSVC branch.")
 		string(CONCAT CMAKE_CXX_FLAGS
 			"${CMAKE_CXX_FLAGS} -D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS "
-			"/W4 /WX /EHa /wd4351 "
+			"/W4 /WX /EHa /wd4127 /wd4351 "
 			"/D${def_CMAKE_MYUSERNAME} /D${def_CMAKE_MYHOSTNAME}")
 		# '- http://msdn.microsoft.com/en-US/library/thxezb7y.aspx:
 		#		  /wd n  Disables the compiler warning that is specified in n.
@@ -74,7 +74,5 @@ message(STATUS "CMAKE_CXX_FLAGS are:" ${CMAKE_CXX_FLAGS})
 
 add_subdirectory(src)
 add_subdirectory(data)
-
-# Link the executable to the required libraries
 
 # -- eof
