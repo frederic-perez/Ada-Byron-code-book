@@ -1,14 +1,14 @@
 # -- CMake build rules
 
 # Boost stuff
-if(WIN32)
-	set(Boost_USE_STATIC_LIBS ON)
-else()
-	set(Boost_USE_STATIC_LIBS OFF)
-endif()
+set(Boost_USE_STATIC_LIBS ON CACHE BOOL "Use statically-linked boost libraries")
+# '- Note: By default set Boost_USE_STATIC_LIBS to ON (to link them statically
+#    to avoid possible problems during execution of the application (not finding
+#    the .so files)), but let the user change it (useful for example to use
+#    Fedora native boost libraries)
 set(Boost_USE_MULTITHREADED ON)
 # find_package(Boost) # <-- Use this simple line for using only headers
-find_package(Boost 
+find_package(Boost
 	COMPONENTS
 		# lexicographically sorted
 		date_time
