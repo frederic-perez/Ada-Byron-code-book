@@ -78,6 +78,16 @@ if(BUILD_TESTING)
 	message(STATUS "CTEST_SITE is ${CTEST_SITE}")
 	set(SITE ${CTEST_SITE}) # For Visual Studio to use the right value
 
+	set(MyCxx "Cxx") # TODO: Get "actual" compiler plus version
+	if(CMAKE_MAJOR_VERSION LESS 3)
+		set(MyBuildType ${CMAKE_BUILD_TYPE})
+	else()
+		set(MyBuildType ${CMAKE_CONFIGURATION_TYPES})
+	endif()
+	set(CTEST_BUILD_NAME
+		${PROJECT_NAME}-${CMAKE_SYSTEM_NAME}-${MyCxx}-${MyBuildType})
+	message(STATUS "CTEST_BUILD_NAME is ${CTEST_BUILD_NAME}")
+	
 	enable_testing()
 	include(CTest)
 	# '- to build Continuous, Experimental, etc., and enables dashboard scripting
