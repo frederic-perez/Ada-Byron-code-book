@@ -74,9 +74,8 @@ message(STATUS "CMAKE_CXX_FLAGS are:" ${CMAKE_CXX_FLAGS})
 
 option(BUILD_TESTING "Build the testing tree" ON)
 if(BUILD_TESTING)
-	set(CTEST_SITE ${MyUsername}-at-${MyHostname})
-	message(STATUS "CTEST_SITE is ${CTEST_SITE}")
-	set(SITE ${CTEST_SITE}) # For Visual Studio to use the right value
+	set(SITE ${MyUsername}-at-${MyHostname})
+	message(STATUS "SITE is ${SITE}")
 
 	set(MyCxx "Cxx") # TODO: Get "actual" compiler plus version
 	if(CMAKE_MAJOR_VERSION LESS 3)
@@ -84,10 +83,9 @@ if(BUILD_TESTING)
 	else()
 		set(MyBuildType ${CMAKE_CONFIGURATION_TYPES})
 	endif()
-	set(CTEST_BUILD_NAME
+	set(BUILDNAME
 		${PROJECT_NAME}-${CMAKE_SYSTEM_NAME}-${MyCxx}-${MyBuildType})
-	message(STATUS "CTEST_BUILD_NAME is ${CTEST_BUILD_NAME}")
-	SET(BUILDNAME ${CTEST_BUILD_NAME}) # For Visual Studio to use the right value
+	message(STATUS "BUILDNAME is ${BUILDNAME}")
 	
 	include(CTest)
 	# '- To build Continuous, Experimental, etc., and enables submission to
