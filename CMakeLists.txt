@@ -74,6 +74,10 @@ message(STATUS "CMAKE_CXX_FLAGS are:" ${CMAKE_CXX_FLAGS})
 
 option(BUILD_TESTING "Build the testing tree" ON)
 if(BUILD_TESTING)
+	set(CTEST_SITE ${MyUsername}-at-${MyHostname})
+	message(STATUS "CTEST_SITE is ${CTEST_SITE}")
+	set(SITE ${CTEST_SITE}) # For Visual Studio to use the right value
+
 	enable_testing()
 	include(CTest)
 	# '- to build Continuous, Experimental, etc., and enables dashboard scripting
