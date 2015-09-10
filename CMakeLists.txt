@@ -87,6 +87,7 @@ if(BUILD_TESTING)
 	set(CTEST_BUILD_NAME
 		${PROJECT_NAME}-${CMAKE_SYSTEM_NAME}-${MyCxx}-${MyBuildType})
 	message(STATUS "CTEST_BUILD_NAME is ${CTEST_BUILD_NAME}")
+	SET(BUILDNAME ${CTEST_BUILD_NAME}) # For Visual Studio to use the right value
 	
 	include(CTest)
 	# '- To build Continuous, Experimental, etc., and enables submission to
