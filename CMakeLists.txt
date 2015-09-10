@@ -88,9 +88,12 @@ if(BUILD_TESTING)
 		${PROJECT_NAME}-${CMAKE_SYSTEM_NAME}-${MyCxx}-${MyBuildType})
 	message(STATUS "CTEST_BUILD_NAME is ${CTEST_BUILD_NAME}")
 	
-	enable_testing()
 	include(CTest)
-	# '- to build Continuous, Experimental, etc., and enables dashboard scripting
+	# '- To build Continuous, Experimental, etc., and enables submission to
+	#    dashboards. 
+	#    From http://www.cmake.org/Wiki/CMake/Testing_With_CTest:
+	#    "This module will automatically call enable_testing() ... so you no
+	#    longer have to do so ..."
 endif(BUILD_TESTING)
 
 add_subdirectory(src)
