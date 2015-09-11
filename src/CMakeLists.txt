@@ -54,6 +54,7 @@ add_executable(${PROJECT_NAME} ${SRC_LIST})
 target_link_libraries(${PROJECT_NAME}
 	${Boost_LIBRARIES}
 #	Other required 3rd party libraries would appear below (examples commented):
+#	${OpenIGTLink_LIBRARIES}
 #	${ITK_LIBRARIES}
 #	${VTK_LIBRARIES}
 )
