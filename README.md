@@ -22,7 +22,7 @@ The "book" uses C++11 features, and includes:
   - <code>boost::lexical_cast</code>
   - <code>&lt;boost/algorithm/string.hpp&gt;</code> nice tools
   - XML parsing
-- (In the future it will contain code ported from my Evernote's notes)
+- (TODO: Finish porting code from my Evernote's notes)
 
 ### Reference material
 
@@ -40,6 +40,7 @@ A never complete list of great C++ references (selected books, etc.):
 - Bjarne Stroustrup, The C++ Programming Language - Third Edition, Addison-Wesley, 1997.
 
 ### Code analysis
+
 We strive to maintain a certain quality on the code by taking advantage of some tools:
 - Cppcheck - A tool for static C/C++ code analysis. Being myself a fan of portable apps, I particularly use the version from [PortableApps.com](http://portableapps.com/apps/development/cppcheck-portable).
 - "Analyze > Run Code Analysis on Only Ada-Byron-code-book" when using Microsoft Windows 8.1: Microsoft Visual Studio Community 2015 (Version 14, with solution platform for x64)
