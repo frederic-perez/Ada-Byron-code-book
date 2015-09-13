@@ -14,7 +14,8 @@ I use to build binaries for these settings:
 - Apple OS X: Xcode 6.2 (LLVM, clang++) 64-bit
 
 and for all of them we use
-- [Boost](http://www.boost.org/) Version 1.57.0 (November 3rd, 2014 21:55 GMT)
+- [Boost](http://www.boost.org/) Version 1.58.0
+- ~~[Boost](http://www.boost.org/) Version 1.57.0 (November 3rd, 2014 21:55 GMT)~~
 
 The "book" uses C++11 features, and includes:
 - Boost examples, using both just headers and installed components:
