@@ -2,7 +2,9 @@
 
 cmake_minimum_required(VERSION 2.8)
 
-project(Ada-Byron-code-book)
+set(PROJECT_NAME "Ada-Byron-code-book")
+set(PROJECT_TYPE "CXX")
+project(${PROJECT_NAME} ${PROJECT_TYPE})
 
 message(STATUS "CMAKE_C_PLATFORM_ID is ${CMAKE_C_PLATFORM_ID}")
 message(STATUS "CMAKE_SYSTEM_NAME is ${CMAKE_SYSTEM_NAME}")
@@ -28,8 +30,6 @@ endif()
 message(STATUS "Your host name (MyHostname variable) is ${MyHostname}")
 set(def_CMAKE_MYHOSTNAME CMAKE_MYHOSTNAME=${MyHostname}) 
 message(STATUS "> def_CMAKE_MYHOSTNAME is ${def_CMAKE_MYHOSTNAME}")
-# SET(CTEST_SITE ${MyHostname})
-# SET(SITE ${CTEST_SITE}) # For Visual Studio to use the right value
 
 if("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
 	if(MSVC)
@@ -77,7 +77,10 @@ if(BUILD_TESTING)
 	set(SITE ${MyUsername}-at-${MyHostname})
 	message(STATUS "SITE is ${SITE}")
 
-	set(MyCxx "Cxx") # TODO: Get "actual" compiler plus version
+	message(STATUS "CMAKE_CXX_COMPILER is ${CMAKE_CXX_COMPILER}")
+	message(STATUS "CMAKE_CXX_COMPILER_ID is ${CMAKE_CXX_COMPILER_ID}")
+	message(STATUS "CMAKE_CXX_COMPILER_VERSION is ${CMAKE_CXX_COMPILER_VERSION}")
+	set(MyCxx "${CMAKE_CXX_COMPILER_ID}-${CMAKE_CXX_COMPILER_VERSION}")
 	if(CMAKE_MAJOR_VERSION LESS 3)
 		set(MyBuildType ${CMAKE_BUILD_TYPE})
 	else()
