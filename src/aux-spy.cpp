@@ -62,6 +62,7 @@ ABcb::spy::VisualStudioCppCompilerVersion(std::ostream& a_os)
 	return
 		a_os
 #ifdef _MSC_VER
+		// See https://en.wikipedia.org/wiki/Visual_C%2B%2B for the "conversion"
 		<< _MSC_VER << " (Visual Studio "
 	#if _MSC_VER == 1900
 		<< 2015
