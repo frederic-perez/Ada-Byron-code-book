@@ -88,11 +88,11 @@ GuruTest(const std::string& a_text)
 		oss << '{' << boost::algorithm::join(definedStrings, ", ") << '}';
 		const std::string setOfDefinedStrings = oss.str();
 
-		std::cerr << pad << __FUNCTION__ << ": " << message << '\n'
+		std::cerr << pad << __func__ << ": " << message << '\n'
 			<< pad << pad << "--guru arg " << setOfDefinedStrings << '\n';
 
 	} else
-		std::cout << pad << __FUNCTION__ << ": guru = " << a_text << std::endl;
+		std::cout << pad << __func__ << ": guru = " << a_text << std::endl;
 }
 
 } // namespace
@@ -100,7 +100,7 @@ GuruTest(const std::string& a_text)
 void
 ABcb::GurusTest(std::initializer_list<std::string> a_args)
 {
-	std::cout << __FUNCTION__ << " called" << std::endl;
+	std::cout << __func__ << " called" << std::endl;
 	for (auto text : a_args)
 		GuruTest(text);
 }
