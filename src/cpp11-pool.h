@@ -29,6 +29,20 @@ PrintList(Arg1 a_first, Args... a_rest)
 	PrintList(a_rest...);
 }
 
+// Example of usage of the "override" keyword
+
+class Base {
+	virtual void Function(int) const {}
+#define ABcb_needed_to_avoid_compiler_error_20150917
+#if defined(ABcb_needed_to_avoid_compiler_error_20150917)
+	virtual void Function(size_t) const {}
+#endif
+};
+	
+class Derived : public Base {
+	void Function(size_t) const override {} // override example
+};
+	
 } // namespace cpp11
 
 } // namespace Ada_Byron_code_book
