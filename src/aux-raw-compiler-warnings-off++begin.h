@@ -22,7 +22,7 @@
 // Stuff to forbid a bad usage of these headers
 //
 #if defined(AuxRawCompilerWarningsOffBegin)
-#error AuxRawCompilerWarningsOffBegin already defined (two ++begin.h includes?)
+#error AuxRawCompilerWarningsOffBegin already defined--two ++begin.h includes?
 #else
 #define AuxRawCompilerWarningsOffBegin
 #endif

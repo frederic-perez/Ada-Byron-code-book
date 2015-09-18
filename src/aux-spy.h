@@ -2,7 +2,7 @@
 
 #pragma once
 
-#ifndef _MSC_VER
+#if !defined(_MSC_VER)
 	#include <cxxabi.h>
 #endif
 #include <memory>
@@ -132,7 +132,7 @@ TypeName()
 	typedef typename std::remove_reference<T>::type TR;
 	std::unique_ptr<char, void(*)(void*)>
 		own(
-#ifndef _MSC_VER
+#if !defined(_MSC_VER)
 			abi::__cxa_demangle(typeid(TR).name(), nullptr,	nullptr, nullptr),
 #else
 			nullptr,

@@ -40,7 +40,8 @@ void GurusTest(std::initializer_list<std::string>);
 
 // First attempt at creating a template class for enhanced enum classes
 #ifdef ADA_BYRON_WORK_IN_PROGRESS_20150616
-template<typename Enum, size_t N, std::string> //, const std::array<const char*, N>& e>
+template<typename Enum, size_t N, std::string>
+	//, const std::array<const char*, N>& e>
 class EnumENH
 {
 	int d_i;
@@ -66,8 +67,8 @@ const std::string fooAndBarText = "foo and bar";
 namespace { const std::string s = "abc"; }
 const std::array<const char*, 3> fooBarText{{ "undefined", "foo", "bar" }};
 
-//using ConcreteType = EnumENH<FooBar, 3, s>; //, fooBarText > ;
-using ConcreteType = EnumENH<FooBar, 3, "string">; //, fooBarText > ;
+//using ConcreteType = EnumENH<FooBar, 3, s>; //, fooBarText>;
+using ConcreteType = EnumENH<FooBar, 3, "string">; //, fooBarText>;
 #endif
 
 } // namespace Ada_Byron_code_book

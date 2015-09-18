@@ -22,8 +22,8 @@ DoAndOutputStuff(const Vector& a_vector, const std::string& a_vectorName)
 		<< pad << a_vectorName << " = " << a_vector
 		<< " | " << a_vectorName << "[0] = " << a_vector[0]
 		<< " | Norm() = " << a_vector.Norm()
-		<< " | /2. = " << a_vector / 2.
-		<< " | *2. = " << a_vector * 2.
+		<< " | /2 = " << a_vector / 2.
+		<< " | x2 = " << a_vector * 2.
 		<< std::endl;
 }
 
