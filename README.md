@@ -94,4 +94,4 @@ Advices on **Hungarian notation**, from well-known C++ gurus:
 
 - - -
 
-*Note: To render a GitHub webpage containing code with a tab size of 2 spaces, append to its URL "?ts=2"*
+*Note: To render a GitHub (or Bitbucket) webpage containing code with a tab size of 2 spaces, append to its URL "?ts=2"*
