@@ -23,7 +23,7 @@ set(def_CMAKE_MYUSERNAME CMAKE_MYUSERNAME=${MyUsername})
 message(STATUS "> def_CMAKE_MYUSERNAME is ${def_CMAKE_MYUSERNAME}")
 set(MyUserActualFullName "N.N.")
 if(${MyUsername} MATCHES "frede" OR "frederic" OR "frederic.perez")
-	set(MyUserActualFullName "Frederic Perez")
+	set(MyUserActualFullName "Frederic-Perez")
 endif()
 message(STATUS "MyUserActualFullName is ${MyUserActualFullName}")
 
@@ -79,7 +79,7 @@ message(STATUS "CMAKE_CXX_FLAGS are:" ${CMAKE_CXX_FLAGS})
 
 option(BUILD_TESTING "Build the testing tree" ON)
 if(BUILD_TESTING)
-	set(SITE ${MyUsername}-at-${MyHostname})
+	set(SITE ${MyUserActualFullName}-at-${MyHostname})
 	message(STATUS "SITE is ${SITE}")
 
 	message(STATUS "CMAKE_CXX_COMPILER is ${CMAKE_CXX_COMPILER}")
