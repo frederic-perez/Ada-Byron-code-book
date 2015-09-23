@@ -113,6 +113,7 @@ ABcb::cli::ParseCommandLine(int argc, char** argv)
 	{	// 2) Operation flags/parameters
 		//
 		po::options_description od("Operation flags/parameters", 160, 80);
+		// TODO: Add example of multitoken, using decltype as in B-s
 		od.add_options()
 			("input-double",
 			po::value<double>(&inputDouble),
