@@ -40,6 +40,9 @@ A never complete list of great C++ references (selected books, etc.):
 - Andrew Koenig, Barbara Moo, Ruminations on C++ -- A Decade of Programming Insight and Experience, Addison-Wesley, 1997. (I particulalarly love Chapter 4, Checklist for class authors.)
 - Bjarne Stroustrup, The C++ Programming Language - Third Edition, Addison-Wesley, 1997.
 
+And finally, a list of Boost-related stuff:
+- Antony Polukhin's Boost Application Development Cookbook [Examples](http://apolukhin.github.io/Boost-Cookbook-4880OS/)
+
 ### Code analysis
 
 We strive to maintain a certain quality on the code by taking advantage of some tools:
