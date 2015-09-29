@@ -44,9 +44,6 @@ ABcb::ExamplesOfLexicalCast(const std::string& a_string)
 		}
 	}
 
-	using boost::lexical_cast;
-	using boost::bad_lexical_cast;
-
 	// Now, lexical_cast
 
 	using boost::lexical_cast;
