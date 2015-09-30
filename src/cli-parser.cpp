@@ -7,6 +7,7 @@
 #include "aux-raw-compiler-warnings-off++begin.h"
 
 	#include <boost/algorithm/string.hpp>
+	#include <boost/numeric/conversion/bounds.hpp>
 	#include <boost/program_options.hpp>
 	#include <boost/tokenizer.hpp>
 
@@ -44,6 +45,8 @@ std::string filenameIn;
 //
 double inputDouble = 42.666;
 double inputPositiveDouble = .8;
+size_t inputUnsignedCharCLI;
+unsigned char inputUnsignedChar;
 PlatonicSolid::Enum platonicSolid = PlatonicSolid::Enum::undefined;
 Color::Enum color = Color::Enum::undefined;
 Fruit::Enum fruit = Fruit::Enum::undefined;
@@ -121,6 +124,9 @@ ABcb::cli::ParseCommandLine(int argc, char** argv)
 			("input-positive-double",
 			po::value<double>(&inputPositiveDouble),
 			"<positive double> # \texample to check the input is positive")
+			("input-ID",
+				po::value<size_t>(&inputUnsignedCharCLI),
+				"<unsigned char> # \texample to get an ID--number--as an unsigned char")
 			("platonic-solid",
 			po::value<std::string>(), //po::value<PlatonicSolid>(&platonicSolid),
 			GetSetOfDefinedString(PlatonicSolid::GetDefinedStrings()).c_str())
@@ -372,6 +378,22 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 					"The input-positive-double parameter must be positive");
 	}
 
+	if (a_vm.count("input-ID")) {
+		try {
+			inputUnsignedChar =
+				boost::numeric_cast<unsigned char>(inputUnsignedCharCLI);
+		}	catch (const boost::numeric::bad_numeric_cast&) {
+			std::ostringstream oss;
+			oss << "Wrong input-ID parameter '" << inputUnsignedCharCLI << '\''
+				<< " (maximum allowed: "
+				<< static_cast<size_t>(
+						boost::numeric::bounds<unsigned char>::highest())
+				<< ')';
+			const std::string message = oss.str();
+			return OutputErrorAndReturnFalse(message);
+		}
+	}
+
 	if (a_vm.count("platonic-solid")) {
 		const std::string& text = a_vm["platonic-solid"].as<std::string>();
 		platonicSolid = PlatonicSolid::GetEnum(text);
@@ -430,6 +452,7 @@ ABcb::cli::ParsedCommandLine(std::ostream& a_os)
 	a_os
 		<< "  --input-double " << inputDouble << '\n'
 		<< "  --input-positive-double " << inputPositiveDouble << '\n'
+		<< "  --input-ID " << inputUnsignedCharCLI << '\n'
 		<< "  --platonic-solid " << GetString(platonicSolid) << '\n'
 		<< "  --color " << Color::GetString(color) << '\n'
 		<< "  --fruit " << Fruit::GetString(fruit) << '\n';
