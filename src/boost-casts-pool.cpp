@@ -6,6 +6,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "aux-raw.h"
+#include "aux-spy.h"
 #include "boost-casts-pool.h"
 
 namespace ABcb = Ada_Byron_code_book;
@@ -70,12 +71,40 @@ ABcb::ExamplesOfBoostLexicalCast(const std::string& a_string)
 	std::clog << __func__ << " finished." << std::endl;
 }
 
+
+namespace {
+
+template <class T>
+void
+DoNumericCast(int a_mySize)
+{
+	std::cout << __func__ << ": a_mySize = " << a_mySize << std::flush;
+	T mySizeAsT = 66;
+	try {
+		mySizeAsT = boost::numeric_cast<T>(a_mySize);
+		std::cout << "; mySizeAsT (" << ABcb::spy::TypeName<T>() << ") = " 
+			<< static_cast<double>(mySizeAsT) << std::endl;
+	}	catch (const boost::numeric::bad_numeric_cast& e) {
+		std::cout << std::endl;
+		std::cerr << __func__ << ": Error: Bad mySizeAsT ("
+			<< static_cast<double>(mySizeAsT)
+			<< ", which is the preset value) tried conversion (to "
+			<< ABcb::spy::TypeName<T>() << "): " << e.what() << '\n';
+	}
+}
+
+} // namespace
+
 void
 ABcb::ExamplesOfBoostNumericCast()
 {
 	std::clog << __func__ << " started..." << std::endl;
 
-	std::cerr << "TODO\n"; // TODO
+	DoNumericCast<signed long>(123456);
+	DoNumericCast<unsigned long>(-123456);
+	DoNumericCast<char>(4200);
+	DoNumericCast<unsigned char>(42);
+	DoNumericCast<double>(1234567890);
 
 	std::clog << __func__ << " finished." << std::endl;
 }
