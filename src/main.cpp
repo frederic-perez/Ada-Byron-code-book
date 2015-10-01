@@ -10,12 +10,12 @@
 #include "algorithm-string-pool.h"
 #include "aux-raw.h"
 #include "aux-spy.h"
+#include "boost-casts-pool.h"
 #include "cli-parser.h"
 #include "concurrency.h"
 #include "cpp11-pool.h"
 #include "euclidean.h"
 #include "filesystem-pool.h"
-#include "lexical-cast-pool.h"
 #include "preprocessor-pool.h"
 #include "promotions-pool.h"
 #include "ublas-pool.h"
@@ -55,7 +55,10 @@ main(int argc, char* argv[])
 	std::cout << std::endl;
 
 	const std::string inputValue = "1234567890";
-	ABcb::ExamplesOfLexicalCast(inputValue);
+	ABcb::ExamplesOfBoostLexicalCast(inputValue);
+	std::cout << std::endl;
+
+	ABcb::ExamplesOfBoostNumericCast();
 	std::cout << std::endl;
 
 	ABcb::ExamplesOfAlgorithmsString();

@@ -33,13 +33,13 @@ set(SRC_LIST
 	aux-raw-compiler-warnings-off++begin.h aux-raw-compiler-warnings-off++end.h
 	aux-spy.cpp aux-spy.h
 	algorithm-string-pool.cpp algorithm-string-pool.h
+	boost-casts-pool.cpp boost-casts-pool.h
 	cli-parser.cpp cli-parser.h
 	concurrency.cpp concurrency.h
 	cpp11-pool.cpp cpp11-pool.h
 	euclidean.cpp euclidean.h
 	main.cpp
 	filesystem-pool.cpp filesystem-pool.h
-	lexical-cast-pool.cpp lexical-cast-pool.h
 	preprocessor-pool.cpp preprocessor-pool.h
 	promotions-pool.cpp promotions-pool.h
 	ublas-pool.cpp ublas-pool.h

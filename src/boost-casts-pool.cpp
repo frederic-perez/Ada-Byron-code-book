@@ -6,13 +6,13 @@
 #include <boost/lexical_cast.hpp>
 
 #include "aux-raw.h"
-#include "lexical-cast-pool.h"
+#include "boost-casts-pool.h"
 
 namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;
 
 void
-ABcb::ExamplesOfLexicalCast(const std::string& a_string)
+ABcb::ExamplesOfBoostLexicalCast(const std::string& a_string)
 {
 	std::clog << __func__ << " started..." << std::endl;
 
@@ -66,6 +66,16 @@ ABcb::ExamplesOfLexicalCast(const std::string& a_string)
 	} catch (const boost::bad_lexical_cast& e) {
 		std::cerr << pad << "Exception caught: " << e.what() << '\n';
 	}
+
+	std::clog << __func__ << " finished." << std::endl;
+}
+
+void
+ABcb::ExamplesOfBoostNumericCast()
+{
+	std::clog << __func__ << " started..." << std::endl;
+
+	std::cerr << "TODO\n"; // TODO
 
 	std::clog << __func__ << " finished." << std::endl;
 }
