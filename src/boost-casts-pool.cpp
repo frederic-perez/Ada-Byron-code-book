@@ -78,6 +78,65 @@ template <class T>
 void
 DoNumericCast(int a_mySize)
 {
+	/*
+
+	The code below (using boost::numeric_cast<T>) beats the following options:
+
+	1) Using C++'s std::numeric_limits<T>::...
+
+		 a) Particular example
+
+				#include <limits>
+
+				const int foo = ComputeAnInt();
+				if (foo > std::numeric_limits<char>::max()) { // Bad situation!
+					std::cerr << __func __ << ": Error: foo too large\n";
+					return false; // this depends on the particular context
+				}
+
+				// Here we are on the safe side (we can perform the cast safely)
+				//
+				const char fooSelf = static_cast<char>(foo);
+
+				// Keep on using fooSelf from this point onwards
+
+		 b) Now, using invented/generic names of classes for cut & paste.
+				After pasting the code, substitute the text in italics with actual code.
+
+				#include <limits>
+
+				const SourceClass sourceObject = ComputeSomething();
+				if (sourceObject > std::numeric_limits<TargetClass>::max()) { // Bad!
+					std::cerr << __func__ << ": Error: sourceObject too large\n";
+					return ThisDependsOnTheParticularContext;
+				}
+				const TargetClass sourceObjectSelf =
+					static_cast<TargetClass>(sourceObject);
+
+				// Keep on using sourceObjectSelf from this point onwards
+
+	2) Using boost::numeric::bounds<T>::... Example:
+
+			#include <boost/numeric/conversion/bounds.hpp>
+
+			if (a_milliseconds > boost::numeric::bounds<DWORD>::highest()) { // Bad!
+				std::cerr << __func__ << ": Error: Too large milliseconds value\n";
+				return false;
+			}
+			const DWORD milliseconds = static_cast<DWORD>(a_milliseconds);
+
+	*/
+
+	/*
+	
+	And now, the best code (so far).
+	Explanations on boost::numeric_cast<T>::... can be found, for example, in
+	From Beyond the C++ Standard Library - An Introduction to Boost, by 
+	Björn Karlsson: Part I : General Libraries, Library 2 : Conversion, 
+	numeric_cast
+
+	*/
+
 	std::cout << __func__ << ": a_mySize = " << a_mySize << std::flush;
 	T mySizeAsT = 66;
 	try {
