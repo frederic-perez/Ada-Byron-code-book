@@ -74,7 +74,7 @@ ABcb::ExamplesOfBoostLexicalCast(const std::string& a_string)
 
 namespace {
 
-template <class T>
+template <class T> // TODO: s/T/TargetT
 void
 DoNumericCast(int a_mySize)
 {
@@ -132,7 +132,7 @@ DoNumericCast(int a_mySize)
 	And now, the best code (so far).
 	Explanations on boost::numeric_cast<T>::... can be found, for example, in
 	From Beyond the C++ Standard Library - An Introduction to Boost, by 
-	Björn Karlsson: Part I : General Libraries, Library 2 : Conversion, 
+	BjÃ¶rn Karlsson: Part I : General Libraries, Library 2 : Conversion, 
 	numeric_cast
 
 	*/
