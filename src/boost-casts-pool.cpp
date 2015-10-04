@@ -75,6 +75,7 @@ ABcb::ExamplesOfBoostLexicalCast(const std::string& a_string)
 namespace {
 
 template <class T> // TODO: s/T/TargetT
+// TODO: Add <class SourceT, class TargetT> void Do...(SourceT a_source)
 void
 DoNumericCast(int a_mySize)
 {
