@@ -74,7 +74,7 @@ ABcb::ExamplesOfBoostLexicalCast(const std::string& a_string)
 
 namespace {
 
-template <class T> // TODO: s/T/TargetT
+template <class TargetT>
 // TODO: Add <class SourceT, class TargetT> void Do...(SourceT a_source)
 void
 DoNumericCast(int a_mySize)
@@ -139,17 +139,18 @@ DoNumericCast(int a_mySize)
 	*/
 
 	std::cout << __func__ << ": a_mySize = " << a_mySize << std::flush;
-	T mySizeAsT = 66;
+	TargetT mySizeAsT = 66;
+	const std::string typeNameOfTargetT = ABcb::spy::TypeName<TargetT>();
 	try {
-		mySizeAsT = boost::numeric_cast<T>(a_mySize);
-		std::cout << "; mySizeAsT (" << ABcb::spy::TypeName<T>() << ") = " 
+		mySizeAsT = boost::numeric_cast<TargetT>(a_mySize);
+		std::cout << "; mySizeAsT (" << typeNameOfTargetT << ") = "
 			<< static_cast<double>(mySizeAsT) << std::endl;
 	}	catch (const boost::numeric::bad_numeric_cast& e) {
 		std::cout << std::endl;
 		std::cerr << __func__ << ": Error: Bad mySizeAsT ("
 			<< static_cast<double>(mySizeAsT)
 			<< ", which is the preset value) tried conversion (to "
-			<< ABcb::spy::TypeName<T>() << "): " << e.what() << '\n';
+			<< typeNameOfTargetT << "): " << e.what() << '\n';
 	}
 }
 
