@@ -77,7 +77,7 @@ namespace {
 template <class TargetT>
 // TODO: Add <class SourceT, class TargetT> void Do...(SourceT a_source)
 void
-DoNumericCast(int a_mySize)
+DoNumericCast(int a_source)
 {
 	/*
 
@@ -138,17 +138,17 @@ DoNumericCast(int a_mySize)
 
 	*/
 
-	std::cout << __func__ << ": a_mySize = " << a_mySize << std::flush;
-	TargetT mySizeAsT = 66;
+	std::cout << __func__ << ": a_source = " << a_source << std::flush;
+	TargetT target = 66;
 	const std::string typeNameOfTargetT = ABcb::spy::TypeName<TargetT>();
 	try {
-		mySizeAsT = boost::numeric_cast<TargetT>(a_mySize);
-		std::cout << "; mySizeAsT (" << typeNameOfTargetT << ") = "
-			<< static_cast<double>(mySizeAsT) << std::endl;
+		target = boost::numeric_cast<TargetT>(a_source);
+		std::cout << "; target (" << typeNameOfTargetT << ") = "
+			<< static_cast<double>(target) << std::endl;
 	}	catch (const boost::numeric::bad_numeric_cast& e) {
 		std::cout << std::endl;
-		std::cerr << __func__ << ": Error: Bad mySizeAsT ("
-			<< static_cast<double>(mySizeAsT)
+		std::cerr << __func__ << ": Error: Bad target ("
+			<< static_cast<double>(target)
 			<< ", which is the preset value) tried conversion (to "
 			<< typeNameOfTargetT << "): " << e.what() << '\n';
 	}
