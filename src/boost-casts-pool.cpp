@@ -74,10 +74,9 @@ ABcb::ExamplesOfBoostLexicalCast(const std::string& a_string)
 
 namespace {
 
-template <class TargetT>
-// TODO: Add <class SourceT, class TargetT> void Do...(SourceT a_source)
+template <class SourceT, class TargetT>
 void
-DoNumericCast(int a_source)
+ApplyNumericCast(SourceT a_source)
 {
 	/*
 
@@ -138,7 +137,8 @@ DoNumericCast(int a_source)
 
 	*/
 
-	std::cout << pad << __func__ << ": a_source = " << a_source << std::flush;
+	std::cout << pad << __func__ << ": a_source ("
+		<< ABcb::spy::TypeName<SourceT>() << ") = " << a_source << std::flush;
 	TargetT target = 66;
 	const std::string typeNameOfTargetT = ABcb::spy::TypeName<TargetT>();
 	try {
@@ -161,11 +161,18 @@ ABcb::ExamplesOfBoostNumericCast()
 {
 	std::clog << __func__ << " started..." << std::endl;
 
-	DoNumericCast<signed long>(123456);
-	DoNumericCast<unsigned long>(-123456);
-	DoNumericCast<char>(4200);
-	DoNumericCast<unsigned char>(42);
-	DoNumericCast<double>(1234567890);
+	int source = 123456;
+	ApplyNumericCast<decltype(source), signed long>(source);
+	ApplyNumericCast<decltype(source), unsigned long>(source);
+	source = -123456;
+	ApplyNumericCast<decltype(source), signed long>(source);
+	ApplyNumericCast<decltype(source), unsigned long>(source);
+	source = 4200;
+	ApplyNumericCast<decltype(source), char>(source);
+	source = 42;
+	ApplyNumericCast<decltype(source), unsigned char>(source);
+	source = 1234567890;
+	ApplyNumericCast<decltype(source), double>(1234567890);
 
 	std::clog << __func__ << " finished." << std::endl;
 }
