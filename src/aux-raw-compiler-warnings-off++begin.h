@@ -45,6 +45,7 @@
 
 #if defined(_MSC_VER)
 	#pragma warning(push)
+	#pragma warning(disable : 4018)
 	#pragma warning(disable : 4127)
 	#pragma warning(disable : 4244)
 	#pragma warning(disable : 4251)

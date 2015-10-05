@@ -1,6 +1,8 @@
 // -- Examples on how to use boost::lexical_cast
 
 #include <iostream>
+#include <limits>
+#include <sstream>
 #include <string>
 
 #include <boost/lexical_cast.hpp>
@@ -74,33 +76,41 @@ ABcb::ExamplesOfBoostLexicalCast(const std::string& a_string)
 
 namespace {
 
+
 template <class SourceT, class TargetT>
 void
-ApplyNumericCast(SourceT a_source)
+UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(SourceT a_source)
+{
+	std::cout << pad << __func__ << ": a_source ("
+		<< ABcb::spy::TypeName<SourceT>() << ") = " << a_source << std::flush;
+#include "aux-raw-compiler-warnings-off++begin.h"
+	bool succeeded = true;
+	if (a_source < std::numeric_limits<TargetT>::min()) {
+		std::cout << std::endl;
+		std::cerr << pad << __func__ << ": Error: a_source too small\n";
+		succeeded = false;
+	} else if (a_source > std::numeric_limits<TargetT>::max()) {
+		std::cout << std::endl;
+		std::cerr << pad << __func__ << ": Error: a_source too large\n";
+		succeeded = false;
+	}
+#include "aux-raw-compiler-warnings-off++end.h"
+	if (!succeeded)
+		return;
+
+	const TargetT target = static_cast<TargetT>(a_source);
+
+	// Keep on using sourceObjectSelf from this point onwards
+
+	std::cout << "; target (" << ABcb::spy::TypeName<TargetT>() << ") = "
+		<< static_cast<double>(target) << std::endl;
+}
+
+template <class SourceT, class TargetT>
+void
+ApplyBoostNumericCast(SourceT a_source)
 {
 	/*
-
-	The code below (using boost::numeric_cast<T>) beats the following options:
-
-	1) Using C++'s std::numeric_limits<T>::...
-
-		 Using invented/generic names of classes for cut & paste.
-			After pasting the code, substitute the text in italics with actual code.
-
-			#include <limits>
-
-			const SourceClass sourceObject = ComputeSomething();
-			if (sourceObject < std::numeric_limits<TargetClass>::min()) {
-				std::cerr << __func__ << ": Error: sourceObject too large\n";
-				return ThisDependsOnTheParticularContext;
-			} else if (sourceObject > std::numeric_limits<TargetClass>::max()) {
-				std::cerr << __func__ << ": Error: sourceObject too large\n";
-				return ThisDependsOnTheParticularContext;
-			}
-			const TargetClass sourceObjectSelf =
-				static_cast<TargetClass>(sourceObject);
-
-			// Keep on using sourceObjectSelf from this point onwards
 
 	2) Using boost::numeric::bounds<T>::... Example:
 
@@ -116,13 +126,16 @@ ApplyNumericCast(SourceT a_source)
 
 	/*
 	
-	And now, the best code (so far).
+	The code below (using boost::numeric_cast<T>) beats the previous options, so
+	this is the best code (so far).
 	Explanations on boost::numeric_cast<T>::... can be found, for example, in
 	From Beyond the C++ Standard Library - An Introduction to Boost, by 
 	Björn Karlsson: Part I : General Libraries, Library 2 : Conversion, 
 	numeric_cast
 
 	*/
+
+	#include <boost/lexical_cast.hpp>
 
 	std::cout << pad << __func__ << ": a_source ("
 		<< ABcb::spy::TypeName<SourceT>() << ") = " << a_source << std::flush;
@@ -149,17 +162,21 @@ ABcb::ExamplesOfBoostNumericCast()
 	std::clog << __func__ << " started..." << std::endl;
 
 	int source = 123456;
-	ApplyNumericCast<decltype(source), signed long>(source);
-	ApplyNumericCast<decltype(source), unsigned long>(source);
+	ApplyBoostNumericCast<decltype(source), signed long>(source);
+	ApplyBoostNumericCast<decltype(source), unsigned long>(source);
 	source = -123456;
-	ApplyNumericCast<decltype(source), signed long>(source);
-	ApplyNumericCast<decltype(source), unsigned long>(source);
+	UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES
+		<decltype(source), signed long>(source);
+	ApplyBoostNumericCast<decltype(source), signed long>(source);
+	UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES
+		<decltype(source), unsigned long>(source);
+	ApplyBoostNumericCast<decltype(source), unsigned long>(source);
 	source = 4200;
-	ApplyNumericCast<decltype(source), char>(source);
+	ApplyBoostNumericCast<decltype(source), char>(source);
 	source = 42;
-	ApplyNumericCast<decltype(source), unsigned char>(source);
+	ApplyBoostNumericCast<decltype(source), unsigned char>(source);
 	source = 1234567890;
-	ApplyNumericCast<decltype(source), double>(1234567890);
+	ApplyBoostNumericCast<decltype(source), double>(1234567890);
 
 	std::clog << __func__ << " finished." << std::endl;
 }
