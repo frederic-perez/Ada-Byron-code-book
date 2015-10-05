@@ -84,36 +84,23 @@ ApplyNumericCast(SourceT a_source)
 
 	1) Using C++'s std::numeric_limits<T>::...
 
-		 a) Particular example
+		 Using invented/generic names of classes for cut & paste.
+			After pasting the code, substitute the text in italics with actual code.
 
-				#include <limits>
+			#include <limits>
 
-				const int foo = ComputeAnInt();
-				if (foo > std::numeric_limits<char>::max()) { // Bad situation!
-					std::cerr << __func __ << ": Error: foo too large\n";
-					return false; // this depends on the particular context
-				}
+			const SourceClass sourceObject = ComputeSomething();
+			if (sourceObject < std::numeric_limits<TargetClass>::min()) {
+				std::cerr << __func__ << ": Error: sourceObject too large\n";
+				return ThisDependsOnTheParticularContext;
+			} else if (sourceObject > std::numeric_limits<TargetClass>::max()) {
+				std::cerr << __func__ << ": Error: sourceObject too large\n";
+				return ThisDependsOnTheParticularContext;
+			}
+			const TargetClass sourceObjectSelf =
+				static_cast<TargetClass>(sourceObject);
 
-				// Here we are on the safe side (we can perform the cast safely)
-				//
-				const char fooSelf = static_cast<char>(foo);
-
-				// Keep on using fooSelf from this point onwards
-
-		 b) Now, using invented/generic names of classes for cut & paste.
-				After pasting the code, substitute the text in italics with actual code.
-
-				#include <limits>
-
-				const SourceClass sourceObject = ComputeSomething();
-				if (sourceObject > std::numeric_limits<TargetClass>::max()) { // Bad!
-					std::cerr << __func__ << ": Error: sourceObject too large\n";
-					return ThisDependsOnTheParticularContext;
-				}
-				const TargetClass sourceObjectSelf =
-					static_cast<TargetClass>(sourceObject);
-
-				// Keep on using sourceObjectSelf from this point onwards
+			// Keep on using sourceObjectSelf from this point onwards
 
 	2) Using boost::numeric::bounds<T>::... Example:
 
