@@ -138,7 +138,7 @@ DoNumericCast(int a_source)
 
 	*/
 
-	std::cout << __func__ << ": a_source = " << a_source << std::flush;
+	std::cout << pad << __func__ << ": a_source = " << a_source << std::flush;
 	TargetT target = 66;
 	const std::string typeNameOfTargetT = ABcb::spy::TypeName<TargetT>();
 	try {
@@ -147,7 +147,7 @@ DoNumericCast(int a_source)
 			<< static_cast<double>(target) << std::endl;
 	}	catch (const boost::numeric::bad_numeric_cast& e) {
 		std::cout << std::endl;
-		std::cerr << __func__ << ": Error: Bad target ("
+		std::cerr << pad << __func__ << ": Error: Bad target ("
 			<< static_cast<double>(target)
 			<< ", which is the preset value) tried conversion (to "
 			<< typeNameOfTargetT << "): " << e.what() << '\n';
