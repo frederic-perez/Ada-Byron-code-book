@@ -76,7 +76,6 @@ ABcb::ExamplesOfBoostLexicalCast(const std::string& a_string)
 
 namespace {
 
-
 template <class SourceT, class TargetT>
 void
 UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(SourceT a_source)
@@ -85,19 +84,24 @@ UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(SourceT a_source)
 		<< ABcb::spy::TypeName<SourceT>() << ") = " << a_source << std::flush;
 #include "aux-raw-compiler-warnings-off++begin.h"
 	bool succeeded = true;
-	if (a_source < std::numeric_limits<TargetT>::min()) {
+	const std::string typeNameOfTargetT = ABcb::spy::TypeName<TargetT>();
+	//if (a_source < boost::numeric::bounds<TargetT>::lowest()) { vs min()
+	if (a_source < std::numeric_limits<TargetT>::lowest()) { // Now in C++
 		std::cout << std::endl;
-		std::cerr << pad << __func__ << ": Error: a_source too small\n";
+		std::cerr << pad << __func__ << ": Error: a_source too small to convert to "
+			<< typeNameOfTargetT << '\n';
 		succeeded = false;
-	} else if (a_source > std::numeric_limits<TargetT>::max()) {
+	//} else if (a_source > boost::numeric::bounds<TargetT>::highest()) {
+	} else if (a_source > std::numeric_limits<TargetT>::max()) { // Use just C++
 		std::cout << std::endl;
-		std::cerr << pad << __func__ << ": Error: a_source too large\n";
+		std::cerr << pad << __func__ << ": Error: a_source too large to convert to "
+			<< typeNameOfTargetT << '\n';
 		succeeded = false;
 	}
 #include "aux-raw-compiler-warnings-off++end.h"
+
 	if (!succeeded)
 		return;
-
 	const TargetT target = static_cast<TargetT>(a_source);
 
 	// Keep on using sourceObjectSelf from this point onwards
@@ -110,20 +114,6 @@ template <class SourceT, class TargetT>
 void
 ApplyBoostNumericCast(SourceT a_source)
 {
-	/*
-
-	2) Using boost::numeric::bounds<T>::... Example:
-
-			#include <boost/numeric/conversion/bounds.hpp>
-
-			if (a_milliseconds > boost::numeric::bounds<DWORD>::highest()) { // Bad!
-				std::cerr << __func__ << ": Error: Too large milliseconds value\n";
-				return false;
-			}
-			const DWORD milliseconds = static_cast<DWORD>(a_milliseconds);
-
-	*/
-
 	/*
 	
 	The code below (using boost::numeric_cast<T>) beats the previous options, so
@@ -162,21 +152,24 @@ ABcb::ExamplesOfBoostNumericCast()
 	std::clog << __func__ << " started..." << std::endl;
 
 	int source = 123456;
-	ApplyBoostNumericCast<decltype(source), signed long>(source);
-	ApplyBoostNumericCast<decltype(source), unsigned long>(source);
+	using SourceT = decltype(source);
+	ApplyBoostNumericCast<SourceT, signed long>(source);
+	ApplyBoostNumericCast<SourceT, unsigned long>(source);
 	source = -123456;
-	UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES
-		<decltype(source), signed long>(source);
-	ApplyBoostNumericCast<decltype(source), signed long>(source);
-	UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES
-		<decltype(source), unsigned long>(source);
-	ApplyBoostNumericCast<decltype(source), unsigned long>(source);
+	using Target1 = signed long;
+	UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES<SourceT, Target1>(source);
+	ApplyBoostNumericCast<SourceT, Target1>(source);
+	using Target2 = unsigned long;
+	UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES<SourceT, Target2>(source);
+	ApplyBoostNumericCast<SourceT, Target2>(source);
 	source = 4200;
-	ApplyBoostNumericCast<decltype(source), char>(source);
+	using Target3 = char;
+	UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES	<SourceT, Target3>(source);
+	ApplyBoostNumericCast<SourceT, Target3>(source);
 	source = 42;
-	ApplyBoostNumericCast<decltype(source), unsigned char>(source);
+	ApplyBoostNumericCast<SourceT, unsigned char>(source);
 	source = 1234567890;
-	ApplyBoostNumericCast<decltype(source), double>(1234567890);
+	ApplyBoostNumericCast<SourceT, double>(1234567890);
 
 	std::clog << __func__ << " finished." << std::endl;
 }
