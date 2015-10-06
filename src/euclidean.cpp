@@ -42,6 +42,10 @@ ABcb::Euclidean::ExamplesOfVector()
 
 	const Vector2 vector2{ 2., 3. };
 	DoAndOutputStuff(vector2, "vector2");
+	Vector2 vector2Self = vector2; // Copy constructor
+	DoAndOutputStuff(vector2Self,	"vector2_copy_ctor");
+	vector2Self = vector2; // Assignment operator
+	DoAndOutputStuff(vector2Self, "vector2_assignment_operator");
 
 	const Vector3 vector3a{ 5., 7., 11. };
 	DoAndOutputStuff(vector3a, "vector3a");
