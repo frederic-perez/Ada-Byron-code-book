@@ -1,7 +1,5 @@
 // -- Examples on how to use boost::lexical_cast
 
-
-
 #pragma once
 
 #include <string>

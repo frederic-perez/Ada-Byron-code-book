@@ -28,6 +28,10 @@ public:
 	Vector() : Vector(0.) {} // Delegating constructor
 	explicit Vector(std::initializer_list<double>);
 
+	// Note: 
+	// Copy constructor and assignment operator are automatically (silently)
+	// created.
+
 	double operator[](size_t a_idx) const { return d_array[a_idx]; }
 	double& operator[](size_t a_idx) { return d_array[a_idx]; }
 

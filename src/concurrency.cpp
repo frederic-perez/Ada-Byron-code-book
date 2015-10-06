@@ -15,10 +15,11 @@ namespace {
 
 std::mutex m;
 
-void run(size_t n){
+void
+run(size_t a_n) {
 	m.lock();
 	for (size_t i = 0; i < 4; ++i)
-		std::cout << pad << pad << n << ": " << i << std::endl;
+		std::cout << pad << pad << a_n << ": " << i << std::endl;
 	m.unlock();
 }
 

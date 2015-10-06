@@ -116,8 +116,8 @@ ApplyBoostNumericCast(SourceT a_source)
 {
 	/*
 	
-	The code below (using boost::numeric_cast<T>) beats the previous options, so
-	this is the best code (so far).
+	The code below--using boost::numeric_cast<T>--beats the previous options, so
+	this is the best code so far.
 	Explanations on boost::numeric_cast<T>::... can be found, for example, in
 	From Beyond the C++ Standard Library - An Introduction to Boost, by 
 	Björn Karlsson: Part I : General Libraries, Library 2 : Conversion, 
@@ -164,7 +164,7 @@ ABcb::ExamplesOfBoostNumericCast()
 	ApplyBoostNumericCast<SourceT, Target2>(source);
 	source = 4200;
 	using Target3 = char;
-	UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES	<SourceT, Target3>(source);
+	UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES<SourceT, Target3>(source);
 	ApplyBoostNumericCast<SourceT, Target3>(source);
 	source = 42;
 	ApplyBoostNumericCast<SourceT, unsigned char>(source);
