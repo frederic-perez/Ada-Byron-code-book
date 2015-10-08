@@ -36,8 +36,8 @@ public:
 	double& operator[](size_t a_idx) { return d_array[a_idx]; }
 
 	double Norm() const; // Synonyms: length, magnitude, norm
-	double SumOfValues() const;
-	// TODO: double AverageOfValues() const;
+	double ElementsSum() const;
+	double ElementsAvg() const;
 
 	// Note: Here we follow the advice of Scott Meyers, More Effective C++
 	// (mec++), Item 22, Consider using op= instead of stand-alone op
@@ -95,13 +95,18 @@ Vector<N>::Norm() const // Synonyms: length, magnitude, norm
 
 template<size_t N>
 double
-Vector<N>::SumOfValues() const
+Vector<N>::ElementsSum() const
 {
 	double acc = 0.;
 	for (auto value : d_array)
 		acc += value;
 	return acc;
 }
+
+template<size_t N>
+double
+Vector<N>::ElementsAvg() const
+{	return ElementsSum()/N; }
 
 template<size_t N>
 Vector<N>&
