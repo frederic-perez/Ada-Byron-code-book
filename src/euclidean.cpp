@@ -36,6 +36,10 @@ ABcb::Euclidean::ExamplesOfVector()
 {
 	std::clog << __func__ << " started..." << std::endl;
 
+	using Vector0 = Vector<0>;
+	const Vector0 vector0default; // TODO: Avoid in ctors Vector<N=0>!
+	//DoAndOutputStuff(vector0default, "vector0default");
+
 	const Vector2 vector2default;
 	DoAndOutputStuff(vector2default, "vector2default");
 
