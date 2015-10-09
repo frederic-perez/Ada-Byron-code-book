@@ -58,6 +58,10 @@ template<size_t N>
 Vector<N>::Vector(double a_value)
 : d_array()
 {
+	static_assert(
+		N > 0, 
+		"static_assert failed: Vector template parameter N (size) is 0. "
+		"It should be strictly positive.");
 	for (auto& value : d_array)
 		value = a_value;
 }
@@ -66,6 +70,10 @@ template<size_t N>
 Vector<N>::Vector(std::initializer_list<double> a_args)
 : d_array()
 {
+	static_assert(
+		N > 0,
+		"static_assert failed: Vector template parameter N (size) is 0. "
+		"It should be strictly positive.");
 	// Note: There is a nice discussion in
 	// stackoverflow.com/questions/5438671/static-assert-on-initializer-listsize
 	// to try to add a static_assert in the ctor, but alas, we did not succeed.
