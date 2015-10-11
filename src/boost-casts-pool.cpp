@@ -16,6 +16,8 @@ using ABcb::raw::pad;
 
 void
 ABcb::ExamplesOfBoostLexicalCast(const std::string& a_string)
+// TODO: CHECK calls, and possibly rename a_string as a_numberToConvert)
+// and copy that name to the declaration of this function
 {
 	std::clog << __func__ << " started..." << std::endl;
 
