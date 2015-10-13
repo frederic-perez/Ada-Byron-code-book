@@ -42,9 +42,12 @@ A never complete list of great C++ references (selected books, etc.):
 - Bjarne Stroustrup, The C++ Programming Language - Third Edition, Addison-Wesley, 1997.
 - TODO: Add github coding guidelines site
 
-And finally, a list of Boost-related stuff:
+A list of Boost-related stuff:
 - Boris Schäling's [The Boost C++ Libraries](http://theboostcpplibraries.com/)
 - Antony Polukhin's [Boost Application Development Cookbook Online Examples](http://apolukhin.github.io/Boost-Cookbook-4880OS/)
+
+And finally, guidelines:
+- A new open source project, led by Bjarne Stroustrup, on GitHub to build modern authoritative guidelines for writing C++ code: [C++ Core Guidelines](https://github.com/isocpp/CppCoreGuidelines)
 
 ### Code analysis
 
