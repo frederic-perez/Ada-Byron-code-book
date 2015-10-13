@@ -15,13 +15,11 @@ namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;
 
 void
-ABcb::ExamplesOfBoostLexicalCast(const std::string& a_string)
-// TODO: CHECK calls, and possibly rename a_string as a_numberToConvert)
-// and copy that name to the declaration of this function
+ABcb::ExamplesOfOldConversions()
 {
 	std::clog << __func__ << " started..." << std::endl;
 
-	// First, old way, which so far does not work properly -- TODO: Fix this
+	// Old way, which so far does not work properly -- TODO: Fix this
 
 	const std::string line = "14 -1 3";
 	if (!line.empty()) {
@@ -44,37 +42,42 @@ ABcb::ExamplesOfBoostLexicalCast(const std::string& a_string)
 						<< ")\n";
 				else
 					std::cout << pad << "indices: " << i << ", " << j << ", " << k
-					<< std::endl;
+						<< std::endl;
 			}
 		}
 	}
 
-	// Now, lexical_cast
+	std::clog << __func__ << " finished." << std::endl;
+}
+
+void
+ABcb::ExamplesOfBoostLexicalCast(const std::string& a_numberToConvert)
+{
+	std::clog << __func__ << " started..." << std::endl;
 
 	using boost::lexical_cast;
 	using boost::bad_lexical_cast;
 
-	const int valueIntS = stoi(a_string);
-	std::cout << pad << "stoi(\"" << a_string << "\") is "
+	const int valueIntS = stoi(a_numberToConvert);
+	std::cout << pad << "stoi(\"" << a_numberToConvert << "\") is "
 		<< valueIntS << std::endl;
-	const int valueIntL = lexical_cast<int>(a_string);
-	std::cout << pad << "lexical_cast<int>(\"" << a_string << "\") is "
+	const int valueIntL = lexical_cast<int>(a_numberToConvert);
+	std::cout << pad << "lexical_cast<int>(\"" << a_numberToConvert << "\") is "
 		<< valueIntL << std::endl;
 
-	const short valueShortS = static_cast<short>(stoi(a_string));
-	std::cout << pad << "stoi(\"" << a_string << "\") is "
+	const short valueShortS = static_cast<short>(stoi(a_numberToConvert));
+	std::cout << pad << "stoi(\"" << a_numberToConvert << "\") is "
 		<< valueShortS << std::endl;
 	try {
-		const short valueShortL = lexical_cast<short>(a_string);
-		std::cout << pad << "lexical_cast<short>(\"" << a_string << "\") is "
-			<< valueShortL << std::endl;
+		const short valueShortL = lexical_cast<short>(a_numberToConvert);
+		std::cout << pad << "lexical_cast<short>(\"" << a_numberToConvert 
+			<< "\") is " << valueShortL << std::endl;
 	} catch (const boost::bad_lexical_cast& e) {
 		std::cerr << pad << "Exception caught: " << e.what() << '\n';
 	}
 
 	std::clog << __func__ << " finished." << std::endl;
 }
-
 
 namespace {
 
@@ -136,11 +139,11 @@ ApplyBoostNumericCast(SourceT a_source)
 	try {
 		target = boost::numeric_cast<TargetT>(a_source);
 		std::cout << "; target (" << typeNameOfTargetT << ") = "
-			<< static_cast<double>(target) << std::endl;
+			<< static_cast<long double>(target) << std::endl;
 	}	catch (const boost::numeric::bad_numeric_cast& e) {
 		std::cout << std::endl;
 		std::cerr << pad << __func__ << ": Error: Bad target ("
-			<< static_cast<double>(target)
+			<< static_cast<long double>(target)
 			<< ", which is the preset value) tried conversion (to "
 			<< typeNameOfTargetT << "): " << e.what() << '\n';
 	}
@@ -171,7 +174,7 @@ ABcb::ExamplesOfBoostNumericCast()
 	source = 42;
 	ApplyBoostNumericCast<SourceT, unsigned char>(source);
 	source = 1234567890;
-	ApplyBoostNumericCast<SourceT, double>(1234567890);
+	ApplyBoostNumericCast<SourceT, double>(source);
 
 	std::clog << __func__ << " finished." << std::endl;
 }

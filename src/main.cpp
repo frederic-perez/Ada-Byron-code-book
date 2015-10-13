@@ -54,10 +54,11 @@ main(int argc, char* argv[])
 	ABcb::ExamplesOfFileSystem(exeFile);
 	std::cout << std::endl;
 
+	ABcb::ExamplesOfOldConversions();
+	std::cout << std::endl;
 	const std::string inputValue = "1234567890";
 	ABcb::ExamplesOfBoostLexicalCast(inputValue);
 	std::cout << std::endl;
-
 	ABcb::ExamplesOfBoostNumericCast();
 	std::cout << std::endl;
 
