@@ -43,8 +43,8 @@ A never complete list of great C++ references (selected books, etc.):
 - TODO: Add github coding guidelines site
 
 And finally, a list of Boost-related stuff:
-- Antony Polukhin's Boost Application Development Cookbook [Examples](http://apolukhin.github.io/Boost-Cookbook-4880OS/)
 - Boris Schäling's [The Boost C++ Libraries](http://theboostcpplibraries.com/)
+- Antony Polukhin's [Boost Application Development Cookbook Online Examples](http://apolukhin.github.io/Boost-Cookbook-4880OS/)
 
 ### Code analysis
 
