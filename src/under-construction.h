@@ -71,6 +71,13 @@ const std::array<const char*, 3> fooBarText{{ "undefined", "foo", "bar" }};
 using ConcreteType = EnumENH<FooBar, 3, "string">; //, fooBarText>;
 #endif
 
+// See Herb Sutter, Andrei Alexandrescu, C++ Coding Standards: 101 Rules, 
+// Guidelines, and Best Practices, Addison Wesley Professional, 2004,
+// Chapter 15, Use const proactively (particularly, the Examples section)
+//
+void Fun(int);
+// void Fun(const int); // redeclares the same: top-level const ignored
+
 } // namespace Ada_Byron_code_book
 
 // -- eof

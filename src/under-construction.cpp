@@ -105,4 +105,8 @@ ABcb::GurusTest(std::initializer_list<std::string> a_args)
 		GuruTest(text);
 }
 
+void
+Fun(const int a_value)
+{	std::cout << __func__ << ": a_value=" << a_value << std::endl; }
+
 // -- eof
