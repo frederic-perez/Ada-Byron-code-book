@@ -126,12 +126,12 @@ ABcb::cpp11::AlgorithmExamples()
 
 	const std::vector<int> v{ 3, 9, 1, 4, 2, 5, 9 };
 	spy::Output(std::cout, v, pad + "v");
-	auto result = std::minmax_element(v.begin(), v.end());
+	auto result = std::minmax_element(v.cbegin(), v.cend());
 	std::cout
 		<< pad << pad << "v's min element (" << *result.first << ") at index "
-		<< (result.first - v.begin()) << '\n'
+		<< (result.first - v.cbegin()) << '\n'
 		<< pad << pad << "v's max element (" << *result.second << ") at index "
-		<< (result.second - v.begin()) << std::endl;
+		<< (result.second - v.cbegin()) << std::endl;
 	
 	float f1 = 12., f2 = 7.;
 	auto fs = std::minmax(f1, f2);
