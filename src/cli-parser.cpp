@@ -84,7 +84,7 @@ GetSetOfDefinedString(const std::vector<std::string>& a_definedStrings)
 } // namespace Ada_Byron_code_book
 
 bool
-ABcb::cli::ParseCommandLine(int argc, char** argv)
+ABcb::cli::ParseCommandLine(const int argc, char** argv)
 {
 	argv0 = argv[0];
 	if ((progname = (char *)strrchr(argv[0], ABcb::raw::SystemSlash())) == NULL)
@@ -300,7 +300,7 @@ ABcb::PlatonicSolid::GetEnum(const std::string& a_text)
 }
 
 std::string
-ABcb::PlatonicSolid::GetString(Enum a_enum)
+ABcb::PlatonicSolid::GetString(const Enum a_enum)
 {	return enumText.at(static_cast<uint8_t>(a_enum)); }
 
 std::vector<std::string>
@@ -325,7 +325,7 @@ ABcb::Color::GetEnum(const std::string& a_text)
 }
 
 std::string
-ABcb::Color::GetString(Enum a_enum)
+ABcb::Color::GetString(const Enum a_enum)
 {	return enumText.at(static_cast<uint8_t>(a_enum)); }
 
 std::vector<std::string>
@@ -350,7 +350,7 @@ ABcb::Fruit::GetEnum(const std::string& a_text)
 }
 
 std::string
-ABcb::Fruit::GetString(Enum a_enum)
+ABcb::Fruit::GetString(const Enum a_enum)
 {
 	return enumText[static_cast<uint8_t>(a_enum)];
 }

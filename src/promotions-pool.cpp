@@ -13,7 +13,7 @@ namespace {
 
 template <typename T>
 void
-Output(const std::string& a_message, T a_t)
+Output(const std::string& a_message, const T a_t)
 {
 	std::cout << pad << a_message << " = " << a_t << " is of type \'"
 		<< typeid(a_t).name() << '\'' << std::endl;

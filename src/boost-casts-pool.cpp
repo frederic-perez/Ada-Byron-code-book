@@ -83,7 +83,7 @@ namespace {
 
 template <class SourceT, class TargetT>
 void
-UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(SourceT a_source)
+UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
 {
 	std::cout << pad << __func__ << ": a_source ("
 		<< ABcb::spy::TypeName<SourceT>() << ") = " << a_source << std::flush;
@@ -117,7 +117,7 @@ UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(SourceT a_source)
 
 template <class SourceT, class TargetT>
 void
-ApplyBoostNumericCast(SourceT a_source)
+ApplyBoostNumericCast(const SourceT a_source)
 {
 	/*
 	

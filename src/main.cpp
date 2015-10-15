@@ -23,7 +23,7 @@
 #include "xml-parser.h"
 
 int
-main(int argc, char* argv[])
+main(const int argc, char* argv[])
 {
 	namespace ABcb = Ada_Byron_code_book;
 

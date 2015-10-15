@@ -9,7 +9,7 @@ namespace Ada_Byron_code_book {
 namespace cpp11 {
 
 void TryBadCode();
-void TestIfAConstParameterCanBeModified(const int);
+void TestIfAConstParameterCanBeModified(int);
 void UsingTuple();
 void AlgorithmExamples();
 void MiscellanyExamples();

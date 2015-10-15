@@ -56,7 +56,7 @@ ABcb::Guru::GetEnum(const std::string& a_text)
 }
 
 std::string
-ABcb::Guru::GetString(Enum a_enum)
+ABcb::Guru::GetString(const Enum a_enum)
 {
 	return enumText[static_cast<uint8_t>(a_enum)];
 }
@@ -98,7 +98,7 @@ GuruTest(const std::string& a_text)
 } // namespace
 
 void
-ABcb::GurusTest(std::initializer_list<std::string> a_args)
+ABcb::GurusTest(const std::initializer_list<std::string> a_args)
 {
 	std::cout << __func__ << " called" << std::endl;
 	for (auto text : a_args)
