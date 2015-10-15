@@ -39,6 +39,7 @@ set(SRC_LIST
 	cpp11-pool.cpp cpp11-pool.h
 	euclidean.cpp euclidean.h
 	main.cpp
+	miscellany.cpp miscellany.h
 	filesystem-pool.cpp filesystem-pool.h
 	preprocessor-pool.cpp preprocessor-pool.h
 	promotions-pool.cpp promotions-pool.h
