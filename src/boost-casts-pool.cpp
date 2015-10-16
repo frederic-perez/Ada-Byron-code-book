@@ -130,7 +130,7 @@ ApplyBoostNumericCast(const SourceT a_source)
 
 	*/
 
-	#include <boost/lexical_cast.hpp>
+	#include <boost/numeric/conversion/bounds.hpp>
 
 	std::cout << pad << __func__ << ": a_source ("
 		<< ABcb::spy::TypeName<SourceT>() << ") = " << a_source << std::flush;
