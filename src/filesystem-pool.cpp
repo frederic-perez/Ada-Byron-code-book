@@ -46,6 +46,8 @@ ABcb::ExamplesOfFileSystem(const std::string& a_filename)
 	bf::path path2 = bf::path("/usr") / "include" / "." / "clang"; // operator/
 	DoSomeStuff(path2, "path2");
 
+// TODO: Add get temporary folder example
+
 	// "Testing" and invented file (random file)
 
 	const bf::path randomPath =
