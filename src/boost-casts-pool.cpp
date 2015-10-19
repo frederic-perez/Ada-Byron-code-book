@@ -5,7 +5,11 @@
 #include <sstream>
 #include <string>
 
-#include <boost/lexical_cast.hpp>
+#include "aux-raw-compiler-warnings-off++begin.h"
+
+	#include <boost/lexical_cast.hpp>
+
+#include "aux-raw-compiler-warnings-off++end.h"
 
 #include "aux-raw.h"
 #include "aux-spy.h"
