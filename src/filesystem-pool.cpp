@@ -46,7 +46,19 @@ ABcb::ExamplesOfFileSystem(const std::string& a_filename)
 	bf::path path2 = bf::path("/usr") / "include" / "." / "clang"; // operator/
 	DoSomeStuff(path2, "path2");
 
-// TODO: Add get temporary folder example
+	// Geting temporary directory path (temporary folder)
+
+	bf::path tempDirectoryPath;
+	try {
+		tempDirectoryPath = bf::temp_directory_path();
+		// '- Returns: A directory path suitable for temporary files under the
+		// conventions of the operating system. The specifics of how this path is
+		// determined are implementation defined.
+		std::cout << pad << "temp_directory_path() returned " << tempDirectoryPath
+			<< std::endl;
+	}	catch (...) {
+		std::cerr << __func__ << ": Error: Could not get temporary folder\n";
+	}
 
 	// "Testing" and invented file (random file)
 
