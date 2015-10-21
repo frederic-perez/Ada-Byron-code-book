@@ -68,6 +68,9 @@ ABcb::Euclidean::ExamplesOfVector()
 	const Vector3 vector3minus = vector3a - vector3b;
 	DoAndOutputStuff(vector3minus, "vector3minus");
 
+	const Vector3 vector3cross = vector3a ^ vector3b;
+	DoAndOutputStuff(vector3cross, "vector3cross");
+
 	std::clog << __func__ << " finished." << std::endl;
 }
 

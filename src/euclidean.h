@@ -47,6 +47,8 @@ public:
 	Vector& operator*=(double);
 	Vector& operator/=(double);
 
+	const Vector operator^(const Vector&) const;
+
 	template<size_t n>
 	friend std::ostream& operator<<(std::ostream&, const Vector<n>&);
 
@@ -150,6 +152,20 @@ Vector<N>::operator/=(double a_rhs)
 	for (size_t i = 0; i < N; ++i)
 		d_array[i] /= a_rhs;
 	return *this;
+}
+
+template<size_t N>
+const Vector<N>
+Vector<N>::operator^(const Vector<N>& a_rhs) const
+{
+	static_assert(
+		N == 3,
+		"static_assert failed: Vector template parameter N (size) is not 3.");
+	return
+		Vector<N>{
+			d_array[1] * a_rhs[2] - d_array[2] * a_rhs[1],
+			a_rhs[0] * d_array[2] - d_array[0] * a_rhs[2],
+			d_array[0] * a_rhs[1] - d_array[1] * a_rhs[0]};
 }
 
 template<size_t N>
