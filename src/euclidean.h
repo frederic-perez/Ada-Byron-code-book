@@ -164,7 +164,7 @@ Vector<N>::operator^(const Vector<N>& a_rhs) const
 	return
 		Vector<N>{
 			d_array[1] * a_rhs[2] - d_array[2] * a_rhs[1],
-			a_rhs[0] * d_array[2] - d_array[0] * a_rhs[2],
+			d_array[2] * a_rhs[0] - d_array[0] * a_rhs[2],
 			d_array[0] * a_rhs[1] - d_array[1] * a_rhs[0]};
 }
 
