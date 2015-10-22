@@ -12,6 +12,7 @@
 #include "aux-raw-compiler-warnings-off++begin.h"
 
 	#include <boost/algorithm/string.hpp>
+	#include <boost/math/constants/constants.hpp>
 
 #include "aux-raw-compiler-warnings-off++end.h"
 
@@ -47,7 +48,8 @@ public:
 	Vector& operator*=(double);
 	Vector& operator/=(double);
 
-	const Vector operator^(const Vector&) const;
+	double ComputeAzimuthAngle() const; // Only for N==2
+	const Vector operator^(const Vector&) const; // Only for N==3
 
 	template<size_t n>
 	friend std::ostream& operator<<(std::ostream&, const Vector<n>&);
@@ -152,6 +154,35 @@ Vector<N>::operator/=(double a_rhs)
 	for (size_t i = 0; i < N; ++i)
 		d_array[i] /= a_rhs;
 	return *this;
+}
+
+template<size_t N>
+double
+Vector<N>::ComputeAzimuthAngle() const
+{
+	static_assert(
+		N == 2,
+		"static_assert failed: Vector template parameter N (size) is not 2.");
+#define ADA_BYRON__USEATAN2_20151022
+#ifdef ADA_BYRON__USEATAN2_20151022
+	double phi = atan2(d_array[1], d_array[0]);
+	if (phi < 0.)
+		phi += 2. * boost::math::constants::pi<double>();
+	return phi;
+#else
+	// Precondition: v must be a normalized Vector3
+	const double sinTheta = sin(acos(d_array[2]));
+	if (fabs(sinTheta)<THRESHOLD_SIN_THETA)
+		return 0.; // x = y = 0.
+	else {
+		double phi;
+		const double aux = d_array[0] / sinTheta; // to avoid precision problems
+		if (aux>1.) phi = 0.;
+		else if (aux<-1.) phi = boost::math::constants::pi<double>();
+		else phi = acos(aux);
+		return (d_array[1]<0.) ? -phi : phi;
+	}
+#endif
 }
 
 template<size_t N>

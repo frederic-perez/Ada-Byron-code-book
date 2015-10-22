@@ -16,9 +16,9 @@ DoAndOutputStuff(const Vector& a_vector, const std::string& a_vectorName)
 {
 	std::cout
 		<< pad << a_vectorName << " typeid name = " << typeid(a_vector).name()
-			<< '\n'
+		<< '\n'
 		<< pad << a_vectorName << " spy::TypeName of its decltype = "
-			<< ABcb::spy::TypeName<decltype(a_vector)>() << '\n'
+		<< ABcb::spy::TypeName<decltype(a_vector)>() << '\n'
 		<< pad << a_vectorName << " = " << a_vector
 		<< " | " << a_vectorName << "[0] = " << a_vector[0]
 		<< " | Norm() = " << a_vector.Norm()
@@ -51,6 +51,8 @@ ABcb::Euclidean::ExamplesOfVector()
 
 	const Vector2 vector2{ 2., 3. };
 	DoAndOutputStuff(vector2, "vector2");
+	std::cout << pad << "vector2's azimuth angle = "
+		<< vector2.ComputeAzimuthAngle() << std::endl;
 	Vector2 vector2Self = vector2; // Copy constructor
 	DoAndOutputStuff(vector2Self,	"vector2_copy_ctor");
 	vector2Self = vector2; // Assignment operator
