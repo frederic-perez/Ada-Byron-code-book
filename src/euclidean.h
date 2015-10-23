@@ -49,6 +49,7 @@ public:
 	Vector& operator/=(double);
 
 	double ComputeAzimuthAngle() const; // Only for N==2
+	double ComputePolarAngle() const; // Only for N==2
 	const Vector operator^(const Vector&) const; // Only for N==3
 
 	template<size_t n>
@@ -183,6 +184,20 @@ Vector<N>::ComputeAzimuthAngle() const
 		return (d_array[1]<0.) ? -phi : phi;
 	}
 #endif
+}
+
+template<size_t N>
+double
+Vector<N>::ComputePolarAngle() const
+{
+	static_assert(
+		N == 2,
+		"static_assert failed: Vector template parameter N (size) is not 2.");
+
+	// Precondition: *this must be a normalized Vector<N>
+	return acos(d_array[2]);
+	// Equivalent code for this routine:
+	// return atan2(sqrt(v.x*v.x+v.y*v.y), v.z);
 }
 
 template<size_t N>

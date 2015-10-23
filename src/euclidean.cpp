@@ -51,8 +51,10 @@ ABcb::Euclidean::ExamplesOfVector()
 
 	const Vector2 vector2{ 2., 3. };
 	DoAndOutputStuff(vector2, "vector2");
-	std::cout << pad << "vector2's azimuth angle = "
-		<< vector2.ComputeAzimuthAngle() << std::endl;
+	std::cout << pad
+		<< "vector2's azimuth angle = " << vector2.ComputeAzimuthAngle()
+		<< "; polar angle = " << vector2.ComputePolarAngle()
+		<< std::endl;
 	Vector2 vector2Self = vector2; // Copy constructor
 	DoAndOutputStuff(vector2Self,	"vector2_copy_ctor");
 	vector2Self = vector2; // Assignment operator
