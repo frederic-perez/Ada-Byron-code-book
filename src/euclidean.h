@@ -40,6 +40,8 @@ public:
 	double ElementsSum() const;
 	double ElementsAvg() const;
 
+// TODO: Add Normalize()
+
 	// Note: Here we follow the advice of Scott Meyers, More Effective C++
 	// (mec++), Item 22, Consider using op= instead of stand-alone op
 	//
