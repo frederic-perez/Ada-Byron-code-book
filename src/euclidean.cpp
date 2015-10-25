@@ -51,6 +51,7 @@ ABcb::Euclidean::ExamplesOfVector()
 
 	const Vector2 vector2{ 2., 3. };
 	DoAndOutputStuff(vector2, "vector2");
+// TODO: s/./vector2.Normalize().CompitePolarAngle()
 	std::cout << pad
 		<< "vector2's azimuth angle = " << vector2.ComputeAzimuthAngle()
 		<< "; polar angle = " << vector2.ComputePolarAngle()
