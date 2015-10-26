@@ -16,7 +16,7 @@ I use to build binaries for these settings:
   - ~~Xcode 6.2 (LLVM, clang++) 64-bit~~
 
 and for all of them we use
-- [Boost](http://www.boost.org/) Version 1.59.0
+- [Boost](http://www.boost.org/) Version 1.59.0 (August 13th, 2015 15:23 GMT)
 - ~~[Boost](http://www.boost.org/) Version 1.58.0 (April 17th, 2015 07:53 GMT)~~
 - ~~[Boost](http://www.boost.org/) Version 1.57.0 (November 3rd, 2014 21:55 GMT)~~
 
