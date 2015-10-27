@@ -50,8 +50,8 @@ public:
 	Vector& operator*=(double);
 	Vector& operator/=(double);
 
-	double ComputeAzimuthAngle() const; // Only for N==2
-	double ComputePolarAngle() const; // Only for N==2; Precondition: Normalized
+	double ComputeAzimuthAngle() const; // Only for N==3
+	double ComputePolarAngle() const; // Only for N==3; Precondition: Normalized
 	const Vector operator^(const Vector&) const; // Only for N==3
 
 	template<size_t n>
@@ -174,8 +174,8 @@ double
 Vector<N>::ComputeAzimuthAngle() const
 {
 	static_assert(
-		N == 2,
-		"static_assert failed: Vector template parameter N (size) is not 2.");
+		N == 3,
+		"static_assert failed: Vector template parameter N (size) is not 3.");
 #define ADA_BYRON__USEATAN2_20151022
 #ifdef ADA_BYRON__USEATAN2_20151022
 	double phi = atan2(d_array[1], d_array[0]);
@@ -203,8 +203,8 @@ double
 Vector<N>::ComputePolarAngle() const
 {
 	static_assert(
-		N == 2,
-		"static_assert failed: Vector template parameter N (size) is not 2.");
+		N == 3,
+		"static_assert failed: Vector template parameter N (size) is not 3.");
 
 	// Precondition: *this must be a normalized Vector<N>
 	return acos(d_array[2]);
