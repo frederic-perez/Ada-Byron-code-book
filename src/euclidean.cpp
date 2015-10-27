@@ -49,12 +49,11 @@ ABcb::Euclidean::ExamplesOfVector()
 	const Vector2 vector2ones(1.);
 	DoAndOutputStuff(vector2ones, "vector2ones");
 
-	const Vector2 vector2{ 2., 3. };
+	Vector2 vector2{ 2., 3. };
 	DoAndOutputStuff(vector2, "vector2");
-// TODO: s/./vector2.Normalize().CompitePolarAngle()
 	std::cout << pad
 		<< "vector2's azimuth angle = " << vector2.ComputeAzimuthAngle()
-		<< "; polar angle = " << vector2.ComputePolarAngle()
+		<< "; polar angle = " << vector2.Normalize().ComputePolarAngle()
 		<< std::endl;
 	Vector2 vector2Self = vector2; // Copy constructor
 	DoAndOutputStuff(vector2Self,	"vector2_copy_ctor");

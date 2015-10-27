@@ -40,7 +40,7 @@ public:
 	double ElementsSum() const;
 	double ElementsAvg() const;
 
-// TODO: Add Normalize()
+	const Vector& Normalize();
 
 	// Note: Here we follow the advice of Scott Meyers, More Effective C++
 	// (mec++), Item 22, Consider using op= instead of stand-alone op
@@ -51,7 +51,7 @@ public:
 	Vector& operator/=(double);
 
 	double ComputeAzimuthAngle() const; // Only for N==2
-	double ComputePolarAngle() const; // Only for N==2
+	double ComputePolarAngle() const; // Only for N==2; Precondition: Normalized
 	const Vector operator^(const Vector&) const; // Only for N==3
 
 	template<size_t n>
@@ -122,6 +122,16 @@ template<size_t N>
 double
 Vector<N>::ElementsAvg() const
 {	return ElementsSum()/N; }
+
+template<size_t N>
+const Vector<N>&
+Vector<N>::Normalize()
+{
+	const double norm = Norm();
+	for (auto& value : d_array)
+		value /= norm;
+	return *this;
+}
 
 template<size_t N>
 Vector<N>&
