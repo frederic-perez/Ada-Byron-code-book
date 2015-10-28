@@ -206,7 +206,7 @@ Vector<N>::ComputePolarAngle() const
 		N == 3,
 		"static_assert failed: Vector template parameter N (size) is not 3.");
 
-	// Precondition: *this must be a normalized Vector<N>
+	//! Precondition: *this must be a normalized Vector<N>
 	return acos(d_array[2]);
 	// Equivalent code for this routine:
 	// return atan2(sqrt(v.x*v.x+v.y*v.y), v.z);

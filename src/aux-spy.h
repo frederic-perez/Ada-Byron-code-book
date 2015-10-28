@@ -12,7 +12,7 @@
 
 #include <boost/noncopyable.hpp>
 
-// TODO: Possibly extend SpyLine with Boost's PP for extra information
+//!? TODO: Possibly extend SpyLine with Boost's PP for extra information
 
 #define SpyLine \
 	std::cerr << "@@@@ " << __FILE__ << ':' << __func__ << ":L" << __LINE__ \

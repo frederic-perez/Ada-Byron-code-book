@@ -5,7 +5,7 @@
 // since we want these preprocessor command to be included in <<every>> client
 // file that does include this file.
 
-// Companion file to ...++begin.h is ...++end.h
+//! Companion file to ...++begin.h is ...++end.h
 //
 // Right usage of these headers
 // ============================

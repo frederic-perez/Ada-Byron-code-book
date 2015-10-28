@@ -1,7 +1,7 @@
 // --
 
-// IMPORTANT: See notes in the companion header file ...-off++begin.h
-//            (They are not replicated here for maintenance reasons.)
+//! IMPORTANT: See notes in the companion header file ...-off++begin.h
+//!            (They are not replicated here for maintenance reasons.)
 
 // Stuff to forbid a bad usage of these headers
 //
