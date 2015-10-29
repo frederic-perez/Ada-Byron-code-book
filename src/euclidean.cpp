@@ -49,6 +49,13 @@ ABcb::Euclidean::ExamplesOfVector()
 	const Vector2 vector2ones(1.);
 	DoAndOutputStuff(vector2ones, "vector2ones");
 
+	try {
+		const Vector2 vector2faulty{ 1., 2., 3 };
+	}	catch (const std::length_error& e) {
+		std::cerr << __func__ << ": Error (creating vector2faulty): " << e.what()
+			<< "\n";
+	}
+
 	const Vector2 vector2{ 2., 3. };
 	DoAndOutputStuff(vector2, "vector2");
 	Vector2 vector2Self = vector2; // Copy constructor
