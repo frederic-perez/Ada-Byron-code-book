@@ -51,9 +51,10 @@ ABcb::Euclidean::ExamplesOfVector()
 
 	try {
 		const Vector2 vector2faulty{ 1., 2., 3 };
-	}	catch (const std::length_error& e) {
-		std::cerr << __func__ << ": Error (creating vector2faulty): " << e.what()
-			<< "\n";
+		std::cerr << pad << "Error: vector2faulty successfully created (?!)\n";
+	} catch (const std::length_error& e) {
+		std::cerr << pad << __func__ << ": Error caught (creating vector2faulty): "
+			<< e.what() << "\n";
 	}
 
 	const Vector2 vector2{ 2., 3. };
