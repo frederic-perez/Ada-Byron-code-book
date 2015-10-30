@@ -90,7 +90,7 @@ Vector<N>::Vector(std::initializer_list<double> a_args)
 		oss << __func__ << ": a_args.size()=" << a_args.size()
 			<< " does not match N=" << N;
 		const std::string what = oss.str();
-		throw std::length_error(what); // TODO: Try/Test this
+		throw std::length_error(what);
 	}
 
 	size_t i = 0;
