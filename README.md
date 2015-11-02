@@ -23,7 +23,7 @@ and for all of them we use
 The "book" uses C++11 features, and includes:
 - Boost examples, using both just headers and installed components:
   - <code>&lt;boost/filesystem.hpp&gt;, &lt;boost/system/config.hpp&gt;</code> 
-  - <code>boost::lexical_cast</code>, <code>boost::numerical_cast</code>
+  - casts (<code>boost::lexical_cast</code>, <code>boost::numerical_cast</code>)
   - <code>&lt;boost/algorithm/string.hpp&gt;</code> nice tools
   - XML parsing
 - (TODO: Finish porting code from my Evernote's notes)
