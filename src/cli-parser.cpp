@@ -3,6 +3,7 @@
 #include <fstream>
 #include <iostream>
 #include <sstream> // std::ostringstream oss
+#include <vector>
 
 #include "aux-raw-compiler-warnings-off++begin.h"
 
@@ -50,6 +51,7 @@ unsigned char inputUnsignedChar;
 PlatonicSolid::Enum platonicSolid = PlatonicSolid::Enum::undefined;
 Color::Enum color = Color::Enum::undefined;
 Fruit::Enum fruit = Fruit::Enum::undefined;
+std::vector<size_t> suggestedWindowPosition;
 
 // 3) Informative output
 //
@@ -116,7 +118,6 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
 	{	// 2) Operation flags/parameters
 		//
 		po::options_description od("Operation flags/parameters", 160, 80);
-		// TODO: Add example of multitoken, using decltype as in B-s
 		od.add_options()
 			("input-double",
 			po::value<double>(&inputDouble),
@@ -136,6 +137,10 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
 			("fruit",
 			po::value<std::string>(),
 			GetSetOfDefinedString(Fruit::GetDefinedStrings()).c_str())
+			("suggested-window-position", // multitoken example
+				po::value<decltype(suggestedWindowPosition)>(&suggestedWindowPosition)
+					->multitoken(),
+				"<x> <y>  # \tIn pixels, with (1, 1) being the top-left corner")
 			;
 		odFull.add(od);
 	}
@@ -424,6 +429,17 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 		}
 	}
 
+	if (!suggestedWindowPosition.empty())
+		if (suggestedWindowPosition.size() != 2) {
+			std::ostringstream oss;
+			oss << "Wrong suggested-window-position parameter ";
+			for (auto position : suggestedWindowPosition)
+				oss << position << ' ';
+			oss << "-- please, specify 2 (x, y) components";
+			const std::string message = oss.str();
+			return OutputErrorAndReturnFalse(message);
+		}
+
 	if (a_vm.count("verbose")) {
 		if (!ParseBoolean(verboseCLI.c_str(), verbose, "on", "off"))
 			return OutputErrorAndReturnFalse("Unknown verbose parameter");
@@ -456,6 +472,12 @@ ABcb::cli::ParsedCommandLine(std::ostream& a_os)
 		<< "  --platonic-solid " << GetString(platonicSolid) << '\n'
 		<< "  --color " << Color::GetString(color) << '\n'
 		<< "  --fruit " << Fruit::GetString(fruit) << '\n';
+	if (!suggestedWindowPosition.empty()) {
+		a_os << "  --suggested-window-position ";
+		for (auto position : suggestedWindowPosition)
+			a_os << position << ' ';
+		a_os << '\n';
+	}
 	a_os << '\n';
 
 	// 3) Informative output
