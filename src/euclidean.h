@@ -128,7 +128,7 @@ const Vector<N>&
 Vector<N>::Normalize()
 {
 	const double norm = Norm();
-	for (auto& value : d_array)
+	for (double& value : d_array)
 		value /= norm;
 	return *this;
 }
