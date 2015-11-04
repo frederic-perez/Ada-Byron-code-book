@@ -40,7 +40,8 @@ class Base {
 };
 	
 class Derived : public Base {
-	void Function(size_t) const override {} // override example
+	void Function(size_t) const override {}
+	// '- Note: It is better typing "override" than "virtual" (when overriding)
 };
 	
 } // namespace cpp11
