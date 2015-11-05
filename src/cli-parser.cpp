@@ -76,9 +76,9 @@ bool CheckArguments(const boost::program_options::variables_map&);
 std::string
 GetSetOfDefinedString(const std::vector<std::string>& a_definedStrings)
 {
-	std::ostringstream oss;
-	oss << '{' << boost::algorithm::join(a_definedStrings, ", ") << '}';
-	return oss.str();
+	const std::string result =
+		'{' + boost::algorithm::join(a_definedStrings, ", ") + '}';
+	return result;
 }
 
 } // namespace cli
