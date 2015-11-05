@@ -9,9 +9,13 @@
 #include <atlstr.h>
 #endif
 
-#include <boost/algorithm/string.hpp>
-#include <boost/locale.hpp>
-#include <boost/range/algorithm/remove_if.hpp>
+#include "aux-raw-compiler-warnings-off++begin.h"
+
+	#include <boost/algorithm/string.hpp>
+	#include <boost/locale.hpp>
+	#include <boost/range/algorithm/remove_if.hpp>
+
+#include "aux-raw-compiler-warnings-off++end.h"
 
 #include "aux-raw.h"
 #include "algorithm-string-pool.h"

@@ -41,6 +41,7 @@
 	#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
 #endif
 	#pragma GCC diagnostic ignored "-Wunused-variable"
+	#pragma GCC diagnostic ignored "-Wunused"
 #endif
 
 #if defined(_MSC_VER)
