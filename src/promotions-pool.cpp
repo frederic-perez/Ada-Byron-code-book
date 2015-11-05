@@ -44,7 +44,7 @@ ABcb::ExamplesOfPromotions()
 	Output(
 		"static_cast<int>(0) - static_cast<int>(2)",
 		static_cast<int>(0) - static_cast<int>(2));
-	static_assert(idx >= 0, "Foo!!!");
+	static_assert(idx >= 0, "Compiler error message--trying static_assert");
 #endif
 
 	std::clog << __func__ << " finished." << std::endl;
