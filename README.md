@@ -12,7 +12,7 @@ I use to build binaries for these settings:
   - ~~Visual Studio 12 2013 Win64~~
 - Linux Ubuntu: g++ 4.8.2, clang++ 3.4.1
 - Apple OS X: 
-  - 10.11 El Capitan, Xcode 7.0 (LLVM, clang++) 64-bit
+  - 10.11 El Capitan, Xcode 7.1 (LLVM, clang++) 64-bit
   - ~~Xcode 6.2 (LLVM, clang++) 64-bit~~
 
 and for all of them we use
