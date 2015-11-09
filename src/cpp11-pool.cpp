@@ -151,6 +151,12 @@ ABcb::cpp11::MiscellanyExamples()
 	std::cout << pad << "PrintList (variadic template function): ";
 	PrintList(1, 2, 'c', "Hello, world!", 666.);
 
+	std::cout << pad 
+		<< "range-for example: for (size_t prime : { 2, 3, 5, 7 }) > ";
+	for (size_t prime : { 2, 3, 5, 7 }) // range-for example
+		std::cout << prime << ' ';
+	std::cout << std::endl;
+
 	std::clog << __func__ << " finished." << std::endl;
 }
 
