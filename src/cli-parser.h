@@ -64,7 +64,7 @@ std::vector<std::string> GetDefinedStrings();
 #define PROJECT_PREFIX_DO_EVIL_TO_STR(unused, data, elem) \
 	BOOST_PP_STRINGIZE(elem),
 #define PROJECT_PREFIX_DO_EVIL(enum_, strings, elements) \ 
-enum enum_ { BOOST_PP_SEQ_ENUM(elements) };                 \
+enum class enum_ { BOOST_PP_SEQ_ENUM(elements) };                 \
 	const char * strings[] = \
 		{ BOOST_PP_SEQ_FOR_EACH(PROJECT_PREFIX_DO_EVIL_TO_STR, ~, SEQ) };
 */
