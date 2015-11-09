@@ -152,8 +152,9 @@ ABcb::cpp11::MiscellanyExamples()
 	PrintList(1, 2, 'c', "Hello, world!", 666.);
 
 	std::cout << pad 
-		<< "range-for example: for (size_t prime : { 2, 3, 5, 7 }) > ";
-	for (size_t prime : { 2, 3, 5, 7 }) // range-for example
+		<< "initializer_list-based range-for example: "
+		<< "for (int prime : { 2, 3, 5, 7 }) > ";
+	for (int prime : { 2, 3, 5, 7 }) // initializer_list-based range-for example
 		std::cout << prime << ' ';
 	std::cout << std::endl;
 
