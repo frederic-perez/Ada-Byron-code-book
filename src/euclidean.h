@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iostream>
 #include <sstream>
+#include <type_traits>
 #include <vector>
 
 #include "aux-raw-compiler-warnings-off++begin.h"
@@ -24,6 +25,13 @@ void ExamplesOfVector();
 
 template<size_t N>
 class Vector {
+	static_assert(
+		N > 0,
+		"static_assert failed: Vector template parameter N (size) is 0. "
+		"It should be strictly positive.");
+	static_assert(
+		std::is_floating_point<double>::value,
+		"static_assert failed: Vector template parameter T is not floating point");
 public:
 	explicit Vector(double); // All elements will be set the input argument
 	Vector() : Vector(0.) {} // Delegating constructor
@@ -65,10 +73,6 @@ template<size_t N>
 Vector<N>::Vector(double a_value)
 : d_array()
 {
-	static_assert(
-		N > 0, 
-		"static_assert failed: Vector template parameter N (size) is 0. "
-		"It should be strictly positive.");
 	for (auto& value : d_array)
 		value = a_value;
 }
@@ -77,10 +81,6 @@ template<size_t N>
 Vector<N>::Vector(std::initializer_list<double> a_args)
 : d_array()
 {
-	static_assert(
-		N > 0,
-		"static_assert failed: Vector template parameter N (size) is 0. "
-		"It should be strictly positive.");
 	// Note: There is a nice discussion in
 	// stackoverflow.com/questions/5438671/static-assert-on-initializer-listsize
 	// to try to add a static_assert in the ctor, but alas, we did not succeed.
