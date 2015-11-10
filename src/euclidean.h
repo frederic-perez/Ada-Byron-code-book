@@ -25,6 +25,7 @@ void ExamplesOfVector();
 
 template<size_t N>
 class Vector {
+
 	static_assert(
 		N > 0,
 		"static_assert failed: Vector template parameter N (size) is 0. "
@@ -32,6 +33,7 @@ class Vector {
 	static_assert(
 		std::is_floating_point<double>::value,
 		"static_assert failed: Vector template parameter T is not floating point");
+
 public:
 	explicit Vector(double); // All elements will be set the input argument
 	Vector() : Vector(0.) {} // Delegating constructor
