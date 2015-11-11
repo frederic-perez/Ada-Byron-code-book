@@ -9,6 +9,8 @@
 
 #include <boost/preprocessor.hpp>
 
+#include "under-construction.h"
+
 namespace Ada_Byron_code_book {
 
 namespace PlatonicSolid { // An enum class and related stuff
@@ -41,7 +43,7 @@ std::vector<std::string> GetDefinedStrings();
 
 } // namespace Color
 
-namespace Fruit { // An enum class and related stuff
+namespace Kruit { // An enum class and related stuff
 
 // Code originarily based on
 // http://www.gamedev.net/topic/437852-c-enum-names-as-strings/
@@ -58,7 +60,13 @@ std::vector<std::string> GetDefinedStrings();
 #undef TO_STR
 #undef SEQUENCE
 
-} // namespace Fruit
+} // namespace Kruit
+
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(\
+	Fruit,
+	(undefined)\
+	(apple)(orange)(pear)
+)
 
 /*
 #define PROJECT_PREFIX_DO_EVIL_TO_STR(unused, data, elem) \

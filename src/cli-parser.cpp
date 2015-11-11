@@ -286,10 +286,12 @@ const uint8_t first = 1;
 const uint8_t last = static_cast<uint8_t>(enumText.size() - 1);
 } // namespace Color
 
+/*
 namespace Fruit {
 	const uint8_t first = 1;
 	const uint8_t last = static_cast<uint8_t>(enumText.size() - 1);
 } // namespace Fruit
+*/
 
 } // namespace Ada_Byron_code_book
 
@@ -343,6 +345,7 @@ ABcb::Color::GetDefinedStrings()
 	return result;
 }
 
+/*
 auto
 ABcb::Fruit::GetEnum(const std::string& a_text)
 -> Enum
@@ -369,6 +372,7 @@ ABcb::Fruit::GetDefinedStrings()
 		result.push_back(enumText[i]);
 	return result;
 }
+*/
 
 bool
 ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
