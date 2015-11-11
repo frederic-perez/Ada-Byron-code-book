@@ -13,13 +13,10 @@
 // TODO: (iss) Parse point cloud (ASCII) file as a 1st example (3DI)
 
 #define ABcb_TO_STR(unused, data, elem) BOOST_PP_STRINGIZE(elem),
-/*
-#define ABcb_DECLARE_ENUM_AND_ENUMTEXT(sequence) \
-enum class Enum : uint8_t { BOOST_PP_SEQ_ENUM(sequence) }; \
-const std::array<const char*, BOOST_PP_SEQ_SIZE(sequence)> enumText{{ \
-	BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, sequence) }};
-*/
 
+// Code originarily based on
+// http://www.gamedev.net/topic/437852-c-enum-names-as-strings/
+//
 #define ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(namespaceName, sequence) \
 namespace namespaceName { \
 \
@@ -62,20 +59,12 @@ GetDefinedStrings() \
 
 namespace Ada_Byron_code_book {
 
-//namespace Guru { // An enum class and related stuff
-
-// Code originarily based on
-// http://www.gamedev.net/topic/437852-c-enum-names-as-strings/
-
-//ABcb_DECLARE_ENUM_AND_ENUMTEXT(
 ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(\
 	Guru,
 	(undefined)\
 	(Andrei_Alexandrescu)(Andrew_Koenig)(Bruce_Eckel)(Bjarne_Stroustrup)\
 	(Herb_Sutter)(Ira_Pohl)(Scott_Meyers)
 )
-
-//} // namespace Guru
 
 void GurusTest(std::initializer_list<std::string>);
 
