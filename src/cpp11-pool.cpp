@@ -178,7 +178,8 @@ ABcb::cpp11::MiscellanyExamples()
 	const size_t result40 = GetFib40();
 	// Wait for GetFib30() and add its result to result2 
 	const size_t result = result30.get() + result40;
-	std::cout << pad << "GetFib30() + GetFib40() = " << result << std::endl;
+	std::cout << pad << "GetFib30() + GetFib40() = " << result 
+		<< " # using std::future and std::async" << std::endl;
 
 	std::clog << __func__ << " finished." << std::endl;
 }
