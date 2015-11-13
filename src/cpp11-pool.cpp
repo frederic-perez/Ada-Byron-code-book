@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <future>
 #include <iostream>
+#include <ratio>
 #include <tuple>
 #include <vector>
 
@@ -178,8 +179,19 @@ ABcb::cpp11::MiscellanyExamples()
 	const size_t result40 = GetFib40();
 	// Wait for GetFib30() and add its result to result2 
 	const size_t result = result30.get() + result40;
-	std::cout << pad << "GetFib30() + GetFib40() = " << result 
-		<< " # using std::future and std::async" << std::endl;
+	std::cout << pad << "std::future and std::async example: "
+		<< "GetFib30() + GetFib40() = " << result << std::endl;
+ 
+	// std::ratio stuff
+	//
+	using ratioA = std::ratio<1, 3>;
+	using ratioB = std::ratio<2, 4>;
+	using sum = std::ratio_add<ratioA, ratioB>;
+	std::cout << pad << "std::ratio and std::ratio_add example: "
+		<< ratioA::num << "/" << ratioA::den
+		<< " + " << ratioB::num << "/" << ratioB::den
+		<< " = " << sum::num << "/" << sum::den
+		<< " = " << static_cast<double>(sum::num)/sum::den << std::endl;
 
 	std::clog << __func__ << " finished." << std::endl;
 }
