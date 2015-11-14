@@ -6,16 +6,16 @@
 
 This "book" gathers a collection of C++ code snippets ready to be used as examples or reused in your own projects. The name Ada Byron in the repository title is a homage to the first software programmer ([Wikipedia entry](http://en.wikipedia.org/wiki/Ada_Lovelace)).
 
-I use to build binaries for these settings:
-- Microsoft Windows 8.1:
-  - Visual Studio 14 2015 Win64 (starting in July, 2015)
-  - ~~Visual Studio 12 2013 Win64~~
-- Linux Ubuntu: g++ 4.8.2, clang++ 3.4.1
+I use to build binaries for these settings (sorted alphabetically)
 - Apple OS X: 
   - 10.11 El Capitan, Xcode 7.1 (LLVM, clang++) 64-bit
   - ~~Xcode 6.2 (LLVM, clang++) 64-bit~~
+- Linux Ubuntu: g++ 4.8.2, clang++ 3.4.1
+- Microsoft Windows 8.1:
+  - Visual Studio 14 2015 Win64 (starting in July, 2015)
+  - ~~Visual Studio 12 2013 Win64~~
 
-and for all of them we use
+Q for all of them we use
 - [Boost](http://www.boost.org/) Version 1.59.0 (August 13th, 2015 15:23 GMT)
 - ~~[Boost](http://www.boost.org/) Version 1.58.0 (April 17th, 2015 07:53 GMT)~~
 - ~~[Boost](http://www.boost.org/) Version 1.57.0 (November 3rd, 2014 21:55 GMT)~~
