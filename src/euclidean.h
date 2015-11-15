@@ -274,13 +274,13 @@ template<size_t N>
 std::ostream&
 operator<<(std::ostream& a_os, const Vector<N>& a_vector)
 {
-	// 1st, the size of the Point
+	// 1st, the size of the Vector
 	//
 	a_os << '[' << a_vector.d_array.size() << ']';
 
-	// 2nd, the actual contents
+	// 2nd, its actual contents
 	//
-	std::ostringstream oss;
+	std::ostringstream oss; // TODO: Simplify, ditching oss
 	std::vector<std::string> valuesAsStrings;
 	for (auto value : a_vector.d_array) {
 		oss << value;
