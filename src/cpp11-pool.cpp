@@ -1,7 +1,6 @@
 // -- Examples on how to use C++11 features, and some other stuff
 
 #include <algorithm>
-#include <future>
 #include <iostream>
 #include <ratio>
 #include <tuple>
@@ -145,19 +144,6 @@ ABcb::cpp11::AlgorithmExamples()
 	std::clog << __func__ << " finished." << std::endl;
 }
 
-namespace {
-
-// From C++1 slides by Alex Sinkayov
-//
-size_t
-Fib(size_t a_n)
-{	return a_n <= 2 ? 1 : Fib(a_n - 1) + Fib(a_n - 2); }
-
-size_t GetFib30() { return Fib(30); }
-size_t GetFib40() { return Fib(40); }
-
-} // namespace
-
 void
 ABcb::cpp11::MiscellanyExamples()
 {
@@ -172,15 +158,6 @@ ABcb::cpp11::MiscellanyExamples()
 	for (int prime : { 2, 3, 5, 7 }) // initializer_list-based range-for example
 		std::cout << prime << ' ';
 	std::cout << std::endl;
-
-	// Start GetFib30() asynchronously 
-	std::future<size_t> result30 = std::async(GetFib30);
-	// Call GetFib40() synchronously 
-	const size_t result40 = GetFib40();
-	// Wait for GetFib30() and add its result to result2 
-	const size_t result = result30.get() + result40;
-	std::cout << pad << "std::future and std::async example: "
-		<< "GetFib30() + GetFib40() = " << result << std::endl;
  
 	// std::ratio stuff
 	//
