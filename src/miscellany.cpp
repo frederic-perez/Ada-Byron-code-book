@@ -3,6 +3,8 @@
 #include <iostream>
 #include <sstream>
 
+#include <boost/numeric/conversion/bounds.hpp>
+
 #include "aux-raw.h"
 #include "miscellany.h"
 
@@ -14,7 +16,21 @@ ABcb::miscellany::Function(const int a_value) // <-- notice the "const" here
 
 size_t
 ABcb::miscellany::FactorialRecursive(const size_t a_n)
-{	return a_n <= 1 ? 1 : a_n * FactorialRecursive(a_n - 1); }
+{
+	if (a_n <= 1)
+		return 1;
+
+	const size_t factorialRecursiveNMinus1 = FactorialRecursive(a_n - 1);
+	const size_t result = a_n * factorialRecursiveNMinus1;
+	static const size_t max = boost::numeric::bounds<size_t>::highest();
+	const bool overflow =
+		// overflow of a * b \equiv a * b > max \equiv a > max/b
+		a_n > max/factorialRecursiveNMinus1;
+	if (overflow)
+		throw 666;
+
+	return result;
+}
 
 size_t
 ABcb::miscellany::FactorialIterative(const size_t a_n)
@@ -46,30 +62,31 @@ ABcb::miscellany::ExamplesOfFactorial()
 
 	// Using FactorialRecursive
 	//
-	size_t n = 3;
-	size_t factorialN = FactorialRecursive(n);
-	size_t nMinus1 = n - 1;
-	size_t factorialNMinus1 = FactorialRecursive(nMinus1);
-	bool failed = factorialN <= factorialNMinus1;
-	for (; !failed;) {
+	size_t n = 0;
+	size_t factorialN = 0;
+	bool overflow = false;
+	while (!overflow) {
 		++n;
-		++nMinus1;
-		factorialNMinus1 = factorialN;
-		factorialN = FactorialRecursive(n);
-		failed = factorialN <= factorialNMinus1; // TODO: Does this really work?
+		try {
+			factorialN = FactorialRecursive(n);
+		} catch (...) {
+			overflow = true;
+		}
 	}
 
+	--n;
+	factorialN = FactorialRecursive(n);
 	oss.str("");
-	oss << factorialNMinus1;
-	std::cout << pad << "FactorialRecursive(" << nMinus1 << ")            = "
+	oss << factorialN;
+	std::cout << pad << "FactorialRecursive(" << n << ")            = "
 		<< oss.str() << std::endl;
 
 	// Using FactorialIterative
 	//
-	const size_t factorialIterative = FactorialIterative(nMinus1-1);
+	const size_t factorialIterative = FactorialIterative(n);
 	oss.str("");
 	oss << factorialIterative;
-	std::cout << pad << "FactorialIterative(" << nMinus1-1 << ")            = "
+	std::cout << pad << "FactorialIterative(" << n << ")            = "
 		<< oss.str() << std::endl;
 
 	std::clog << __func__ << " finished." << std::endl;
