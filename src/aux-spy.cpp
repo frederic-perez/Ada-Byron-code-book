@@ -193,12 +193,14 @@ ABcb::spy::SizeOfs(std::ostream& a_os)
 		<< pad << "sizeof(char) = " << sizeof(char) << '\n'
 		<< pad << "sizeof(wchar_t) = " << sizeof(wchar_t) << '\n'
 		<< pad << "sizeof(int) = " << sizeof(int) << '\n'
+		<< pad << "sizeof(int64_t) = " << sizeof(int64_t) << '\n'
 		<< pad << "sizeof(float) = " << sizeof(float) << '\n'
 		<< pad << "sizeof(double) = " << sizeof(double) << '\n'
 		<< pad << "sizeof(long double) = " << sizeof(long double) << '\n'
 		<< pad << "sizeof(size_t) = " << sizeof(size_t) << '\n'
 		<< pad << "sizeof(unsigned int) = " << sizeof(unsigned int) << '\n'
-		<< pad << "sizeof(unsigned long) = " << sizeof(unsigned long) << '\n';
+		<< pad << "sizeof(unsigned long) = " << sizeof(unsigned long) << '\n'
+		<< pad << "sizeof(uint64_t) = " << sizeof(uint64_t) << '\n';
 	return a_os;
 }
 
