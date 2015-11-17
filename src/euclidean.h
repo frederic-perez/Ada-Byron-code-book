@@ -280,11 +280,15 @@ operator<<(std::ostream& a_os, const Vector<N>& a_vector)
 
 	// 2nd, its actual contents
 	//
-	std::ostringstream oss; // TODO: Simplify, ditching oss
+	std::ostringstream oss;
 	std::vector<std::string> valuesAsStrings;
 	for (auto value : a_vector.d_array) {
 		oss << value;
 		valuesAsStrings.push_back(oss.str());
+		// '- Note: We do not use
+		//			valuesAsStrings.push_back(std::to_string(value));
+		//		because std::to_string(double) outputs six decimal digits
+		//		and we want no decimal digits whenever possible.
 		oss.str("");
 	}
 	oss << '(' << boost::algorithm::join(valuesAsStrings, ", ") << ')';
