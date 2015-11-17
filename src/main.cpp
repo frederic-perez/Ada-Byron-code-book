@@ -16,6 +16,7 @@
 #include "cpp11-pool.h"
 #include "euclidean.h"
 #include "filesystem-pool.h"
+#include "miscellany.h"
 #include "preprocessor-pool.h"
 #include "promotions-pool.h"
 #include "ublas-pool.h"
@@ -93,6 +94,8 @@ main(const int argc, char* argv[])
 	std::clog << '\n' << __func__ << " finishes. Time elapsed: "
 		<< timeElapsed << " seconds" 
 		<< std::setprecision(previousPrecision) << std::endl;
+
+	ABcb::miscellany::ExamplesOfFactorial();
 
 	return EXIT_SUCCESS;
 }
