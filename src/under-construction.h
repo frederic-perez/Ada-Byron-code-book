@@ -20,18 +20,17 @@
 #define ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(namespaceName, sequence) \
 namespace namespaceName { \
 \
-enum class Enum : uint8_t { BOOST_PP_SEQ_ENUM(sequence) }; \
-const std::array<const char*, BOOST_PP_SEQ_SIZE(sequence)> enumText{{ \
-	BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, sequence) }}; \
+enum class Enum : uint8_t { undefined, BOOST_PP_SEQ_ENUM(sequence) }; \
+const std::array<const char*, 1 + BOOST_PP_SEQ_SIZE(sequence)> enumText{{ \
+	"undefined", BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, sequence) }}; \
 \
-const uint8_t first = 1; \
 const uint8_t beyond = static_cast<uint8_t>(enumText.size()); \
 \
 inline \
 Enum \
 GetEnum(const std::string& a_text) \
 { \
-	uint8_t i = first; \
+	uint8_t i = 1; \
 	for (; i < beyond && a_text != enumText[i]; ++i); \
 	return i < beyond ? static_cast<Enum>(i) : Enum::undefined; \
 } \
@@ -46,7 +45,7 @@ std::vector<std::string> \
 GetDefinedStrings() \
 { \
 	std::vector<std::string> result; \
-	for (uint8_t i = first; i < beyond; ++i) \
+	for (uint8_t i = 1; i < beyond; ++i) \
 		result.push_back(enumText[i]); \
 	return result; \
 } \
@@ -57,7 +56,6 @@ namespace Ada_Byron_code_book {
 
 ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(\
 	Guru,
-	(undefined)\
 	(Andrei_Alexandrescu)(Andrew_Koenig)(Bruce_Eckel)(Bjarne_Stroustrup)\
 	(Herb_Sutter)(Ira_Pohl)(Scott_Meyers)
 )

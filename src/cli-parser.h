@@ -15,19 +15,16 @@ namespace Ada_Byron_code_book {
 
 ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(\
 	PlatonicSolid,
-	(undefined)\
 	(tetrahedron)(octahedron)(icosahedron)(hexahedron)(dodecahedron)
 )
 
 ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(\
 	Color,
-	(undefined)\
 	(red)(green)(blue)
 )
 
 ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(\
 	Fruit,
-	(undefined)\
 	(apple)(orange)(pear)
 )
 
