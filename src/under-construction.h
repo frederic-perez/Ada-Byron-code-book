@@ -33,9 +33,7 @@ GetEnum(const std::string& a_text) \
 { \
 	uint8_t i = first; \
 	for (; i < beyond && a_text != enumText[i]; ++i); \
-	if (i < beyond) \
-		return static_cast<Enum>(i); \
-	return Enum::undefined; \
+	return i < beyond ? static_cast<Enum>(i) : Enum::undefined; \
 } \
 \
 inline \
