@@ -1,5 +1,6 @@
 // -- 
 
+#include <stdexcept>
 #include <iostream>
 #include <sstream>
 
@@ -26,8 +27,11 @@ ABcb::miscellany::FactorialRecursive(const size_t a_n)
 	const bool overflow =
 		// overflow of a * b \equiv a * b > max \equiv a > max/b
 		a_n > max/factorialRecursiveNMinus1;
-	if (overflow)
-		throw 666;
+	if (overflow) {
+		std::ostringstream oss;
+		oss << "Overflow trying to compute " << __func__ << '(' << a_n << ')';
+		throw std::overflow_error(oss.str());
+	}
 
 	return result;
 }
@@ -69,7 +73,9 @@ ABcb::miscellany::ExamplesOfFactorial()
 		++n;
 		try {
 			factorialN = FactorialRecursive(n);
-		} catch (...) {
+		} catch (const std::overflow_error& e) {
+			std::cerr << pad << __func__ << ": Exception caught: " << e.what()
+				<< '\n';
 			overflow = true;
 		}
 	}
