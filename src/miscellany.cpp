@@ -24,6 +24,12 @@ ABcb::miscellany::FactorialRecursive(const size_t a_n)
 	const size_t factorialRecursiveNMinus1 = FactorialRecursive(a_n - 1);
 	const size_t result = a_n * factorialRecursiveNMinus1;
 	static const size_t max = boost::numeric::bounds<size_t>::highest();
+	//
+	// Interesting information on std::overflow_error available at
+	// http://en.cppreference.com/w/cpp/error/overflow_error
+	//
+	// TODO: Study en.cppreference.com/w/cpp/error/overflow_error and apply it!
+	//
 	const bool overflow =
 		// overflow of a * b \equiv a * b > max \equiv a > max/b
 		a_n > max/factorialRecursiveNMinus1;
