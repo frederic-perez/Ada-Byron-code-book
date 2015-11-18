@@ -40,17 +40,15 @@ GetEnum(const std::string& a_text) \
 \
 inline \
 std::string \
-GetString(Enum a_enum) { \
-	return enumText[static_cast<uint8_t>(a_enum)]; \
-} \
+GetString(Enum a_enum) \
+{	return enumText[static_cast<uint8_t>(a_enum)]; } \
 \
 inline \
 std::vector<std::string> \
 GetDefinedStrings() \
 { \
 	std::vector<std::string> result; \
-	uint8_t i = first; \
-	for (; i <= last; ++i) \
+	for (uint8_t i = first; i <= last; ++i) \
 		result.push_back(enumText[i]); \
 	return result; \
 } \
