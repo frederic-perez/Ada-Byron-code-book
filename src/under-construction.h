@@ -24,28 +24,28 @@ enum class Enum : uint8_t { undefined, BOOST_PP_SEQ_ENUM(sequence) }; \
 const std::array<const char*, 1 + BOOST_PP_SEQ_SIZE(sequence)> enumText{{ \
 	"undefined", BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, sequence) }}; \
 \
-const uint8_t beyond = static_cast<uint8_t>(enumText.size()); \
+const size_t beyond = enumText.size(); \
 \
 inline \
 Enum \
 GetEnum(const std::string& a_text) \
 { \
-	uint8_t i = 1; \
+	size_t i = 1; \
 	for (; i < beyond && a_text != enumText[i]; ++i); \
 	return i < beyond ? static_cast<Enum>(i) : Enum::undefined; \
 } \
 \
 inline \
 std::string \
-GetString(Enum a_enum) \
-{	return enumText[static_cast<uint8_t>(a_enum)]; } \
+GetString(const Enum a_enum) \
+{	return enumText[static_cast<size_t>(a_enum)]; } \
 \
 inline \
 std::vector<std::string> \
 GetDefinedStrings() \
 { \
 	std::vector<std::string> result; \
-	for (uint8_t i = 1; i < beyond; ++i) \
+	for (size_t i = 1; i < beyond; ++i) \
 		result.push_back(enumText[i]); \
 	return result; \
 } \
