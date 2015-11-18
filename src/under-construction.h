@@ -25,15 +25,15 @@ const std::array<const char*, BOOST_PP_SEQ_SIZE(sequence)> enumText{{ \
 	BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, sequence) }}; \
 \
 const uint8_t first = 1; \
-const uint8_t last = static_cast<uint8_t>(enumText.size() - 1); \
+const uint8_t beyond = static_cast<uint8_t>(enumText.size()); \
 \
 inline \
 Enum \
 GetEnum(const std::string& a_text) \
 { \
 	uint8_t i = first; \
-	for (; i <= last && a_text != enumText[i]; ++i); \
-	if (i <= last) \
+	for (; i < beyond && a_text != enumText[i]; ++i); \
+	if (i < beyond) \
 		return static_cast<Enum>(i); \
 	return Enum::undefined; \
 } \
@@ -48,7 +48,7 @@ std::vector<std::string> \
 GetDefinedStrings() \
 { \
 	std::vector<std::string> result; \
-	for (uint8_t i = first; i <= last; ++i) \
+	for (uint8_t i = first; i < beyond; ++i) \
 		result.push_back(enumText[i]); \
 	return result; \
 } \
