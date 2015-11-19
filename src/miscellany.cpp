@@ -1,9 +1,12 @@
 // -- 
 
 #include <stdexcept>
+#include <iomanip>
 #include <iostream>
 #include <sstream>
 
+#include <boost/math/constants/constants.hpp>
+#include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/numeric/conversion/bounds.hpp>
 
 #include "aux-raw.h"
@@ -104,5 +107,47 @@ ABcb::miscellany::ExamplesOfFactorial()
 	std::clog << __func__ << " finished." << std::endl;
 }
 
+namespace {
+
+template<typename T>
+T
+AreaOfACircle(const T r)
+{
+	using boost::math::constants::pi;
+	return pi<T>() * r * r;
+}
+
+} // namespace
+
+void
+ABcb::miscellany::ExamplesOfMultiprecision()
+{
+	std::clog << __func__ << " started..." << std::endl;
+
+	using ABcb::raw::pad;
+
+	// Code based on
+	//	http://www.boost.org/doc/libs/1_59_0/libs/multiprecision/
+	//	doc/html/boost_multiprecision/tut/floats/fp_eg/aos.html
+
+	const float r_f = 123.f / 100.f;
+	const float a_f = AreaOfACircle(r_f);
+	std::cout << pad << std::setprecision(std::numeric_limits<float>::digits10)
+		<< a_f << std::endl;
+
+	const double r_d = 123. / 100.;
+	const double a_d = AreaOfACircle(r_d);
+	std::cout << pad << std::setprecision(std::numeric_limits<double>::digits10)
+		<< a_d << std::endl;
+
+	using boost::multiprecision::cpp_dec_float_50;
+	const cpp_dec_float_50 r_mp(cpp_dec_float_50(123) / 100);
+	const cpp_dec_float_50 a_mp = AreaOfACircle(r_mp);
+	std::cout << pad
+		<< std::setprecision(std::numeric_limits<cpp_dec_float_50>::digits10)
+		<< a_mp << std::endl;
+
+	std::clog << __func__ << " finished." << std::endl;
+}
 
 // -- eof

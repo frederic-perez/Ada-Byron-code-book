@@ -37,6 +37,8 @@ size_t FactorialIterative(size_t);
 
 void ExamplesOfFactorial();
 
+void ExamplesOfMultiprecision();
+
 } // namespace miscellany
 
 } // namespace Ada_Byron_code_book

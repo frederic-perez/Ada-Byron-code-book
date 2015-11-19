@@ -96,6 +96,7 @@ main(const int argc, char* argv[])
 		<< std::setprecision(previousPrecision) << std::endl;
 
 	ABcb::miscellany::ExamplesOfFactorial();
+	ABcb::miscellany::ExamplesOfMultiprecision();
 
 	return EXIT_SUCCESS;
 }
