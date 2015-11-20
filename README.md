@@ -49,9 +49,12 @@ A list of Boost-related stuff:
 - Boris Schäling's [The Boost C++ Libraries](http://theboostcpplibraries.com/)
 - Antony Polukhin's [Boost Application Development Cookbook Online Examples](http://apolukhin.github.io/Boost-Cookbook-4880OS/)
 
-And finally, guidelines:
+Guidelines:
 - A new open source project, led by Bjarne Stroustrup, on GitHub to build modern authoritative guidelines for writing C++ code: [C++ Core Guidelines](https://github.com/isocpp/CppCoreGuidelines)
 - Herb Sutter, Andrei Alexandrescu, C++ Coding Standards: 101 Rules, Guidelines, and Best Practices, Addison Wesley Professional, 2004
+
+And finally, C++ compilers:
+- [http://www.stroustrup.com/compilers.html](http://www.stroustrup.com/compilers.html), by Bjarne Stroustrup
 
 ### Code analysis
 
