@@ -6,6 +6,7 @@
 #include <boost/date_time/c_local_time_adjustor.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/version.hpp>
 
@@ -200,7 +201,9 @@ ABcb::spy::SizeOfs(std::ostream& a_os)
 		<< pad << "sizeof(size_t) = " << sizeof(size_t) << '\n'
 		<< pad << "sizeof(unsigned int) = " << sizeof(unsigned int) << '\n'
 		<< pad << "sizeof(unsigned long) = " << sizeof(unsigned long) << '\n'
-		<< pad << "sizeof(uint64_t) = " << sizeof(uint64_t) << '\n';
+		<< pad << "sizeof(uint64_t) = " << sizeof(uint64_t) << '\n'
+		<< pad <<	"sizeof(boost::multiprecision::cpp_dec_float_50) = "
+			<< sizeof(boost::multiprecision::cpp_dec_float_50) << '\n';
 	return a_os;
 }
 
