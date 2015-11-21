@@ -23,7 +23,7 @@ namespace Euclidean {
 
 void ExamplesOfVector();
 
-template<size_t N>
+template<size_t N> // TODO: Extend <class T, size_t N>
 class Vector {
 
 	static_assert(
