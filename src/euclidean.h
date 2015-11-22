@@ -297,6 +297,7 @@ operator<<(std::ostream& a_os, const Vector<N>& a_vector)
 	return a_os;
 }
 
+// TODO: Instantiate double, 3, 2 and boost multiprecision, 3
 using Vector2 = Vector<2>;
 using Vector3 = Vector<3>;
 
