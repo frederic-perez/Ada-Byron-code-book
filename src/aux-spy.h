@@ -31,7 +31,7 @@ std::ostream& HostName(std::ostream&);
 std::ostream& UserName(std::ostream&);
 std::ostream& LocalDate(std::ostream&);
 std::ostream& LocalTime(std::ostream&);
-std::ostream& SizeOfs(std::ostream&);
+std::ostream& InfoOfSomeTypes(std::ostream&);
 
 class RunInfo; // To be used like std::cout << RunInfo("my-progname") << ...
 std::ostream& operator<<(std::ostream&, const RunInfo&);

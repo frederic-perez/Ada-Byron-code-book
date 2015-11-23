@@ -188,22 +188,29 @@ const std::string pad = "  ";
 } // namespace
 
 std::ostream&
-ABcb::spy::SizeOfs(std::ostream& a_os)
+ABcb::spy::InfoOfSomeTypes(std::ostream& a_os)
 {
+	using boost::multiprecision::cpp_dec_float_50;
 	a_os
 		<< pad << "sizeof(char) = " << sizeof(char) << '\n'
 		<< pad << "sizeof(wchar_t) = " << sizeof(wchar_t) << '\n'
 		<< pad << "sizeof(int) = " << sizeof(int) << '\n'
 		<< pad << "sizeof(int64_t) = " << sizeof(int64_t) << '\n'
-		<< pad << "sizeof(float) = " << sizeof(float) << '\n'
-		<< pad << "sizeof(double) = " << sizeof(double) << '\n'
-		<< pad << "sizeof(long double) = " << sizeof(long double) << '\n'
+		<< pad << "sizeof(float) = " << sizeof(float)
+			<< " | highest = " << boost::numeric::bounds<float>::highest() << '\n'
+		<< pad << "sizeof(double) = " << sizeof(double)
+			<< " | highest = " << boost::numeric::bounds<double>::highest() << '\n'
+		<< pad << "sizeof(long double) = " << sizeof(long double)
+			<< " | highest = " << boost::numeric::bounds<long double>::highest()
+			<< '\n'
 		<< pad << "sizeof(size_t) = " << sizeof(size_t) << '\n'
 		<< pad << "sizeof(unsigned int) = " << sizeof(unsigned int) << '\n'
 		<< pad << "sizeof(unsigned long) = " << sizeof(unsigned long) << '\n'
 		<< pad << "sizeof(uint64_t) = " << sizeof(uint64_t) << '\n'
 		<< pad <<	"sizeof(boost::multiprecision::cpp_dec_float_50) = "
-			<< sizeof(boost::multiprecision::cpp_dec_float_50) << '\n';
+			<< sizeof(cpp_dec_float_50)
+			<< " | highest = " << boost::numeric::bounds<cpp_dec_float_50>::highest()
+		<< '\n';
 	return a_os;
 }
 
@@ -286,7 +293,7 @@ ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
 		<< "Using Visual Studio C/C++ compiler version "
 			<< VisualStudioCppCompilerVersion << '\n'
 		<< "List of preprocessor defines:\n" << ListOfPreprocessorDefines
-		<< "sizeof some POD types:\n" << SizeOfs;
+		<< "Info of some types:\n" << InfoOfSomeTypes;
 	return a_os;
 }
 
