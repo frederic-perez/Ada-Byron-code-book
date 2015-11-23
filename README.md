@@ -53,8 +53,11 @@ Guidelines:
 - A new open source project, led by Bjarne Stroustrup, on GitHub to build modern authoritative guidelines for writing C++ code: [C++ Core Guidelines](https://github.com/isocpp/CppCoreGuidelines)
 - Herb Sutter, Andrei Alexandrescu, C++ Coding Standards: 101 Rules, Guidelines, and Best Practices, Addison Wesley Professional, 2004
 
-And finally, C++ compilers:
+C++ compilers:
 - [http://www.stroustrup.com/compilers.html](http://www.stroustrup.com/compilers.html), by Bjarne Stroustrup
+
+And finally, a list of intesting libraries or toolkits:
+- OpenGL Mathematics (GLM), a header only C++ mathematics library for graphics software
 
 ### Code analysis
 
