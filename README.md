@@ -73,15 +73,17 @@ Other tools related to code analysis:
 
 ### Commits
 
-When committing changes, we use common prefixes--see for example a [list of ITK changes](http://kitware.com/blog/home/post/881). From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix):
+When committing changes, we use common prefixes--see for example a [list of ITK changes](http://kitware.com/blog/home/post/881). From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix) and an [ITK Git entry](http://www.itk.org/Wiki/ITK/Git/Develop):
 
 | Prefix | What          |
 | ------ |:--------------|
-| BUG    | a change made to fix a runtime issue (crash, segmentation fault, exception, or incorrect result) |
-| COMP   | a fix for a compilation issue (including minor C++ or C++11 improvements), error or warning  |
-| ENH    | new functionality added to the project |
-| PERF   | a performance improvement |
-| STYLE  | a change that does not impact the logic or execution of the code (coding style, comments, doc.) |
+| BUG    | Fixing a runtime issue (crash, segmentation fault, exception) or incorrect result |
+| COMP   | Fix for a compilation issue (including minor C++ or C++11 improvements), error or warning  |
+| DOC    | Documentation change |
+| ENH    | New functionality added to the project |
+| PERF   | Performance improvement |
+| STYLE  | No logic impact (indentation, comments) |  
+| WIP    | Work in progress |  
 
 Example commit messages:
 - Bad: BUG: Check pointer validity before dereferencing -> implementation detail, self-explanatory (by looking at the code)
