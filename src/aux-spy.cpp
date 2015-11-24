@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <sstream>
+#include <type_traits>
 
 #include <boost/date_time/c_local_time_adjustor.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
@@ -184,7 +185,19 @@ ABcb::spy::LocalTime(std::ostream& a_os)
 namespace {
 
 const std::string pad = "  ";
-
+	
+template <class T>
+std::ostream&
+Range(std::ostream& a_os)
+{
+	static_assert(
+		std::is_arithmetic<T>::value, // TODO: How to avoid instantiating with char?
+		"static_assert failed: Template parameter T is not arithmetic");
+	a_os << "Range = [" << boost::numeric::bounds<T>::lowest() << ", "
+		<< boost::numeric::bounds<T>::highest() << ']' << std::flush;
+	return a_os;
+}
+	
 } // namespace
 
 std::ostream&
@@ -197,19 +210,20 @@ ABcb::spy::InfoOfSomeTypes(std::ostream& a_os)
 		<< pad << "sizeof(int) = " << sizeof(int) << '\n'
 		<< pad << "sizeof(int64_t) = " << sizeof(int64_t) << '\n'
 		<< pad << "sizeof(float) = " << sizeof(float)
-			<< " | highest = " << boost::numeric::bounds<float>::highest() << '\n'
+			<< " | " << Range<float> << '\n'
 		<< pad << "sizeof(double) = " << sizeof(double)
-			<< " | highest = " << boost::numeric::bounds<double>::highest() << '\n'
+			<< " | " << Range<double> << '\n'
 		<< pad << "sizeof(long double) = " << sizeof(long double)
-			<< " | highest = " << boost::numeric::bounds<long double>::highest()
-			<< '\n'
+			<< " | " << Range<long double> << '\n'
 		<< pad << "sizeof(size_t) = " << sizeof(size_t) << '\n'
 		<< pad << "sizeof(unsigned int) = " << sizeof(unsigned int) << '\n'
 		<< pad << "sizeof(unsigned long) = " << sizeof(unsigned long) << '\n'
 		<< pad << "sizeof(uint64_t) = " << sizeof(uint64_t) << '\n'
 		<< pad <<	"sizeof(boost::multiprecision::cpp_dec_float_50) = "
 			<< sizeof(cpp_dec_float_50)
-			<< " | highest = " << boost::numeric::bounds<cpp_dec_float_50>::highest()
+			<< " | Range = [" << boost::numeric::bounds<cpp_dec_float_50>::lowest()
+			<< ", "
+			<< boost::numeric::bounds<cpp_dec_float_50>::highest() << ']'
 		<< '\n';
 	return a_os;
 }
