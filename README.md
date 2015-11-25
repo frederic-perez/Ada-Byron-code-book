@@ -7,7 +7,7 @@
 This "book" gathers a collection of C++ code snippets ready to be used as examples or reused in your own projects. The name Ada Byron in the repository title is a homage to the first software programmer ([Wikipedia entry](http://en.wikipedia.org/wiki/Ada_Lovelace)).
 
 I use to build binaries for these settings (sorted alphabetically)
-- Apple OS X: 
+- Apple Mac OS X: 
   - 10.11 El Capitan, Xcode 7.1 (LLVM, clang++) 64-bit
   - ~~Xcode 6.2 (LLVM, clang++) 64-bit~~
 - Linux Ubuntu: g++ 4.8.2, clang++ 3.4.1
