@@ -243,15 +243,20 @@ GetArgv0Info(const std::string& a_argv0)
 		<< pad << "is " << fullArgv0 << ",\n";
 	if (bf::exists(fullArgv0)) {
 		oss << pad << "which " << (bf::is_regular(fullArgv0) ? "is" : "is not")
-			<< " a regular file, created";
-
+			<< " a regular file, created by ";
 #if defined(CMAKE_MYUSERNAME)
-		oss << " by " << BOOST_PP_STRINGIZE(CMAKE_MYUSERNAME) << ',';
+		oss << BOOST_PP_STRINGIZE(CMAKE_MYUSERNAME);
+#else
+		oss << '?';
 #endif
+		oss << ", at ";
 #if defined(CMAKE_MYHOSTNAME)
-		oss << " at " << BOOST_PP_STRINGIZE(CMAKE_MYHOSTNAME) << ',';
+		oss << BOOST_PP_STRINGIZE(CMAKE_MYHOSTNAME);
+#else
+		oss << '?';
 #endif
-
+		oss << ',';
+		
 		// Day of the week, month, day, year
 		//
 		const std::time_t theTime_t = bf::last_write_time(fullArgv0);
