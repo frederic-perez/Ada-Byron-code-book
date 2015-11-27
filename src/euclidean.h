@@ -23,7 +23,7 @@ namespace Euclidean {
 
 void ExamplesOfVector();
 
-template<size_t N> // TODO: Extend <class T, size_t N>
+template<class T, size_t N>
 class Vector {
 
 	static_assert(
@@ -31,24 +31,24 @@ class Vector {
 		"static_assert failed: Vector template parameter N (size) is 0. "
 		"It should be strictly positive.");
 	static_assert(
-		std::is_floating_point<double>::value,
+		std::is_floating_point<T>::value,
 		"static_assert failed: Vector template parameter T is not floating point");
 
 public:
-	explicit Vector(double); // All elements will be set the input argument
+	explicit Vector(T); // All elements will be set the input argument
 	Vector() : Vector(0.) {} // Delegating constructor
-	explicit Vector(std::initializer_list<double>);
+	explicit Vector(std::initializer_list<T>);
 
 	// Note: 
 	// Copy constructor and assignment operator are automatically (silently)
 	// created.
 
-	double operator[](size_t a_idx) const { return d_array[a_idx]; }
-	double& operator[](size_t a_idx) { return d_array[a_idx]; }
+	T operator[](size_t a_idx) const { return d_array[a_idx]; }
+	T& operator[](size_t a_idx) { return d_array[a_idx]; }
 
-	double Norm() const; // Synonyms: length, magnitude, norm
-	double ElementsSum() const;
-	double ElementsAvg() const;
+	T Norm() const; // Synonyms: length, magnitude, norm
+	T ElementsSum() const;
+	T ElementsAvg() const;
 
 	const Vector& Normalize();
 
@@ -57,30 +57,30 @@ public:
 	//
 	Vector& operator+=(const Vector&);
 	Vector& operator-=(const Vector&);
-	Vector& operator*=(double);
-	Vector& operator/=(double);
+	Vector& operator*=(T);
+	Vector& operator/=(T);
 
-	double ComputeAzimuthAngle() const; // Only for N==3
-	double ComputePolarAngle() const; // Only for N==3; Precondition: Normalized
+	T ComputeAzimuthAngle() const; // Only for N==3
+	T ComputePolarAngle() const; // Only for N==3; Precondition: Normalized
 	const Vector operator^(const Vector&) const; // Only for N==3
 
-	template<size_t n>
-	friend std::ostream& operator<<(std::ostream&, const Vector<n>&);
+	template<class t, size_t n>
+	friend std::ostream& operator<<(std::ostream&, const Vector<t, n>&);
 
 private:
-	std::array<double, N> d_array;
+	std::array<T, N> d_array;
 };
 
-template<size_t N>
-Vector<N>::Vector(double a_value)
+template<class T, size_t N>
+Vector<T, N>::Vector(T a_value)
 : d_array()
 {
 	for (auto& value : d_array)
 		value = a_value;
 }
 
-template<size_t N>
-Vector<N>::Vector(std::initializer_list<double> a_args)
+template<class T, size_t N>
+Vector<T, N>::Vector(std::initializer_list<T> a_args)
 : d_array()
 {
 	// Note: There is a nice discussion in
@@ -100,179 +100,179 @@ Vector<N>::Vector(std::initializer_list<double> a_args)
 		d_array[i] = *it;
 }
 
-template<size_t N>
-double
-Vector<N>::Norm() const // Synonyms: length, magnitude, norm
+template<class T, size_t N>
+T
+Vector<T, N>::Norm() const // Synonyms: length, magnitude, norm
 {
-	double accSquared = 0.;
+	T accSquared = 0.;
 	for (auto value : d_array)
 		accSquared += value*value;
 	return sqrt(accSquared);
 }
 
-template<size_t N>
-double
-Vector<N>::ElementsSum() const
+template<class T, size_t N>
+T
+Vector<T, N>::ElementsSum() const
 {
-	double acc = 0.;
+	T acc = 0.;
 	for (auto value : d_array)
 		acc += value;
 	return acc;
 }
 
-template<size_t N>
-double
-Vector<N>::ElementsAvg() const
+template<class T, size_t N>
+T
+Vector<T, N>::ElementsAvg() const
 {	return ElementsSum()/N; }
 
-template<size_t N>
-const Vector<N>&
-Vector<N>::Normalize()
+template<class T, size_t N>
+const Vector<T, N>&
+Vector<T, N>::Normalize()
 {
-	const double norm = Norm();
-	for (double& value : d_array)
+	const T norm = Norm();
+	for (T& value : d_array)
 		value /= norm;
 	return *this;
 }
 
-template<size_t N>
-Vector<N>&
-Vector<N>::operator+=(const Vector<N>& a_rhs)
+template<class T, size_t N>
+Vector<T, N>&
+Vector<T, N>::operator+=(const Vector<T, N>& a_rhs)
 {
 	for (size_t i = 0; i < N; ++i)
 		d_array[i] += a_rhs.d_array[i];
 	return *this;
 }
 
-template<size_t N>
-Vector<N>&
-Vector<N>::operator-=(const Vector<N>& a_rhs)
+template<class T, size_t N>
+Vector<T, N>&
+Vector<T, N>::operator-=(const Vector<T, N>& a_rhs)
 {
 	for (size_t i = 0; i < N; ++i)
 		d_array[i] -= a_rhs.d_array[i];
 	return *this;
 }
 
-template<size_t N>
-Vector<N>&
-Vector<N>::operator*=(double a_rhs)
+template<class T, size_t N>
+Vector<T, N>&
+Vector<T, N>::operator*=(T a_rhs)
 {
 	for (size_t i = 0; i < N; ++i)
 		d_array[i] *= a_rhs;
 	return *this;
 }
 
-template<size_t N>
-Vector<N>&
-Vector<N>::operator/=(double a_rhs)
+template<class T, size_t N>
+Vector<T, N>&
+Vector<T, N>::operator/=(T a_rhs)
 {
 	for (size_t i = 0; i < N; ++i)
 		d_array[i] /= a_rhs;
 	return *this;
 }
 
-template<size_t N>
-double
-Vector<N>::ComputeAzimuthAngle() const
+template<class T, size_t N>
+T
+Vector<T, N>::ComputeAzimuthAngle() const
 {
 	static_assert(
 		N == 3,
 		"static_assert failed: Vector template parameter N (size) is not 3.");
 #define ADA_BYRON__USEATAN2_20151022
 #ifdef ADA_BYRON__USEATAN2_20151022
-	double phi = atan2(d_array[1], d_array[0]);
+	T phi = atan2(d_array[1], d_array[0]);
 	if (phi < 0.)
-		phi += 2. * boost::math::constants::pi<double>();
+		phi += 2. * boost::math::constants::pi<T>();
 	return phi;
 #else
 	// Precondition: v must be a normalized Vector3
-	const double sinTheta = sin(acos(d_array[2]));
+	const T sinTheta = sin(acos(d_array[2]));
 	if (fabs(sinTheta)<THRESHOLD_SIN_THETA)
 		return 0.; // x = y = 0.
 	else {
-		double phi;
-		const double aux = d_array[0] / sinTheta; // to avoid precision problems
+		T phi;
+		const T aux = d_array[0] / sinTheta; // to avoid precision problems
 		if (aux>1.) phi = 0.;
-		else if (aux<-1.) phi = boost::math::constants::pi<double>();
+		else if (aux<-1.) phi = boost::math::constants::pi<T>();
 		else phi = acos(aux);
 		return (d_array[1]<0.) ? -phi : phi;
 	}
 #endif
 }
 
-template<size_t N>
-double
-Vector<N>::ComputePolarAngle() const
+template<class T, size_t N>
+T
+Vector<T, N>::ComputePolarAngle() const
 {
 	static_assert(
 		N == 3,
 		"static_assert failed: Vector template parameter N (size) is not 3.");
 
-	//! Precondition: *this must be a normalized Vector<N>
+	//! Precondition: *this must be a normalized Vector<T, N>
 	return acos(d_array[2]);
 	// Equivalent code for this routine:
 	// return atan2(sqrt(v.x*v.x+v.y*v.y), v.z);
 }
 
-template<size_t N>
-const Vector<N>
-Vector<N>::operator^(const Vector<N>& a_rhs) const
+template<class T, size_t N>
+const Vector<T, N>
+Vector<T, N>::operator^(const Vector<T, N>& a_rhs) const
 {
 	static_assert(
 		N == 3,
 		"static_assert failed: Vector template parameter N (size) is not 3.");
 	return
-		Vector<N>{
+		Vector<T, N>{
 			d_array[1] * a_rhs[2] - d_array[2] * a_rhs[1],
 			d_array[2] * a_rhs[0] - d_array[0] * a_rhs[2],
 			d_array[0] * a_rhs[1] - d_array[1] * a_rhs[0]};
 }
 
-template<size_t N>
-const Vector<N>
-operator+(const Vector<N>& a_lhs, const Vector<N>& a_rhs)
+template<class T, size_t N>
+const Vector<T, N>
+operator+(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs)
 {
-	return Vector<N>(a_lhs) += a_rhs;
+	return Vector<T, N>(a_lhs) += a_rhs;
 }
 
-template<size_t N>
-const Vector<N>
-operator-(const Vector<N>& a_lhs, const Vector<N>& a_rhs)
+template<class T, size_t N>
+const Vector<T, N>
+operator-(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs)
 {
-	return Vector<N>(a_lhs) -= a_rhs;
+	return Vector<T, N>(a_lhs) -= a_rhs;
 }
 
-template<size_t N>
-const Vector<N>
-operator*(const Vector<N>& a_lhs, double a_rhs)
+template<class T, size_t N>
+const Vector<T, N>
+operator*(const Vector<T, N>& a_lhs, T a_rhs)
 {
-	return Vector<N>(a_lhs) *= a_rhs;
+	return Vector<T, N>(a_lhs) *= a_rhs;
 }
 
-template<size_t N>
-const Vector<N>
-operator*(double a_lhs, const Vector<N>& a_rhs)
+template<class T, size_t N>
+const Vector<T, N>
+operator*(T a_lhs, const Vector<T, N>& a_rhs)
 {
-	return Vector<N>(a_rhs) *= a_lhs;
+	return Vector<T, N>(a_rhs) *= a_lhs;
 }
 
-template<size_t N>
-const Vector<N>
-operator/(const Vector<N>& a_lhs, double a_rhs)
+template<class T, size_t N>
+const Vector<T, N>
+operator/(const Vector<T, N>& a_lhs, T a_rhs)
 {
-	return Vector<N>(a_lhs) /= a_rhs;
+	return Vector<T, N>(a_lhs) /= a_rhs;
 }
 
-template<size_t N>
-const Vector<N>
-operator/(double a_lhs, const Vector<N>& a_rhs)
+template<class T, size_t N>
+const Vector<T, N>
+operator/(T a_lhs, const Vector<T, N>& a_rhs)
 {
-	return Vector<N>(a_rhs) /= a_lhs;
+	return Vector<T, N>(a_rhs) /= a_lhs;
 }
 	
-template<size_t N>
+template<class T, size_t N>
 std::ostream&
-operator<<(std::ostream& a_os, const Vector<N>& a_vector)
+operator<<(std::ostream& a_os, const Vector<T, N>& a_vector)
 {
 	// 1st, the size of the Vector
 	//
@@ -298,8 +298,8 @@ operator<<(std::ostream& a_os, const Vector<N>& a_vector)
 }
 
 // TODO: Instantiate double, 3, 2 and boost multiprecision, 3
-using Vector2 = Vector<2>;
-using Vector3 = Vector<3>;
+using Vector2 = Vector<double, 2>;
+using Vector3 = Vector<double, 3>;
 
 } // namespace Euclidean
 
