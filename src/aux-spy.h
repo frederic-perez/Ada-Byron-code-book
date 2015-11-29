@@ -124,7 +124,7 @@ protected:
 
 template<class T>
 std::string
-TypeName() // TODO: s/./TypeNameENH()
+TypeName() // Consider it instead of typeid(-).name TODO: s/./TypeNameENH()
 {
 	// Credits to 
 	// http://stackoverflow.com/questions/81870/print-variable-type-in-c
