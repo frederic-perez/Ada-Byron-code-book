@@ -17,8 +17,8 @@ DoAndOutputStuff(const Vector& a_vector, const std::string& a_vectorName)
 	std::cout
 		<< pad << a_vectorName << " typeid name = " << typeid(a_vector).name()
 		<< '\n'
-		<< pad << a_vectorName << " spy::TypeName of its decltype = "
-		<< ABcb::spy::TypeName<decltype(a_vector)>() << '\n'
+		<< pad << a_vectorName << " spy::TypeNameENH of its decltype = "
+		<< ABcb::spy::TypeNameENH<decltype(a_vector)>() << '\n'
 		<< pad << a_vectorName << " = " << a_vector
 		<< " | " << a_vectorName << "[0] = " << a_vector[0]
 		<< " | Norm() = " << a_vector.Norm()

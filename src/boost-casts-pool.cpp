@@ -90,21 +90,21 @@ void
 UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
 {
 	std::cout << pad << __func__ << ": a_source ("
-		<< ABcb::spy::TypeName<SourceT>() << ") = " << a_source << std::flush;
+		<< ABcb::spy::TypeNameENH<SourceT>() << ") = " << a_source << std::flush;
 #include "aux-raw-compiler-warnings-off++begin.h"
 	bool succeeded = true;
-	const std::string typeNameOfTargetT = ABcb::spy::TypeName<TargetT>();
+	const std::string typeNameENHOfTargetT = ABcb::spy::TypeNameENH<TargetT>();
 	//if (a_source < boost::numeric::bounds<TargetT>::lowest()) { vs min()
 	if (a_source < std::numeric_limits<TargetT>::lowest()) { // Now in C++
 		std::cout << std::endl;
 		std::cerr << pad << __func__ << ": Error: a_source too small to convert to "
-			<< typeNameOfTargetT << '\n';
+			<< typeNameENHOfTargetT << '\n';
 		succeeded = false;
 	//} else if (a_source > boost::numeric::bounds<TargetT>::highest()) {
 	} else if (a_source > std::numeric_limits<TargetT>::max()) { // Use just C++
 		std::cout << std::endl;
 		std::cerr << pad << __func__ << ": Error: a_source too large to convert to "
-			<< typeNameOfTargetT << '\n';
+			<< typeNameENHOfTargetT << '\n';
 		succeeded = false;
 	}
 #include "aux-raw-compiler-warnings-off++end.h"
@@ -115,7 +115,7 @@ UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
 
 	// Keep on using sourceObjectSelf from this point onwards
 
-	std::cout << "; target (" << ABcb::spy::TypeName<TargetT>() << ") = "
+	std::cout << "; target (" << ABcb::spy::TypeNameENH<TargetT>() << ") = "
 		<< static_cast<double>(target) << std::endl;
 }
 
@@ -137,9 +137,9 @@ ApplyBoostNumericCast(const SourceT a_source)
 	#include <boost/numeric/conversion/bounds.hpp>
 
 	std::cout << pad << __func__ << ": a_source ("
-		<< ABcb::spy::TypeName<SourceT>() << ") = " << a_source << std::flush;
+		<< ABcb::spy::TypeNameENH<SourceT>() << ") = " << a_source << std::flush;
 	TargetT target = 66;
-	const std::string typeNameOfTargetT = ABcb::spy::TypeName<TargetT>();
+	const std::string typeNameOfTargetT = ABcb::spy::TypeNameENH<TargetT>();
 	try {
 		target = boost::numeric_cast<TargetT>(a_source);
 		std::cout << "; target (" << typeNameOfTargetT << ") = "
