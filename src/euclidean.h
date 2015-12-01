@@ -302,7 +302,7 @@ operator<<(std::ostream& a_os, const Vector<T, N>& a_vector)
 
 using Vector2 = Vector<double, 2>;
 using Vector3 = Vector<double, 3>;
-
+using Vector3Q = Vector<long double, 3>;
 using Vector3HQ = Vector<boost::multiprecision::cpp_dec_float_50, 3>;
 
 } // namespace Euclidean

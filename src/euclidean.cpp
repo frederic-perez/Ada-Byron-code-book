@@ -85,8 +85,32 @@ ABcb::Euclidean::ExamplesOfVector()
 	const Vector3 vector3cross = vector3a ^ vector3b;
 	DoAndOutputStuff(vector3cross, "vector3cross");
 
+	// Vector3Q
+
+	Vector3Q vector3Qa{ 5., 7., 11. };
+	DoAndOutputStuff(vector3Qa, "vector3Qa");
+	vector3Qa *= 2.;
+	vector3Qa = vector3Qa * static_cast<long double>(2.); // TODO
+	vector3Qa.Normalize();
+	DoAndOutputStuff(vector3Qa, "vector3Qa (normalized)");
+	std::cout << pad
+		<< "vector3Qa's azimuth angle = " << vector3Qa.ComputeAzimuthAngle()
+		<< "; polar angle = " << vector3Qa.ComputePolarAngle()
+		<< std::endl;
+
+	const Vector3Q vector3Qb{ -4., -6., -10. };
+	DoAndOutputStuff(vector3Qb, "vector3Qb");
+
+	const Vector3Q vector3Qcross = vector3Qa ^ vector3Qb;
+	DoAndOutputStuff(vector3Qcross, "vector3Qcross");
+
+	// Vector3HQ
+
 	Vector3HQ vector3HQa{ 5., 7., 11. };
 	DoAndOutputStuff(vector3HQa, "vector3HQa");
+	vector3HQa *= 2.;
+	vector3HQa = // TODO
+		vector3HQa * static_cast<boost::multiprecision::cpp_dec_float_50>(2.);
 	vector3HQa.Normalize();
 	DoAndOutputStuff(vector3HQa, "vector3HQa (normalized)");
 	std::cout << pad
