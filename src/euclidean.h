@@ -14,6 +14,7 @@
 
 	#include <boost/algorithm/string.hpp>
 	#include <boost/math/constants/constants.hpp>
+	#include <boost/multiprecision/cpp_dec_float.hpp>
 
 #include "aux-raw-compiler-warnings-off++end.h"
 
@@ -30,9 +31,11 @@ class Vector {
 		N > 0,
 		"static_assert failed: Vector template parameter N (size) is 0. "
 		"It should be strictly positive.");
-	static_assert(
-		std::is_floating_point<T>::value,
-		"static_assert failed: Vector template parameter T is not floating point");
+//	static_assert(
+//		std::is_floating_point<T>::value,
+//		"static_assert failed: Vector template parameter T is not floating point");
+//	'- TODO: Oops! This assert does not work with
+//		 boost::multiprecision::cpp_dec_float_50
 
 public:
 	explicit Vector(T); // All elements will be set the input argument
@@ -297,9 +300,10 @@ operator<<(std::ostream& a_os, const Vector<T, N>& a_vector)
 	return a_os;
 }
 
-// TODO: Instantiate double, 3, 2 and boost multiprecision, 3
 using Vector2 = Vector<double, 2>;
 using Vector3 = Vector<double, 3>;
+
+using Vector3HQ = Vector<boost::multiprecision::cpp_dec_float_50, 3>;
 
 } // namespace Euclidean
 

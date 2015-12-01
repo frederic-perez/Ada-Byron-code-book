@@ -24,8 +24,8 @@ DoAndOutputStuff(const Vector& a_vector, const std::string& a_vectorName)
 		<< " | Norm() = " << a_vector.Norm()
 		<< " | ElementsSum() = " << a_vector.ElementsSum()
 		<< " | ElementsAvg() = " << a_vector.ElementsAvg()
-		<< " | /2 = " << a_vector / 2.
-		<< " | x2 = " << a_vector * 2.
+//		<< " | /2 = " << a_vector / 2. TODO: Make this work with multiprecision
+//		<< " | x2 = " << a_vector * 2.
 		<< std::endl;
 }
 
@@ -84,6 +84,21 @@ ABcb::Euclidean::ExamplesOfVector()
 
 	const Vector3 vector3cross = vector3a ^ vector3b;
 	DoAndOutputStuff(vector3cross, "vector3cross");
+
+	Vector3HQ vector3HQa{ 5., 7., 11. };
+	DoAndOutputStuff(vector3HQa, "vector3HQa");
+	vector3HQa.Normalize();
+	DoAndOutputStuff(vector3HQa, "vector3HQa (normalized)");
+	std::cout << pad
+		<< "vector3HQa's azimuth angle = " << vector3HQa.ComputeAzimuthAngle()
+		<< "; polar angle = " << vector3HQa.ComputePolarAngle()
+		<< std::endl;
+
+	const Vector3HQ vector3HQb{ -4., -6., -10. };
+	DoAndOutputStuff(vector3HQb, "vector3HQb");
+
+	const Vector3HQ vector3HQcross = vector3HQa ^ vector3HQb;
+	DoAndOutputStuff(vector3HQcross, "vector3HQcross");
 
 	std::clog << __func__ << " finished." << std::endl;
 }
