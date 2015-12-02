@@ -132,6 +132,8 @@ ApplyBoostNumericCast(const SourceT a_source)
 	Björn Karlsson: Part I : General Libraries, Library 2 : Conversion, 
 	numeric_cast
 
+	Note: Another possibility would be using std::stod (from <string>)
+
 	*/
 
 	#include <boost/numeric/conversion/bounds.hpp>
