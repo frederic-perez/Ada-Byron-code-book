@@ -13,7 +13,7 @@
 
 #include "aux-raw.h"
 #include "aux-spy.h"
-#include "boost-casts-pool.h"
+#include "conversions+casts++.h"
 
 namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;
