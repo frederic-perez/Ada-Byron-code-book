@@ -110,6 +110,8 @@ Vector<T, N>::Norm() const // Synonyms: length, magnitude, norm
 	T accSquared = 0.;
 	for (auto value : d_array)
 		accSquared += value*value;
+	using std::sqrt;
+	// '- To avoid "Implicit conversion loses floating-point precision..."
 	return sqrt(accSquared);
 }
 
@@ -183,6 +185,8 @@ Vector<T, N>::ComputeAzimuthAngle() const
 		"static_assert failed: Vector template parameter N (size) is not 3.");
 #define ADA_BYRON__USEATAN2_20151022
 #ifdef ADA_BYRON__USEATAN2_20151022
+	using std::atan2;
+	// '- To avoid "Implicit conversion loses floating-point precision..."
 	T phi = atan2(d_array[1], d_array[0]);
 	if (phi < 0.)
 		phi += 2. * boost::math::constants::pi<T>();
@@ -212,6 +216,8 @@ Vector<T, N>::ComputePolarAngle() const
 		"static_assert failed: Vector template parameter N (size) is not 3.");
 
 	//! Precondition: *this must be a normalized Vector<T, N>
+	using std::acos;
+	// '- To avoid "Implicit conversion loses floating-point precision..."
 	return acos(d_array[2]);
 	// Equivalent code for this routine:
 	// return atan2(sqrt(v.x*v.x+v.y*v.y), v.z);
