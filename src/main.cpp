@@ -57,6 +57,8 @@ main(const int argc, char* argv[])
 
 	ABcb::ExamplesOfOldConversions();
 	std::cout << std::endl;
+	ABcb::ExamplesOfCpp11Conversions();
+	std::cout << std::endl;
 	const std::string inputValue = "1234567890";
 	ABcb::ExamplesOfBoostLexicalCast(inputValue);
 	std::cout << std::endl;

@@ -55,6 +55,30 @@ ABcb::ExamplesOfOldConversions()
 }
 
 void
+ABcb::ExamplesOfCpp11Conversions()
+{
+	std::clog << __func__ << " started..." << std::endl;
+	
+	std::string line = "14 -1 67.89 3.1416";
+	std::cout << pad << "Parsing line \"" << line << "\" => " << std::flush;
+	std::string::size_type idx;
+	const unsigned long ul = std::stoul(line, &idx);
+	line = line.substr(idx);
+	const int i = std::stoi(line, &idx);
+	line = line.substr(idx);
+	const float f = std::stof(line, &idx);
+	line = line.substr(idx);
+	const double d = std::stod(line);
+	std::cout << "std::stoul: " << ul << "; std::stoi: " << i
+		<< "; std::stof: " << f << "; std::stod: " << d << std::endl;
+	
+	// TODO: Add example of std::to_string(double) and others from
+	//	www.cplusplus.com/reference/string/
+	
+	std::clog << __func__ << " finished." << std::endl;
+}
+
+void
 ABcb::ExamplesOfBoostLexicalCast(const std::string& a_numberToConvert)
 {
 	std::clog << __func__ << " started..." << std::endl;

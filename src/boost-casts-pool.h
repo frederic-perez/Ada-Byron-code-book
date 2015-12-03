@@ -1,4 +1,4 @@
-// -- Examples on how to use boost::lexical_cast
+// -- Examples on how to use boost::lexical_cast and more
 
 #pragma once
 
@@ -7,6 +7,7 @@
 namespace Ada_Byron_code_book {
 
 void ExamplesOfOldConversions();
+void ExamplesOfCpp11Conversions();
 void ExamplesOfBoostLexicalCast(const std::string& a_numberToConvert);
 void ExamplesOfBoostNumericCast();
 
