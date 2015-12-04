@@ -71,10 +71,19 @@ ABcb::ExamplesOfCpp11Conversions()
 	const double d = std::stod(line);
 	std::cout << "std::stoul: " << ul << "; std::stoi: " << i
 		<< "; std::stof: " << f << "; std::stod: " << d << std::endl;
-	
-	// TODO: Add example of std::to_string(double) and others from
-	//	www.cplusplus.com/reference/string/
-	
+
+	const std::string backToLine =
+		std::to_string(ul) + ' ' + std::to_string(i) + ' ' + std::to_string(f)
+		+ ' ' + std::to_string(d);
+	std::cout << pad << "Back to line (using std::to_string): \"" << backToLine
+		<< "\"" << std::endl;
+	std::ostringstream oss;
+	oss << ul << ' ' << i << ' ' << f << ' ' << d;
+	std::cout << pad << "Back to line (using std::ostringstream): \""
+		<< oss.str() << "\"" << std::endl;
+
+	// TODO: Add more examples from www.cplusplus.com/reference/string/
+
 	std::clog << __func__ << " finished." << std::endl;
 }
 
