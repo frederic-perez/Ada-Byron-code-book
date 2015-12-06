@@ -59,7 +59,7 @@ ABcb::ExamplesOfCpp11Conversions()
 {
 	std::clog << __func__ << " started..." << std::endl;
 	
-	std::string line = "14 -1 67.89 3.1416";
+	std::string line = "14 -1 67.89 3.1416"; // TODO: Add 5e-9 and parse it too; s/line/string + in messages
 	std::cout << pad << "Parsing line \"" << line << "\" => " << std::flush;
 	std::string::size_type idx;
 	const unsigned long ul = std::stoul(line, &idx);
