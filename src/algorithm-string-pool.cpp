@@ -162,7 +162,7 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 
 	const std::string line = "aa bb , cc dd , ee , gg,hh, ii ,kk";
 	Output("$$ line (original)", line);
-	// Split the line a into sections using "," as the delimiter,
+	// Split the string a into sections using "," as the delimiter,
 	// store result into a vector of strings
 	// Code adapted from http://www.panix.com/~jrr/boost/string.htm on 05.26.2015
 	std::vector<std::string> tokens;

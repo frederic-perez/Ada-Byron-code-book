@@ -25,10 +25,10 @@ ABcb::ExamplesOfOldConversions()
 
 	// Old way, which so far does not work properly -- TODO: Fix this
 
-	const std::string line = "14 -1 3";
-	if (!line.empty()) {
-		std::cout << pad << "Parsing line \"" << line << "\" => " << std::flush;
-		std::istringstream iss(line); // or parse(line)
+	const std::string string = "14 -1 3";
+	if (!string.empty()) {
+		std::cout << pad << "Parsing string \"" << string << "\" => " << std::flush;
+		std::istringstream iss(string); // or parse(string)
 		unsigned int i;
 		iss >> i;
 		if (!iss.good()) // Note: if (iss.fail) does not work fine for our purposes
@@ -59,27 +59,27 @@ ABcb::ExamplesOfCpp11Conversions()
 {
 	std::clog << __func__ << " started..." << std::endl;
 	
-	std::string line = "14 -1 67.89 3.1416"; // TODO: Add 5e-9 and parse it too; s/line/string + in messages
-	std::cout << pad << "Parsing line \"" << line << "\" => " << std::flush;
+	std::string string = "14 -1 67.89 3.1416"; // TODO: Add 5e-9 and parse it too
+	std::cout << pad << "Parsing string \"" << string << "\" >> " << std::flush;
 	std::string::size_type idx;
-	const unsigned long ul = std::stoul(line, &idx);
-	line = line.substr(idx);
-	const int i = std::stoi(line, &idx);
-	line = line.substr(idx);
-	const float f = std::stof(line, &idx);
-	line = line.substr(idx);
-	const double d = std::stod(line);
+	const unsigned long ul = std::stoul(string, &idx);
+	string = string.substr(idx);
+	const int i = std::stoi(string, &idx);
+	string = string.substr(idx);
+	const float f = std::stof(string, &idx);
+	string = string.substr(idx);
+	const double d = std::stod(string);
 	std::cout << "std::stoul: " << ul << "; std::stoi: " << i
 		<< "; std::stof: " << f << "; std::stod: " << d << std::endl;
 
-	const std::string backToLine =
+	const std::string backToString =
 		std::to_string(ul) + ' ' + std::to_string(i) + ' ' + std::to_string(f)
 		+ ' ' + std::to_string(d);
-	std::cout << pad << "Back to line (using std::to_string): \"" << backToLine
-		<< "\"" << std::endl;
+	std::cout << pad << "Back to string (using std::to_string): \""
+		<< backToString << "\"" << std::endl;
 	std::ostringstream oss;
 	oss << ul << ' ' << i << ' ' << f << ' ' << d;
-	std::cout << pad << "Back to line (using std::ostringstream): \""
+	std::cout << pad << "Back to string (using std::ostringstream): \""
 		<< oss.str() << "\"" << std::endl;
 
 	// TODO: Add more examples from www.cplusplus.com/reference/string/
