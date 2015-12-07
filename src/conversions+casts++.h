@@ -6,7 +6,7 @@
 
 namespace Ada_Byron_code_book {
 
-void ExamplesOfOldConversions();
+void ExamplesOfIstringstreamFailingConversions();
 void ExamplesOfCpp11Conversions();
 void ExamplesOfBoostLexicalCast(const std::string& a_numberToConvert);
 void ExamplesOfBoostNumericCast();

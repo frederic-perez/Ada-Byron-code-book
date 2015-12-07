@@ -55,7 +55,7 @@ main(const int argc, char* argv[])
 	ABcb::ExamplesOfFileSystem(exeFile);
 	std::cout << std::endl;
 
-	ABcb::ExamplesOfOldConversions();
+	ABcb::ExamplesOfIstringstreamFailingConversions();
 	std::cout << std::endl;
 	ABcb::ExamplesOfCpp11Conversions();
 	std::cout << std::endl;

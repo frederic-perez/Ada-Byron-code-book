@@ -19,7 +19,7 @@ namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;
 
 void
-ABcb::ExamplesOfOldConversions()
+ABcb::ExamplesOfIstringstreamFailingConversions()
 {
 	std::clog << __func__ << " started..." << std::endl;
 
@@ -27,7 +27,9 @@ ABcb::ExamplesOfOldConversions()
 
 	const std::string string = "14 -1 3";
 	if (!string.empty()) {
-		std::cout << pad << "Parsing string \"" << string << "\" => " << std::flush;
+		std::cout << pad << "Parsing string \"" << string 
+			<< "\" to unsigned ints i, j, k using std::istringstream >> "
+			<< std::flush;
 		std::istringstream iss(string); // or parse(string)
 		unsigned int i;
 		iss >> i;
@@ -37,13 +39,13 @@ ABcb::ExamplesOfOldConversions()
 			unsigned int j;
 			iss >> j;
 			if (!iss.good())
-				std::cerr << pad << "Error parsing second index\n";
+				std::cerr << pad << "Error parsing second index (expected behavior)\n";
 			else {
 				unsigned int k;
 				iss >> k;
 				if (!iss.good())
 					std::cerr << "Error parsing third index (i=" << i << ", j=" << j
-						<< ")\n";
+						<< "), but it should have failed for the second index\n";
 				else
 					std::cout << pad << "indices: " << i << ", " << j << ", " << k
 						<< std::endl;
