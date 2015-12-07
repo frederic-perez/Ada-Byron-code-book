@@ -56,8 +56,11 @@ Guidelines:
 C++ compilers:
 - [http://www.stroustrup.com/compilers.html](http://www.stroustrup.com/compilers.html), by Bjarne Stroustrup
 
-And finally, a list of intesting libraries or toolkits:
+A list of intesting libraries or toolkits:
 - OpenGL Mathematics (GLM), a header only C++ mathematics library for graphics software
+
+And finally, a list of good programming practices and other interesting programming books:
+- Martin Fowler, Kent Beck, John Brant, William Opdyke, Don Roberts, _Refactoring: Improving the Design of Existing Code_, Addison Wesley, 2000
 
 ### Code analysis
 
