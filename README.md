@@ -9,7 +9,7 @@ This "book" gathers a collection of C++ code snippets ready to be used as exampl
 I use to build binaries for these settings (sorted alphabetically)
 - Apple Mac OS X: 
   - 10.11 El Capitan, Xcode 7.1.1 (LLVM, clang++) 64-bit
-  - ~~Xcode 6.2 (LLVM, clang++) 64-bit~~
+  - ~~10.10 Yosemite, Xcode 6.2 (LLVM, clang++) 64-bit~~
 - Linux Ubuntu: g++ 4.8.2, clang++ 3.4.1
 - Microsoft Windows 8.1 Pro:
   - Visual Studio 14 2015 Win64 (starting in July, 2015)
