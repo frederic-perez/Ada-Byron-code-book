@@ -1,5 +1,6 @@
 // -- Examples on how to use boost::lexical_cast
 
+//#include <codecvt>
 #include <iostream>
 #include <limits>
 #include <sstream>
@@ -83,6 +84,31 @@ ABcb::ExamplesOfCpp11Conversions()
 	oss << ul << ' ' << i << ' ' << f << ' ' << d;
 	std::cout << pad << "Back to string (using std::ostringstream): \""
 		<< oss.str() << "\"" << std::endl;
+
+	// From http://www.cplusplus.com/forum/general/125880/
+	//
+	/* vs14 linker error
+	const std::u16string utf16 = u"Πυθαγόρας ὁ Σάμιος (Pythagoras of Samos)";
+	// http://en.cppreference.com/w/cpp/locale/wstring_convert
+	std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> codecvt;
+	std::cout << pad << codecvt.to_bytes(utf16) << std::endl;
+	*/
+	/* vs14 linker error
+	const std::u16string utf16 = u"Πυθαγόρας ὁ Σάμιος";
+	const std::u16string another_utf16 = u"(Pythagoras of Samos)";
+
+	// http://en.cppreference.com/w/cpp/locale/wstring_convert
+	std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> codecvt;
+
+	std::ostringstream ograph;
+	ograph << "the two UTF-16 strings contain: '" << codecvt.to_bytes(utf16)
+		<< "' and '" << codecvt.to_bytes(another_utf16) << "'";
+
+	std::cout << ograph.str() << '\n';
+	*/
+
+	// TODO: Study and go ahead with stuff from
+	// http://en.cppreference.com/w/cpp/locale/codecvt_utf8_utf16
 
 	// TODO: Add more examples from www.cplusplus.com/reference/string/
 
