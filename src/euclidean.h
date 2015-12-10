@@ -309,8 +309,6 @@ operator<<(std::ostream& a_os, const Vector<T, N>& a_vector)
 	return a_os;
 }
 
-using VectorChar = Vector<char, 2>;
-
 using Vector2 = Vector<double, 2>;
 using Vector3 = Vector<double, 3>;
 using Vector3Q = Vector<long double, 3>;
