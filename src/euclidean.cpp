@@ -43,6 +43,12 @@ ABcb::Euclidean::ExamplesOfVector()
 	const Vector0 vector0initializerList{};
 #endif
 
+#undef ADA_BYRON_CHECK_STATIC_ASSERT_COMPILER_ERROR_20151210
+#if defined(ADA_BYRON_CHECK_STATIC_ASSERT_COMPILER_ERROR_20151210)
+	using VectorImpossible = Vector<char, 2>;
+	const VectorImpossible vectorImpossible;
+#endif
+
 	const Vector2 vector2default;
 	DoAndOutputStuff(vector2default, "vector2default");
 

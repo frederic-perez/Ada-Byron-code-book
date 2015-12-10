@@ -31,11 +31,14 @@ class Vector {
 		N > 0,
 		"static_assert failed: Vector template parameter N (size) is 0. "
 		"It should be strictly positive.");
-//	static_assert(
-//		std::is_floating_point<T>::value,
-//		"static_assert failed: Vector template parameter T is not floating point");
-//	'- TODO: Oops! This assert does not work with
-//		 boost::multiprecision::cpp_dec_float_50
+	static_assert(
+		// std::is_floating_point<T>::value,
+		//	'- Oops! Alas, this assert does not work with
+		//		 boost::multiprecision::cpp_dec_float_50
+		//		 so we use the expression below, found in the Internet
+		//		 (it catches attempts of instantiating T as a char, for example)
+		false == std::numeric_limits<T>::is_integer,
+		"static_assert failed: Vector template parameter T is not floating point");
 
 public:
 	explicit Vector(T); // All elements will be set the input argument
@@ -305,6 +308,8 @@ operator<<(std::ostream& a_os, const Vector<T, N>& a_vector)
 
 	return a_os;
 }
+
+using VectorChar = Vector<char, 2>;
 
 using Vector2 = Vector<double, 2>;
 using Vector3 = Vector<double, 3>;
