@@ -191,7 +191,7 @@ std::ostream&
 Range(std::ostream& a_os)
 {
 	static_assert(
-		std::is_arithmetic<T>::value, // TODO: How to avoid instantiating with char?
+		std::is_scalar<T>::value, // TODO: How to avoid instantiating with char?
 		"static_assert failed: Template parameter T is not arithmetic");
 	a_os << "Range = [" << boost::numeric::bounds<T>::lowest() << ", "
 		<< boost::numeric::bounds<T>::highest() << ']' << std::flush;
@@ -201,14 +201,18 @@ Range(std::ostream& a_os)
 } // namespace
 
 std::ostream&
-ABcb::spy::InfoOfSomeTypes(std::ostream& a_os)
+ABcb::spy::InfoOfSomeTypes(std::ostream& a_os) // TODO: Refactor contents
 {
 	using boost::multiprecision::cpp_dec_float_50;
 	a_os
-		<< pad << "sizeof(char) = " << sizeof(char) << '\n'
-		<< pad << "sizeof(wchar_t) = " << sizeof(wchar_t) << '\n'
-		<< pad << "sizeof(int) = " << sizeof(int) << '\n'
-		<< pad << "sizeof(int64_t) = " << sizeof(int64_t) << '\n'
+		<< pad << "sizeof(char) = " << sizeof(char)
+			<< " | " << Range<char> << '\n' 
+		<< pad << "sizeof(wchar_t) = " << sizeof(wchar_t)
+			<< " | " << Range<wchar_t> << '\n'
+		<< pad << "sizeof(int) = " << sizeof(int)
+			<< " | " << Range<int> << '\n'
+		<< pad << "sizeof(int64_t) = " << sizeof(int64_t)
+			<< " | " << Range<int64_t> << '\n'
 		<< pad << "sizeof(float) = " << sizeof(float)
 			<< " | " << Range<float> << '\n'
 		<< pad << "sizeof(double) = " << sizeof(double)
