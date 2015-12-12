@@ -68,6 +68,7 @@ public:
 
 	T ComputeAzimuthAngle() const; // Only for N==3
 	T ComputePolarAngle() const; // Only for N==3; Precondition: Normalized
+// TODO operator*(const Vector&) const // inner product
 	const Vector operator^(const Vector&) const; // Only for N==3
 
 	template<class t, size_t n>
