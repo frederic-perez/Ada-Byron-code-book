@@ -70,6 +70,10 @@ ABcb::Euclidean::ExamplesOfVector()
 	vector2Self = vector2; // Assignment operator
 	DoAndOutputStuff(vector2Self, "vector2_assignment_operator");
 
+	const double dotProduct = vector2 * vector2Self;
+	std::cout << pad << "Dot product: " << vector2 << " * " << vector2Self
+		<< " = " << dotProduct << std::endl;
+
 	Vector3 vector3a{ 5., 7., 11. };
 	DoAndOutputStuff(vector3a, "vector3a");
 	vector3a.Normalize();

@@ -68,8 +68,7 @@ public:
 
 	T ComputeAzimuthAngle() const; // Only for N==3
 	T ComputePolarAngle() const; // Only for N==3; Precondition: Normalized
-// TODO operator*(const Vector&) const // scalar product
-// '- Use std::inner_product in its definition
+	T operator*(const Vector&) const; // Scalar product
 	const Vector operator^(const Vector&) const; // Only for N==3
 
 	template<class t, size_t n>
@@ -226,6 +225,17 @@ Vector<T, N>::ComputePolarAngle() const
 	return acos(d_array[2]);
 	// Equivalent code for this routine:
 	// return atan2(sqrt(v.x*v.x+v.y*v.y), v.z);
+}
+
+template<class T, size_t N>
+T
+Vector<T, N>::operator*(const Vector<T, N>& a_rhs) const
+{
+	T result = 0.;
+	for (size_t i = 0; i < d_array.size(); ++i)
+		result += d_array[i] * a_rhs.d_array[i];
+	return result;
+	// TODO: Use std::inner_product instead!
 }
 
 template<class T, size_t N>
