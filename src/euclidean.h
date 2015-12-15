@@ -6,6 +6,7 @@
 #include <array>
 #include <cmath>
 #include <iostream>
+#include <numeric>
 #include <sstream>
 #include <type_traits>
 #include <vector>
@@ -232,10 +233,16 @@ T
 Vector<T, N>::operator*(const Vector<T, N>& a_rhs) const
 {
 	T result = 0.;
-	for (size_t i = 0; i < d_array.size(); ++i)
+#undef ADA_BYRON__USE_INNER_PRODUCT_20151215
+#if defined(ADA_BYRON__USE_INNER_PRODUCT_20151215)
+	std::inner_product(
+		d_array.begin(), d_array.end(), a_rhs.d_array.begin(), result);
+	// '- TODO: Debug this (it does not work!)
+#else
+	for (size_t i = 0; i < N; ++i)
 		result += d_array[i] * a_rhs.d_array[i];
+#endif
 	return result;
-	// TODO: Use std::inner_product instead!
 }
 
 template<class T, size_t N>
