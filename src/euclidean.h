@@ -1,5 +1,7 @@
 // -- 
 
+// TODO: Add definitions to .cpp as Roberto did elsewhere. Try one first!
+
 #pragma once
 
 #include <algorithm>
