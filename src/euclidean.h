@@ -82,14 +82,6 @@ private:
 };
 
 template<class T, size_t N>
-Vector<T, N>::Vector(T a_value)
-: d_array()
-{
-	for (auto& value : d_array)
-		value = a_value;
-}
-
-template<class T, size_t N>
 Vector<T, N>::Vector(std::initializer_list<T> a_args)
 : d_array()
 {

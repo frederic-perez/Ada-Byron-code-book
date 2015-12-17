@@ -8,6 +8,14 @@ namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179
 
 using ABcb::raw::pad;
 
+template<class T, size_t N>
+ABcb::Euclidean::Vector<T, N>::Vector(T a_value)
+: d_array()
+{
+	for (auto& value : d_array)
+		value = a_value;
+}
+
 namespace {
 
 template<class Vector>
