@@ -82,27 +82,6 @@ private:
 };
 
 template<class T, size_t N>
-Vector<T, N>::Vector(std::initializer_list<T> a_args)
-: d_array()
-{
-	// Note: There is a nice discussion in
-	// stackoverflow.com/questions/5438671/static-assert-on-initializer-listsize
-	// to try to add a static_assert in the ctor, but alas, we did not succeed.
-	//
-	if (d_array.size() != a_args.size()) { // Verify right size
-		std::ostringstream oss;
-		oss << __func__ << ": a_args.size()=" << a_args.size()
-			<< " does not match N=" << N;
-		const std::string what = oss.str();
-		throw std::length_error(what);
-	}
-
-	size_t i = 0;
-	for (auto it = begin(a_args); it != end(a_args); ++it, ++i)
-		d_array[i] = *it;
-}
-
-template<class T, size_t N>
 T
 Vector<T, N>::Norm() const // Synonyms: length, magnitude, norm
 {
