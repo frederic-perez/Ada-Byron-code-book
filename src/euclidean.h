@@ -54,7 +54,8 @@ public:
 
 	T operator[](size_t a_idx) const { return d_array[a_idx]; }
 	T& operator[](size_t a_idx) { return d_array[a_idx]; }
-// TODO: Add add(size_t) using d_array.at
+	T at(size_t a_idx) const { return d_array.at(a_idx); }
+	T& at(size_t a_idx) { return d_array.at(a_idx); }
 
 	T Norm() const; // Synonyms: length, magnitude, norm
 	T ElementsSum() const;
