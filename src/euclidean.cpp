@@ -37,6 +37,131 @@ ABcb::Euclidean::Vector<T, N>::Vector(std::initializer_list<T> a_args)
 		d_array[i] = *it;
 }
 
+template<class T, size_t N>
+T
+ABcb::Euclidean::Vector<T, N>::Norm() const // Synonyms: length, magnitude, norm
+{
+	T accSquared = 0.;
+	for (auto value : d_array)
+		accSquared += value*value;
+	using std::sqrt;
+	// '- To avoid "Implicit conversion loses floating-point precision..."
+	return sqrt(accSquared);
+}
+
+template<class T, size_t N>
+T
+ABcb::Euclidean::Vector<T, N>::ElementsSum() const
+{
+	T acc = 0.;
+	for (auto value : d_array)
+		acc += value;
+	return acc;
+}
+
+template<class T, size_t N>
+T
+ABcb::Euclidean::Vector<T, N>::ElementsAvg() const
+{	return ElementsSum()/N; }
+
+template<class T, size_t N>
+auto
+ABcb::Euclidean::Vector<T, N>::Normalize()
+-> const Vector<T, N>&
+{
+	const T norm = Norm();
+	for (T& value : d_array)
+		value /= norm;
+	return *this;
+}
+
+template<class T, size_t N>
+auto
+ABcb::Euclidean::Vector<T, N>::operator+=(const Vector<T, N>& a_rhs)
+-> Vector<T, N>&
+{
+	for (size_t i = 0; i < N; ++i)
+		d_array[i] += a_rhs.d_array[i];
+	return *this;
+}
+
+template<class T, size_t N>
+auto
+ABcb::Euclidean::Vector<T, N>::operator-=(const Vector<T, N>& a_rhs)
+-> Vector<T, N>&
+{
+	for (size_t i = 0; i < N; ++i)
+		d_array[i] -= a_rhs.d_array[i];
+	return *this;
+}
+
+template<class T, size_t N>
+auto
+ABcb::Euclidean::Vector<T, N>::operator*=(T a_rhs)
+-> Vector<T, N>&
+{
+	for (size_t i = 0; i < N; ++i)
+		d_array[i] *= a_rhs;
+	return *this;
+}
+
+template<class T, size_t N>
+auto
+ABcb::Euclidean::Vector<T, N>::operator/=(T a_rhs)
+-> Vector<T, N>&
+{
+	for (size_t i = 0; i < N; ++i)
+		d_array[i] /= a_rhs;
+	return *this;
+}
+
+template<class T, size_t N>
+T
+ABcb::Euclidean::Vector<T, N>::ComputeAzimuthAngle() const
+{
+	static_assert(
+		N == 3,
+		"static_assert failed: Vector template parameter N (size) is not 3.");
+#define ADA_BYRON__USEATAN2_20151022
+#ifdef ADA_BYRON__USEATAN2_20151022
+	using std::atan2;
+	// '- To avoid "Implicit conversion loses floating-point precision..."
+	T phi = atan2(d_array[1], d_array[0]);
+	if (phi < 0.)
+		phi += 2. * boost::math::constants::pi<T>();
+	return phi;
+#else
+	// Precondition: v must be a normalized Vector3
+	const T sinTheta = sin(acos(d_array[2]));
+	if (fabs(sinTheta)<THRESHOLD_SIN_THETA)
+		return 0.; // x = y = 0.
+	else {
+		T phi;
+		const T aux = d_array[0] / sinTheta; // to avoid precision problems
+		if (aux>1.) phi = 0.;
+		else if (aux<-1.) phi = boost::math::constants::pi<T>();
+		else phi = acos(aux);
+		return (d_array[1]<0.) ? -phi : phi;
+	}
+#endif
+}
+
+template<class T, size_t N>
+T
+ABcb::Euclidean::Vector<T, N>::ComputePolarAngle() const
+{
+	static_assert(
+		N == 3,
+		"static_assert failed: Vector template parameter N (size) is not 3.");
+	
+	//! Precondition: *this must be a normalized Vector<T, N>
+	using std::acos;
+	// '- To avoid "Implicit conversion loses floating-point precision..."
+	return acos(d_array[2]);
+	// Equivalent code for this routine:
+	// return atan2(sqrt(v.x*v.x+v.y*v.y), v.z);
+}
+
 namespace {
 
 template<class Vector>
