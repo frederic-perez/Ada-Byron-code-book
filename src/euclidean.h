@@ -75,6 +75,7 @@ public:
 
 	T ComputeAzimuthAngle() const; // Only for N==3
 	T ComputePolarAngle() const; // Only for N==3; Precondition: Normalized
+
 	T operator*(const Vector&) const; // Scalar product
 	const Vector operator^(const Vector&) const; // Only for N==3
 
