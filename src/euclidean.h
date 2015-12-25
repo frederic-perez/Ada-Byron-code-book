@@ -73,11 +73,11 @@ public:
 	Vector& operator*=(T);
 	Vector& operator/=(T);
 
-	T ComputeAzimuthAngle() const; // Only for N==3
-	T ComputePolarAngle() const; // Only for N==3; Precondition: Normalized
-
 	T operator*(const Vector&) const; // Scalar product
 	const Vector operator^(const Vector&) const; // Only for N==3
+
+	T ComputeAzimuthAngle() const; // Only for N==3
+	T ComputePolarAngle() const; // Only for N==3; Precondition: Normalized
 
 	template<class t, size_t n>
 	friend std::ostream& operator<<(std::ostream&, const Vector<t, n>&);
