@@ -148,6 +148,38 @@ ABcb::Euclidean::Vector<T, N>::ComputeAzimuthAngle() const
 
 template<class T, size_t N>
 T
+ABcb::Euclidean::Vector<T, N>::operator*(const Vector<T, N>& a_rhs) const
+{
+	T result = 0.;
+#undef ADA_BYRON__USE_INNER_PRODUCT_20151215
+#if defined(ADA_BYRON__USE_INNER_PRODUCT_20151215)
+	std::inner_product(
+		d_array.begin(), d_array.end(), a_rhs.d_array.begin(), result);
+	// '- TODO: Debug this (it does not work!)
+#else
+	for (size_t i = 0; i < N; ++i)
+		result += d_array[i] * a_rhs.d_array[i];
+#endif
+	return result;
+}
+
+template<class T, size_t N>
+auto
+ABcb::Euclidean::Vector<T, N>::operator^(const Vector<T, N>& a_rhs) const
+-> const Vector<T, N>
+{
+	static_assert(
+		N == 3,
+		"static_assert failed: Vector template parameter N (size) is not 3.");
+	return
+		Vector<T, N>{
+		d_array[1] * a_rhs[2] - d_array[2] * a_rhs[1],
+			d_array[2] * a_rhs[0] - d_array[0] * a_rhs[2],
+			d_array[0] * a_rhs[1] - d_array[1] * a_rhs[0]};
+}
+
+template<class T, size_t N>
+T
 ABcb::Euclidean::Vector<T, N>::ComputePolarAngle() const
 {
 	static_assert(
