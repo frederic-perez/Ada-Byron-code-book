@@ -117,37 +117,6 @@ ABcb::Euclidean::Vector<T, N>::operator/=(T a_rhs)
 
 template<class T, size_t N>
 T
-ABcb::Euclidean::Vector<T, N>::ComputeAzimuthAngle() const
-{
-	static_assert(
-		N == 3,
-		"static_assert failed: Vector template parameter N (size) is not 3.");
-#define ADA_BYRON__USEATAN2_20151022
-#ifdef ADA_BYRON__USEATAN2_20151022
-	using std::atan2;
-	// '- To avoid "Implicit conversion loses floating-point precision..."
-	T phi = atan2(d_array[1], d_array[0]);
-	if (phi < 0.)
-		phi += 2. * boost::math::constants::pi<T>();
-	return phi;
-#else
-	// Precondition: v must be a normalized Vector3
-	const T sinTheta = sin(acos(d_array[2]));
-	if (fabs(sinTheta)<THRESHOLD_SIN_THETA)
-		return 0.; // x = y = 0.
-	else {
-		T phi;
-		const T aux = d_array[0] / sinTheta; // to avoid precision problems
-		if (aux>1.) phi = 0.;
-		else if (aux<-1.) phi = boost::math::constants::pi<T>();
-		else phi = acos(aux);
-		return (d_array[1]<0.) ? -phi : phi;
-	}
-#endif
-}
-
-template<class T, size_t N>
-T
 ABcb::Euclidean::Vector<T, N>::operator*(const Vector<T, N>& a_rhs) const
 {
 	T result = 0.;
@@ -176,6 +145,37 @@ ABcb::Euclidean::Vector<T, N>::operator^(const Vector<T, N>& a_rhs) const
 		d_array[1] * a_rhs[2] - d_array[2] * a_rhs[1],
 			d_array[2] * a_rhs[0] - d_array[0] * a_rhs[2],
 			d_array[0] * a_rhs[1] - d_array[1] * a_rhs[0]};
+}
+
+template<class T, size_t N>
+T
+ABcb::Euclidean::Vector<T, N>::ComputeAzimuthAngle() const
+{
+	static_assert(
+								N == 3,
+								"static_assert failed: Vector template parameter N (size) is not 3.");
+#define ADA_BYRON__USEATAN2_20151022
+#ifdef ADA_BYRON__USEATAN2_20151022
+	using std::atan2;
+	// '- To avoid "Implicit conversion loses floating-point precision..."
+	T phi = atan2(d_array[1], d_array[0]);
+	if (phi < 0.)
+		phi += 2. * boost::math::constants::pi<T>();
+	return phi;
+#else
+	// Precondition: v must be a normalized Vector3
+	const T sinTheta = sin(acos(d_array[2]));
+	if (fabs(sinTheta)<THRESHOLD_SIN_THETA)
+		return 0.; // x = y = 0.
+	else {
+		T phi;
+		const T aux = d_array[0] / sinTheta; // to avoid precision problems
+		if (aux>1.) phi = 0.;
+		else if (aux<-1.) phi = boost::math::constants::pi<T>();
+		else phi = acos(aux);
+		return (d_array[1]<0.) ? -phi : phi;
+	}
+#endif
 }
 
 template<class T, size_t N>
