@@ -194,6 +194,54 @@ ABcb::Euclidean::Vector<T, N>::ComputePolarAngle() const
 	// return atan2(sqrt(v.x*v.x+v.y*v.y), v.z);
 }
 
+template<class T, size_t N>
+auto
+ABcb::Euclidean::operator+(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs)
+-> const Vector<T, N>
+{
+	return Vector<T, N>(a_lhs) += a_rhs;
+}
+
+template<class T, size_t N>
+auto
+ABcb::Euclidean::operator-(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs)
+-> const Vector<T, N>
+{
+	return Vector<T, N>(a_lhs) -= a_rhs;
+}
+
+template<class T, size_t N, class T2>
+auto
+ABcb::Euclidean::operator*(const Vector<T, N>& a_lhs, T2 a_rhs)
+-> const Vector<T, N>
+{
+	return Vector<T, N>(a_lhs) *= a_rhs;
+}
+
+template<class T, size_t N, class T2>
+auto
+ABcb::Euclidean::operator*(T2 a_lhs, const Vector<T, N>& a_rhs)
+-> const Vector<T, N>
+{
+	return Vector<T, N>(a_rhs) *= a_lhs;
+}
+
+template<class T, size_t N, class T2>
+auto
+ABcb::Euclidean::operator/(const Vector<T, N>& a_lhs, T2 a_rhs)
+-> const Vector<T, N>
+{
+	return Vector<T, N>(a_lhs) /= a_rhs;
+}
+
+template<class T, size_t N, class T2>
+auto
+ABcb::Euclidean::operator/(T a_lhs, const Vector<T, N>& a_rhs)
+-> const Vector<T2, N>
+{
+	return Vector<T, N>(a_rhs) /= a_lhs;
+}
+
 namespace {
 
 template<class Vector>

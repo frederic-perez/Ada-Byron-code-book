@@ -88,46 +88,28 @@ private:
 
 template<class T, size_t N>
 const Vector<T, N>
-operator+(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs)
-{
-	return Vector<T, N>(a_lhs) += a_rhs;
-}
+operator+(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs);
 
 template<class T, size_t N>
 const Vector<T, N>
-operator-(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs)
-{
-	return Vector<T, N>(a_lhs) -= a_rhs;
-}
+operator-(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs);
 
 template<class T, size_t N, class T2>
 const Vector<T, N>
-operator*(const Vector<T, N>& a_lhs, T2 a_rhs)
-{
-	return Vector<T, N>(a_lhs) *= a_rhs;
-}
+operator*(const Vector<T, N>& a_lhs, T2 a_rhs);
 
 template<class T, size_t N, class T2>
 const Vector<T, N>
-operator*(T2 a_lhs, const Vector<T, N>& a_rhs)
-{
-	return Vector<T, N>(a_rhs) *= a_lhs;
-}
+operator*(T2 a_lhs, const Vector<T, N>& a_rhs);
 
 template<class T, size_t N, class T2>
 const Vector<T, N>
-operator/(const Vector<T, N>& a_lhs, T2 a_rhs)
-{
-	return Vector<T, N>(a_lhs) /= a_rhs;
-}
+operator/(const Vector<T, N>& a_lhs, T2 a_rhs);
 
 template<class T, size_t N, class T2>
 const Vector<T2, N>
-operator/(T a_lhs, const Vector<T, N>& a_rhs)
-{
-	return Vector<T, N>(a_rhs) /= a_lhs;
-}
-	
+operator/(T a_lhs, const Vector<T, N>& a_rhs);
+
 template<class T, size_t N>
 std::ostream&
 operator<<(std::ostream& a_os, const Vector<T, N>& a_vector)
