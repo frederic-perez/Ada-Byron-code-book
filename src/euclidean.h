@@ -1,6 +1,6 @@
 // -- 
 
-// TODO: Add definitions to .cpp as Roberto did elsewhere. Try one first!
+// TODO: Move definitions to .cpp as Roberto did elsewhere
 
 #pragma once
 
