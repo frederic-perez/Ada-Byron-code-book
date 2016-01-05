@@ -1,5 +1,17 @@
 // -- 
 
+#include <algorithm>
+#include <array>
+#include <cmath>
+#include <iostream>
+#include <numeric>
+
+#include "aux-raw-compiler-warnings-off++begin.h"
+
+	#include <boost/math/constants/constants.hpp>
+
+#include "aux-raw-compiler-warnings-off++end.h"
+
 #include "aux-raw.h"
 #include "aux-spy.h"
 #include "euclidean.h"

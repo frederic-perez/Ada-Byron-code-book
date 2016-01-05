@@ -6,11 +6,6 @@
 
 // TODO: Move #includes to .cpp
 
-#include <algorithm>
-#include <array>
-#include <cmath>
-#include <iostream>
-#include <numeric>
 #include <sstream>
 #include <type_traits>
 #include <vector>
@@ -18,7 +13,6 @@
 #include "aux-raw-compiler-warnings-off++begin.h"
 
 	#include <boost/algorithm/string.hpp>
-	#include <boost/math/constants/constants.hpp>
 	#include <boost/multiprecision/cpp_dec_float.hpp>
 
 #include "aux-raw-compiler-warnings-off++end.h"
