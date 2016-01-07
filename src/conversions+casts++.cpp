@@ -62,7 +62,7 @@ ABcb::ExamplesOfCpp11Conversions()
 {
 	std::clog << __func__ << " started..." << std::endl;
 	
-	std::string string = "14 -1 67.89 3.1416"; // TODO: Add 5e-9 and parse it too
+	std::string string = "14 -1 67.89 3.1416 5e-7";
 	std::cout << pad << "Parsing string \"" << string << "\" >> " << std::flush;
 	std::string::size_type idx;
 	const unsigned long ul = std::stoul(string, &idx);
@@ -71,19 +71,22 @@ ABcb::ExamplesOfCpp11Conversions()
 	string = string.substr(idx);
 	const float f = std::stof(string, &idx);
 	string = string.substr(idx);
-	const double d = std::stod(string);
+	const double d1 = std::stod(string, &idx);
+	string = string.substr(idx);
+	const double d2 = std::stod(string); // Caution: idx is not updated here
 	std::cout << "std::stoul: " << ul << "; std::stoi: " << i
-		<< "; std::stof: " << f << "; std::stod: " << d << std::endl;
+		<< "; std::stof: " << f << "; std::stod: " << d1 << "; std::stod: " << d2
+		<< std::endl;
 
 	const std::string backToString =
 		std::to_string(ul) + ' ' + std::to_string(i) + ' ' + std::to_string(f)
-		+ ' ' + std::to_string(d);
+		+ ' ' + std::to_string(d1) + ' ' + std::to_string(d2);
 	std::cout << pad << "Back to string (using std::to_string): \""
 		<< backToString << "\"" << std::endl;
 	std::ostringstream oss;
-	oss << ul << ' ' << i << ' ' << f << ' ' << d;
+	oss << ul << ' ' << i << ' ' << f << ' ' << d1 << ' ' << d2;
 	std::cout << pad << "Back to string (using std::ostringstream): \""
-		<< oss.str() << "\"" << std::endl;
+		<< oss.str() << "\" <-- Preferred way!" << std::endl;
 
 	// From http://www.cplusplus.com/forum/general/125880/
 	//
