@@ -185,19 +185,37 @@ ABcb::spy::LocalTime(std::ostream& a_os)
 namespace {
 
 const std::string pad = "  ";
-	
+
 template <class T>
 std::ostream&
 Range(std::ostream& a_os)
 {
 	static_assert(
-		std::is_scalar<T>::value, // TODO: How to avoid instantiating with char?
-		"static_assert failed: Template parameter T is not arithmetic");
+		std::is_scalar<T>::value || // TODO: How to avoid instantiating with char?
+		false == std::numeric_limits<T>::is_integer,
+		"static_assert failed: "
+		"Template parameter T is neither arithmetic nor floating point");
 	a_os << "Range = [" << boost::numeric::bounds<T>::lowest() << ", "
 		<< boost::numeric::bounds<T>::highest() << ']' << std::flush;
 	return a_os;
 }
-	
+
+template <class T>
+std::ostream&
+RangeAsInt(std::ostream& a_os)
+{
+	static_assert(
+		std::is_scalar<T>::value ||
+		true == std::numeric_limits<T>::is_integer,
+		"static_assert failed: Template parameter T is not suitable");
+	a_os << "Range (as int) = [" 
+		<< boost::numeric_cast<int>(boost::numeric::bounds<T>::lowest())
+		<< ", "
+		<< boost::numeric_cast<int>(boost::numeric::bounds<T>::highest())
+		<< ']' << std::flush;
+	return a_os;
+}
+
 } // namespace
 
 std::ostream&
@@ -206,7 +224,7 @@ ABcb::spy::InfoOfSomeTypes(std::ostream& a_os) // TODO: Refactor contents
 	using boost::multiprecision::cpp_dec_float_50;
 	a_os
 		<< pad << "sizeof(char) = " << sizeof(char)
-			<< " | " << Range<char> << '\n' 
+			<< " | " << RangeAsInt<char> << '\n'
 		<< pad << "sizeof(wchar_t) = " << sizeof(wchar_t)
 			<< " | " << Range<wchar_t> << '\n'
 		<< pad << "sizeof(int) = " << sizeof(int)
@@ -219,16 +237,17 @@ ABcb::spy::InfoOfSomeTypes(std::ostream& a_os) // TODO: Refactor contents
 			<< " | " << Range<double> << '\n'
 		<< pad << "sizeof(long double) = " << sizeof(long double)
 			<< " | " << Range<long double> << '\n'
-		<< pad << "sizeof(size_t) = " << sizeof(size_t) << '\n'
-		<< pad << "sizeof(unsigned int) = " << sizeof(unsigned int) << '\n'
-		<< pad << "sizeof(unsigned long) = " << sizeof(unsigned long) << '\n'
-		<< pad << "sizeof(uint64_t) = " << sizeof(uint64_t) << '\n'
+		<< pad << "sizeof(size_t) = " << sizeof(size_t)
+			<< " | " << Range<size_t> << '\n'
+		<< pad << "sizeof(unsigned int) = " << sizeof(unsigned int)
+			<< " | " << Range<unsigned int> << '\n'
+		<< pad << "sizeof(unsigned long) = " << sizeof(unsigned long)
+			<< " | " << Range<unsigned long> << '\n'
+		<< pad << "sizeof(uint64_t) = " << sizeof(uint64_t)
+			<< " | " << Range<uint64_t> << '\n'
 		<< pad <<	"sizeof(boost::multiprecision::cpp_dec_float_50) = "
 			<< sizeof(cpp_dec_float_50)
-			<< " | Range = [" << boost::numeric::bounds<cpp_dec_float_50>::lowest()
-			<< ", "
-			<< boost::numeric::bounds<cpp_dec_float_50>::highest() << ']'
-		<< '\n';
+			<< " | " << Range<cpp_dec_float_50> << '\n';
 	return a_os;
 }
 
