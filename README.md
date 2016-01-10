@@ -102,7 +102,7 @@ Example commit messages:
 Advice on **unnecessary comments**:
 - Avoid (or remove) unnecessary comments! For example, from C++ Gotchas: Avoiding Common Problems in Coding and Design, by Stephen C. Dewhurst: Gotcha #1: Excessive Commenting: _"If a maintainer has to be reminded of the meaning of the `public:` label [for example with the comment `// Public Interface`], you don't want that person maintaining your code."_
 
-Why C++ does not have a **<code>super</code> keyword**, and we do not promote creating any proxy for that:
+Why C++ does not have a **`super` keyword**, and we do not promote creating any proxy for that:
 - See the most voted answer of this [StackOverflow's thread](http://stackoverflow.com/questions/180601/using-super-in-c).
 
 Do not write **<code>using namespace [std]</code>** in header files or before an <code>#include</code>:
