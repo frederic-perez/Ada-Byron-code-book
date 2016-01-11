@@ -265,7 +265,7 @@ GetArgv0Info(const std::string& a_argv0)
 	oss << "The full argv[0]:\n"
 		<< pad << "is " << fullArgv0 << ",\n";
 	if (bf::exists(fullArgv0)) {
-		oss << pad << "which " << (bf::is_regular(fullArgv0) ? "is" : "is not")
+		oss << pad << "which is" << (bf::is_regular(fullArgv0) ? "" : " not")
 			<< " a regular file, created by ";
 #if defined(CMAKE_MYUSERNAME)
 		oss << BOOST_PP_STRINGIZE(CMAKE_MYUSERNAME);
