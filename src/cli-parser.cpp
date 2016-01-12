@@ -21,6 +21,41 @@ namespace ABcb = Ada_Byron_code_book;
 
 namespace {
 
+void
+GuruTest(const std::string& a_text)
+{
+	using namespace ABcb;
+	Guru::Enum guru = Guru::GetEnum(a_text);
+	using raw::pad;
+	if (guru == Guru::Enum::undefined) {
+		const std::string message =
+			"Unknown guru parameter '" + a_text + "'";
+
+		std::ostringstream oss;
+		std::vector<std::string> definedStrings = Guru::GetDefinedStrings();
+		oss << '{' << boost::algorithm::join(definedStrings, ", ") << '}';
+		const std::string setOfDefinedStrings = oss.str();
+
+		std::cerr << pad << __func__ << ": " << message << '\n'
+			<< pad << pad << "--guru arg " << setOfDefinedStrings << '\n';
+
+	}
+	else
+		std::cout << pad << __func__ << ": guru = " << a_text << std::endl;
+}
+
+} // namespace
+
+void
+ABcb::GurusTest(const std::initializer_list<std::string> a_args)
+{
+	std::cout << __func__ << " called" << std::endl;
+	for (auto text : a_args)
+		GuruTest(text);
+}
+
+namespace {
+
 char* argv0 = 0;
 char* progname = 0;
 
