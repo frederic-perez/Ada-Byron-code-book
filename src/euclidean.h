@@ -1,7 +1,5 @@
 // -- 
 
-// TODO: Move definitions to .cpp as Roberto did elsewhere
-
 #pragma once
 
 // TODO: Move #includes to .cpp
@@ -103,6 +101,8 @@ operator/(const Vector<T, N>& a_lhs, T2 a_rhs);
 template<class T, size_t N, class T2>
 const Vector<T2, N>
 operator/(T a_lhs, const Vector<T, N>& a_rhs);
+
+// TODO: Move the definition below to .cpp
 
 template<class T, size_t N>
 std::ostream&
