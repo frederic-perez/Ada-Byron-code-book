@@ -87,6 +87,11 @@ main(const int argc, char* argv[])
 	ABcb::GurusTest(
 		{ BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, (Annie_Lennox)(Mike_Oldfield)) });
 
+	ABcb::miscellany::ExamplesOfFactorial();
+	ABcb::miscellany::ExamplesOfMultiprecision();
+
+	// Output final message and exit
+	//
 	const double timeElapsed = timerHQ.Seconds();
 	const auto previousPrecision = std::clog.precision(2);
 	// '- Note: "auto" is recommended here to avoid potential problems with
@@ -94,11 +99,8 @@ main(const int argc, char* argv[])
 	//		precision in vs12), since the standard states that the return type of
 	//		setprecision is "unspecified"
 	std::clog << '\n' << __func__ << " finishes. Time elapsed: "
-		<< timeElapsed << " seconds" 
+		<< timeElapsed << " seconds"
 		<< std::setprecision(previousPrecision) << std::endl;
-
-	ABcb::miscellany::ExamplesOfFactorial();
-	ABcb::miscellany::ExamplesOfMultiprecision();
 
 	return EXIT_SUCCESS;
 }
