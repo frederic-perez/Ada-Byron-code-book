@@ -76,12 +76,11 @@ ABcb::miscellany::ExamplesOfFactorial()
 	// Using FactorialRecursive
 	//
 	size_t n = 0;
-	size_t factorialN = 0;
 	bool overflow = false;
 	while (!overflow) {
 		++n;
 		try {
-			factorialN = FactorialRecursive(n);
+			FactorialRecursive(n);
 		} catch (const std::overflow_error& e) {
 			std::cerr << pad << __func__ << ": Exception caught: " << e.what()
 				<< '\n';
@@ -90,7 +89,7 @@ ABcb::miscellany::ExamplesOfFactorial()
 	}
 
 	--n;
-	factorialN = FactorialRecursive(n);
+	const size_t factorialN = FactorialRecursive(n);
 	oss.str("");
 	oss << factorialN;
 	std::cout << pad << "FactorialRecursive(" << n << ")            = "
