@@ -15,7 +15,7 @@ I use to build binaries for these settings (sorted alphabetically)
   - Visual Studio 14 2015 Win64 (starting in July, 2015)
   - ~~Visual Studio 12 2013 Win64~~
 
-Q for all of them we use
+and for all of them we use
 - (TODO: Get and use Boost 1.60.0)
 - [Boost](http://www.boost.org/) Version 1.59.0 (August 13th, 2015 15:23 GMT)
 - ~~[Boost](http://www.boost.org/) Version 1.58.0 (April 17th, 2015 07:53 GMT)~~
