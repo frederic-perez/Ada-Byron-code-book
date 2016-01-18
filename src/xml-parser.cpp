@@ -137,7 +137,6 @@ using Ada_Byron_code_book::raw::pad;
 
 	// traverse pt
 	for (const ptree::value_type& pairStringPtree : pt.get_child("flights")) {
-SpyLine
 		if (pairStringPtree.first == "flight") {
 			const ptree& subtree = pairStringPtree.second;
 			const std::string carrier = subtree.get<std::string>("carrier");
