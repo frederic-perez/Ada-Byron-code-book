@@ -68,7 +68,7 @@ And finally, a list of good programming practices and other interesting programm
 We strive to maintain a certain quality on the code by taking advantage of some tools:
 - Cppcheck - A tool for static C/C++ code analysis. Being myself a fan of portable apps, I particularly use the version from [PortableApps.com](http://portableapps.com/apps/development/cppcheck-portable).
 - "Analyze > Run Code Analysis on Only Ada-Byron-code-book" when using Microsoft Windows 8.1: Microsoft Visual Studio Community 2015 (Version 14, with solution platform for x64)
-- "Product > Analyze" when using Apple OS X: Xcode 6.2 (LLVM, clang++) 64-bit
+- "Product > Analyze" when using Apple OS X: Xcode 7.1.1 (LLVM, clang++) 64-bit
 - (Just starting...) In g++ and clang++, address/thread/memory sanitizer (AKA [ASan](https://code.google.com/p/address-sanitizer/), TSan, MSan)--for example, for Asan, with the flags `-fsanitize=address -fno-omit-frame-pointer`
 - TODO (try this): Cloud-based [Coverity Scan](http://www.coverity.com/products/coverity-scan/) for the Open Source Community
 
