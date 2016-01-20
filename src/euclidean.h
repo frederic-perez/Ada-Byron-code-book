@@ -115,6 +115,7 @@ operator<<(std::ostream& a_os, const Vector<T, N>& a_vector)
 	// 2nd, its actual contents
 	//
 	std::ostringstream oss;
+	oss << std::setprecision(std::numeric_limits<T>::digits10);
 	std::vector<std::string> valuesAsStrings;
 	for (auto value : a_vector.d_array) {
 		oss << value;
