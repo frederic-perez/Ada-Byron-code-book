@@ -128,7 +128,8 @@ namespace {
 void
 Read(std::istream& a_istream, Flights& a_flights)
 {
-using Ada_Byron_code_book::raw::pad;
+	using Ada_Byron_code_book::raw::pad;
+
 	// populate tree structure pt
 	using boost::property_tree::ptree;
 	ptree pt;
@@ -146,12 +147,12 @@ using Ada_Byron_code_book::raw::pad;
 			} catch (const std::exception& e) {
 				std::cerr << pad << __func__ << ": std::exception caught: "
 					<< e.what() << std::endl;
-				return;
+				throw; // rethrow the original exception, no slicing or anything
 			}
-				const Date date = subtree.get<Date>("date");
-				const bool cancelled = subtree.get("<xmlattr>.cancelled", false);
-				const Flight flight(carrier, number, date, cancelled);
-				a_flights.push_back(flight);
+			const Date date = subtree.get<Date>("date");
+			const bool cancelled = subtree.get("<xmlattr>.cancelled", false);
+			const Flight flight(carrier, number, date, cancelled);
+			a_flights.push_back(flight);
 		}
 	}
 }
