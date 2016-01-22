@@ -77,8 +77,8 @@ main(const int argc, char* argv[])
 	const std::string filenameIn = "input.xml";
 	const std::string filenameOut = "output.xml";
 	succeeded = ABcb::ParseXML(filenameIn, filenameOut);
-	std::clog << "ABcb::ParseXML " << (succeeded ? "succeeded" : "failed")
-		<< std::endl << std::endl;
+	std::clog << "Ada_Byron_code_book::ParseXML "
+		<< (succeeded ? "succeeded" : "failed") << ".\n" << std::endl;
 
 	ABcb::ExamplesOfConcurrency();
 	std::cout << std::endl;
