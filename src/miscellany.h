@@ -6,6 +6,8 @@ namespace Ada_Byron_code_book {
 
 namespace miscellany {
 
+void ExampleOfRawStringLiteral();
+
 // See Herb Sutter, Andrei Alexandrescu, C++ Coding Standards: 101 Rules, 
 // Guidelines, and Best Practices, Addison Wesley Professional, 2004,
 // Chapter 15, Use const proactively (particularly, the Examples section)

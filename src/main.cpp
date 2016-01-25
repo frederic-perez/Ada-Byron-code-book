@@ -87,6 +87,7 @@ main(const int argc, char* argv[])
 	ABcb::GurusTest(
 		{ BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, (Annie_Lennox)(Mike_Oldfield)) });
 
+	ABcb::miscellany::ExampleOfRawStringLiteral();
 	ABcb::miscellany::ExamplesOfFactorial();
 	ABcb::miscellany::ExamplesOfMultiprecision();
 
