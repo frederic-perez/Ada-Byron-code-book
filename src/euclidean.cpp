@@ -109,7 +109,7 @@ ABcb::Euclidean::Vector<T, N>::operator-=(const Vector<T, N>& a_rhs)
 
 template<class T, size_t N>
 auto
-ABcb::Euclidean::Vector<T, N>::operator*=(T a_rhs)
+ABcb::Euclidean::Vector<T, N>::operator*=(const T a_rhs)
 -> Vector<T, N>&
 {
 	for (size_t i = 0; i < N; ++i)
