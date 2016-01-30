@@ -107,7 +107,7 @@ Why C++ does not have a **`super` keyword**, and we do not promote creating any 
 
 Do not write (for example) **`using namespace std;`** in header files or before an `#include`:
 - From Programming, Principles and Practice Using C++, by Stroustrup: _"Be restrained in the use or `using` directives. The notational convenience offered by a `using` directive is achieved at the cost or potential name clashes. In particular, avoid `using` directives in header files."_
-- From Thinking in C++, 2nd ed. Vol. 1, by Eckel: _"Thus, if you start putting `using` directives in header files, it’s very easy to end up “turning off” namespaces practically everywhere, and thereby neutralizing the beneficial effects of namespaces. In short: don’t put <code>using</code> directives in header files."_
+- From Thinking in C++, 2nd ed. Vol. 1, by Eckel: _"Thus, if you start putting `using` directives in header files, it’s very easy to end up “turning off” namespaces practically everywhere, and thereby neutralizing the beneficial effects of namespaces. In short: don’t put `using` directives in header files."_
 - From Industrial Strength C++, by Henricson and Nyquist: _"A <code>using</code> declaration or a <code>using</code> directive in the global scope is not recommended inside header files, since it will make names globally accessible to all files that include that header."_
 - From C++ Coding Standards: 101 Rules, Guidelines, and Best Practices, by Sutter and Alexandrescu: _"Rule 59: Don't write namespace usings in a header file or before an <code>#include</code>."_
 
