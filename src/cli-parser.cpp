@@ -9,6 +9,7 @@
 
 	#include <boost/algorithm/string.hpp>
 	#include <boost/numeric/conversion/bounds.hpp>
+	#include <boost/numeric/conversion/cast.hpp>
 	#include <boost/program_options.hpp>
 	#include <boost/tokenizer.hpp>
 
