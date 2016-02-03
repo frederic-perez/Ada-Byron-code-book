@@ -116,8 +116,7 @@ template<typename T>
 T
 AreaOfACircle(const T r)
 {
-	using boost::math::constants::pi;
-	return pi<T>() * r * r;
+	return boost::math::constants::pi<T>() * r * r; // Notice the nice pi used
 }
 
 } // namespace
