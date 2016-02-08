@@ -94,6 +94,9 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 	std::string name = "  Alan Turing 42  ";
 	Output("%% name (original)", name);
 	name.erase(boost::remove_if(name, ::isdigit), name.end());
+	// '- Notice that all "remove_if" call has an "erase" companion
+	//		to do the actual cleanup.
+	//		This happens for both std:: and boost::, by the way
 	Output("   name (after isdigit removal)", name);
 
 	namespace ba = boost::algorithm;
