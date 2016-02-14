@@ -97,6 +97,10 @@ Example commit messages:
 - Bad: COMP: Typo in cmake variable -> implementation detail, self-explanatory
 - Good: COMP: Fix compilation error with Numpy on Visual Studio 
 
+### Online compilers
+
+TODO: Gather list fom my bookmarks
+
 ### Miscellaneous notes
 
 Advice on **unnecessary comments**:
