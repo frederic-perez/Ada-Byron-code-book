@@ -229,6 +229,8 @@ ABcb::spy::InfoOfSomeTypes(std::ostream& a_os) // TODO: Refactor contents
 			<< " | " << Range<wchar_t> << '\n'
 		<< pad << "sizeof(int) = " << sizeof(int)
 			<< " | " << Range<int> << '\n'
+		<< pad << "sizeof(short int) = " << sizeof(short int)
+			<< " | " << Range<short int> << '\n'
 		<< pad << "sizeof(int64_t) = " << sizeof(int64_t)
 			<< " | " << Range<int64_t> << '\n'
 		<< pad << "sizeof(float) = " << sizeof(float)
@@ -241,6 +243,8 @@ ABcb::spy::InfoOfSomeTypes(std::ostream& a_os) // TODO: Refactor contents
 			<< " | " << Range<size_t> << '\n'
 		<< pad << "sizeof(unsigned int) = " << sizeof(unsigned int)
 			<< " | " << Range<unsigned int> << '\n'
+		<< pad << "sizeof(unsigned short) = " << sizeof(unsigned short)
+			<< " | " << Range<unsigned short> << '\n'
 		<< pad << "sizeof(unsigned long) = " << sizeof(unsigned long)
 			<< " | " << Range<unsigned long> << '\n'
 		<< pad << "sizeof(uint64_t) = " << sizeof(uint64_t)
