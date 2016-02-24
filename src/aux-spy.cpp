@@ -101,11 +101,11 @@ GetHostName()
 	//
 	const char* hostname = getenv("HOSTNAME");
 	if (hostname)
-		return hostname;
+		return hostname; // iff hostname != nullptr, it can be converted to string
 
 	hostname = getenv("COMPUTERNAME");
 	if (hostname)
-		return hostname;
+		return hostname; // iff like above
 
 #ifdef _WINDOWS
 #pragma warning(default : 4996) // This function or variable may be unsafe
@@ -138,11 +138,10 @@ GetUserName()
 {
 	const char* username = getenv("USER");
 	if (username)
-		return username;
+		return username; // iff username != nullptr, it can be converted to string
 
-	if (!username)
-		username = getenv("USERNAME");
-	return username ? username : "unknown-username";
+	username = getenv("USERNAME");
+	return username ? username : "unknown-username"; // iff like above
 }
 
 } // namespace
