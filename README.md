@@ -38,7 +38,8 @@ Some interesting C++11-related URLs:
 - Scott Meyers's post on the [Effective C++11 book](http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html)
 - Post on [lambdas](http://blog.feabhas.com/2014/03/demystifying-c-lambdas/)
 - Alex Sinyakov's [C++11 cheat sheet](https://isocpp.org/blog/2012/12/c11-a-cheat-sheet-alex-sinyakov)
-- Threads
+- Concurrency:
+  - Bartosz Milewski's post on [Functional Data Structures and Concurrency in C++](http://bartoszmilewski.com/2013/12/10/functional-data-structures-and-concurrency-in-c/)
   - [cppreference.com's thread](http://en.cppreference.com/w/cpp/thread)
   - [C++11 concurrency cheatsheet](http://cpprocks.com/c-concurrency-cheatsheet/)
   - SolarianProgrammer's [C++11 multithreading tutorial](https://solarianprogrammer.com/2011/12/16/cpp-11-thread-tutorial/) (posted on December 16, 2011), [C++11 multithreading tutorial - part 2](https://solarianprogrammer.com/2012/02/27/cpp-11-thread-tutorial-part-2/), both with [code on GitHub](https://github.com/sol-prog/threads)
