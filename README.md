@@ -38,6 +38,11 @@ Some interesting C++11-related URLs:
 - Scott Meyers's post on the [Effective C++11 book](http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html)
 - Post on [lambdas](http://blog.feabhas.com/2014/03/demystifying-c-lambdas/)
 - Alex Sinyakov's [C++11 cheat sheet](https://isocpp.org/blog/2012/12/c11-a-cheat-sheet-alex-sinyakov)
+- Threads
+  - [cppreference.com's thread](http://en.cppreference.com/w/cpp/thread)
+  - SolarianProgrammer's [C++11 multithreading tutorial](https://solarianprogrammer.com/2011/12/16/cpp-11-thread-tutorial/) (posted on December 16, 2011), [C++11 multithreading tutorial - part 2](https://solarianprogrammer.com/2012/02/27/cpp-11-thread-tutorial-part-2/), both with [code on GitHub](https://github.com/sol-prog/threads)
+  - K Hong's [Multi-Threaded Programming with C++11 - Part A](http://www.bogotobogo.com/cplusplus/multithreaded4_cplusplus11.php), [Part B
+(Sharing Data - mutex, and race conditions, and deadlock)](http://www.bogotobogo.com/cplusplus/multithreaded4_cplusplus11B.php); [Debugging - 2016](http://www.bogotobogo.com/cplusplus/multithreadedDebugging.php)
 
 A never complete list of great C++ references (selected books, etc.):
 - Scott Meyers, _More Efficient C++ -- 35 New Ways to Improve Your Programs and Designs_ (mec++, for short), Addison-Wesley Professional Computing Series, 1996.
