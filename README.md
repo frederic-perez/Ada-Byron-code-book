@@ -40,6 +40,7 @@ Some interesting C++11-related URLs:
 - Alex Sinyakov's [C++11 cheat sheet](https://isocpp.org/blog/2012/12/c11-a-cheat-sheet-alex-sinyakov)
 - Threads
   - [cppreference.com's thread](http://en.cppreference.com/w/cpp/thread)
+  - [C++11 concurrency cheatsheet](http://cpprocks.com/c-concurrency-cheatsheet/)
   - SolarianProgrammer's [C++11 multithreading tutorial](https://solarianprogrammer.com/2011/12/16/cpp-11-thread-tutorial/) (posted on December 16, 2011), [C++11 multithreading tutorial - part 2](https://solarianprogrammer.com/2012/02/27/cpp-11-thread-tutorial-part-2/), both with [code on GitHub](https://github.com/sol-prog/threads)
   - K Hong's [Multi-Threaded Programming with C++11 - Part A](http://www.bogotobogo.com/cplusplus/multithreaded4_cplusplus11.php), [Part B
 (Sharing Data - mutex, and race conditions, and deadlock)](http://www.bogotobogo.com/cplusplus/multithreaded4_cplusplus11B.php); [Debugging - 2016](http://www.bogotobogo.com/cplusplus/multithreadedDebugging.php)
