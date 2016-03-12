@@ -80,5 +80,12 @@ ABcb::ExamplesOfConcurrency()
 // TODO: void ExamplesOfConcurrencyUsingPOSIXThreads();
 // TODO: Start by translating into C++ (using Pthreads) the simple example in
 // https://en.wikipedia.org/wiki/POSIX_Threads
+/*
+ADD use examples of:
+- creating threads (detached, joinable)
+- pthread_join
+- mutex, rwlocks, conditions, barriers and semaphores
+- thread cancellations
+*/
 
 // -- eof
