@@ -52,6 +52,7 @@ A never complete list of great C++ references (selected books, etc.):
 - Bjarne Stroustrup, _The C++ Programming Language - Third Edition_, Addison-Wesley, 1997.
 - MITK's [Bug Squashing Seminars](http://www.mitk.org/wiki/Bug_Squashing_Seminars)
 - Wikibooks' C++ programming language [subject](https://en.wikibooks.org/wiki/Subject:C%2B%2B_programming_language) and [category](https://en.wikibooks.org/wiki/Category:C%2B%2B_programming_language).
+- Anthony Williams, _C++ Concurrency in Action: Practical Multithreading_, Manning Publications, 2012.
 
 A list of Boost-related stuff:
 - Boris Schäling's [The Boost C++ Libraries](http://theboostcpplibraries.com/)
