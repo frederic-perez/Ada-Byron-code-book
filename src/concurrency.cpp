@@ -77,4 +77,8 @@ ABcb::ExamplesOfConcurrency()
 	std::clog << __func__ << " finished." << std::endl;
 }
 
+// TODO: void ExamplesOfConcurrencyUsingPOSIXThreads();
+// TODO: Start by translating into C++ (using Pthreads) the simple example in
+// https://en.wikipedia.org/wiki/POSIX_Threads
+
 // -- eof
