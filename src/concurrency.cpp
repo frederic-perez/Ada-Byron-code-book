@@ -6,6 +6,14 @@
 #include <sstream>
 #include <thread>
 
+#if !defined(_MSC_VER)
+#include <array>
+#include <chrono>
+#include <string>
+
+#include <pthread.h> // From 3rd party library POSIX threads
+#endif
+
 #include "aux-raw.h"
 #include "concurrency.h"
 
@@ -67,7 +75,7 @@ ExampleOfFutureAndAsync()
 } // namespace
 
 void
-ABcb::ExamplesOfConcurrency()
+ABcb::ExamplesOfConcurrencyUsingCpp11()
 {
 	std::clog << __func__ << " started..." << std::endl;
 
@@ -76,6 +84,8 @@ ABcb::ExamplesOfConcurrency()
 
 	std::clog << __func__ << " finished." << std::endl;
 }
+
+#if !defined(_MSC_VER)
 
 // TODO: void ExamplesOfConcurrencyUsingPOSIXThreads();
 // TODO: Start by translating into C++ (using Pthreads) the simple example in
@@ -87,5 +97,104 @@ ADD use examples of:
 - mutex, rwlocks, conditions, barriers and semaphores
 - thread cancellations
 */
+
+namespace POSIX {
+
+void
+Waiter(size_t a_threadNumber)
+{
+	std::cout << pad << pad << __func__ 
+		<< " starts to wait for 5 seconds [thread #"
+		<< a_threadNumber << ", thread_self()=" << pthread_self() << "]..."
+		<< std::endl;
+	std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+	std::cout << pad << pad << __func__ 
+		<< " is about to end (sleeping time finished)" << std::endl;
+}
+
+pthread_barrier_t barrier;
+
+void*
+Function(void* a_param)
+{
+	const size_t threadNumber = reinterpret_cast<size_t>(a_param);
+
+	std::ostringstream oss;
+	oss << " [thread #" << threadNumber << ", thread_self()=" << pthread_self()
+		<< ']';
+	const std::string threadInfo = oss.str();
+
+	if (threadNumber == 3) {
+		std::cout << pad << pad << __func__ << " is about to call Waiter"
+			<< threadInfo << std::endl;
+		Waiter(threadNumber);
+	}
+
+	std::cout << pad << pad << __func__ << " is about to stop for barrier"
+		<< threadInfo << std::endl;
+	const int rc = pthread_barrier_wait(&barrier); // Synchronization point
+	if (rc != 0 && rc != PTHREAD_BARRIER_SERIAL_THREAD) {
+		std::cerr << pad << pad << __func__
+			<< ": Error: Could not wait on barrier. Exiting.\n";
+		exit(-1);
+	}
+	std::cout << pad << pad << __func__ << " exited from barrier" << threadInfo
+		<< std::endl;
+	return nullptr;
+}
+
+void*
+OutputThreadSelf(void*)
+{
+	std::cout << pad << pad << __func__ << " called [thread_self()="
+		<< pthread_self() << ']' << std::endl;
+	return nullptr;
+}
+
+void
+ExampleOfPthreadsBarrierCreateAndJoin()
+{
+	std::clog << pad << __func__ << " started..." << std::endl;
+
+	const size_t NumberOfThreads = 6;
+
+	if (pthread_barrier_init(&barrier, nullptr, NumberOfThreads)) {
+		std::cerr << pad << __func__
+			<< ": Failed to initialize the barrier. Exiting.\n";
+		return;
+	}
+
+	std::array<pthread_t, NumberOfThreads> threads;
+	for (size_t i = 0; i < NumberOfThreads; ++i)
+		pthread_create(&threads[i], nullptr, Function, reinterpret_cast<void*>(i));
+	for (auto thread : threads)
+		pthread_join(thread, nullptr);
+
+	std::cout << pad << __func__ << " starts to wait for 1 second..."
+		<< std::flush;
+	std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+	std::cout << " (finished)" << std::endl;
+
+	for (auto thread : threads)
+		pthread_create(&thread, nullptr, OutputThreadSelf, nullptr);
+	for (auto thread : threads)
+		pthread_join(thread, nullptr);
+
+	std::clog << pad << __func__ << " finished." << std::endl;
+}
+
+} // namespace POSIX
+
+void
+ABcb::ExamplesOfConcurrencyUsingPOSIXThreads()
+{
+	std::clog << __func__ << " started..." << std::endl;
+
+	POSIX::ExampleOfPthreadsBarrierCreateAndJoin();
+
+	std::clog << __func__ << " finished." << std::endl;
+}
+
+#endif // !defined(_MSC_VER)
 
 // -- eof

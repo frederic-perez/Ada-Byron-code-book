@@ -80,8 +80,12 @@ main(const int argc, char* argv[])
 	std::clog << "Ada_Byron_code_book::ParseXML "
 		<< (succeeded ? "succeeded" : "failed") << ".\n" << std::endl;
 
-	ABcb::ExamplesOfConcurrency();
+	ABcb::ExamplesOfConcurrencyUsingCpp11();
 	std::cout << std::endl;
+#if !defined(_MSC_VER)
+	ABcb::ExamplesOfConcurrencyUsingPOSIXThreads();
+	std::cout << std::endl;
+#endif
 
 	ABcb::GurusTest({ "Bjarne_Stroustrup", "John_Doe", "Andrew_Koenig" });
 	ABcb::GurusTest(
