@@ -61,6 +61,7 @@ A list of Boost-related stuff:
 Guidelines:
 - A new open source project, led by Bjarne Stroustrup, on GitHub to build modern authoritative guidelines for writing C++ code: [C++ Core Guidelines](https://github.com/isocpp/CppCoreGuidelines)
 - Herb Sutter, Andrei Alexandrescu, _C++ Coding Standards: 101 Rules, Guidelines, and Best Practices_, Addison Wesley Professional, 2004
+- [LLVM Coding Standards](http://llvm.org/docs/CodingStandards.html)
 
 C++ compilers:
 - [http://www.stroustrup.com/compilers.html](http://www.stroustrup.com/compilers.html), by Bjarne Stroustrup
