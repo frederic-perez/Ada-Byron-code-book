@@ -113,12 +113,12 @@ class Timer : boost::noncopyable {
 	//
 public:
 	Timer();
+	typename TClock::duration Elapsed() const;
 	double Seconds() const;
 
 	void Reset();
 
 protected:
-	typename TClock::duration Elapsed() const;
 	typename TClock::time_point d_start;
 };
 
