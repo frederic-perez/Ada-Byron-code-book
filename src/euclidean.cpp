@@ -318,7 +318,7 @@ ABcb::Euclidean::ExamplesOfVector()
 	}
 	catch (const std::out_of_range& e) {
 		std::cerr << pad << __func__ << ": Error caught (access out of range): "
-			<< e.what() << "\n";
+			<< e.what() << '\n';
 	}
 
 	const Vector2 vector2{ 2., 3. };

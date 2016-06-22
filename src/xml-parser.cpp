@@ -146,7 +146,7 @@ Read(std::istream& a_istream, Flights& a_flights)
 				number = subtree.get<unsigned>("number");
 			} catch (const std::exception& e) {
 				std::cerr << pad << __func__ << ": std::exception caught: "
-					<< e.what() << std::endl;
+					<< e.what() << '\n';
 				throw; // rethrow the original exception, no slicing or anything
 			}
 			const Date date = subtree.get<Date>("date");
@@ -196,8 +196,8 @@ Ada_Byron_code_book::ParseXML(
 		std::clog << pad << __func__ << ": Reading " << a_inputFilename
 			<< std::endl;
 	else {
-		std::cerr << pad << __func__ << ": " << a_inputFilename << " does not exist"
-			<< std::endl;
+		std::cerr << pad << __func__ << ": " << a_inputFilename
+			<< " does not exist\n";
 		return false;
 	}
 	try {
@@ -207,7 +207,7 @@ Ada_Byron_code_book::ParseXML(
 			Read(input, flights);
 		} catch (const std::exception& e) {
 			std::cerr << pad << __func__ << ": Exception by 'Read' caught: "
-				<< e.what() << std::endl;
+				<< e.what() << '\n';
 			return false;
 		}
 		std::clog << pad << __func__ << ": Read(\"" << a_inputFilename
@@ -217,7 +217,7 @@ Ada_Byron_code_book::ParseXML(
 		std::clog << pad << __func__ << ": Writing of \"" << a_outputFilename
 			<< "\" finished" << std::endl;
 	} catch (...) {
-		std::cerr << pad << __func__ << ": Exception ... caught" << std::endl;
+		std::cerr << pad << __func__ << ": Exception ... caught\n";
 		return false;
 	}
 	std::clog << __func__ << " finished." << std::endl;
