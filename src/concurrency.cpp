@@ -59,17 +59,17 @@ size_t GetFibonacci40() { return Fibonacci(40); }
 void
 ExampleOfFutureAndAsync()
 {
-	// Start GetFib30() asynchronously 
+	// Start GetFibonacci30() asynchronously 
 	std::future<size_t> result30 = std::async(GetFibonacci30);
-	// Call GetFib40() synchronously 
+	// Call GetFibonacci40() synchronously 
 	const size_t result40 = GetFibonacci40();
-	// Wait for GetFib30() and add its result to result2
+	// Wait for GetFibonacci30() and add its result to result2
 	const size_t result = result30.get() + result40;
 	std::ostringstream oss;
 	oss.imbue(std::locale("")); // To add commas when outputting result
 	oss << result;
 	std::cout << pad << "std::future and std::async example: "
-		<< "GetFib30() + GetFib40() = " << oss.str() << std::endl;
+		<< "GetFibonacci30() + GetFibonacci40() = " << oss.str() << std::endl;
 }
 
 } // namespace
