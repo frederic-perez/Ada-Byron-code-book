@@ -1,7 +1,7 @@
 ## Ada Byron's code book
 
 <p align="center">
-  <img src="https://www.dropbox.com/s/g06opyevlffkrol/Ada%20Byron--from%20teaser%20of%20Happy%20Ada%20Lovelace%20Day%202015%20by%20Natasha%20Sayce-Zelem-200V.jpg?dl=0?dl=0?raw=true" alt="Ada Byron from the Wikipedia"/>
+  <img src="https://www.dropbox.com/s/g06opyevlffkrol/Ada%20Byron--from%20teaser%20of%20Happy%20Ada%20Lovelace%20Day%202015%20by%20Natasha%20Sayce-Zelem-200V.jpg?raw=true" alt="Ada Byron from the Wikipedia"/>
 </p>
 
 This "book" gathers a collection of C++ code snippets ready to be used as examples or reused in your own projects. The name Ada Byron in the repository title is a homage to the first software programmer ([Wikipedia entry](http://en.wikipedia.org/wiki/Ada_Lovelace)).
