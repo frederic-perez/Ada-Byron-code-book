@@ -312,11 +312,10 @@ ABcb::Euclidean::ExamplesOfVector()
 	try {
 		const Vector2 vector2{ 1., 2. };
 		std::cout << pad << "vector2 = " << vector2 << "; "
-			<< "vector2[66] = " << vector2[66] << "; "
+			// << "vector2[66] = " << vector2[66] << "; " // undefined behavior
 			<< "vector2.at(66) = " << std::flush;
 		std::cout << vector2.at(66) << std::endl;
-	}
-	catch (const std::out_of_range& e) {
+	} catch (const std::out_of_range& e) {
 		std::cerr << pad << __func__ << ": Error caught (access out of range): "
 			<< e.what() << '\n';
 	}
