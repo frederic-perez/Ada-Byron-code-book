@@ -1,4 +1,4 @@
-// -- 
+// --
 
 #pragma once
 // '- This pragma works for
@@ -15,7 +15,7 @@
 //! Unfortulately __func__ is not known by vs12, vs14.
 //! This is a workaround:
 #ifndef __func__
-#define __func__ __FUNCTION__
+#  define __func__ __FUNCTION__
 #endif
 
 namespace Ada_Byron_code_book {
@@ -24,21 +24,22 @@ namespace raw {
 
 // Note: Recall that for std::array<> objects you must use the size() inspector
 //
-template<typename T, size_t N>
+template <typename T, size_t N>
 size_t
-ArraySize(const T(&)[N])
-{	return N; }
+ArraySize(const T (&)[N])
+{
+  return N;
+}
 
-template<typename T>
+template <typename T>
 void
 WipeOut(T& a_t)
 {
-	a_t.clear();
-	T().swap(a_t);
+  a_t.clear();
+  T().swap(a_t);
 }
 
-char
-SystemSlash();
+char SystemSlash();
 
 void ExamplesOfRaw();
 

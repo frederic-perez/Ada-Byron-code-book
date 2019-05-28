@@ -1,4 +1,4 @@
-// -- 
+// --
 
 #pragma once
 
@@ -17,7 +17,6 @@ void ExamplesOfConcurrencyUsingCpp11();
 void ExamplesOfConcurrencyUsingPOSIXThreads();
 
 #endif
-
 
 } // namespace Ada_Byron_code_book
 

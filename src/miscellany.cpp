@@ -1,9 +1,9 @@
-// -- 
+// --
 
-#include <stdexcept>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
+#include <stdexcept>
 
 #include <boost/math/constants/constants.hpp>
 #include <boost/multiprecision/cpp_dec_float.hpp>
@@ -16,107 +16,106 @@ namespace ABcb = Ada_Byron_code_book;
 
 void
 ABcb::miscellany::ExampleOfRawStringLiteral()
-{	std::cout << __func__ << ": " << R"(C:\life\brian\foo.pdf)" << std::endl; }
+{
+  std::cout << __func__ << ": "
+            << R"(C:\life\brian\foo.pdf)" << std::endl;
+}
 
-void
-ABcb::miscellany::Function(const int a_value) // <-- notice the "const" here
-{	std::cout << __func__ << ": a_value=" << a_value << std::endl; }
+void ABcb::miscellany::Function(const int a_value) // <-- notice the "const" here
+{
+  std::cout << __func__ << ": a_value=" << a_value << std::endl;
+}
 
 size_t
 ABcb::miscellany::FactorialRecursive(const size_t a_n)
 {
-	if (a_n <= 1)
-		return 1;
+  if (a_n <= 1)
+    return 1;
 
-	const size_t factorialRecursiveNMinus1 = FactorialRecursive(a_n - 1);
-	const size_t result = a_n * factorialRecursiveNMinus1;
-	static const size_t max = boost::numeric::bounds<size_t>::highest();
-	//
-	// Interesting information on std::overflow_error available at
-	// http://en.cppreference.com/w/cpp/error/overflow_error
-	//
-	// TODO: Study en.cppreference.com/w/cpp/error/overflow_error and apply it!
-	//
-	const bool overflow =
-		// overflow of a * b \equiv a * b > max \equiv a > max/b
-		a_n > max/factorialRecursiveNMinus1;
-	if (overflow) {
-		std::ostringstream oss;
-		oss << "Overflow trying to compute " << __func__ << '(' << a_n << ')';
-		throw std::overflow_error(oss.str());
-	}
+  const size_t factorialRecursiveNMinus1 = FactorialRecursive(a_n - 1);
+  const size_t result = a_n * factorialRecursiveNMinus1;
+  static const size_t max = boost::numeric::bounds<size_t>::highest();
+  //
+  // Interesting information on std::overflow_error available at
+  // http://en.cppreference.com/w/cpp/error/overflow_error
+  //
+  // TODO: Study en.cppreference.com/w/cpp/error/overflow_error and apply it!
+  //
+  const bool overflow =
+    // overflow of a * b \equiv a * b > max \equiv a > max/b
+    a_n > max / factorialRecursiveNMinus1;
+  if (overflow) {
+    std::ostringstream oss;
+    oss << "Overflow trying to compute " << __func__ << '(' << a_n << ')';
+    throw std::overflow_error(oss.str());
+  }
 
-	return result;
+  return result;
 }
 
 size_t
 ABcb::miscellany::FactorialIterative(const size_t a_n)
 {
-	size_t result = 1;
-	for (size_t i = 1; i <= a_n; ++i)
-		result *= i;
-	return result;
+  size_t result = 1;
+  for (size_t i = 1; i <= a_n; ++i)
+    result *= i;
+  return result;
 }
 
 void
 ABcb::miscellany::ExamplesOfFactorial()
 {
-	std::clog << __func__ << " started..." << std::endl;
+  std::clog << __func__ << " started..." << std::endl;
 
-	using ABcb::raw::pad;
+  using ABcb::raw::pad;
 
-	// Using FactorialCompileTime
-	//
-	//const size_t N = 21; // < integral constant overflow in vs14
-	const size_t N = 20; // < integral constant overflow in vs14
-	const size_t factorialCompileTime =
-		ABcb::miscellany::FactorialCompileTime<N>::d_value; // == 24
-	std::ostringstream oss;
-	oss.imbue(std::locale("")); // To add commas when outputting result
-	oss << factorialCompileTime;
-	std::cout << pad << "FactorialCompileTime<" << N << ">::d_value = "
-		<< oss.str() << std::endl;
+  // Using FactorialCompileTime
+  //
+  // const size_t N = 21; // < integral constant overflow in vs14
+  const size_t N = 20; // < integral constant overflow in vs14
+  const size_t factorialCompileTime = ABcb::miscellany::FactorialCompileTime<N>::d_value; // == 24
+  std::ostringstream oss;
+  oss.imbue(std::locale("")); // To add commas when outputting result
+  oss << factorialCompileTime;
+  std::cout << pad << "FactorialCompileTime<" << N << ">::d_value = " << oss.str() << std::endl;
 
-	// Using FactorialRecursive
-	//
-	size_t n = 0;
-	bool overflow = false;
-	while (!overflow) {
-		++n;
-		try {
-			FactorialRecursive(n);
-		} catch (const std::overflow_error& e) {
-			std::cerr << pad << __func__ << ": Exception caught: " << e.what()
-				<< '\n';
-			overflow = true;
-		}
-	}
+  // Using FactorialRecursive
+  //
+  size_t n = 0;
+  bool overflow = false;
+  while (!overflow) {
+    ++n;
+    try {
+      FactorialRecursive(n);
+    } catch (const std::overflow_error& e) {
+      std::cerr << pad << __func__ << ": Exception caught: " << e.what() << '\n';
+      overflow = true;
+    }
+  }
 
-	--n;
-	const size_t factorialN = FactorialRecursive(n);
-	oss.str("");
-	oss << factorialN;
-	std::cout << pad << "FactorialRecursive(" << n << ")            = "
-		<< oss.str() << std::endl;
+  --n;
+  const size_t factorialN = FactorialRecursive(n);
+  oss.str("");
+  oss << factorialN;
+  std::cout << pad << "FactorialRecursive(" << n << ")            = " << oss.str() << std::endl;
 
-	// Using FactorialIterative
-	//
-	const size_t factorialIterative = FactorialIterative(n);
-	oss.str("");
-	oss << factorialIterative;
-	std::cout << pad << "FactorialIterative(" << n << ")            = "
-		<< oss.str() << std::endl;
+  // Using FactorialIterative
+  //
+  const size_t factorialIterative = FactorialIterative(n);
+  oss.str("");
+  oss << factorialIterative;
+  std::cout << pad << "FactorialIterative(" << n << ")            = " << oss.str() << std::endl;
 
-	std::clog << __func__ << " finished." << std::endl;
+  std::clog << __func__ << " finished." << std::endl;
 }
 
 namespace {
 
-template<typename T>
+template <typename T>
 T
 AreaOfACircle(const T r)
 {
-	return boost::math::constants::pi<T>() * r * r; // Notice the nice pi used
+  return boost::math::constants::pi<T>() * r * r; // Notice the nice pi used
 }
 
 } // namespace
@@ -124,32 +123,28 @@ AreaOfACircle(const T r)
 void
 ABcb::miscellany::ExamplesOfMultiprecision()
 {
-	std::clog << __func__ << " started..." << std::endl;
+  std::clog << __func__ << " started..." << std::endl;
 
-	using ABcb::raw::pad;
+  using ABcb::raw::pad;
 
-	// Code based on
-	//	http://www.boost.org/doc/libs/1_59_0/libs/multiprecision/
-	//	doc/html/boost_multiprecision/tut/floats/fp_eg/aos.html
+  // Code based on
+  //	http://www.boost.org/doc/libs/1_59_0/libs/multiprecision/
+  //	doc/html/boost_multiprecision/tut/floats/fp_eg/aos.html
 
-	const float r_f = 123.f / 100.f;
-	const float a_f = AreaOfACircle(r_f);
-	std::cout << pad << std::setprecision(std::numeric_limits<float>::digits10)
-		<< a_f << std::endl;
+  const float r_f = 123.f / 100.f;
+  const float a_f = AreaOfACircle(r_f);
+  std::cout << pad << std::setprecision(std::numeric_limits<float>::digits10) << a_f << std::endl;
 
-	const double r_d = 123. / 100.;
-	const double a_d = AreaOfACircle(r_d);
-	std::cout << pad << std::setprecision(std::numeric_limits<double>::digits10)
-		<< a_d << std::endl;
+  const double r_d = 123. / 100.;
+  const double a_d = AreaOfACircle(r_d);
+  std::cout << pad << std::setprecision(std::numeric_limits<double>::digits10) << a_d << std::endl;
 
-	using boost::multiprecision::cpp_dec_float_50;
-	const cpp_dec_float_50 r_mp(cpp_dec_float_50(123) / 100);
-	const cpp_dec_float_50 a_mp = AreaOfACircle(r_mp);
-	std::cout << pad
-		<< std::setprecision(std::numeric_limits<cpp_dec_float_50>::digits10)
-		<< a_mp << std::endl;
+  using boost::multiprecision::cpp_dec_float_50;
+  const cpp_dec_float_50 r_mp(cpp_dec_float_50(123) / 100);
+  const cpp_dec_float_50 a_mp = AreaOfACircle(r_mp);
+  std::cout << pad << std::setprecision(std::numeric_limits<cpp_dec_float_50>::digits10) << a_mp << std::endl;
 
-	std::clog << __func__ << " finished." << std::endl;
+  std::clog << __func__ << " finished." << std::endl;
 }
 
 // -- eof

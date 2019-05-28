@@ -1,9 +1,9 @@
-// -- 
+// --
 
 #pragma once
 
 #if !defined(_MSC_VER)
-	#include <cxxabi.h>
+#  include <cxxabi.h>
 #endif
 #include <memory>
 #include <ostream>
@@ -14,9 +14,7 @@
 
 //!? TODO: Possibly extend SpyLine with Boost's PP for extra information
 
-#define SpyLine \
-	std::cerr << "@@@@ " << __FILE__ << ':' << __func__ << ":L" << __LINE__ \
-		<< '\n';
+#define SpyLine std::cerr << "@@@@ " << __FILE__ << ':' << __func__ << ":L" << __LINE__ << '\n';
 
 namespace Ada_Byron_code_book {
 
@@ -38,122 +36,111 @@ std::ostream& operator<<(std::ostream&, const RunInfo&);
 
 class RunInfo : boost::noncopyable {
 public:
-	explicit RunInfo(
-		const std::string& a_argv0,
-		const std::string& a_progname)
-	: d_argv0(a_argv0), d_progname(a_progname)
-	{}
+  explicit RunInfo(const std::string& a_argv0, const std::string& a_progname) : d_argv0(a_argv0), d_progname(a_progname)
+  {}
 
-	const std::string& GetArgv0() const { return d_argv0; }
-	const std::string& GetProgName() const { return d_progname; }
+  const std::string& GetArgv0() const { return d_argv0; }
+  const std::string& GetProgName() const { return d_progname; }
+
 private:
-	const std::string d_argv0;
-	const std::string d_progname;
+  const std::string d_argv0;
+  const std::string d_progname;
 };
 
-template<typename T>
+template <typename T>
 std::ostream&
-Output(
-	std::ostream& a_os,
-	const T& a_container,
-	const std::string& a_containerName)
+Output(std::ostream& a_os, const T& a_container, const std::string& a_containerName)
 {
-	a_os << (a_containerName.empty() ? "[unnamed]" : a_containerName) << " = ";
-	if (a_container.empty())
-		a_os << "[0]{}" << std::endl;
-	else {
-		const size_t N = a_container.size();
-		a_os << "[" << N << "]{";
-		for (size_t i = 0; i < N; ++i) {
-			a_os << a_container[i];
-			if (i < N - 1)
-				a_os << ", ";
-		}
-		a_os << '}' << std::endl;
-	}
-	return a_os;
+  a_os << (a_containerName.empty() ? "[unnamed]" : a_containerName) << " = ";
+  if (a_container.empty())
+    a_os << "[0]{}" << std::endl;
+  else {
+    const size_t N = a_container.size();
+    a_os << "[" << N << "]{";
+    for (size_t i = 0; i < N; ++i) {
+      a_os << a_container[i];
+      if (i < N - 1)
+        a_os << ", ";
+    }
+    a_os << '}' << std::endl;
+  }
+  return a_os;
 }
 
-template<typename T>
+template <typename T>
 std::ostream&
-Output(
-	std::ostream& a_os,
-	const T* a_oldCArray,
-	size_t a_size,
-	const std::string& a_name)
+Output(std::ostream& a_os, const T* a_oldCArray, size_t a_size, const std::string& a_name)
 {
-	a_os << (a_name.empty() ? "[unnamed]" : a_name) << " = ";
-	if (a_size == 0)
-		a_os << "[0]{}" << std::endl;
-	else {
-		a_os << "[" << a_size << "]{";
-		for (size_t i = 0; i < a_size; ++i) {
-			a_os << a_oldCArray[i];
-			if (i < a_size - 1)
-				a_os << ", ";
-		}
-		a_os << '}' << std::endl;
-	}
-	return a_os;
+  a_os << (a_name.empty() ? "[unnamed]" : a_name) << " = ";
+  if (a_size == 0)
+    a_os << "[0]{}" << std::endl;
+  else {
+    a_os << "[" << a_size << "]{";
+    for (size_t i = 0; i < a_size; ++i) {
+      a_os << a_oldCArray[i];
+      if (i < a_size - 1)
+        a_os << ", ";
+    }
+    a_os << '}' << std::endl;
+  }
+  return a_os;
 }
 
-template<typename TClock>
+template <typename TClock>
 class Timer : boost::noncopyable {
-	//
-	// Based on the example under
-	// http://www.boost.org/doc/libs/1_47_0/doc/html/chrono/users_guide.html
-	// #chrono.users_guide.examples.time_point.a_tiny_program_that_times_how_
-	// long_until_a_key_is_struck
-	//
-	// Examples
-	// --------
-	//	Timer<boost::chrono::system_clock> t1;
-	//	Timer<boost::chrono::steady_clock> t2; // GCC duplicate?
-	//	Timer<boost::chrono::high_resolution_clock> t3;
-	//
+  //
+  // Based on the example under
+  // http://www.boost.org/doc/libs/1_47_0/doc/html/chrono/users_guide.html
+  // #chrono.users_guide.examples.time_point.a_tiny_program_that_times_how_
+  // long_until_a_key_is_struck
+  //
+  // Examples
+  // --------
+  //	Timer<boost::chrono::system_clock> t1;
+  //	Timer<boost::chrono::steady_clock> t2; // GCC duplicate?
+  //	Timer<boost::chrono::high_resolution_clock> t3;
+  //
 public:
-	Timer();
-	typename TClock::duration Elapsed() const;
-	double Seconds() const;
+  Timer();
+  typename TClock::duration Elapsed() const;
+  double Seconds() const;
 
-	void Reset();
+  void Reset();
 
 protected:
-	typename TClock::time_point d_start;
+  typename TClock::time_point d_start;
 };
 
-template<class T>
-std::string
-TypeNameENH() // Consider this function instead of using typeid(-).name
+template <class T>
+std::string TypeNameENH() // Consider this function instead of using typeid(-).name
 {
-	// Credits to 
-	// http://stackoverflow.com/questions/81870/print-variable-type-in-c
-	//
-	typedef typename std::remove_reference<T>::type TR;
-	std::unique_ptr<char, void(*)(void*)>
-		own(
+  // Credits to
+  // http://stackoverflow.com/questions/81870/print-variable-type-in-c
+  //
+  typedef typename std::remove_reference<T>::type TR;
+  std::unique_ptr<char, void (*)(void*)> own(
 #if !defined(_MSC_VER)
-			abi::__cxa_demangle(typeid(TR).name(), nullptr,	nullptr, nullptr),
+    abi::__cxa_demangle(typeid(TR).name(), nullptr, nullptr, nullptr),
 #else
-			nullptr,
+    nullptr,
 #endif
-			std::free);
-	std::string r = own != nullptr ? own.get() : typeid(TR).name();
+    std::free);
+  std::string r = own != nullptr ? own.get() : typeid(TR).name();
 #include "aux-raw-compiler-warnings-off++begin.h"
-	if (std::is_const<TR>::value)
-		r += " const";
-	if (std::is_volatile<TR>::value)
-		r += " volatile";
-	if (std::is_lvalue_reference<T>::value)
-		r += "&";
-	else if (std::is_rvalue_reference<T>::value)
-		r += "&&";
+  if (std::is_const<TR>::value)
+    r += " const";
+  if (std::is_volatile<TR>::value)
+    r += " volatile";
+  if (std::is_lvalue_reference<T>::value)
+    r += "&";
+  else if (std::is_rvalue_reference<T>::value)
+    r += "&&";
 #include "aux-raw-compiler-warnings-off++end.h"
-	return r;
+  return r;
 }
 
-} // spy
+} // namespace spy
 
-} // Ada_Byron_code_book
+} // namespace Ada_Byron_code_book
 
 // -- eof

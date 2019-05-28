@@ -1,4 +1,4 @@
-// -- 
+// --
 
 #include "under-construction.h"
 
@@ -13,16 +13,16 @@
 #ifdef ADA_BYRON_PARSING_WITH_ISTRINGSTREAM_IS_EASY_20150626
 // TODO
 // NOTE: Parsing using std::istringstream is easy
-#include <sstream>
+#  include <sstream>
 
 std::string line;
 while (getline(fileI, line))
-	if (!line.empty()) {
-		std::istringstream parse(line);
-		double x, y;
-		parse >> x >> y;
-		// do stuff with x and y
-	}
+  if (!line.empty()) {
+    std::istringstream parse(line);
+    double x, y;
+    parse >> x >> y;
+    // do stuff with x and y
+  }
 #endif
 
 // -- eof

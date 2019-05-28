@@ -1,4 +1,4 @@
-// -- 
+// --
 
 // Note: Do not even think about doing
 // #pragma once
@@ -22,45 +22,45 @@
 // Stuff to forbid a bad usage of these headers
 //
 #if defined(AuxRawCompilerWarningsOffBegin)
-#error AuxRawCompilerWarningsOffBegin already defined--two ++begin.h includes?
+#  error AuxRawCompilerWarningsOffBegin already defined--two ++begin.h includes?
 #else
-#define AuxRawCompilerWarningsOffBegin
+#  define AuxRawCompilerWarningsOffBegin
 #endif
 
 #if defined(__GNUC__)
-	// See http://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
-	// Further reading:
-	// - https://svn.boost.org/trac/boost/wiki/Guidelines/WarningsGuidelines
-	#pragma GCC diagnostic ignored "-Wcast-qual"
-	#pragma GCC diagnostic ignored "-Wconversion"
-	#pragma GCC diagnostic ignored "-Wfloat-equal"
-	#pragma GCC diagnostic ignored "-Wignored-qualifiers"
-	#pragma GCC diagnostic ignored "-Wredundant-decls"
-	#pragma GCC diagnostic ignored "-Wshadow"
-#if !defined(__clang__)
-	#pragma GCC diagnostic ignored "-Wunused-local-typedefs"
-#endif
-	#pragma GCC diagnostic ignored "-Wunused-variable"
-	#pragma GCC diagnostic ignored "-Wunused"
+// See http://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html
+// Further reading:
+// - https://svn.boost.org/trac/boost/wiki/Guidelines/WarningsGuidelines
+#  pragma GCC diagnostic ignored "-Wcast-qual"
+#  pragma GCC diagnostic ignored "-Wconversion"
+#  pragma GCC diagnostic ignored "-Wfloat-equal"
+#  pragma GCC diagnostic ignored "-Wignored-qualifiers"
+#  pragma GCC diagnostic ignored "-Wredundant-decls"
+#  pragma GCC diagnostic ignored "-Wshadow"
+#  if !defined(__clang__)
+#    pragma GCC diagnostic ignored "-Wunused-local-typedefs"
+#  endif
+#  pragma GCC diagnostic ignored "-Wunused-variable"
+#  pragma GCC diagnostic ignored "-Wunused"
 #endif
 
 #if defined(_MSC_VER)
-	#pragma warning(push)
-	#pragma warning(disable : 4018)
-	#pragma warning(disable : 4127)
-	#pragma warning(disable : 4244)
-	#pragma warning(disable : 4251)
-	#pragma warning(disable : 4267)
-	#pragma warning(disable : 4275)
-	#pragma warning(disable : 4310)
-	#pragma warning(disable : 4503)
-	#pragma warning(disable : 4512)
-	#pragma warning(disable : 4520)
-	#pragma warning(disable : 4616)
-	#pragma warning(disable : 4701)
-	#pragma warning(disable : 4800)
-	#pragma warning(disable : 4913)
-	#pragma warning(disable : 4996)
+#  pragma warning(push)
+#  pragma warning(disable : 4018)
+#  pragma warning(disable : 4127)
+#  pragma warning(disable : 4244)
+#  pragma warning(disable : 4251)
+#  pragma warning(disable : 4267)
+#  pragma warning(disable : 4275)
+#  pragma warning(disable : 4310)
+#  pragma warning(disable : 4503)
+#  pragma warning(disable : 4512)
+#  pragma warning(disable : 4520)
+#  pragma warning(disable : 4616)
+#  pragma warning(disable : 4701)
+#  pragma warning(disable : 4800)
+#  pragma warning(disable : 4913)
+#  pragma warning(disable : 4996)
 #endif
 
 // -- eof
