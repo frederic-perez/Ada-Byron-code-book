@@ -111,8 +111,11 @@ protected:
   typename TClock::time_point d_start;
 };
 
+// Consider this function instead of using typeid(-).name
+//
 template <class T>
-std::string TypeNameENH() // Consider this function instead of using typeid(-).name
+std::string
+TypeNameENH()
 {
   // Credits to
   // http://stackoverflow.com/questions/81870/print-variable-type-in-c

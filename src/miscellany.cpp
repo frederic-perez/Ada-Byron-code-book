@@ -21,7 +21,9 @@ ABcb::miscellany::ExampleOfRawStringLiteral()
             << R"(C:\life\brian\foo.pdf)" << std::endl;
 }
 
-void ABcb::miscellany::Function(const int a_value) // <-- notice the "const" here
+void
+ABcb::miscellany::Function(const int a_value)
+// notice the "const" above
 {
   std::cout << __func__ << ": a_value=" << a_value << std::endl;
 }

@@ -207,7 +207,9 @@ RangeAsInt(std::ostream& a_os)
 
 } // namespace
 
-std::ostream& ABcb::spy::InfoOfSomeTypes(std::ostream& a_os) // TODO: Refactor contents
+// TODO: Refactor contents
+std::ostream&
+ABcb::spy::InfoOfSomeTypes(std::ostream& a_os)
 {
   using boost::multiprecision::cpp_dec_float_50;
   a_os << pad << "sizeof(char) = " << sizeof(char) << " | " << RangeAsInt<char> << '\n'

@@ -34,7 +34,9 @@ run(const size_t a_n)
   m.unlock();
 }
 
-void ExampleOf3ThreadsAndMutex() // From C++11 slides - Alex Sinkayov.pdf
+// From C++11 slides - Alex Sinkayov.pdf
+void
+ExampleOf3ThreadsAndMutex()
 {
   std::clog << pad << __func__ << " started..." << std::endl;
   std::thread t1(run, 1);
@@ -48,7 +50,6 @@ void ExampleOf3ThreadsAndMutex() // From C++11 slides - Alex Sinkayov.pdf
 }
 
 // From C++1 slides by Alex Sinkayov
-//
 size_t
 Fibonacci(size_t a_n)
 {
