@@ -1,5 +1,3 @@
-// --
-
 #include <algorithm>
 #include <array>
 #include <cmath>
@@ -46,8 +44,10 @@ ABcb::Euclidean::Vector<T, N>::Vector(std::initializer_list<T> a_args) : d_array
     d_array[i] = *it;
 }
 
+// Synonyms: length, magnitude, norm
 template <class T, size_t N>
-T ABcb::Euclidean::Vector<T, N>::Norm() const // Synonyms: length, magnitude, norm
+T
+ABcb::Euclidean::Vector<T, N>::Norm() const
 {
   T accSquared = 0.;
   for (auto value : d_array)
@@ -355,5 +355,3 @@ ABcb::Euclidean::ExamplesOfVector()
 
   std::clog << __func__ << " finished." << std::endl;
 }
-
-// -- eof
