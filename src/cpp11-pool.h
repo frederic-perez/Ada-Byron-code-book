@@ -49,5 +49,3 @@ class Derived : public Base {
 } // namespace cpp11
 
 } // namespace Ada_Byron_code_book
-
-// -- eof

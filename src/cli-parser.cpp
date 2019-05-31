@@ -1,5 +1,3 @@
-// --
-
 #include <fstream>
 #include <iostream>
 #include <sstream> // std::ostringstream oss
@@ -391,5 +389,3 @@ ABcb::cli::ParsedCommandLine(std::ostream& a_os)
   a_os << std::flush;
   return a_os;
 }
-
-// -- eof

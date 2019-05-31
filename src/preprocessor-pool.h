@@ -1,5 +1,3 @@
-// --
-
 #pragma once
 
 #include <ostream>
@@ -18,5 +16,3 @@ std::ostream& ListOfPreprocessorDefines(std::ostream&);
 } // namespace spy
 
 } // namespace Ada_Byron_code_book
-
-// -- eof

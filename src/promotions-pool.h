@@ -7,5 +7,3 @@ namespace Ada_Byron_code_book {
 void ExamplesOfPromotions();
 
 } // namespace Ada_Byron_code_book
-
-// -- eof

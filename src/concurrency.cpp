@@ -1,5 +1,3 @@
-// --
-
 #include <future>
 #include <iostream>
 #include <mutex>
@@ -196,5 +194,3 @@ ABcb::ExamplesOfConcurrencyUsingPOSIXThreads()
 }
 
 #endif // !defined(_MSC_VER)
-
-// -- eof

@@ -1,5 +1,3 @@
-// --
-
 #include <chrono>
 #include <sstream>
 #include <type_traits>
@@ -341,5 +339,3 @@ ABcb::spy::Timer<TClock>::Reset()
 // template class ABcb::spy::Timer<std::chrono::system_clock>;
 // template class ABcb::spy::Timer<std::chrono::steady_clock>; // GCC duplicate?
 template class ABcb::spy::Timer<std::chrono::high_resolution_clock>;
-
-// -- eof

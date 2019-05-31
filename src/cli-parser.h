@@ -1,5 +1,3 @@
-// --
-
 #pragma once
 
 #include <array>
@@ -104,5 +102,3 @@ ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(PlatonicSolid, (tetrahedron)(octahedron)(i
 } // namespace cli
 
 } // namespace Ada_Byron_code_book
-
-// -- eof

@@ -1,5 +1,3 @@
-// --
-
 #include "under-construction.h"
 
 // namespace ABcb = Ada_Byron_code_book;
@@ -24,5 +22,3 @@ while (getline(fileI, line))
     // do stuff with x and y
   }
 #endif
-
-// -- eof

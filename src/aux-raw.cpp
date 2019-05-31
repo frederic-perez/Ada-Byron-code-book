@@ -1,5 +1,3 @@
-// --
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -34,5 +32,3 @@ ABcb::raw::ExamplesOfRaw()
 
   std::clog << __func__ << " finished." << std::endl;
 }
-
-// -- eof

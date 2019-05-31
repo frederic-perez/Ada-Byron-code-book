@@ -112,5 +112,3 @@ ABcb::ExamplesOfFileSystem(const std::string& a_filename)
   std::cout << std::endl;
   std::clog << __func__ << " finished." << std::endl;
 }
-
-// -- eof

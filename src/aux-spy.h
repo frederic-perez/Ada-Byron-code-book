@@ -1,5 +1,3 @@
-// --
-
 #pragma once
 
 #if !defined(_MSC_VER)
@@ -145,5 +143,3 @@ TypeNameENH()
 } // namespace spy
 
 } // namespace Ada_Byron_code_book
-
-// -- eof

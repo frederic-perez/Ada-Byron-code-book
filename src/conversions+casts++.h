@@ -12,5 +12,3 @@ void ExamplesOfBoostLexicalCast(const std::string& a_numberToConvert);
 void ExamplesOfBoostNumericCast();
 
 } // namespace Ada_Byron_code_book
-
-// -- eof

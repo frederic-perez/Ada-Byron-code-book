@@ -1,5 +1,3 @@
-// --
-
 // Note: Do not even think about doing
 // #pragma once
 // since we want these preprocessor command to be included in <<every>> client
@@ -62,5 +60,3 @@
 #  pragma warning(disable : 4913)
 #  pragma warning(disable : 4996)
 #endif
-
-// -- eof

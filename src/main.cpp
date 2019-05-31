@@ -1,5 +1,3 @@
-// --
-
 #include <chrono>
 #include <iomanip>
 #include <iostream>
@@ -106,5 +104,3 @@ main(const int argc, char* argv[])
 
   return EXIT_SUCCESS;
 }
-
-// -- eof

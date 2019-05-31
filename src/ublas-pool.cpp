@@ -108,5 +108,3 @@ ABcb::ExamplesOfUblas()
 
   std::clog << __func__ << " finished." << std::endl;
 }
-
-// -- eof

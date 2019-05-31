@@ -166,5 +166,3 @@ ABcb::cpp11::MiscellanyExamples()
 
   std::clog << __func__ << " finished." << std::endl;
 }
-
-// -- eof

@@ -1,5 +1,3 @@
-// --
-
 //! IMPORTANT: See notes in the companion header file ...-off++begin.h
 //!            (They are not replicated here for maintenance reasons.)
 
@@ -30,5 +28,3 @@
 #if defined(_MSC_VER)
 #  pragma warning(pop)
 #endif
-
-// -- eof

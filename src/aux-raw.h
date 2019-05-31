@@ -1,5 +1,3 @@
-// --
-
 #pragma once
 // '- This pragma works for
 // - Windows 8.1:
@@ -48,5 +46,3 @@ const std::string pad = "  ";
 } // namespace raw
 
 } // namespace Ada_Byron_code_book
-
-// -- eof

@@ -1,5 +1,3 @@
-// --
-
 #pragma once
 
 namespace Ada_Byron_code_book {
@@ -19,5 +17,3 @@ void ExamplesOfConcurrencyUsingPOSIXThreads();
 #endif
 
 } // namespace Ada_Byron_code_book
-
-// -- eof

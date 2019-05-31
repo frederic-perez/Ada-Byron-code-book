@@ -1,5 +1,3 @@
-// --
-
 #include <string>
 
 #include "aux-raw.h"
@@ -79,5 +77,3 @@ ABcb::spy::ListOfPreprocessorDefines(std::ostream& a_os)
 #endif
               << std::flush;
 }
-
-// -- eof

@@ -233,5 +233,3 @@ ABcb::ExamplesOfBoostNumericCast()
 
   std::clog << __func__ << " finished." << std::endl;
 }
-
-// -- eof

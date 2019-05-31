@@ -1,5 +1,3 @@
-// --
-
 #pragma once
 
 namespace Ada_Byron_code_book {
@@ -42,5 +40,3 @@ void ExamplesOfMultiprecision();
 } // namespace miscellany
 
 } // namespace Ada_Byron_code_book
-
-// -- eof

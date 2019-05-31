@@ -1,5 +1,3 @@
-// --
-
 // Based on the example by Andrzej Krzemienski
 // in https://akrzemi1.wordpress.com/examples/parsing-xml/
 
@@ -206,5 +204,3 @@ Ada_Byron_code_book::ParseXML(const std::string& a_inputFilename, const std::str
   std::clog << __func__ << " finished." << std::endl;
   return true;
 }
-
-// -- eof

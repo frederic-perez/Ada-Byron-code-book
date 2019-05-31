@@ -1,5 +1,3 @@
-// --
-
 #pragma once
 
 // TODO: Move #includes to .cpp
@@ -134,5 +132,3 @@ using Vector3HQ = Vector<boost::multiprecision::cpp_dec_float_50, 3>;
 } // namespace Euclidean
 
 } // namespace Ada_Byron_code_book
-
-// -- eof

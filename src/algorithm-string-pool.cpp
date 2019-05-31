@@ -49,23 +49,23 @@ ourToLower(std::string& a_text)
   std::transform(a_text.begin(), a_text.end(), a_text.begin(), ::tolower);
   for (auto& c : a_text) {
     switch (c) {
-    case 'À': c = 'à'; break;
-    case 'È': c = 'è'; break;
-    case 'Ì': c = 'ì'; break;
-    case 'Ò': c = 'ò'; break;
-    case 'Ù': c = 'ù'; break;
-    case 'Á': c = 'á'; break;
-    case 'É': c = 'é'; break;
-    case 'Í': c = 'í'; break;
-    case 'Ó': c = 'ó'; break;
-    case 'Ú': c = 'ú'; break;
-    case 'Ä': c = 'ä'; break;
-    case 'Ë': c = 'ë'; break;
-    case 'Ï': c = 'ï'; break;
-    case 'Ö': c = 'ö'; break;
-    case 'Ü': c = 'ü'; break;
-    case 'Ç': c = 'ç'; break;
-    case 'Ñ': c = 'ñ'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
+    case 'ï¿½': c = 'ï¿½'; break;
     default:;
     }
   }
@@ -117,11 +117,11 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
   name.erase(remove_if(name.begin(), name.end(), ba::is_any_of("LN")), name.end());
   Output("   name (after is_any_of(\"LN\") removal)", name);
 
-  std::string special = "CAFÉ BJÖRK ÀÈÌÒÙ ÁÉÍÓÚ ÄËÏÖÜ ÇÑ L·L";
+  std::string special = "CAFï¿½ BJï¿½RK ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ Lï¿½L";
   Output(">> special (original)", special);
   ourToLower(special);
   Output("   special (after ourToLower)", special);
-  const std::string specialK = "café björk àèìòù áéíóú äëïöü çñ l·l";
+  const std::string specialK = "cafï¿½ bjï¿½rk ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ lï¿½l";
   const bool equal = special == specialK;
   // '- NOTE on comparing std::string objects:
   //		Use operator== (or operator!=) instead of writing obfuscated code
@@ -176,5 +176,3 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 
   std::clog << __func__ << " finished." << std::endl;
 }
-
-// -- eof

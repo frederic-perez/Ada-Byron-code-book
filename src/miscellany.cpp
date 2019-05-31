@@ -1,5 +1,3 @@
-// --
-
 #include <iomanip>
 #include <iostream>
 #include <sstream>
@@ -148,5 +146,3 @@ ABcb::miscellany::ExamplesOfMultiprecision()
 
   std::clog << __func__ << " finished." << std::endl;
 }
-
-// -- eof
