@@ -25,12 +25,12 @@ using MatrixD33 = bnu::fixed_matrix<double, 3, 3>;
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1900)
 /*
+// TODO for vs14
 VectorD3
-operator^(const VectorD3& a_lhs, const VectorD3& a_rhs) // TODO for vs14
+operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)
 {
-        const bnu::fixed_vector<double, 3>
-                v(a_lhs[0], a_rhs[0], 666.); // TODO
-        return v;
+  const bnu::fixed_vector<double, 3> v(a_lhs[0], a_rhs[0], 666.); // TODO
+  return v;
 }
 */
 #else
