@@ -261,7 +261,7 @@ GetArgv0Info(const std::string& a_argv0)
     const pt::ptime thePtime =
       // pt::from_time_t(theTime_t); <-- Does not work properly for Darwin
       // Solution from http://stackoverflow.com/questions/6143569/
-      //	how-to-get-a-local-date-time-from-a-time-t-with-boostdate-time
+      //   how-to-get-a-local-date-time-from-a-time-t-with-boostdate-time
       boost::date_time::c_local_adjustor<pt::ptime>::utc_to_local(pt::from_time_t(theTime_t));
     const pt::ptime::date_type date = thePtime.date();
     oss << " on " << date.day_of_week() << ", " << date.month() << ' ' << date.day() << ", " << date.year();
