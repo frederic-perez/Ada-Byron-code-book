@@ -128,8 +128,8 @@ ABcb::miscellany::ExamplesOfMultiprecision()
   using ABcb::raw::pad;
 
   // Code based on
-  //	http://www.boost.org/doc/libs/1_59_0/libs/multiprecision/
-  //	doc/html/boost_multiprecision/tut/floats/fp_eg/aos.html
+  //   http://www.boost.org/doc/libs/1_59_0/libs/multiprecision/
+  //   doc/html/boost_multiprecision/tut/floats/fp_eg/aos.html
 
   const float r_f = 123.f / 100.f;
   const float a_f = AreaOfACircle(r_f);

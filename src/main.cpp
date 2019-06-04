@@ -95,9 +95,9 @@ main(const int argc, char* argv[])
   const double timeElapsed = timerHQ.Seconds();
   const auto previousPrecision = std::clog.precision(2);
   // '- Note: "auto" is recommended here to avoid potential problems with
-  //		different compilers (eg. requiring "static_cast" to set the previous
-  //		precision in vs12), since the standard states that the return type of
-  //		setprecision is "unspecified"
+  //    different compilers (eg. requiring "static_cast" to set the previous
+  //    precision in vs12), since the standard states that the return type of
+  //    setprecision is "unspecified"
   std::clog << '\n'
             << __func__ << " finishes. Time elapsed: " << timeElapsed << " seconds"
             << std::setprecision(previousPrecision) << std::endl;
