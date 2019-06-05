@@ -94,9 +94,9 @@ class Timer : boost::noncopyable {
   //
   // Examples
   // --------
-  //	Timer<boost::chrono::system_clock> t1;
-  //	Timer<boost::chrono::steady_clock> t2; // GCC duplicate?
-  //	Timer<boost::chrono::high_resolution_clock> t3;
+  // Timer<boost::chrono::system_clock> t1;
+  // Timer<boost::chrono::steady_clock> t2; // GCC duplicate?
+  // Timer<boost::chrono::high_resolution_clock> t3;
   //
 public:
   Timer();

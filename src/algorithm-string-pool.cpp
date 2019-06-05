@@ -94,9 +94,8 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
   std::string name = "  Alan Turing 42  ";
   Output("%% name (original)", name);
   name.erase(boost::remove_if(name, ::isdigit), name.end());
-  // '- Notice that all "remove_if" call has an "erase" companion
-  //		to do the actual cleanup.
-  //		This happens for both std:: and boost::, by the way
+  // '- Notice that all "remove_if" call has an "erase" companion to do the actual cleanup.
+  //    This happens for both std:: and boost::, by the way
   Output("   name (after isdigit removal)", name);
 
   namespace ba = boost::algorithm;
@@ -124,13 +123,12 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
   const std::string specialK = "caf� bj�rk ����� ����� ����� �� l�l";
   const bool equal = special == specialK;
   // '- NOTE on comparing std::string objects:
-  //		Use operator== (or operator!=) instead of writing obfuscated code
-  //		like
-  //			strcmp(a_date.c_str(), date2.c_str()) == 0
-  //		See
-  //			http://en.cppreference.com/w/cpp/string/basic_string/operator_cmp
-  //		std::string::operator==:
-  //			Simpler, shorter, faster, easier to maintain. Period.
+  //    Use operator== (or operator!=) instead of writing obfuscated code like
+  //      strcmp(a_date.c_str(), date2.c_str()) == 0
+  //    See
+  //      http://en.cppreference.com/w/cpp/string/basic_string/operator_cmp
+  //    std::string::operator==:
+  //    Simpler, shorter, faster, easier to maintain. Period.
 
   std::cout << pad << "   special == \"" << specialK << "\" is " << std::boolalpha << equal << std::endl;
 

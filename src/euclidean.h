@@ -28,10 +28,10 @@ class Vector {
     "It should be strictly positive.");
   static_assert(
     // std::is_floating_point<T>::value,
-    //	'- Oops! Alas, this assert does not work with
-    //		 boost::multiprecision::cpp_dec_float_50
-    //		 so we use the expression below, found in the Internet
-    //		 (it catches attempts of instantiating T as a char, for example)
+    // '- Oops! Alas, this assert does not work with
+    //    boost::multiprecision::cpp_dec_float_50
+    //    so we use the expression below, found in the Internet
+    //    (it catches attempts of instantiating T as a char, for example)
     false == std::numeric_limits<T>::is_integer,
     "static_assert failed: Vector template parameter T is not floating point");
 
@@ -112,10 +112,9 @@ operator<<(std::ostream& a_os, const Vector<T, N>& a_vector)
   for (auto value : a_vector.d_array) {
     oss << value;
     valuesAsStrings.push_back(oss.str());
-    // '- Note: We do not use
-    //			valuesAsStrings.push_back(std::to_string(value));
-    //		because std::to_string(double) outputs six decimal digits
-    //		and we want no decimal digits whenever possible.
+    // '- Note: We do not use valuesAsStrings.push_back(std::to_string(value));
+    //    because std::to_string(double) outputs six decimal digits
+    //    and we want no decimal digits whenever possible.
     oss.str("");
   }
   oss << '(' << boost::algorithm::join(valuesAsStrings, ", ") << ')';
