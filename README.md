@@ -149,6 +149,6 @@ Advices on **Hungarian notation**, from well-known C++ gurus:
 - _"Additionally, never attempt to encode a variable's type in its name. For instance, calling an integer index iIndex is actively damaging to understanding and maintaining the code. First, a name should describe a program entity's abstract meaning, not how it's implemented (data abstraction can apply even to predefined types). Second, in the common case that the variable's type changes, just as common is that its name doesn't change in sync. The variable's name then becomes an effective source of misinformation about its type."_ (from C++ Gotchas: Avoiding Common Problems in Coding and Design, by Stephen C. Dewhurst; Gotcha #8: Failure to Distinguish Access and Visibility)
 - Examples: Ditch `std::string sName; int iIndex;` and write instead `std::string name; int index;`
 
-- - -
+---
 
-_Note: To render a GitHub (or Bitbucket) webpage containing code with a tab size of 2 spaces, append to its URL "?ts=2"_
+_Note: To render a GitHub (or Bitbucket) webpage containing code with a tab size of 2 spaces, append to its URL_ `?ts=2`.
