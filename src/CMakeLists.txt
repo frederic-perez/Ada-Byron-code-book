@@ -10,42 +10,42 @@ set(Boost_USE_STATIC_LIBS ON CACHE BOOL "Use statically-linked boost libraries")
 set(Boost_USE_MULTITHREADED ON)
 # find_package(Boost) # <-- Use this simple line for using only headers
 find_package(Boost
-	COMPONENTS
-		# lexicographically sorted
-		date_time
-		filesystem
-		locale
-		program_options
-		system
+  COMPONENTS
+    # lexicographically sorted
+    date_time
+    filesystem
+    locale
+    program_options
+    system
 )
 if (Boost_FOUND)
-	message(STATUS "Boost found:")
-	include_directories(${Boost_INCLUDE_DIRS})
-	message(STATUS "  Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
-	message(STATUS "  Boost_LIBRARIES: ${Boost_LIBRARIES}
-	Note: Boost_LIBRARIES can be empty if no COMPONENTS are used.") # Used below
+  message(STATUS "Boost found:")
+  include_directories(${Boost_INCLUDE_DIRS})
+  message(STATUS "  Boost_INCLUDE_DIRS: ${Boost_INCLUDE_DIRS}")
+  message(STATUS "  Boost_LIBRARIES: ${Boost_LIBRARIES}
+  Note: Boost_LIBRARIES can be empty if no COMPONENTS are used.") # Used below
 else ()
-	message(FATAL_ERROR "Boost not found - Hint(?): ENV{BOOST_ROOT} is $ENV{BOOST_ROOT}")
+  message(FATAL_ERROR "Boost not found - Hint(?): ENV{BOOST_ROOT} is $ENV{BOOST_ROOT}")
 endif ()
 
 set(SRC_LIST
-	aux-raw.cpp aux-raw.h
-	aux-raw-compiler-warnings-off++begin.h aux-raw-compiler-warnings-off++end.h
-	aux-spy.cpp aux-spy.h
-	algorithm-string-pool.cpp algorithm-string-pool.h
-	cli-parser.cpp cli-parser.h
-	concurrency.cpp concurrency.h
-	conversions+casts++.cpp conversions+casts++.h
-	cpp11-pool.cpp cpp11-pool.h
-	euclidean.cpp euclidean.h
-	main.cpp
-	miscellany.cpp miscellany.h
-	filesystem-pool.cpp filesystem-pool.h
-	preprocessor-pool.cpp preprocessor-pool.h
-	promotions-pool.cpp promotions-pool.h
-	ublas-pool.cpp ublas-pool.h
-	under-construction.cpp under-construction.h
-	xml-parser.cpp xml-parser.h
+  aux-raw.cpp aux-raw.h
+  aux-raw-compiler-warnings-off++begin.h aux-raw-compiler-warnings-off++end.h
+  aux-spy.cpp aux-spy.h
+  algorithm-string-pool.cpp algorithm-string-pool.h
+  cli-parser.cpp cli-parser.h
+  concurrency.cpp concurrency.h
+  conversions+casts++.cpp conversions+casts++.h
+  cpp11-pool.cpp cpp11-pool.h
+  euclidean.cpp euclidean.h
+  main.cpp
+  miscellany.cpp miscellany.h
+  filesystem-pool.cpp filesystem-pool.h
+  preprocessor-pool.cpp preprocessor-pool.h
+  promotions-pool.cpp promotions-pool.h
+  ublas-pool.cpp ublas-pool.h
+  under-construction.cpp under-construction.h
+  xml-parser.cpp xml-parser.h
 )
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
@@ -53,20 +53,18 @@ add_executable(${PROJECT_NAME} ${SRC_LIST})
 # Link the executable to the required libraries
 
 target_link_libraries(${PROJECT_NAME}
-	${Boost_LIBRARIES}
-#	Other required 3rd party libraries would appear below (examples commented):
-#	${CMAKE_THREAD_LIBS_INIT}
-#	${OpenIGTLink_LIBRARIES}
-#	${ITK_LIBRARIES}
-#	${VTK_LIBRARIES}
+  ${Boost_LIBRARIES}
+# Other required 3rd party libraries would appear below (examples commented):
+# ${CMAKE_THREAD_LIBS_INIT}
+# ${OpenIGTLink_LIBRARIES}
+# ${ITK_LIBRARIES}
+# ${VTK_LIBRARIES}
 )
 
 set(TARGET_NAME ${PROJECT_NAME}Targets)
 install(TARGETS ${PROJECT_NAME} # EXPORT ${TARGET_NAME}
-#	LIBRARY DESTINATION lib
-#	ARCHIVE DESTINATION lib
-	RUNTIME DESTINATION bin
-#	INCLUDES DESTINATION include
+# LIBRARY DESTINATION lib
+# ARCHIVE DESTINATION lib
+  RUNTIME DESTINATION bin
+# INCLUDES DESTINATION include
 )
-
-# -- eof
