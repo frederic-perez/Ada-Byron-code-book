@@ -3,11 +3,11 @@
 #include <iostream>
 
 #include "aux-raw-compiler-warnings-off++begin.h"
-
-#include <boost/numeric/ublas/io.hpp>
-#include <boost/numeric/ublas/matrix.hpp>
-#include <boost/numeric/ublas/vector.hpp>
-
+// clang-format off
+  #include <boost/numeric/ublas/io.hpp>
+  #include <boost/numeric/ublas/matrix.hpp>
+  #include <boost/numeric/ublas/vector.hpp>
+// clang-format on
 #include "aux-raw-compiler-warnings-off++end.h"
 
 #include "aux-raw.h"

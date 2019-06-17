@@ -4,13 +4,13 @@
 #include <vector>
 
 #include "aux-raw-compiler-warnings-off++begin.h"
-
-#include <boost/algorithm/string.hpp>
-#include <boost/numeric/conversion/bounds.hpp>
-#include <boost/numeric/conversion/cast.hpp>
-#include <boost/program_options.hpp>
-#include <boost/tokenizer.hpp>
-
+// clang-format off
+  #include <boost/algorithm/string.hpp>
+  #include <boost/numeric/conversion/bounds.hpp>
+  #include <boost/numeric/conversion/cast.hpp>
+  #include <boost/program_options.hpp>
+  #include <boost/tokenizer.hpp>
+// clang-format on
 #include "aux-raw-compiler-warnings-off++end.h"
 
 #include "aux-raw.h"

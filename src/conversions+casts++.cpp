@@ -7,9 +7,9 @@
 #include <string>
 
 #include "aux-raw-compiler-warnings-off++begin.h"
-
-#include <boost/lexical_cast.hpp>
-
+// clang-format off
+  #include <boost/lexical_cast.hpp>
+// clang-format on
 #include "aux-raw-compiler-warnings-off++end.h"
 
 #include "aux-raw.h"
