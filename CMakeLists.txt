@@ -36,7 +36,7 @@ else()
   cmake_host_system_information(RESULT MyHostname QUERY HOSTNAME)
 endif()
 message(STATUS "Your host name (MyHostname variable) is ${MyHostname}")
-set(def_CMAKE_MYHOSTNAME CMAKE_MYHOSTNAME=${MyHostname}) 
+set(def_CMAKE_MYHOSTNAME CMAKE_MYHOSTNAME=${MyHostname})
 message(STATUS "> def_CMAKE_MYHOSTNAME is ${def_CMAKE_MYHOSTNAME}")
 
 if("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
@@ -112,10 +112,10 @@ if(BUILD_TESTING)
   set(BUILDNAME
     ${PROJECT_NAME}-${CMAKE_SYSTEM_NAME}-${MyCxx}-${MyBuildType})
   message(STATUS "BUILDNAME is ${BUILDNAME}")
-  
+
   include(CTest)
   # '- To build Continuous, Experimental, etc., and enables submission to
-  #    dashboards. 
+  #    dashboards.
   #    From http://www.cmake.org/Wiki/CMake/Testing_With_CTest:
   #    "This module will automatically call enable_testing() ... so you no
   #    longer have to do so ..."
