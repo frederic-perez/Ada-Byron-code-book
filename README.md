@@ -1,4 +1,4 @@
-## Ada Byron's code book
+# Ada Byron's code book
 
 <p align="center">
   <img src="images/Ada%20Byron--from%20teaser%20of%20Happy%20Ada%20Lovelace%20Day%202015%20by%20Natasha%20Sayce-Zelem-200V.jpg?raw=true" alt="Ada Byron from the Wikipedia"/>
@@ -32,28 +32,28 @@ The "book" uses C++11 features, and includes:
   - XML parsing
 - (TODO: Finish porting code from my Evernote's notes)
 
-### Reference material
+## Reference material
 
 Some interesting C++11-related URLs:
 
 - Wikipedia's [C++11](http://en.wikipedia.org/wiki/C%2B%2B11) entry
 - Herb Sutter's post on [Elements of modern style](http://herbsutter.com/elements-of-modern-c-style/)
-- http://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html
+- [Improved Type Inference in C++11](https://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html)
 - Scott Meyers's post on the [Effective C++11 book](http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html)
 - Post on [lambdas](http://blog.feabhas.com/2014/03/demystifying-c-lambdas/)
 - Alex Sinyakov's [C++11 cheat sheet](https://isocpp.org/blog/2012/12/c11-a-cheat-sheet-alex-sinyakov)
 - Concurrency:
   - Bartosz Milewski's post on [Functional Data Structures and Concurrency in C++](http://bartoszmilewski.com/2013/12/10/functional-data-structures-and-concurrency-in-c/)
   - [cppreference.com's thread](http://en.cppreference.com/w/cpp/thread)
-  - [C++11 concurrency cheatsheet](http://cpprocks.com/c-concurrency-cheatsheet/)
-  - SolarianProgrammer's [C++11 multithreading tutorial](https://solarianprogrammer.com/2011/12/16/cpp-11-thread-tutorial/) (posted on December 16, 2011), [C++11 multithreading tutorial - part 2](https://solarianprogrammer.com/2012/02/27/cpp-11-thread-tutorial-part-2/), both with [code on GitHub](https://github.com/sol-prog/threads)
+  - [C++11 concurrency cheat sheet](http://cpprocks.com/c-concurrency-cheatsheet/)
+  - Solarian Programmer's [C++11 multithreading tutorial](https://solarianprogrammer.com/2011/12/16/cpp-11-thread-tutorial/) (posted on December 16, 2011), [C++11 multithreading tutorial - part 2](https://solarianprogrammer.com/2012/02/27/cpp-11-thread-tutorial-part-2/), both with [code on GitHub](https://github.com/sol-prog/threads)
   - K Hong's [Multi-Threaded Programming with C++11 - Part A](http://www.bogotobogo.com/cplusplus/multithreaded4_cplusplus11.php), [Part B
 (Sharing Data - mutex, and race conditions, and deadlock)](http://www.bogotobogo.com/cplusplus/multithreaded4_cplusplus11B.php); [Debugging - 2016](http://www.bogotobogo.com/cplusplus/multithreadedDebugging.php)
 
 A never complete list of great C++ references (selected books, etc.):
 
 - Scott Meyers, _More Efficient C++ -- 35 New Ways to Improve Your Programs and Designs_ (mec++, for short), Addison-Wesley Professional Computing Series, 1996.
-- Andrew Koenig, Barbara Moo, _Ruminations on C++ -- A Decade of Programming Insight and Experience_, Addison-Wesley, 1997. (I particulalarly love Chapter 4, Checklist for class authors.)
+- Andrew Koenig, Barbara Moo, _Ruminations on C++ -- A Decade of Programming Insight and Experience_, Addison-Wesley, 1997. (I particularly love Chapter 4, Checklist for class authors.)
 - Bjarne Stroustrup, _The C++ Programming Language - Third Edition_, Addison-Wesley, 1997.
 - Anthony Williams, _C++ Concurrency in Action: Practical Multithreading_, Manning Publications, 2012.
 - MITK's [Bug Squashing Seminars](http://www.mitk.org/wiki/Bug_Squashing_Seminars)
@@ -141,7 +141,7 @@ Do not write (for example) **`using namespace std;`** in header files or before 
 - From Programming, Principles and Practice Using C++, by Stroustrup: _"Be restrained in the use or `using` directives. The notational convenience offered by a `using` directive is achieved at the cost or potential name clashes. In particular, avoid `using` directives in header files."_
 - From Thinking in C++, 2nd ed. Vol. 1, by Eckel: _"Thus, if you start putting `using` directives in header files, it’s very easy to end up “turning off” namespaces practically everywhere, and thereby neutralizing the beneficial effects of namespaces. In short: don’t put `using` directives in header files."_
 - From Industrial Strength C++, by Henricson and Nyquist: _"A `using` declaration or a `using` directive in the global scope is not recommended inside header files, since it will make names globally accessible to all files that include that header."_
-- From C++ Coding Standards: 101 Rules, Guidelines, and Best Practices, by Sutter and Alexandrescu: _"Rule 59: Don't write namespace usings in a header file or before an `#include`."_
+- From C++ Coding Standards: 101 Rules, Guidelines, and Best Practices, by Sutter and Alexandrescu: _"Rule 59: Don't write namespace `#using`s in a header file or before an `#include`."_
 
 Advices on **Hungarian notation**, from well-known C++ gurus:
 
