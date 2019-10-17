@@ -7,8 +7,9 @@
 
 namespace ABcb = Ada_Byron_code_book;
 
-char
+auto
 ABcb::raw::SystemSlash()
+-> char
 {
 #if defined(__CYGWIN__) || defined(__GNUC__)
   return '/';

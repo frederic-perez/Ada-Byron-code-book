@@ -23,8 +23,9 @@ namespace raw {
 // Note: Recall that for std::array<> objects you must use the size() inspector
 //
 template <typename T, size_t N>
-size_t
+auto
 ArraySize(const T (&)[N])
+-> size_t
 {
   return N;
 }
@@ -37,7 +38,7 @@ WipeOut(T& a_t)
   T().swap(a_t);
 }
 
-char SystemSlash();
+auto SystemSlash() -> char;
 
 void ExamplesOfRaw();
 
