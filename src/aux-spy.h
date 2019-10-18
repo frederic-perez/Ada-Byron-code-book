@@ -18,27 +18,27 @@ namespace Ada_Byron_code_book {
 
 namespace spy {
 
-std::ostream& BoostVersion(std::ostream&);
-std::ostream& ClangVersion(std::ostream&);
-std::ostream& GNUGppVersion(std::ostream&);
-std::ostream& VisualStudioCppCompilerVersion(std::ostream&);
+auto BoostVersion(std::ostream&) -> std::ostream&;
+auto ClangVersion(std::ostream&) -> std::ostream&;
+auto GNUGppVersion(std::ostream&) -> std::ostream&;
+auto VisualStudioCppCompilerVersion(std::ostream&) -> std::ostream&;
 
-std::ostream& HostName(std::ostream&);
-std::ostream& UserName(std::ostream&);
-std::ostream& LocalDate(std::ostream&);
-std::ostream& LocalTime(std::ostream&);
-std::ostream& InfoOfSomeTypes(std::ostream&);
+auto HostName(std::ostream&) -> std::ostream&;
+auto UserName(std::ostream&) -> std::ostream&;
+auto LocalDate(std::ostream&) -> std::ostream&;
+auto LocalTime(std::ostream&) -> std::ostream&;
+auto InfoOfSomeTypes(std::ostream&) -> std::ostream&;
 
 class RunInfo; // To be used like std::cout << RunInfo("my-progname") << ...
-std::ostream& operator<<(std::ostream&, const RunInfo&);
+auto operator<<(std::ostream&, const RunInfo&) -> std::ostream&;
 
 class RunInfo : boost::noncopyable {
 public:
   explicit RunInfo(const std::string& a_argv0, const std::string& a_progname) : d_argv0(a_argv0), d_progname(a_progname)
   {}
 
-  const std::string& GetArgv0() const { return d_argv0; }
-  const std::string& GetProgName() const { return d_progname; }
+  auto GetArgv0() const -> const std::string& { return d_argv0; }
+  auto GetProgName() const -> const std::string& { return d_progname; }
 
 private:
   const std::string d_argv0;
