@@ -27,28 +27,26 @@ ABcb::ExamplesOfIstringstreamFailingConversions()
   // Old way, which so far does not work properly -- TODO: Fix this
 
   const std::string string = "14 -1 3";
-  if (!string.empty()) {
-    std::cout << pad << "Parsing string \"" << string << "\" to unsigned ints i, j, k using std::istringstream >> "
-              << std::flush;
-    std::istringstream iss(string); // or parse(string)
-    unsigned int i;
-    iss >> i;
-    if (!iss.good()) // Note: if (iss.fail) does not work fine for our purposes
-      std::cerr << "Error parsing first index\n";
+  std::cout << pad << "Parsing string \"" << string << "\" to unsigned ints i, j, k using std::istringstream >> "
+            << std::flush;
+  std::istringstream iss(string); // or parse(string)
+  unsigned int i;
+  iss >> i;
+  if (!iss.good()) // Note: if (iss.fail) does not work fine for our purposes
+    std::cerr << "Error parsing first index\n";
+  else {
+    unsigned int j;
+    iss >> j;
+    if (!iss.good())
+      std::cerr << pad << "Error parsing second index (expected behavior)\n";
     else {
-      unsigned int j;
-      iss >> j;
+      unsigned int k;
+      iss >> k;
       if (!iss.good())
-        std::cerr << pad << "Error parsing second index (expected behavior)\n";
-      else {
-        unsigned int k;
-        iss >> k;
-        if (!iss.good())
-          std::cerr << "Error parsing third index (i=" << i << ", j=" << j
-                    << "), but it should have failed for the second index\n";
-        else
-          std::cout << pad << "indices: " << i << ", " << j << ", " << k << std::endl;
-      }
+        std::cerr << "Error parsing third index (i=" << i << ", j=" << j
+                  << "), but it should have failed for the second index\n";
+      else
+        std::cout << pad << "indices: " << i << ", " << j << ", " << k << std::endl;
     }
   }
 
