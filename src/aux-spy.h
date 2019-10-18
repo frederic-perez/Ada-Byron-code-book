@@ -34,7 +34,9 @@ auto operator<<(std::ostream&, const RunInfo&) -> std::ostream&;
 
 class RunInfo : boost::noncopyable {
 public:
-  explicit RunInfo(const std::string& a_argv0, const std::string& a_progname) : d_argv0(a_argv0), d_progname(a_progname)
+  explicit RunInfo(std::string a_argv0, std::string a_progname)
+  : d_argv0{ std::move(a_argv0) },
+    d_progname{ std::move(a_progname) }
   {}
 
   auto GetArgv0() const -> const std::string& { return d_argv0; }
@@ -46,19 +48,21 @@ private:
 };
 
 template <typename T>
-std::ostream&
+auto
 Output(std::ostream& a_os, const T& a_container, const std::string& a_containerName)
+-> std::ostream&
 {
   a_os << (a_containerName.empty() ? "[unnamed]" : a_containerName) << " = ";
-  if (a_container.empty())
+  if (a_container.empty()) {
     a_os << "[0]{}" << std::endl;
-  else {
+  } else {
     const size_t N = a_container.size();
     a_os << "[" << N << "]{";
     for (size_t i = 0; i < N; ++i) {
       a_os << a_container[i];
-      if (i < N - 1)
+      if (i < N - 1) {
         a_os << ", ";
+      }
     }
     a_os << '}' << std::endl;
   }
@@ -66,18 +70,20 @@ Output(std::ostream& a_os, const T& a_container, const std::string& a_containerN
 }
 
 template <typename T>
-std::ostream&
+auto
 Output(std::ostream& a_os, const T* a_oldCArray, size_t a_size, const std::string& a_name)
+-> std::ostream&
 {
   a_os << (a_name.empty() ? "[unnamed]" : a_name) << " = ";
-  if (a_size == 0)
+  if (a_size == 0) {
     a_os << "[0]{}" << std::endl;
-  else {
+  } else {
     a_os << "[" << a_size << "]{";
     for (size_t i = 0; i < a_size; ++i) {
       a_os << a_oldCArray[i];
-      if (i < a_size - 1)
+      if (i < a_size - 1) {
         a_os << ", ";
+      }
     }
     a_os << '}' << std::endl;
   }
@@ -100,8 +106,8 @@ class Timer : boost::noncopyable {
   //
 public:
   Timer();
-  typename TClock::duration Elapsed() const;
-  double Seconds() const;
+  auto Elapsed() const -> typename TClock::duration;
+  auto Seconds() const -> double;
 
   void Reset();
 
@@ -112,8 +118,9 @@ protected:
 // Consider this function instead of using typeid(-).name
 //
 template <class T>
-std::string
+auto
 TypeNameENH()
+-> std::string
 {
   // Credits to
   // http://stackoverflow.com/questions/81870/print-variable-type-in-c
