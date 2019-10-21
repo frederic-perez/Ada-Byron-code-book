@@ -99,12 +99,14 @@ GetHostName()
   // This block is meant for vs10 or MinGW's g++
   //
   const char* hostname = getenv("HOSTNAME");
-  if (hostname)
+  if (hostname != nullptr) {
     return hostname; // iff hostname != nullptr, it can be converted to string
+  }
 
   hostname = getenv("COMPUTERNAME");
-  if (hostname)
+  if (hostname != nullptr) {
     return hostname; // iff like above
+  }
 
 #  ifdef _WINDOWS
 #    pragma warning(default : 4996) // This function or variable may be unsafe
@@ -138,11 +140,12 @@ GetUserName()
 -> std::string
 {
   const char* username = getenv("USER");
-  if (username)
+  if (username != nullptr) {
     return username; // iff username != nullptr, it can be converted to string
+  }
 
   username = getenv("USERNAME");
-  return username ? username : "unknown-username"; // iff like above
+  return username != nullptr ? username : "unknown-username"; // iff like above
 }
 
 } // namespace
@@ -176,7 +179,7 @@ ABcb::spy::LocalTime(std::ostream& a_os)
   const pt::ptime now = pt::second_clock::local_time();
 
   std::ostringstream oss;
-  pt::time_facet* const f = new pt::time_facet("%H:%M:%S");
+  auto* const f = new pt::time_facet("%H:%M:%S");
   oss.imbue(std::locale(oss.getloc(), f));
   oss << now;
 
@@ -194,8 +197,8 @@ Range(std::ostream& a_os)
 -> std::ostream&
 {
   static_assert(
-    std::is_scalar<T>::value || // TODO: How to avoid instantiating with char?
-      false == std::numeric_limits<T>::is_integer,
+    std::is_scalar<T>::value // TODO: How to avoid instantiating with char?
+    || false == std::numeric_limits<T>::is_integer,
     "static_assert failed: "
     "Template parameter T is neither arithmetic nor floating point");
   a_os << "Range = [" << boost::numeric::bounds<T>::lowest() << ", " << boost::numeric::bounds<T>::highest() << ']'
@@ -283,11 +286,12 @@ GetArgv0Info(const std::string& a_argv0)
 
     // Hours, minutes and seconds
     //
-    pt::time_facet* const f = new pt::time_facet("%H:%M:%S");
+    auto* const f = new pt::time_facet("%H:%M:%S");
     oss.imbue(std::locale(oss.getloc(), f));
     oss << ", at " << thePtime;
-  } else
+  } else {
     oss << "(which does not seem to exist)";
+  }
   return oss.str();
 }
 
