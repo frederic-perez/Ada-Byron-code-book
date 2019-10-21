@@ -9,6 +9,7 @@
 #include <boost/preprocessor.hpp>
 #include <boost/version.hpp>
 
+#include "aux-raw.h" // pad
 #include "aux-spy.h"
 #include "preprocessor-pool.h"
 
@@ -185,7 +186,7 @@ ABcb::spy::LocalTime(std::ostream& a_os)
 
 namespace {
 
-const std::string pad = "  ";
+using ABcb::raw::pad;
 
 template <class T>
 auto
