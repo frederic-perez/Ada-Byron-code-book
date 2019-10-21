@@ -11,8 +11,7 @@ namespace Ada_Byron_code_book {
 
 namespace spy {
 
-std::ostream& ListOfPreprocessorDefines(std::ostream&);
+auto ListOfPreprocessorDefines(std::ostream&) -> std::ostream&;
 
 } // namespace spy
-
 } // namespace Ada_Byron_code_book

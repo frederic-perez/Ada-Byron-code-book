@@ -14,8 +14,9 @@
 
 namespace ABcb = Ada_Byron_code_book;
 
-std::ostream&
+auto
 ABcb::spy::BoostVersion(std::ostream& a_os)
+-> std::ostream&
 {
   return a_os << BOOST_VERSION / 100000 << '.' // major version
               << BOOST_VERSION / 100 % 1000 << '.' // minor version
@@ -23,8 +24,9 @@ ABcb::spy::BoostVersion(std::ostream& a_os)
               << std::flush;
 }
 
-std::ostream&
+auto
 ABcb::spy::ClangVersion(std::ostream& a_os)
+-> std::ostream&
 {
   return a_os
 #ifdef __clang__
@@ -38,8 +40,9 @@ ABcb::spy::ClangVersion(std::ostream& a_os)
     << std::flush;
 }
 
-std::ostream&
+auto
 ABcb::spy::GNUGppVersion(std::ostream& a_os)
+-> std::ostream&
 {
   return a_os
 #ifdef ADA_BYRON__GNUGPP_VERSION
@@ -52,8 +55,9 @@ ABcb::spy::GNUGppVersion(std::ostream& a_os)
     << std::flush;
 }
 
-std::ostream&
+auto
 ABcb::spy::VisualStudioCppCompilerVersion(std::ostream& a_os)
+-> std::ostream&
 {
   return a_os
 #ifdef _MSC_VER
@@ -81,8 +85,9 @@ ABcb::spy::VisualStudioCppCompilerVersion(std::ostream& a_os)
 
 namespace {
 
-std::string
+auto
 GetHostName()
+-> std::string
 {
 #ifdef _MSC_VER
 #  pragma warning(disable : 4996) // This function or variable may be unsafe
@@ -118,16 +123,18 @@ GetHostName()
 
 } // namespace
 
-std::ostream&
+auto
 ABcb::spy::HostName(std::ostream& a_os)
+-> std::ostream&
 {
   return a_os << GetHostName() << std::flush;
 }
 
 namespace {
 
-std::string
+auto
 GetUserName()
+-> std::string
 {
   const char* username = getenv("USER");
   if (username)
@@ -139,14 +146,16 @@ GetUserName()
 
 } // namespace
 
-std::ostream&
+auto
 ABcb::spy::UserName(std::ostream& a_os)
+-> std::ostream&
 {
   return a_os << GetUserName() << std::flush;
 }
 
-std::ostream&
+auto
 ABcb::spy::LocalDate(std::ostream& a_os)
+-> std::ostream&
 {
   namespace pt = boost::posix_time;
   const pt::ptime now = pt::second_clock::local_time();
@@ -158,8 +167,9 @@ ABcb::spy::LocalDate(std::ostream& a_os)
   return a_os;
 }
 
-std::ostream&
+auto
 ABcb::spy::LocalTime(std::ostream& a_os)
+-> std::ostream&
 {
   namespace pt = boost::posix_time;
   const pt::ptime now = pt::second_clock::local_time();
@@ -178,8 +188,9 @@ namespace {
 const std::string pad = "  ";
 
 template <class T>
-std::ostream&
+auto
 Range(std::ostream& a_os)
+-> std::ostream&
 {
   static_assert(
     std::is_scalar<T>::value || // TODO: How to avoid instantiating with char?
@@ -192,8 +203,9 @@ Range(std::ostream& a_os)
 }
 
 template <class T>
-std::ostream&
+auto
 RangeAsInt(std::ostream& a_os)
+-> std::ostream&
 {
   static_assert(
     std::is_scalar<T>::value || true == std::numeric_limits<T>::is_integer,
@@ -206,8 +218,9 @@ RangeAsInt(std::ostream& a_os)
 } // namespace
 
 // TODO: Refactor contents
-std::ostream&
+auto
 ABcb::spy::InfoOfSomeTypes(std::ostream& a_os)
+-> std::ostream&
 {
   using boost::multiprecision::cpp_dec_float_50;
   a_os << pad << "sizeof(char) = " << sizeof(char) << " | " << RangeAsInt<char> << '\n'
@@ -232,8 +245,9 @@ namespace {
 
 namespace bf = boost::filesystem;
 
-std::string
+auto
 GetArgv0Info(const std::string& a_argv0)
+-> std::string
 {
   const bf::path fullArgv0 = bf::system_complete(bf::canonical(bf::path(a_argv0)));
 
@@ -276,8 +290,9 @@ GetArgv0Info(const std::string& a_argv0)
   return oss.str();
 }
 
-std::string
+auto
 GetCurrentDirInfo()
+-> std::string
 {
   const std::string dot = ".";
   const bf::path currentDir(dot);
@@ -289,8 +304,9 @@ GetCurrentDirInfo()
 
 } // namespace
 
-std::ostream&
+auto
 ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
+-> std::ostream&
 {
   const std::string argv0Info = GetArgv0Info(a_runInfo.GetArgv0());
   const std::string currentDirInfo = GetCurrentDirInfo();
@@ -316,15 +332,17 @@ ABcb::spy::Timer<TClock>::Timer() : d_start(TClock::now())
 {}
 
 template <typename TClock>
-typename TClock::duration
+auto
 ABcb::spy::Timer<TClock>::Elapsed() const
+-> typename TClock::duration
 {
   return TClock::now() - d_start;
 }
 
 template <typename TClock>
-double
+auto
 ABcb::spy::Timer<TClock>::Seconds() const
+-> double
 {
   return Elapsed().count() * ((double)TClock::period::num / TClock::period::den);
 }
