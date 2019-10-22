@@ -22,7 +22,7 @@
 \
   const size_t beyond = enumText.size(); \
 \
-  inline Enum GetEnum(const std::string& a_text) \
+  inline auto GetEnum(const std::string& a_text) -> Enum \
   { \
     size_t i = 1; \
     for (; i < beyond && a_text != enumText[i]; ++i) \
@@ -30,13 +30,14 @@
     return i < beyond ? static_cast<Enum>(i) : Enum::undefined; \
   } \
 \
-  inline std::string GetString(const Enum a_enum) { return enumText[static_cast<size_t>(a_enum)]; } \
+  inline auto GetString(const Enum a_enum) -> std::string { return enumText[static_cast<size_t>(a_enum)]; } \
 \
-  inline std::vector<std::string> GetDefinedStrings() \
+  inline auto GetDefinedStrings() -> std::vector<std::string> \
   { \
     std::vector<std::string> result; \
-    for (size_t i = 1; i < beyond; ++i) \
-      result.push_back(enumText[i]); \
+    for (size_t i = 1; i < beyond; ++i) { \
+      result.emplace_back(enumText[i]); \
+    } \
     return result; \
   } \
 \
@@ -92,12 +93,12 @@ ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Fruit, (apple)(orange)(pear))
 
 namespace cli {
 
-std::string Argv0();
-std::string ProgramName();
+auto Argv0() -> std::string;
+auto ProgramName() -> std::string;
 
-bool ParseCommandLine(int argc, char** argv);
+auto ParseCommandLine(int argc, char** argv) -> bool;
 
-std::ostream& ParsedCommandLine(std::ostream&);
+auto ParsedCommandLine(std::ostream&) -> std::ostream&;
 
 } // namespace cli
 
