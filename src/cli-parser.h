@@ -47,7 +47,7 @@ namespace Ada_Byron_code_book {
 ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(
   Guru, (Andrei_Alexandrescu)(Andrew_Koenig)(Bruce_Eckel)(Bjarne_Stroustrup)(Herb_Sutter)(Ira_Pohl)(Scott_Meyers))
 
-  void GurusTest(std::initializer_list<std::string>);
+void GurusTest(std::initializer_list<std::string>);
 
 // First attempt at creating a template class for enhanced enum classes
 #ifdef ADA_BYRON_WORK_IN_PROGRESS_20150616
@@ -86,18 +86,18 @@ namespace Ada_Byron_code_book {
 
 ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(PlatonicSolid, (tetrahedron)(octahedron)(icosahedron)(hexahedron)(dodecahedron))
 
-  ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Color, (red)(green)(blue))
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Color, (red)(green)(blue))
 
-    ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Fruit, (apple)(orange)(pear))
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Fruit, (apple)(orange)(pear))
 
-      namespace cli
-{
-  std::string Argv0();
-  std::string ProgramName();
+namespace cli {
 
-  bool ParseCommandLine(int argc, char** argv);
+std::string Argv0();
+std::string ProgramName();
 
-  std::ostream& ParsedCommandLine(std::ostream&);
+bool ParseCommandLine(int argc, char** argv);
+
+std::ostream& ParsedCommandLine(std::ostream&);
 
 } // namespace cli
 
