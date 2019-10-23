@@ -23,6 +23,7 @@ namespace raw {
 // Note: Recall that for std::array<> objects you must use the size() inspector
 //
 template <typename T, size_t N>
+constexpr
 auto
 ArraySize(const T (&)[N])
 -> size_t
@@ -38,8 +39,16 @@ WipeOut(T& a_t)
   T().swap(a_t);
 }
 
-auto SystemSlash() -> char;
-
+constexpr
+auto
+SystemSlash() -> char
+{
+#if defined(__CYGWIN__) || defined(__GNUC__)
+  return '/';
+#else
+  return '\\';
+#endif
+}
 void ExamplesOfRaw();
 
 const std::string pad = "  ";
