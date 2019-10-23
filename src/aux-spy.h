@@ -98,11 +98,13 @@ class Timer : boost::noncopyable {
   // #chrono.users_guide.examples.time_point.a_tiny_program_that_times_how_
   // long_until_a_key_is_struck
   //
+  // Notice that `chrono` is part of the standard since C++11.
+  //
   // Examples
   // --------
-  // Timer<boost::chrono::system_clock> t1;
-  // Timer<boost::chrono::steady_clock> t2; // GCC duplicate?
-  // Timer<boost::chrono::high_resolution_clock> t3;
+  // Timer<std::chrono::system_clock> t1;
+  // Timer<std::chrono::steady_clock> t2; // GCC duplicate?
+  // Timer<std::chrono::high_resolution_clock> t3;
   //
 public:
   Timer();
