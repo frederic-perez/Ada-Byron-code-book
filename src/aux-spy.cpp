@@ -1,4 +1,5 @@
 #include <chrono>
+#include <iomanip>
 #include <sstream>
 #include <type_traits>
 
@@ -350,6 +351,16 @@ ABcb::spy::Timer<TClock>::Seconds() const
 -> double
 {
   return Elapsed().count() * ((double)TClock::period::num / TClock::period::den);
+}
+
+template <typename TClock>
+auto
+ABcb::spy::Timer<TClock>::Seconds(size_t precision) const
+-> std::string
+{
+  std::ostringstream oss;
+  oss << std::fixed << std::setprecision(precision) << Seconds();
+  return oss.str();
 }
 
 template <typename TClock>

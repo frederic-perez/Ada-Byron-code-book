@@ -110,6 +110,7 @@ public:
   Timer();
   auto Elapsed() const -> typename TClock::duration;
   auto Seconds() const -> double;
+  auto Seconds(size_t precision) const -> std::string;
 
   void Reset();
 
