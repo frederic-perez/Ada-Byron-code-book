@@ -139,8 +139,18 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
   Output("-- narrow (original)", narrow);
   ba::to_lower(narrow);
   Output("   narrow (after ba::to_lower)", narrow);
-  std::transform(narrow.begin(), narrow.end(), narrow.begin(), ::tolower);
-  Output("   narrow (after ::tolower)", narrow);
+
+  //std::transform(narrow.begin(), narrow.end(), narrow.begin(), ::tolower);
+  // '- warning C4244: '=': conversion from 'int' to 'char', possible loss of data
+  //
+  // Thus, we resort to the solution proposed in 
+  // https://developercommunity.visualstudio.com/content/problem/23811
+  //
+  std::transform(
+    narrow.begin(), narrow.end(), narrow.begin(),
+    [](char c) { return static_cast<char>(::tolower(c)); });
+  Output("   narrow (after lambda-wrapped ::tolower within transform)", narrow);
+
   ba::to_upper_copy(narrow);
   Output("   narrow (after ba::to_upper_copy)", narrow);
   try {

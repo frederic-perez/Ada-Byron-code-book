@@ -8,7 +8,7 @@ set(Boost_USE_STATIC_LIBS ON CACHE BOOL "Use statically-linked boost libraries")
 #    Fedora native boost libraries, or for OSX when using Boost's "locale" to
 #    avoid weird "_iconv*" missing symbols when linking")
 set(Boost_USE_MULTITHREADED ON)
-# find_package(Boost) # <-- Use this simple line for using only headers
+# find_package(Boost) # <-- Use this simple line when using only headers
 find_package(Boost
   COMPONENTS
     # lexicographically sorted
