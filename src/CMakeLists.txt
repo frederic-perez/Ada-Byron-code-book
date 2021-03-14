@@ -38,6 +38,7 @@ set(SRC_LIST
   conversions+casts++.cpp conversions+casts++.h
   cpp11-pool.cpp cpp11-pool.h
   euclidean.cpp euclidean.h
+  literal-operators.cpp literal-operators.h
   main.cpp
   miscellany.cpp miscellany.h
   filesystem-pool.cpp filesystem-pool.h

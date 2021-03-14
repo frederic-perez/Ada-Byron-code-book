@@ -1,0 +1,39 @@
+#include "literal-operators.h"
+
+#include "aux-raw.h"
+
+#include <algorithm>
+#include <iostream>
+
+namespace ABcb = Ada_Byron_code_book;
+
+namespace {
+
+using Ada_Byron_code_book::raw::pad;
+
+void
+ExampleOfUnsignedCharLiteral()
+{
+  using ABcb::literal_operators::operator "" _uchar;
+#undef FPCX_MIXING_UNSIGNED_CHAR_WITH_INTEGER_20210130
+#if defined(FPCX_MIXING_UNSIGNED_CHAR_WITH_INTEGER_20210130)
+  const auto result = std::min(42_uchar, 66);
+  // '- Compiler error: No instance of overloaded function "std::min" matches the argument list
+#else
+  const auto result = std::min(42_uchar, static_cast<unsigned char>(66)); // OK, same type
+#endif
+  std::clog << pad << "std::min(42_uchar, static_cast<unsigned char>(66)) returned (as size_t) " << static_cast<size_t>(result)
+    << std::endl;
+}
+
+} // namespace
+
+void
+ABcb::literal_operators::Examples()
+{
+  std::clog << __func__ << " started..." << std::endl;
+
+  ExampleOfUnsignedCharLiteral();
+
+  std::clog << __func__ << " finished." << std::endl;
+}

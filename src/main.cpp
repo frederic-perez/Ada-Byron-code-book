@@ -14,6 +14,7 @@
 #include "cpp11-pool.h"
 #include "euclidean.h"
 #include "filesystem-pool.h"
+#include "literal-operators.h"
 #include "miscellany.h"
 #include "preprocessor-pool.h"
 #include "promotions-pool.h"
@@ -89,6 +90,9 @@ main(const int argc, char* argv[])
   ABcb::miscellany::ExampleOfRawStringLiteral();
   ABcb::miscellany::ExamplesOfFactorial();
   ABcb::miscellany::ExamplesOfMultiprecision();
+  std::cout << std::endl;
+
+  ABcb::literal_operators::Examples();
 
   // Output final message and exit
   //
