@@ -1,6 +1,7 @@
 #include "literal-operators.h"
 
 #include "aux-raw.h"
+#include "aux-spy.h"
 
 #include <algorithm>
 #include <iostream>
@@ -10,6 +11,17 @@ namespace ABcb = Ada_Byron_code_book;
 namespace {
 
 using Ada_Byron_code_book::raw::pad;
+
+void
+ExampleOfSSuffixStringLiteral()
+{
+  using namespace std::string_literals; // enables s-suffix for std::string literals
+
+  const auto foo = "Hello, world!"s;
+  std::clog << pad << "foo = `" << foo
+    << "`; spy::TypeNameENH of foo's decltype = " << ABcb::spy::TypeNameENH<decltype(foo)>()
+    << std::endl;
+}
 
 void
 ExampleOfUnsignedCharLiteral()
@@ -33,6 +45,7 @@ ABcb::literal_operators::Examples()
 {
   std::clog << __func__ << " started..." << std::endl;
 
+  ExampleOfSSuffixStringLiteral();
   ExampleOfUnsignedCharLiteral();
 
   std::clog << __func__ << " finished." << std::endl;
