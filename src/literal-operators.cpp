@@ -17,7 +17,8 @@ ExampleOfSSuffixStringLiteral()
 {
   using namespace std::string_literals; // enables s-suffix for std::string literals
 
-  const auto foo = "Hello, world!"s;
+  const auto foo = "Hello, world!"s; // auto deduces std::string
+  // '- See https://en.wikipedia.org/wiki/C%2B%2B14#Standard_user-defined_literals
   std::clog << pad << "foo = `" << foo
     << "`; spy::TypeNameENH of foo's decltype = " << ABcb::spy::TypeNameENH<decltype(foo)>()
     << std::endl;

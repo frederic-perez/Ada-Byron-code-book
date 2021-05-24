@@ -35,7 +35,7 @@ message(STATUS "Your host name (MyHostname variable) is ${MyHostname}")
 set(def_CMAKE_MYHOSTNAME CMAKE_MYHOSTNAME=${MyHostname})
 message(STATUS "> def_CMAKE_MYHOSTNAME is ${def_CMAKE_MYHOSTNAME}")
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 if("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
