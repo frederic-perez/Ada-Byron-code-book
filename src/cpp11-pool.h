@@ -4,9 +4,7 @@
 
 #include <string>
 
-namespace Ada_Byron_code_book {
-
-namespace cpp11 {
+namespace Ada_Byron_code_book::cpp11 {
 
 void TryBadCode();
 void TestIfAConstParameterCanBeModified(int);
@@ -46,6 +44,4 @@ class Derived : public Base {
   // '- Note: It is better typing "override" than "virtual" (when overriding)
 };
 
-} // namespace cpp11
-
-} // namespace Ada_Byron_code_book
+} // namespace Ada_Byron_code_book::cpp11

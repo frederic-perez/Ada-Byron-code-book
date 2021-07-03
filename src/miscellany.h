@@ -1,8 +1,6 @@
 #pragma once
 
-namespace Ada_Byron_code_book {
-
-namespace miscellany {
+namespace Ada_Byron_code_book::miscellany {
 
 void ExampleOfRawStringLiteral();
 
@@ -37,6 +35,4 @@ void ExamplesOfFactorial();
 
 void ExamplesOfMultiprecision();
 
-} // namespace miscellany
-
-} // namespace Ada_Byron_code_book
+} // namespace Ada_Byron_code_book::miscellany

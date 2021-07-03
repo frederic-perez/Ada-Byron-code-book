@@ -14,9 +14,7 @@
 // clang-format on
 #include "aux-raw-compiler-warnings-off++end.h"
 
-namespace Ada_Byron_code_book {
-
-namespace Euclidean {
+namespace Ada_Byron_code_book::Euclidean {
 
 void ExamplesOfVector();
 
@@ -128,6 +126,4 @@ using Vector3 = Vector<double, 3>;
 using Vector3Q = Vector<long double, 3>;
 using Vector3HQ = Vector<boost::multiprecision::cpp_dec_float_50, 3>;
 
-} // namespace Euclidean
-
-} // namespace Ada_Byron_code_book
+} // namespace Ada_Byron_code_book::Euclidean

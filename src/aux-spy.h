@@ -14,9 +14,7 @@
 
 #define SpyLine std::cerr << "@@@@ " << __FILE__ << ':' << __func__ << ":L" << __LINE__ << '\n';
 
-namespace Ada_Byron_code_book {
-
-namespace spy {
+namespace Ada_Byron_code_book::spy {
 
 auto BoostVersion(std::ostream&) -> std::ostream&;
 auto ClangVersion(std::ostream&) -> std::ostream&;
@@ -150,6 +148,4 @@ TypeNameENH()
   return r;
 }
 
-} // namespace spy
-
-} // namespace Ada_Byron_code_book
+} // namespace Ada_Byron_code_book::spy

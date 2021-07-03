@@ -16,9 +16,7 @@
 #  define __func__ __FUNCTION__
 #endif
 
-namespace Ada_Byron_code_book {
-
-namespace raw {
+namespace Ada_Byron_code_book::raw {
 
 // Note: Recall that for std::array<> objects you must use the size() inspector
 //
@@ -53,6 +51,4 @@ void ExamplesOfRaw();
 
 const std::string pad = "  ";
 
-} // namespace raw
-
-} // namespace Ada_Byron_code_book
+} // namespace Ada_Byron_code_book::raw

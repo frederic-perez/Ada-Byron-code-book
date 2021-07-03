@@ -7,11 +7,8 @@
 // #if ADA_BYRON__GNUGPP_VERSION > 30200 // Test for GCC > 3.2.0
 #endif
 
-namespace Ada_Byron_code_book {
-
-namespace spy {
+namespace Ada_Byron_code_book::spy {
 
 auto ListOfPreprocessorDefines(std::ostream&) -> std::ostream&;
 
-} // namespace spy
-} // namespace Ada_Byron_code_book
+} // namespace Ada_Byron_code_book::spy

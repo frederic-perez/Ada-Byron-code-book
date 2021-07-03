@@ -73,9 +73,7 @@ ABcb::cli::ProgramName()
   return progname;
 }
 
-namespace Ada_Byron_code_book {
-
-namespace cli {
+namespace Ada_Byron_code_book::cli {
 
 // 1) File selection
 //
@@ -120,9 +118,7 @@ GetSetOfDefinedString(const std::vector<std::string>& a_definedStrings)
   return result;
 }
 
-} // namespace cli
-
-} // namespace Ada_Byron_code_book
+} // namespace Ada_Byron_code_book::cli
 
 auto
 ABcb::cli::ParseCommandLine(const int argc, char** argv)
@@ -138,8 +134,6 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
   namespace po = boost::program_options;
   const std::string usageTitle = std::string("Usage: ") + progname + " [OPTIONS]...";
   po::options_description odFull(usageTitle);
-
-  using namespace ABcb::cli;
 
   { // 1) File selection
     //

@@ -99,16 +99,14 @@ using Flights = std::vector<Flight>;
 
 #ifdef XML_DATE_TRANSLATOR_20150325
 
-namespace boost {
-namespace property_tree {
+namespace boost::property_tree {
 
 template <>
 struct translator_between<std::string, Date> {
   using type = DateTranslator;
 };
 
-} // namespace property_tree
-} // namespace boost
+} // namespace boost::property_tree
 
 #endif
 

@@ -321,7 +321,6 @@ ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
   const std::string argv0Info = GetArgv0Info(a_runInfo.GetArgv0());
   const std::string currentDirInfo = GetCurrentDirInfo();
 
-  using namespace ABcb::spy;
   a_os << '\n'
        << a_runInfo.GetProgName() << " was launched by " << UserName << " at " << HostName << " on " << LocalDate
        << ", at " << LocalTime << '\n'

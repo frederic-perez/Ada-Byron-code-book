@@ -1,8 +1,6 @@
 #pragma once
 
-namespace Ada_Byron_code_book {
-
-namespace literal_operators {
+namespace Ada_Byron_code_book::literal_operators {
 
 void Examples();
 
@@ -14,6 +12,4 @@ inline constexpr unsigned char operator "" _uchar(unsigned long long arg) noexce
   return static_cast<unsigned char>(arg);
 }
 
-} // namespace literal_operators
-
-} // namespace Ada_Byron_code_book
+} // namespace Ada_Byron_code_book::literal_operators
