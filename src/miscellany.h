@@ -29,7 +29,7 @@ public:
 };
 
 size_t FactorialRecursive(size_t);
-size_t FactorialIterative(size_t);
+constexpr size_t FactorialIterative(size_t);
 
 void ExamplesOfFactorial();
 

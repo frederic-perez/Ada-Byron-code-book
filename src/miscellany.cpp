@@ -53,6 +53,7 @@ ABcb::miscellany::FactorialRecursive(const size_t a_n)
   return result;
 }
 
+constexpr
 size_t
 ABcb::miscellany::FactorialIterative(const size_t a_n)
 {
@@ -73,11 +74,14 @@ ABcb::miscellany::ExamplesOfFactorial()
   //
   // const size_t N = 21; // < integral constant overflow in vs14
   const size_t N = 20; // < integral constant overflow in vs14
-  const size_t factorialCompileTime = ABcb::miscellany::FactorialCompileTime<N>::d_value; // == 24
+  const size_t factorialCompileTime = FactorialCompileTime<N>::d_value; // == 24
   std::ostringstream oss;
   oss.imbue(std::locale("")); // To add commas when outputting result
   oss << factorialCompileTime;
   std::cout << pad << "FactorialCompileTime<" << N << ">::d_value = " << oss.str() << std::endl;
+
+  static_assert(FactorialCompileTime<1>::d_value == 1);
+  static_assert(FactorialCompileTime<4>::d_value == 24);
 
   // Using FactorialRecursive
   //
@@ -105,6 +109,9 @@ ABcb::miscellany::ExamplesOfFactorial()
   oss.str("");
   oss << factorialIterative;
   std::cout << pad << "FactorialIterative(" << n << ")            = " << oss.str() << std::endl;
+
+  static_assert(FactorialIterative(1) == 1);
+  static_assert(FactorialIterative(4) == 24);
 
   std::clog << __func__ << " finished." << std::endl;
 }
