@@ -34,6 +34,10 @@ The "book" uses C++11 features, and includes:
 
 ## Reference material
 
+Some interesting URLs on C++20/17/14/11:
+
+- [A cheatsheet of modern C++ language and library features](https://github.com/AnthonyCalandra/modern-cpp-features), by Anthony Calandra
+
 Some interesting C++11-related URLs:
 
 - Wikipedia's [C++11](http://en.wikipedia.org/wiki/C%2B%2B11) entry
