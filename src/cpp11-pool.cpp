@@ -126,19 +126,19 @@ ABcb::cpp11::AlgorithmExamples()
 
   const std::vector<int> v{3, 9, 1, 4, 2, 5, 9};
   spy::Output(std::cout, v, pad + "v");
-  const auto [min, max] = // C++17
+  const auto [minIt, maxIt] = // C++17 structured binding
     std::minmax_element(v.cbegin(), v.cend());
-  std::cout << pad << pad << "v's min element is " << *min << ", at index " << (min - v.cbegin())
+  std::cout << pad << pad << "v's min element is " << *minIt << ", at index " << (minIt - v.cbegin())
             << '\n'
-            << pad << pad << "v's max element is " << *max << ", at index " << (max - v.cbegin())
+            << pad << pad << "v's max element is " << *maxIt << ", at index " << (maxIt - v.cbegin())
             << std::endl;
 
   float f1 = 12.f, f2 = 7.f;
-  const auto [minf1f2, maxf1f2] = // C++17
+  const auto [min, max] = // C++17 structured binding
     std::minmax(f1, f2);
   std::cout << pad << "f1 = " << f1 << ", f2 = " << f2 << '\n'
-            << pad << pad << "min of {f1, f2} = " << minf1f2 << '\n'
-            << pad << pad << "max of {f1, f2} = " << maxf1f2 << std::endl;
+            << pad << pad << "min of {f1, f2} = " << min << '\n'
+            << pad << pad << "max of {f1, f2} = " << max << std::endl;
 
   std::clog << __func__ << " finished." << std::endl;
 }
