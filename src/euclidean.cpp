@@ -21,8 +21,7 @@ using ABcb::raw::pad;
 template <class T, size_t N>
 ABcb::Euclidean::Vector<T, N>::Vector(const T a_value) : d_array()
 {
-  for (auto& value : d_array)
-    value = a_value;
+  std::fill(d_array.begin(), d_array.end(), a_value);
 }
 
 template <class T, size_t N>
@@ -61,9 +60,8 @@ template <class T, size_t N>
 T
 ABcb::Euclidean::Vector<T, N>::ElementsSum() const
 {
-  T acc = 0.;
-  for (auto value : d_array)
-    acc += value;
+  const auto zero = static_cast<T>(0.);
+  T acc = std::accumulate(d_array.begin(), d_array.end(), zero);
   return acc;
 }
 
