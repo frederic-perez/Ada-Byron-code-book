@@ -9,19 +9,22 @@ This "book" gathers a collection of C++ code snippets ready to be used as exampl
 I use to build binaries for these settings (sorted alphabetically)
 
 - Apple Mac OS X:
-  - 10.11 El Capitan, Xcode 7.1.1 (LLVM, clang++) 64-bit (discontinued on January 14, 2016)
+  - 10.11 El Capitan, Xcode 7.1.1 (LLVM, clang++) 64-bit (discontinued in January 2016)
   - ~~10.10 Yosemite, Xcode 6.2 (LLVM, clang++) 64-bit~~
-- Linux Ubuntu: g++ 4.8.2, clang++ 3.4.1
-- Microsoft Windows 8.1 Pro:
-  - Visual Studio 14 2015 Win64 (starting in July, 2015)
-  - ~~Visual Studio 12 2013 Win64~~
+- Linux Ubuntu: g++ 4.8.2, clang++ 3.4.1 (discontinued in October 2019)
+- Microsoft Windows
+  - 10 Pro:
+    - Visual Studio 16 2019 (started in July 2021)
+  - 8.1 Pro:
+    - Visual Studio 14 2015 Win64 (started in July 2015; discontinued in October 2019)
+    - ~~Visual Studio 12 2013 Win64~~
 
 and for all of them we use
 
-- (TODO: Get and use Boost 1.60.0)
-- [Boost](http://www.boost.org/) Version 1.59.0 (August 13th, 2015 15:23 GMT)
-- ~~[Boost](http://www.boost.org/) Version 1.58.0 (April 17th, 2015 07:53 GMT)~~
-- ~~[Boost](http://www.boost.org/) Version 1.57.0 (November 3rd, 2014 21:55 GMT)~~
+- [Boost](http://www.boost.org/) Version 1.75.0 (December 11th, 2020 19:50 GMT)
+- ~~Boost Version 1.59.0 (August 13th, 2015 15:23 GMT)~~
+- ~~Boost Version 1.58.0 (April 17th, 2015 07:53 GMT)~~
+- ~~Boost Version 1.57.0 (November 3rd, 2014 21:55 GMT)~~
 
 The "book" uses C++11 features, and includes:
 
