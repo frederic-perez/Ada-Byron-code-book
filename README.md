@@ -64,13 +64,13 @@ A never complete list of great C++ references (selected books, etc.):
 - Bjarne Stroustrup, _The C++ Programming Language - Third Edition_, Addison-Wesley, 1997.
 - Anthony Williams, _C++ Concurrency in Action: Practical Multithreading_, Manning Publications, 2012.
 - MITK's [Bug Squashing Seminars](http://www.mitk.org/wiki/Bug_Squashing_Seminars)
-- Wikibooks' C++ programming language [subject](https://en.wikibooks.org/wiki/Subject:C%2B%2B_programming_language) and [category](https://en.wikibooks.org/wiki/Category:C%2B%2B_programming_language).
+- Wikibooks' C++ programming [subject](https://en.wikibooks.org/wiki/C%2B%2B_Programming), and [category](https://en.wikibooks.org/wiki/Category:Subject:C%2B%2B_programming_language).
 - [C++ links: Learning and teaching](https://github.com/MattPD/cpplinks): A categorized list of C++ resources (a GitHub repo by MattPD).
-- [Modernes C++]()
+- [Modernes C++](https://www.modernescpp.com/)
 
 A list of Boost-related stuff:
 
-- Boris Schäling's [The Boost C++ Libraries](http://theboostcpplibraries.com/)
+- Boris Schäling's [The Boost C++ Libraries](https://theboostcpplibraries.com/)
 - Antony Polukhin's [Boost Application Development Cookbook Online Examples](http://apolukhin.github.io/Boost-Cookbook-4880OS/)
 
 Guidelines:
@@ -131,8 +131,8 @@ Example commit messages:
 ### Online compilers
 
 - [List at Get Started!](https://isocpp.org/get-started)
-- [Coliru](http://coliru.stacked-crooked.com/)
-- At the great [&lt;Coding Ground&gt;](http://codingground.tutorialspoint.com/) there is a [C++ online compiler](http://www.tutorialspoint.com/compile_cpp_online.php)
+- [Coliru](https://coliru.stacked-crooked.com/)
+- The site [&lt;Coding Ground&gt;](https://www.tutorialspoint.com/codingground.htm) includes a [C++ online compiler](https://www.tutorialspoint.com/compile_cpp_online.php)
 
 ### Miscellaneous notes
 
