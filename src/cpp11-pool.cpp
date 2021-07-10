@@ -133,7 +133,9 @@ ABcb::cpp11::AlgorithmExamples()
             << pad << pad << "v's max element is " << *maxIt << ", at index " << (maxIt - v.cbegin())
             << std::endl;
 
-  float f1 = 12.f, f2 = 7.f;
+  const auto [f1, f2] = std::tuple(12.f, 7.f); // C++17 structured binding
+  // '- Using the "Exception" of the https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Res-name-one
+  //    ES.10: Declare one name (only) per declaration
   const auto [min, max] = // C++17 structured binding
     std::minmax(f1, f2);
   std::cout << pad << "f1 = " << f1 << ", f2 = " << f2 << '\n'
