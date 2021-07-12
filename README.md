@@ -4,7 +4,7 @@
   <img src="images/Ada%20Byron--from%20teaser%20of%20Happy%20Ada%20Lovelace%20Day%202015%20by%20Natasha%20Sayce-Zelem-200V.jpg?raw=true" alt="Ada Byron from the Wikipedia"/>
 </p>
 
-This "book" gathers a collection of C++ code snippets ready to be used as examples or reused in your own projects. The name Ada Byron in the repository title is a homage to the first software programmer ([Wikipedia entry](http://en.wikipedia.org/wiki/Ada_Lovelace)).
+This "book" gathers a collection of C++ code snippets ready to be used as examples or reused in your own projects. The name Ada Byron in the repository title is a homage to the first software programmer ([Wikipedia entry](https://en.wikipedia.org/wiki/Ada_Lovelace)).
 
 I use to build binaries for these settings (sorted alphabetically)
 
@@ -21,7 +21,7 @@ I use to build binaries for these settings (sorted alphabetically)
 
 and for all of them we use
 
-- [Boost](http://www.boost.org/) Version 1.75.0 (December 11th, 2020 19:50 GMT)
+- [Boost](https://www.boost.org/) Version 1.75.0 (December 11th, 2020 19:50 GMT)
 - ~~Boost Version 1.59.0 (August 13th, 2015 15:23 GMT)~~
 - ~~Boost Version 1.58.0 (April 17th, 2015 07:53 GMT)~~
 - ~~Boost Version 1.57.0 (November 3rd, 2014 21:55 GMT)~~
@@ -43,19 +43,19 @@ Some interesting URLs on C++20/17/14/11:
 
 Some interesting C++11-related URLs:
 
-- Wikipedia's [C++11](http://en.wikipedia.org/wiki/C%2B%2B11) entry
-- Herb Sutter's post on [Elements of modern style](http://herbsutter.com/elements-of-modern-c-style/)
+- Wikipedia's [C++11](https://en.wikipedia.org/wiki/C%2B%2B11) entry
+- Herb Sutter's post on [Elements of modern style](https://herbsutter.com/elements-of-modern-c-style/)
 - [Improved Type Inference in C++11](https://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html)
 - Scott Meyers's post on the [Effective C++11 book](http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html)
-- Post on [lambdas](http://blog.feabhas.com/2014/03/demystifying-c-lambdas/)
+- Post on [lambdas](https://blog.feabhas.com/2014/03/demystifying-c-lambdas/)
 - Alex Sinyakov's [C++11 cheat sheet](https://isocpp.org/blog/2012/12/c11-a-cheat-sheet-alex-sinyakov)
 - Concurrency:
-  - Bartosz Milewski's post on [Functional Data Structures and Concurrency in C++](http://bartoszmilewski.com/2013/12/10/functional-data-structures-and-concurrency-in-c/)
+  - Bartosz Milewski's post on [Functional Data Structures and Concurrency in C++](https://bartoszmilewski.com/2013/12/10/functional-data-structures-and-concurrency-in-c/)
   - [cppreference.com's thread](http://en.cppreference.com/w/cpp/thread)
   - [C++11 concurrency cheat sheet](http://cpprocks.com/c-concurrency-cheatsheet/)
   - Solarian Programmer's [C++11 multithreading tutorial](https://solarianprogrammer.com/2011/12/16/cpp-11-thread-tutorial/) (posted on December 16, 2011), [C++11 multithreading tutorial - part 2](https://solarianprogrammer.com/2012/02/27/cpp-11-thread-tutorial-part-2/), both with [code on GitHub](https://github.com/sol-prog/threads)
-  - K Hong's [Multi-Threaded Programming with C++11 - Part A](http://www.bogotobogo.com/cplusplus/multithreaded4_cplusplus11.php), [Part B
-(Sharing Data - mutex, and race conditions, and deadlock)](http://www.bogotobogo.com/cplusplus/multithreaded4_cplusplus11B.php); [Debugging - 2016](http://www.bogotobogo.com/cplusplus/multithreadedDebugging.php)
+  - K Hong's [Multi-Threaded Programming with C++11 - Part A](https://www.bogotobogo.com/cplusplus/multithreaded4_cplusplus11.php), [Part B
+(Sharing Data - mutex, and race conditions, and deadlock)](https://www.bogotobogo.com/cplusplus/multithreaded4_cplusplus11B.php); [Debugging - 2020](https://www.bogotobogo.com/cplusplus/multithreadedDebugging.php)
 
 A never complete list of great C++ references (selected books, etc.):
 
@@ -63,7 +63,7 @@ A never complete list of great C++ references (selected books, etc.):
 - Andrew Koenig, Barbara Moo, _Ruminations on C++ -- A Decade of Programming Insight and Experience_, Addison-Wesley, 1997. (I particularly love Chapter 4, Checklist for class authors.)
 - Bjarne Stroustrup, _The C++ Programming Language - Third Edition_, Addison-Wesley, 1997.
 - Anthony Williams, _C++ Concurrency in Action: Practical Multithreading_, Manning Publications, 2012.
-- MITK's [Bug Squashing Seminars](http://www.mitk.org/wiki/Bug_Squashing_Seminars)
+- MITK's [Bug Squashing Seminars](https://www.mitk.org/wiki/Bug_Squashing_Seminars)
 - Wikibooks' C++ programming [subject](https://en.wikibooks.org/wiki/C%2B%2B_Programming), and [category](https://en.wikibooks.org/wiki/Category:Subject:C%2B%2B_programming_language).
 - [C++ links: Learning and teaching](https://github.com/MattPD/cpplinks): A categorized list of C++ resources (a GitHub repo by MattPD).
 - [Modernes C++](https://www.modernescpp.com/)
@@ -95,11 +95,10 @@ And finally, a list of good programming practices and other interesting programm
 
 We strive to maintain a certain quality on the code by taking advantage of some tools:
 
-- Cppcheck - A tool for static C/C++ code analysis. Being myself a fan of portable apps, I particularly use the version from [PortableApps.com](http://portableapps.com/apps/development/cppcheck-portable).
+- Cppcheck - A tool for static C/C++ code analysis. Being myself a fan of portable apps, I particularly use the version from [PortableApps.com](https://portableapps.com/apps/development/cppcheck-portable).
 - "Analyze > Run Code Analysis on Only Ada-Byron-code-book" when using Microsoft Windows 8.1: Microsoft Visual Studio Community 2015 (Version 14, with solution platform for x64)
 - "Product > Analyze" when using Apple OS X: Xcode 7.1.1 (LLVM, clang++) 64-bit
-- (Just starting...) In g++ and clang++, address/thread/memory sanitizer (AKA [ASan](https://code.google.com/p/address-sanitizer/), TSan, MSan)--for example, for Asan, with the flags `-fsanitize=address -fno-omit-frame-pointer`
-- TODO (try this): Cloud-based [Coverity Scan](http://www.coverity.com/products/coverity-scan/) for the Open Source Community
+- (Just starting...) In g++ and clang++, address/thread/memory sanitizer (ASan, TSan, MSan)--for example, for ASan, with the flags `-fsanitize=address -fno-omit-frame-pointer`. See [google/sanitizers repo](https://github.com/google/sanitizers).
 
 Other tools related to code analysis:
 
@@ -107,7 +106,7 @@ Other tools related to code analysis:
 
 ### Commits
 
-When committing changes, we use common prefixes--see for example a [list of ITK changes](http://kitware.com/blog/home/post/881). From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix) and an [ITK Git entry](http://www.itk.org/Wiki/ITK/Git/Develop):
+When committing changes, we now favor using emojis that convey information (see, for example, [gitmoji](https://gitmoji.dev/)). In the past we used common prefixes--see for example a [list of ITK changes](https://blog.kitware.com/itk-4-7-2-has-been-released/). From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix) and an [ITK Git entry](https://www.itk.org/Wiki/ITK/Git/Develop):
 
 | Prefix | What          |
 | ------ |:--------------|
@@ -132,7 +131,11 @@ Example commit messages:
 
 - [List at Get Started!](https://isocpp.org/get-started)
 - [Coliru](https://coliru.stacked-crooked.com/)
+- [Compiler Explorer (Godbolt)](https://godbolt.org/)
+- [cppinsights.io](https://cppinsights.io/)
 - The site [&lt;Coding Ground&gt;](https://www.tutorialspoint.com/codingground.htm) includes a [C++ online compiler](https://www.tutorialspoint.com/compile_cpp_online.php)
+- [Rextester](https://rextester.com/l/cpp_online_compiler_visual)
+- [Wandbox](https://wandbox.org/)
 
 ### Miscellaneous notes
 
@@ -142,7 +145,7 @@ Advice on **unnecessary comments**:
 
 Why C++ does not have a **`super` keyword**, and we do not promote creating any proxy for that:
 
-- See the most voted answer of this [StackOverflow's thread](http://stackoverflow.com/questions/180601/using-super-in-c).
+- See the most voted answer of this [StackOverflow's thread](https://stackoverflow.com/questions/180601/using-super-in-c).
 
 Do not write (for example) **`using namespace std;`** in header files or before an `#include`:
 
