@@ -59,8 +59,8 @@ Some interesting C++11-related URLs:
 
 A never complete list of great C++ references (selected books, etc.):
 
-- Scott Meyers, _More Efficient C++ -- 35 New Ways to Improve Your Programs and Designs_ (mec++, for short), Addison-Wesley Professional Computing Series, 1996.
-- Andrew Koenig, Barbara Moo, _Ruminations on C++ -- A Decade of Programming Insight and Experience_, Addison-Wesley, 1997. (I particularly love Chapter 4, Checklist for class authors.)
+- Scott Meyers, _More Efficient C++: 35 New Ways to Improve Your Programs and Designs_ (mec++, for short), Addison-Wesley Professional Computing Series, 1996.
+- Andrew Koenig, Barbara Moo, _Ruminations on C++: A Decade of Programming Insight and Experience_, Addison-Wesley, 1997. (I particularly love Chapter 4, Checklist for class authors.)
 - Bjarne Stroustrup, _The C++ Programming Language - Third Edition_, Addison-Wesley, 1997.
 - Anthony Williams, _C++ Concurrency in Action: Practical Multithreading_, Manning Publications, 2012.
 - MITK's [Bug Squashing Seminars](https://www.mitk.org/wiki/Bug_Squashing_Seminars)
@@ -98,7 +98,7 @@ We strive to maintain a certain quality on the code by taking advantage of some 
 - Cppcheck - A tool for static C/C++ code analysis. Being myself a fan of portable apps, I particularly use the version from [PortableApps.com](https://portableapps.com/apps/development/cppcheck-portable).
 - "Analyze > Run Code Analysis on Only Ada-Byron-code-book" when using Microsoft Windows 8.1: Microsoft Visual Studio Community 2015 (Version 14, with solution platform for x64)
 - "Product > Analyze" when using Apple OS X: Xcode 7.1.1 (LLVM, clang++) 64-bit
-- (Just starting...) In g++ and clang++, address/thread/memory sanitizer (ASan, TSan, MSan)--for example, for ASan, with the flags `-fsanitize=address -fno-omit-frame-pointer`. See [google/sanitizers repo](https://github.com/google/sanitizers).
+- (Just starting...) In g++ and clang++, address/thread/memory sanitizer (ASan, TSan, MSan)—for example, for ASan, with the flags `-fsanitize=address -fno-omit-frame-pointer`. See [google/sanitizers repo](https://github.com/google/sanitizers).
 
 Other tools related to code analysis:
 
@@ -106,7 +106,7 @@ Other tools related to code analysis:
 
 ### Commits
 
-When committing changes, we now favor using emojis that convey information (see, for example, [gitmoji](https://gitmoji.dev/)). In the past we used common prefixes--see for example a [list of ITK changes](https://blog.kitware.com/itk-4-7-2-has-been-released/). From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix) and an [ITK Git entry](https://www.itk.org/Wiki/ITK/Git/Develop):
+When committing changes, we now favor using emojis that convey information (see, for example, [gitmoji](https://gitmoji.dev/)). In the past we used common prefixes—see for example a [list of ITK changes](https://blog.kitware.com/itk-4-7-2-has-been-released/). From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix) and an [ITK Git entry](https://www.itk.org/Wiki/ITK/Git/Develop):
 
 | Prefix | What          |
 | ------ |:--------------|
