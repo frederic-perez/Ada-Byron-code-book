@@ -53,8 +53,7 @@ ABcb::miscellany::FactorialRecursive(const size_t a_n)
   return result;
 }
 
-constexpr
-size_t
+constexpr size_t
 ABcb::miscellany::FactorialIterative(const size_t a_n)
 {
   size_t result = 1;

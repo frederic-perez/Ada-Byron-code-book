@@ -20,14 +20,13 @@ ExampleOfSSuffixStringLiteral()
   const auto foo = "Hello, world!"s; // auto deduces std::string
   // '- See https://en.wikipedia.org/wiki/C%2B%2B14#Standard_user-defined_literals
   std::clog << pad << "foo = `" << foo
-    << "`; spy::TypeNameENH of foo's decltype = " << ABcb::spy::TypeNameENH<decltype(foo)>()
-    << std::endl;
+            << "`; spy::TypeNameENH of foo's decltype = " << ABcb::spy::TypeNameENH<decltype(foo)>() << std::endl;
 }
 
 void
 ExampleOfUnsignedCharLiteral()
 {
-  using ABcb::literal_operators::operator "" _uchar;
+  using ABcb::literal_operators::operator"" _uchar;
 #undef FPCX_MIXING_UNSIGNED_CHAR_WITH_INTEGER_20210130
 #if defined(FPCX_MIXING_UNSIGNED_CHAR_WITH_INTEGER_20210130)
   const auto result = std::min(42_uchar, 66);
@@ -35,8 +34,8 @@ ExampleOfUnsignedCharLiteral()
 #else
   const auto result = std::min(42_uchar, static_cast<unsigned char>(66)); // OK, same type
 #endif
-  std::clog << pad << "std::min(42_uchar, static_cast<unsigned char>(66)) returned (as size_t) " << static_cast<size_t>(result)
-    << std::endl;
+  std::clog << pad << "std::min(42_uchar, static_cast<unsigned char>(66)) returned (as size_t) "
+            << static_cast<size_t>(result) << std::endl;
 }
 
 } // namespace

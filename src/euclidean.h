@@ -61,7 +61,7 @@ public:
   Vector& operator*=(T);
   Vector& operator/=(T);
 
-  T operator*(const Vector&)const; // Scalar product
+  T operator*(const Vector&) const; // Scalar product
   const Vector operator^(const Vector&) const; // Only for N==3
 
   T ComputeAzimuthAngle() const; // Only for N==3

@@ -21,9 +21,9 @@ namespace ABcb = Ada_Byron_code_book;
 namespace {
 
 ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(
-  Guru, (Andrei_Alexandrescu)(Andrew_Koenig)(Bruce_Eckel)(Bjarne_Stroustrup)(Herb_Sutter)(Ira_Pohl)(Scott_Meyers))
+  Guru, (Andrei_Alexandrescu)(Andrew_Koenig)(Bruce_Eckel)(Bjarne_Stroustrup)(Herb_Sutter)(Ira_Pohl)(Scott_Meyers));
 
- void
+void
 GuruTest(const std::string& a_text)
 {
   using ABcb::raw::pad;
@@ -60,9 +60,9 @@ namespace {
 char* argv0 = nullptr;
 char* progname = nullptr;
 
-ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(PlatonicSolid, (tetrahedron)(octahedron)(icosahedron)(hexahedron)(dodecahedron))
-ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Color, (red)(green)(blue))
-ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Fruit, (apple)(orange)(pear))
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(PlatonicSolid, (tetrahedron)(octahedron)(icosahedron)(hexahedron)(dodecahedron));
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Color, (red)(green)(blue));
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Fruit, (apple)(orange)(pear));
 
 } // namespace
 

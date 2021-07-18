@@ -128,13 +128,12 @@ ABcb::cpp11::AlgorithmExamples()
   spy::Output(std::cout, v, pad + "v");
   const auto [minIt, maxIt] = // C++17 structured binding
     std::minmax_element(v.cbegin(), v.cend());
-  std::cout << pad << pad << "v's min element is " << *minIt << ", at index " << (minIt - v.cbegin())
-            << '\n'
-            << pad << pad << "v's max element is " << *maxIt << ", at index " << (maxIt - v.cbegin())
-            << std::endl;
+  std::cout << pad << pad << "v's min element is " << *minIt << ", at index " << (minIt - v.cbegin()) << '\n'
+            << pad << pad << "v's max element is " << *maxIt << ", at index " << (maxIt - v.cbegin()) << std::endl;
 
   const auto [f1, f2] = std::tuple(12.f, 7.f); // C++17 structured binding
-  // '- Using the "Exception" of the https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Res-name-one
+  // '- Using the "Exception" of the
+  // https://github.com/isocpp/CppCoreGuidelines/blob/master/CppCoreGuidelines.md#Res-name-one
   //    ES.10: Declare one name (only) per declaration
   const auto [min, max] = // C++17 structured binding
     std::minmax(f1, f2);

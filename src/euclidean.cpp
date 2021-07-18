@@ -119,7 +119,8 @@ ABcb::Euclidean::Vector<T, N>::operator/=(T a_rhs) -> Vector<T, N>&
 }
 
 template <class T, size_t N>
-T ABcb::Euclidean::Vector<T, N>::operator*(const Vector<T, N>& a_rhs) const
+T
+ABcb::Euclidean::Vector<T, N>::operator*(const Vector<T, N>& a_rhs) const
 {
   T result = 0.;
 #undef ADA_BYRON__USE_INNER_PRODUCT_20151215
@@ -138,9 +139,10 @@ auto
 ABcb::Euclidean::Vector<T, N>::operator^(const Vector<T, N>& a_rhs) const -> const Vector<T, N>
 {
   static_assert(N == 3, "static_assert failed: Vector template parameter N (size) is not 3.");
-  return Vector<T, N>{d_array[1] * a_rhs[2] - d_array[2] * a_rhs[1],
-                      d_array[2] * a_rhs[0] - d_array[0] * a_rhs[2],
-                      d_array[0] * a_rhs[1] - d_array[1] * a_rhs[0]};
+  return Vector<T, N>{
+    d_array[1] * a_rhs[2] - d_array[2] * a_rhs[1],
+    d_array[2] * a_rhs[0] - d_array[0] * a_rhs[2],
+    d_array[0] * a_rhs[1] - d_array[1] * a_rhs[0]};
 }
 
 template <class T, size_t N>
@@ -204,13 +206,15 @@ ABcb::Euclidean::operator-(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs)
 }
 
 template <class T, size_t N, class T2>
-auto ABcb::Euclidean::operator*(const Vector<T, N>& a_lhs, T2 a_rhs) -> const Vector<T, N>
+auto
+ABcb::Euclidean::operator*(const Vector<T, N>& a_lhs, T2 a_rhs) -> const Vector<T, N>
 {
   return Vector<T, N>(a_lhs) *= a_rhs;
 }
 
 template <class T, size_t N, class T2>
-auto ABcb::Euclidean::operator*(T2 a_lhs, const Vector<T, N>& a_rhs) -> const Vector<T, N>
+auto
+ABcb::Euclidean::operator*(T2 a_lhs, const Vector<T, N>& a_rhs) -> const Vector<T, N>
 {
   return Vector<T, N>(a_rhs) *= a_lhs;
 }
