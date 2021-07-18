@@ -20,12 +20,15 @@ namespace ABcb = Ada_Byron_code_book;
 
 namespace {
 
-void
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(
+  Guru, (Andrei_Alexandrescu)(Andrew_Koenig)(Bruce_Eckel)(Bjarne_Stroustrup)(Herb_Sutter)(Ira_Pohl)(Scott_Meyers))
+
+ void
 GuruTest(const std::string& a_text)
 {
-  using namespace ABcb;
-  Guru::Enum guru = Guru::GetEnum(a_text);
-  using raw::pad;
+  using ABcb::raw::pad;
+
+  const Guru::Enum guru = Guru::GetEnum(a_text);
   if (guru == Guru::Enum::undefined) {
     const std::string message = "Unknown guru parameter '" + a_text + "'";
 
@@ -37,7 +40,7 @@ GuruTest(const std::string& a_text)
     std::cerr << pad << __func__ << ": " << message << '\n'
               << pad << pad << "--guru arg " << setOfDefinedStrings << '\n';
   } else {
-    std::cout << pad << __func__ << ": guru = " << a_text << std::endl;
+    std::cout << pad << __func__ << ": Guru::Enum guru exists for text `" << a_text << "`" << std::endl;
   }
 }
 
@@ -56,6 +59,10 @@ namespace {
 
 char* argv0 = nullptr;
 char* progname = nullptr;
+
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(PlatonicSolid, (tetrahedron)(octahedron)(icosahedron)(hexahedron)(dodecahedron))
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Color, (red)(green)(blue))
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Fruit, (apple)(orange)(pear))
 
 } // namespace
 

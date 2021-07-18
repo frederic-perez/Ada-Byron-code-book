@@ -17,10 +17,9 @@
   namespace namespaceName { \
 \
   enum class Enum : uint8_t { undefined, BOOST_PP_SEQ_ENUM(sequence) }; \
-  const std::array<const char*, 1 + BOOST_PP_SEQ_SIZE(sequence)> enumText{ \
-    {"undefined", BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, sequence)}}; \
+  const std::array enumText{"undefined", BOOST_PP_SEQ_FOR_EACH(ABcb_TO_STR, ~, sequence)}; \
 \
-  const size_t beyond = enumText.size(); \
+  constexpr size_t beyond = enumText.size(); \
 \
   inline auto GetEnum(const std::string& a_text) -> Enum \
   { \
@@ -44,9 +43,6 @@
   } // namespace namespaceName
 
 namespace Ada_Byron_code_book {
-
-ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(
-  Guru, (Andrei_Alexandrescu)(Andrew_Koenig)(Bruce_Eckel)(Bjarne_Stroustrup)(Herb_Sutter)(Ira_Pohl)(Scott_Meyers))
 
 void GurusTest(std::initializer_list<std::string>);
 
@@ -80,16 +76,6 @@ const std::array<const char*, 3> fooBarText{{"undefined", "foo", "bar"}};
 // using ConcreteType = EnumENH<FooBar, 3, s>; //, fooBarText>;
 using ConcreteType = EnumENH<FooBar, 3, "string">; //, fooBarText>;
 #endif
-
-} // namespace Ada_Byron_code_book
-
-namespace Ada_Byron_code_book {
-
-ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(PlatonicSolid, (tetrahedron)(octahedron)(icosahedron)(hexahedron)(dodecahedron))
-
-ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Color, (red)(green)(blue))
-
-ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Fruit, (apple)(orange)(pear))
 
 namespace cli {
 
