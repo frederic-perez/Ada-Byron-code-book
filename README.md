@@ -26,7 +26,7 @@ and for all of them we use
 - ~~Boost Version 1.58.0 (April 17th, 2015 07:53 GMT)~~
 - ~~Boost Version 1.57.0 (November 3rd, 2014 21:55 GMT)~~
 
-The "book" uses C++11 features, and includes:
+The "book" uses modern C++ features, and includes:
 
 - Boost examples, using both just headers and installed components:
   - `<boost/filesystem.hpp>`, `<boost/system/config.hpp>`
@@ -37,13 +37,10 @@ The "book" uses C++11 features, and includes:
 
 ## Reference material
 
-Some interesting URLs on C++20/17/14/11:
+Some interesting URLs on different C++ revisions:
 
+- C++ language revisions: Wikipedia's [C++23](https://en.wikipedia.org/wiki/C%2B%2B23), [C++20](https://en.wikipedia.org/wiki/C%2B%2B20), [C++17](https://en.wikipedia.org/wiki/C%2B%2B17), [C++14](https://en.wikipedia.org/wiki/C%2B%2B14), [C++11](https://en.wikipedia.org/wiki/C%2B%2B11), [C++03](https://en.wikipedia.org/wiki/C%2B%2B03), and [C++98](https://en.wikipedia.org/wiki/C%2B%2B#Standardization) entries
 - [A cheatsheet of modern C++ language and library features](https://github.com/AnthonyCalandra/modern-cpp-features), by Anthony Calandra
-
-Some interesting C++11-related URLs:
-
-- Wikipedia's [C++11](https://en.wikipedia.org/wiki/C%2B%2B11) entry
 - Herb Sutter's post on [Elements of modern style](https://herbsutter.com/elements-of-modern-c-style/)
 - [Improved Type Inference in C++11](https://www.cprogramming.com/c++11/c++11-auto-decltype-return-value-after-function.html)
 - Scott Meyers's post on the [Effective C++11 book](http://scottmeyers.blogspot.co.at/2013/01/effective-c11-content-and-status.html)
