@@ -39,7 +39,8 @@ WipeOut(T& a_t)
 
 constexpr
 auto
-SystemSlash() -> char
+SystemSlash()
+-> char
 {
 #if defined(__CYGWIN__) || defined(__GNUC__)
   return '/';

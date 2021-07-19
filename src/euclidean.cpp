@@ -74,7 +74,8 @@ ABcb::Euclidean::Vector<T, N>::ElementsAvg() const
 
 template <class T, size_t N>
 auto
-ABcb::Euclidean::Vector<T, N>::Normalize() -> const Vector<T, N>&
+ABcb::Euclidean::Vector<T, N>::Normalize()
+-> const Vector<T, N>&
 {
   const T norm = Norm();
   for (T& value : d_array)
@@ -84,7 +85,8 @@ ABcb::Euclidean::Vector<T, N>::Normalize() -> const Vector<T, N>&
 
 template <class T, size_t N>
 auto
-ABcb::Euclidean::Vector<T, N>::operator+=(const Vector<T, N>& a_rhs) -> Vector<T, N>&
+ABcb::Euclidean::Vector<T, N>::operator+=(const Vector<T, N>& a_rhs)
+-> Vector<T, N>&
 {
   for (size_t i = 0; i < N; ++i)
     d_array[i] += a_rhs.d_array[i];
@@ -93,7 +95,8 @@ ABcb::Euclidean::Vector<T, N>::operator+=(const Vector<T, N>& a_rhs) -> Vector<T
 
 template <class T, size_t N>
 auto
-ABcb::Euclidean::Vector<T, N>::operator-=(const Vector<T, N>& a_rhs) -> Vector<T, N>&
+ABcb::Euclidean::Vector<T, N>::operator-=(const Vector<T, N>& a_rhs)
+-> Vector<T, N>&
 {
   for (size_t i = 0; i < N; ++i)
     d_array[i] -= a_rhs.d_array[i];
@@ -102,7 +105,8 @@ ABcb::Euclidean::Vector<T, N>::operator-=(const Vector<T, N>& a_rhs) -> Vector<T
 
 template <class T, size_t N>
 auto
-ABcb::Euclidean::Vector<T, N>::operator*=(const T a_rhs) -> Vector<T, N>&
+ABcb::Euclidean::Vector<T, N>::operator*=(const T a_rhs)
+-> Vector<T, N>&
 {
   for (size_t i = 0; i < N; ++i)
     d_array[i] *= a_rhs;
@@ -111,7 +115,8 @@ ABcb::Euclidean::Vector<T, N>::operator*=(const T a_rhs) -> Vector<T, N>&
 
 template <class T, size_t N>
 auto
-ABcb::Euclidean::Vector<T, N>::operator/=(T a_rhs) -> Vector<T, N>&
+ABcb::Euclidean::Vector<T, N>::operator/=(T a_rhs)
+-> Vector<T, N>&
 {
   for (size_t i = 0; i < N; ++i)
     d_array[i] /= a_rhs;
@@ -136,7 +141,8 @@ ABcb::Euclidean::Vector<T, N>::operator*(const Vector<T, N>& a_rhs) const
 
 template <class T, size_t N>
 auto
-ABcb::Euclidean::Vector<T, N>::operator^(const Vector<T, N>& a_rhs) const -> const Vector<T, N>
+ABcb::Euclidean::Vector<T, N>::operator^(const Vector<T, N>& a_rhs) const
+-> const Vector<T, N>
 {
   static_assert(N == 3, "static_assert failed: Vector template parameter N (size) is not 3.");
   return Vector<T, N>{
@@ -193,42 +199,48 @@ ABcb::Euclidean::Vector<T, N>::ComputePolarAngle() const
 
 template <class T, size_t N>
 auto
-ABcb::Euclidean::operator+(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs) -> const Vector<T, N>
+ABcb::Euclidean::operator+(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs)
+-> const Vector<T, N>
 {
   return Vector<T, N>(a_lhs) += a_rhs;
 }
 
 template <class T, size_t N>
 auto
-ABcb::Euclidean::operator-(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs) -> const Vector<T, N>
+ABcb::Euclidean::operator-(const Vector<T, N>& a_lhs, const Vector<T, N>& a_rhs)
+-> const Vector<T, N>
 {
   return Vector<T, N>(a_lhs) -= a_rhs;
 }
 
 template <class T, size_t N, class T2>
 auto
-ABcb::Euclidean::operator*(const Vector<T, N>& a_lhs, T2 a_rhs) -> const Vector<T, N>
+ABcb::Euclidean::operator*(const Vector<T, N>& a_lhs, T2 a_rhs)
+-> const Vector<T, N>
 {
   return Vector<T, N>(a_lhs) *= a_rhs;
 }
 
 template <class T, size_t N, class T2>
 auto
-ABcb::Euclidean::operator*(T2 a_lhs, const Vector<T, N>& a_rhs) -> const Vector<T, N>
+ABcb::Euclidean::operator*(T2 a_lhs, const Vector<T, N>& a_rhs)
+-> const Vector<T, N>
 {
   return Vector<T, N>(a_rhs) *= a_lhs;
 }
 
 template <class T, size_t N, class T2>
 auto
-ABcb::Euclidean::operator/(const Vector<T, N>& a_lhs, T2 a_rhs) -> const Vector<T, N>
+ABcb::Euclidean::operator/(const Vector<T, N>& a_lhs, T2 a_rhs)
+-> const Vector<T, N>
 {
   return Vector<T, N>(a_lhs) /= a_rhs;
 }
 
 template <class T, size_t N, class T2>
 auto
-ABcb::Euclidean::operator/(T a_lhs, const Vector<T, N>& a_rhs) -> const Vector<T2, N>
+ABcb::Euclidean::operator/(T a_lhs, const Vector<T, N>& a_rhs)
+-> const Vector<T2, N>
 {
   return Vector<T, N>(a_rhs) /= a_lhs;
 }

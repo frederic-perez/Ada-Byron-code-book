@@ -57,7 +57,8 @@ class EnumENH {
 
 template <typename Enum>
 auto
-GetEnum(const std::string& a_text) -> Enum
+GetEnum(const std::string& a_text)
+-> Enum
 {
   // uint8_t i = first;
   // for (; i <= last && a_text != enumText[i]; ++i);
@@ -71,7 +72,7 @@ const std::string fooAndBarText = "foo and bar";
 namespace {
 const std::string s = "abc";
 }
-const std::array<const char*, 3> fooBarText{{"undefined", "foo", "bar"}};
+const std::array fooBarText{"undefined", "foo", "bar"};
 
 // using ConcreteType = EnumENH<FooBar, 3, s>; //, fooBarText>;
 using ConcreteType = EnumENH<FooBar, 3, "string">; //, fooBarText>;

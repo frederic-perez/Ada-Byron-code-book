@@ -38,9 +38,9 @@ VectorD3
 operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)
 {
   return VectorD3::array_type{
-    {a_lhs[1] * a_rhs[2] - a_rhs[1] * a_lhs[2],
-     a_lhs[2] * a_rhs[0] - a_rhs[2] * a_lhs[0],
-     a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]}};
+    a_lhs[1] * a_rhs[2] - a_rhs[1] * a_lhs[2],
+    a_lhs[2] * a_rhs[0] - a_rhs[2] * a_lhs[0],
+    a_lhs[0] * a_rhs[1] - a_rhs[0] * a_lhs[1]};
 }
 #endif
 
@@ -57,14 +57,14 @@ GetSliceLocation(const VectorD3& a_vecX, const VectorD3& a_vecY, const VectorD3&
   std::cout << pad << __func__ << ": vecZ = " << vecZ << '\n';
 
   const MatrixD33 orientation(MatrixD33::array_type{
-    {a_vecX[0], a_vecY[0], vecZ[0], a_vecX[1], a_vecY[1], vecZ[1], a_vecX[2], a_vecY[2], vecZ[2]}});
+    a_vecX[0], a_vecY[0], vecZ[0], a_vecX[1], a_vecY[1], vecZ[1], a_vecX[2], a_vecY[2], vecZ[2]});
 
   std::cout << pad << __func__ << ": orientation = " << orientation << '\n';
 
 #  if defined(_MSC_VER)
   const auto resultTmp2 = prod(a_point, orientation);
-  const VectorD3::array_type resultAT{{resultTmp2(0), resultTmp2(1), resultTmp2(2)}};
-  const VectorD3 result{{resultAT}};
+  const VectorD3::array_type resultAT{resultTmp2(0), resultTmp2(1), resultTmp2(2)};
+  const VectorD3 result{resultAT}
 #  else
   const VectorD3 result = prod(a_point, orientation);
 #  endif
@@ -83,28 +83,28 @@ ABcb::ExamplesOfUblas()
 
   // Simple example
 #if defined(_MSC_VER)
-  const VectorD3::array_type p1{{1., 0., 0.}};
-  const VectorD3::array_type p2{{0., 0., -1.}};
-  const VectorD3::array_type p3{{-105.80165, -201.29752, 227.30165}};
+  const VectorD3::array_type p1{1., 0., 0.};
+  const VectorD3::array_type p2{0., 0., -1.};
+  const VectorD3::array_type p3{-105.80165, -201.29752, 227.30165};
   GetSliceLocation(p1, p2, p3);
 #else
   GetSliceLocation(
-    VectorD3::array_type{{1., 0., 0.}},
-    VectorD3::array_type{{0., 0., -1.}},
-    VectorD3::array_type{{-105.80165, -201.29752, 227.30165}});
+    VectorD3::array_type{1., 0., 0.},
+    VectorD3::array_type{0., 0., -1.},
+    VectorD3::array_type{-105.80165, -201.29752, 227.30165});
 #endif
 
   // A more difficult example
 #if defined(_MSC_VER)
-  const VectorD3::array_type p4{{1., 0., 0.}};
-  const VectorD3::array_type p5{{0., -0.033155151, -0.99945021}};
-  const VectorD3::array_type p6{{-95.202782, -71.037422, 206.67741}};
+  const VectorD3::array_type p4{1., 0., 0.};
+  const VectorD3::array_type p5{0., -0.033155151, -0.99945021};
+  const VectorD3::array_type p6{-95.202782, -71.037422, 206.67741};
   GetSliceLocation(p4, p5, p6);
 #else
   GetSliceLocation(
-    VectorD3::array_type{{1., 0., 0.}},
-    VectorD3::array_type{{0., -0.033155151, -0.99945021}},
-    VectorD3::array_type{{-95.202782, -71.037422, 206.67741}});
+    VectorD3::array_type{1., 0., 0.},
+    VectorD3::array_type{0., -0.033155151, -0.99945021},
+    VectorD3::array_type{-95.202782, -71.037422, 206.67741});
 #endif
 
   std::clog << __func__ << " finished." << std::endl;
