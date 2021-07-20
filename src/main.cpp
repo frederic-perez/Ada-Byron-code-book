@@ -12,6 +12,7 @@
 #include "concurrency.h"
 #include "conversions+casts++.h"
 #include "cpp11-pool.h"
+#include "enum-class-iteration+.h"
 #include "euclidean.h"
 #include "filesystem-pool.h"
 #include "literal-operators.h"
@@ -93,6 +94,15 @@ main(const int argc, char* argv[])
   std::cout << std::endl;
 
   ABcb::literal_operators::Examples();
+  std::cout << std::endl;
+
+  try {
+    ABcb::enums::ExamplesOfEnumClassAsIntegral();
+    std::cout << std::endl;
+    ABcb::enums::ExamplesOfEnumClassIteration();
+  } catch (const std::string& message) {
+    std::cerr << "Exception caught: " << message << "\n\n";
+  }
 
   // Output final message and exit
   //

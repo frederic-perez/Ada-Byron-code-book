@@ -37,6 +37,7 @@ set(SRC_LIST
   concurrency.cpp concurrency.h
   conversions+casts++.cpp conversions+casts++.h
   cpp11-pool.cpp cpp11-pool.h
+  enum-class-iteration+.cpp enum-class-iteration+.h
   euclidean.cpp euclidean.h
   literal-operators.cpp literal-operators.h
   main.cpp
