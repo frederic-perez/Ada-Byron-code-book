@@ -10,10 +10,12 @@ namespace Ada_Byron_code_book::enums {
 #undef FPCX_TRY_NOT_ENUM_CLASS_AND_INT_20171009
 #if defined(FPCX_TRY_NOT_ENUM_CLASS_AND_INT_20171009)
 enum NotEnumClass { foo, bar, undefined };
-static constexpr std::array<const char*, count_defined<NotEnumClass>()> text_not_enum_class{{"foo", "bar"}};
-// static_assert > compilation error (in count_defined<NotEnumClass>())
+static constexpr std::array text_not_enum_class{"foo", "bar"};
+static_assert(text_not_enum_class.size() == count_defined<NotEnumClass>(), "Bad array: wrong size");
+// '- count_defined<NotEnumClass>() above causes its own static_assert to fail
 
-const size_t num_defined_in_int = count_defined<int>(); // ditto
+const size_t num_defined_in_int = count_defined<int>();
+// '- count_defined<int>() above causes its own static_assert to fail
 #endif
 
 //

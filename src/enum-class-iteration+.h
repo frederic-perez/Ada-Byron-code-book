@@ -47,7 +47,7 @@ count_defined()
   // Note: This works for
   // 1. consecutive enum values, starting with "zero"; if not > Specialize, and
   // 2. `undefined` must be the last value of the enum class
-  static_assert(is_enum_class<T>::value, "static_assert failed: Bad type--T should be an enum class");
+  static_assert(is_enum_class<T>::value, "Bad type--T should be an enum class");
   return static_cast<size_t>(T::undefined);
 }
 
