@@ -204,7 +204,6 @@ Range(std::ostream& a_os)
   static_assert(
     std::is_scalar<T>::value // TODO: How to avoid instantiating with char?
     || false == std::numeric_limits<T>::is_integer,
-    "static_assert failed: "
     "Template parameter T is neither arithmetic nor floating point");
   a_os << "Range = [" << boost::numeric::bounds<T>::lowest() << ", " << boost::numeric::bounds<T>::highest() << ']'
        << std::flush;
@@ -218,7 +217,7 @@ RangeAsInt(std::ostream& a_os)
 {
   static_assert(
     std::is_scalar<T>::value || true == std::numeric_limits<T>::is_integer,
-    "static_assert failed: Template parameter T is not suitable");
+    "Template parameter T is not suitable");
   a_os << "Range (as int) = [" << boost::numeric_cast<int>(boost::numeric::bounds<T>::lowest()) << ", "
        << boost::numeric_cast<int>(boost::numeric::bounds<T>::highest()) << ']' << std::flush;
   return a_os;

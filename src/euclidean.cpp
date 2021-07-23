@@ -144,7 +144,7 @@ auto
 ABcb::Euclidean::Vector<T, N>::operator^(const Vector<T, N>& a_rhs) const
 -> const Vector<T, N>
 {
-  static_assert(N == 3, "static_assert failed: Vector template parameter N (size) is not 3.");
+  static_assert(N == 3, "Vector template parameter N (size) is not 3.");
   return Vector<T, N>{
     d_array[1] * a_rhs[2] - d_array[2] * a_rhs[1],
     d_array[2] * a_rhs[0] - d_array[0] * a_rhs[2],
@@ -155,7 +155,7 @@ template <class T, size_t N>
 T
 ABcb::Euclidean::Vector<T, N>::ComputeAzimuthAngle() const
 {
-  static_assert(N == 3, "static_assert failed: Vector template parameter N (size) is not 3.");
+  static_assert(N == 3, "Vector template parameter N (size) is not 3.");
 #define ADA_BYRON__USEATAN2_20151022
 #ifdef ADA_BYRON__USEATAN2_20151022
   using std::atan2;
@@ -187,7 +187,7 @@ template <class T, size_t N>
 T
 ABcb::Euclidean::Vector<T, N>::ComputePolarAngle() const
 {
-  static_assert(N == 3, "static_assert failed: Vector template parameter N (size) is not 3.");
+  static_assert(N == 3, "Vector template parameter N (size) is not 3.");
 
   //! Precondition: *this must be a normalized Vector<T, N>
   using std::acos;
