@@ -202,7 +202,10 @@ Range(std::ostream& a_os)
 -> std::ostream&
 {
   static_assert(
-    std::is_scalar<T>::value // TODO: How to avoid instantiating with char?
+    !std::is_same<T, char>::value,
+    "Cannot instantiate with char (use Range_CastingToInt<T> instead)");
+  static_assert(
+    std::is_scalar<T>::value
     || false == std::numeric_limits<T>::is_integer,
     "Template parameter T is neither arithmetic nor floating point");
   a_os << "Range = [" << boost::numeric::bounds<T>::lowest() << ", " << boost::numeric::bounds<T>::highest() << ']'
@@ -212,13 +215,13 @@ Range(std::ostream& a_os)
 
 template <class T>
 auto
-RangeAsInt(std::ostream& a_os)
+Range_CastingToInt(std::ostream& a_os)
 -> std::ostream&
 {
   static_assert(
     std::is_scalar<T>::value || true == std::numeric_limits<T>::is_integer,
     "Template parameter T is not suitable");
-  a_os << "Range (as int) = [" << boost::numeric_cast<int>(boost::numeric::bounds<T>::lowest()) << ", "
+  a_os << "Range (casting to int) = [" << boost::numeric_cast<int>(boost::numeric::bounds<T>::lowest()) << ", "
        << boost::numeric_cast<int>(boost::numeric::bounds<T>::highest()) << ']' << std::flush;
   return a_os;
 }
@@ -231,8 +234,10 @@ ABcb::spy::InfoOfSomeTypes(std::ostream& a_os)
 -> std::ostream&
 {
   using boost::multiprecision::cpp_dec_float_50;
-  a_os << pad << "sizeof(char) = " << sizeof(char) << " | " << RangeAsInt<char> << '\n'
+  a_os << pad << "sizeof(char) = " << sizeof(char) << " | " << Range_CastingToInt<char> << '\n'
        << pad << "sizeof(wchar_t) = " << sizeof(wchar_t) << " | " << Range<wchar_t> << '\n'
+       << pad << "sizeof(char16_t) = " << sizeof(char16_t) << " | " << Range<char16_t> << '\n'
+       << pad << "sizeof(char32_t) = " << sizeof(char32_t) << " | " << Range<char32_t> << '\n'
        << pad << "sizeof(int) = " << sizeof(int) << " | " << Range<int> << '\n'
        << pad << "sizeof(short int) = " << sizeof(short int) << " | " << Range<short int> << '\n'
        << pad << "sizeof(int64_t) = " << sizeof(int64_t) << " | " << Range<int64_t> << '\n'

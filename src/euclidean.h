@@ -25,9 +25,9 @@ class Vector {
     "Vector template parameter N (size) is 0. It should be strictly positive.");
   static_assert(
     // std::is_floating_point<T>::value,
-    // '- Oops! Alas, this assert does not work with
-    //    boost::multiprecision::cpp_dec_float_50
-    //    so we use the expression below, found in the Internet
+    // '- Oops! Alas, this assert does not work when instantiating
+    //    T with boost::multiprecision::cpp_dec_float_50
+    //    so we use the expression below, found on the Internet
     //    (it catches attempts of instantiating T as a char, for example)
     false == std::numeric_limits<T>::is_integer,
     "Vector template parameter T is not floating point");
