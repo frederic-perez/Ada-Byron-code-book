@@ -48,9 +48,8 @@ template <class T, size_t N>
 T
 ABcb::Euclidean::Vector<T, N>::Norm() const
 {
-  T accSquared = 0.;
-  for (auto value : d_array)
-    accSquared += value * value;
+  const T accSquared =
+    std::inner_product(d_array.begin(), d_array.end(), d_array.begin(), static_cast<T>(0.));
   using std::sqrt;
   // '- To avoid "Implicit conversion loses floating-point precision..."
   return sqrt(accSquared);
@@ -78,8 +77,16 @@ ABcb::Euclidean::Vector<T, N>::Normalize()
 -> const Vector<T, N>&
 {
   const T norm = Norm();
+#define FPCX_USE_SIMPLE_LOOP_20210725
+#if defined(FPCX_USE_SIMPLE_LOOP_20210725)
   for (T& value : d_array)
     value /= norm;
+#else
+  // Another possibility, which I find more cumbersome than the code above:
+  std::transform(
+    d_array.begin(), d_array.end(), d_array.begin(),
+    [=](T t) -> T { return t/norm; });
+#endif
   return *this;
 }
 
