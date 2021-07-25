@@ -18,7 +18,7 @@
 
 namespace Ada_Byron_code_book::raw {
 
-// Note: Recall that for std::array<> objects you must use the size() inspector
+// Note: Recall that for std::array objects you must use the size() inspector
 //
 template <typename T, size_t N>
 constexpr

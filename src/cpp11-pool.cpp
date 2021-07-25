@@ -124,7 +124,7 @@ ABcb::cpp11::AlgorithmExamples()
 {
   std::clog << __func__ << " started..." << std::endl;
 
-  const std::vector<int> v{3, 9, 1, 4, 2, 5, 9};
+  const std::vector v{3, 9, 1, 4, 2, 5, 9};
   spy::Output(std::cout, v, pad + "v");
   const auto [minIt, maxIt] = // C++17 structured binding
     std::minmax_element(v.cbegin(), v.cend());

@@ -33,9 +33,9 @@ GuruTest(const std::string& a_text)
     const std::string message = "Unknown guru parameter '" + a_text + "'";
 
     std::ostringstream oss;
-    std::vector<std::string> definedStrings = Guru::GetDefinedStrings();
+    const auto definedStrings = Guru::GetDefinedStrings();
     oss << '{' << boost::algorithm::join(definedStrings, ", ") << '}';
-    const std::string setOfDefinedStrings = oss.str();
+    const auto setOfDefinedStrings = oss.str();
 
     std::cerr << pad << __func__ << ": " << message << '\n'
               << pad << pad << "--guru arg " << setOfDefinedStrings << '\n';
@@ -50,7 +50,7 @@ void
 ABcb::GurusTest(const std::initializer_list<std::string> a_args)
 {
   std::cout << __func__ << " called" << std::endl;
-  for (auto text : a_args) {
+  for (const auto& text : a_args) {
     GuruTest(text);
   }
 }
