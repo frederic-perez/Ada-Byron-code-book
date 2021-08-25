@@ -13,12 +13,12 @@ ABcb::raw::ExamplesOfRaw()
   std::clog << __func__ << " started..." << std::endl;
 
   const double myCArray[] = {1., 2., 3.};
-  spy::Output(std::cout, myCArray, ABcb::raw::ArraySize(myCArray), pad + "myCArray (after construction)");
+  std::cout << spy::ToString(myCArray, ABcb::raw::ArraySize(myCArray), pad + "myCArray (after construction)") << std::endl;
 
   std::vector myVector{4, 3, 2, 1};
-  spy::Output(std::cout, myVector, pad + "myVector (after construction)");
+  std::cout << spy::ToString(myVector, pad + "myVector (after construction)") << std::endl;
   ABcb::raw::WipeOut(myVector);
-  spy::Output(std::cout, myVector, pad + "myVector (after WipeOut call)");
+  std::cout << spy::ToString(myVector, pad + "myVector (after WipeOut call)") << std::endl;
 
   std::clog << __func__ << " finished." << std::endl;
 }

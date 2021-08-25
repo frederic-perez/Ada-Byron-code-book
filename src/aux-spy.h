@@ -5,6 +5,7 @@
 #endif
 #include <memory>
 #include <ostream>
+#include <sstream>
 #include <string>
 #include <type_traits>
 
@@ -45,47 +46,60 @@ private:
   const std::string d_progname;
 };
 
-template <typename T>
-auto
-Output(std::ostream& a_os, const T& a_container, const std::string& a_containerName)
--> std::ostream&
+// Function that allows output of containers with basic or even enum class values
+// For enum class values, it requires the existence of
+//   std::ostream& operator<<(std::ostream&, MyEnumClass)
+// which could be defined, for examples, as
+//   std::ostream& operator<<(std::ostream& a_os, MyEnumClass a_value) {
+//     a_os << as_string(a_value);
+//     return a_os;
+//   }
+// Usage example: std::clog << ... << ToString(myContainer, "myContainer") << ...;
+//
+template <typename TContainer>
+std::string
+ToString(const TContainer& a_container, const std::string& a_containerName)
 {
-  a_os << (a_containerName.empty() ? "[unnamed]" : a_containerName) << " = ";
+  std::ostringstream oss;
+  oss << (a_containerName.empty() ? "[unnamed]" : a_containerName) << " = ";
   if (a_container.empty()) {
-    a_os << "[0]{}" << std::endl;
+    oss << "[0]{}" << std::endl;
   } else {
     const size_t N = a_container.size();
-    a_os << "[" << N << "]{";
+    oss << "[" << N << "]{";
     for (size_t i = 0; i < N; ++i) {
-      a_os << a_container[i];
+      oss << a_container[i];
       if (i < N - 1) {
-        a_os << ", ";
+        oss << ", ";
       }
     }
-    a_os << '}' << std::endl;
+    oss << '}' << std::flush;
   }
-  return a_os;
+  return oss.str();
 }
 
+// Function that allows output of old C arrays with basic or enum class values
+// (see comments for the function above)
+//
 template <typename T>
-auto
-Output(std::ostream& a_os, const T* a_oldCArray, size_t a_size, const std::string& a_name)
--> std::ostream&
+std::string
+ToString(const T* a_oldCArray, size_t a_size, const std::string& a_name)
 {
-  a_os << (a_name.empty() ? "[unnamed]" : a_name) << " = ";
+  std::ostringstream oss;
+  oss << (a_name.empty() ? "[unnamed]" : a_name) << " = ";
   if (a_size == 0) {
-    a_os << "[0]{}" << std::endl;
+    oss << "[0]{}" << std::endl;
   } else {
-    a_os << "[" << a_size << "]{";
+    oss << "[" << a_size << "]{";
     for (size_t i = 0; i < a_size; ++i) {
-      a_os << a_oldCArray[i];
+      oss << a_oldCArray[i];
       if (i < a_size - 1) {
-        a_os << ", ";
+        oss << ", ";
       }
     }
-    a_os << '}' << std::endl;
+    oss << '}' << std::flush;
   }
-  return a_os;
+  return oss.str();
 }
 
 template <typename TClock>
