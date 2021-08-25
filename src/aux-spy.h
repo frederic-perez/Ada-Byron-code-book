@@ -63,7 +63,7 @@ ToString(const TContainer& a_container, const std::string& a_containerName)
   std::ostringstream oss;
   oss << (a_containerName.empty() ? "[unnamed]" : a_containerName) << " = ";
   if (a_container.empty()) {
-    oss << "[0]{}" << std::endl;
+    oss << "[0]{}";
   } else {
     const size_t N = a_container.size();
     oss << "[" << N << "]{";
@@ -73,7 +73,7 @@ ToString(const TContainer& a_container, const std::string& a_containerName)
         oss << ", ";
       }
     }
-    oss << '}' << std::flush;
+    oss << '}';
   }
   return oss.str();
 }
@@ -88,7 +88,7 @@ ToString(const T* a_oldCArray, size_t a_size, const std::string& a_name)
   std::ostringstream oss;
   oss << (a_name.empty() ? "[unnamed]" : a_name) << " = ";
   if (a_size == 0) {
-    oss << "[0]{}" << std::endl;
+    oss << "[0]{}";
   } else {
     oss << "[" << a_size << "]{";
     for (size_t i = 0; i < a_size; ++i) {
@@ -97,7 +97,7 @@ ToString(const T* a_oldCArray, size_t a_size, const std::string& a_name)
         oss << ", ";
       }
     }
-    oss << '}' << std::flush;
+    oss << '}';
   }
   return oss.str();
 }
