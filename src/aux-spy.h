@@ -46,14 +46,24 @@ private:
   const std::string d_progname;
 };
 
-// Function that allows output of containers with basic or even enum class values
-// For enum class values, it requires the existence of
-//   std::ostream& operator<<(std::ostream&, MyEnumClass)
-// which could be defined, for examples, as
-//   std::ostream& operator<<(std::ostream& a_os, MyEnumClass a_value) {
-//     a_os << as_string(a_value);
-//     return a_os;
-//   }
+// Function that allows output of containers with basic, enum class values, glm::fvec3, etc.
+// - For basic/common types, it can be used directly, since operator<< is defined by C++ for
+//   those types.
+// - For enum class values, it requires the existence of
+//     std::ostream& operator<<(std::ostream&, MyEnumClass)
+//   which could be defined, for examples, as
+//     std::ostream& operator<<(std::ostream& a_os, MyEnumClass a_value) {
+//       a_os << as_string(a_value);
+//       return a_os;
+//     }
+// - For non-basic classes like, for example, glm::fvec3 (an instantiation of a template 
+//   struct), we need to define:
+//     namespace glm { // required by clang++
+//     std::ostream& operator<<(std::ostream& a_os, const fvec3& value) {
+//       a_os << to_string(value);
+//       return a_os;
+//     }
+//     } // namespace glm
 // Usage example: std::clog << ... << ToString(myContainer, "myContainer") << ...;
 //
 template <typename TContainer>
@@ -78,7 +88,7 @@ ToString(const TContainer& a_container, const std::string& a_containerName)
   return oss.str();
 }
 
-// Function that allows output of old C arrays with basic or enum class values
+// Function that allows output of old C arrays with basic, enum class values, etc.
 // (see comments for the function above)
 //
 template <typename T>
