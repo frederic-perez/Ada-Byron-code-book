@@ -7,7 +7,7 @@
 
 #include "algorithm-string-pool.h"
 #include "aux-raw.h"
-#include "aux-spy.h"
+#include "aux-spy+.h"
 #include "cli-parser.h"
 #include "concurrency.h"
 #include "conversions+casts++.h"

@@ -7,7 +7,7 @@
 #include <vector>
 
 #include "aux-raw.h"
-#include "aux-spy.h"
+#include "aux-spy+.h"
 #include "cpp11-pool.h"
 
 namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179
@@ -91,11 +91,20 @@ void
 print(const std::tuple<Args...>& t)
 {
   const size_t N = sizeof...(Args);
-  std::cout << '[' << N << "]{";
+  std::cout << '{';
   TuplePrinter<decltype(t), N>::print(t);
   std::cout << '}';
 }
 // end helper function
+
+using MyTuple = std::tuple<int, std::string, bool>;
+
+std::ostream&
+operator<<(std::ostream& a_os, const MyTuple& value)
+{
+  a_os << '{' << std::get<0>(value) << ", " << std::get<1>(value) << ", " << std::get<2>(value) << '}';
+  return a_os;
+}
 
 } // namespace
 
@@ -104,7 +113,6 @@ ABcb::cpp11::UsingTuple()
 {
   std::clog << __func__ << " started..." << std::endl;
 
-  using MyTuple = std::tuple<int, std::string, bool>;
   const size_t N = std::tuple_size<MyTuple>::value;
   std::clog << pad << "The size of MyTuple is " << N << std::endl;
 
@@ -112,9 +120,12 @@ ABcb::cpp11::UsingTuple()
   std::cout << pad << "typeid of get<0>(myTuple) = " << typeid(std::get<0>(myTuple)).name() << std::endl;
   std::cout << pad << "typeid of get<1>(myTuple) = " << typeid(std::get<1>(myTuple)).name() << std::endl;
   std::cout << pad << "typeid of get<2>(myTuple) = " << typeid(std::get<2>(myTuple)).name() << std::endl;
-  std::cout << pad << "myTuple = ";
+  std::cout << pad << "myTuple = " << myTuple << " should be equal to ";
   print(myTuple);
   std::cout << std::endl;
+
+  const std::vector myTuples = {myTuple, {42, "foo", false}};
+  std::cout << pad << ToString(myTuples, "myTuples") << std::endl;
 
   std::clog << __func__ << " finished." << std::endl;
 }
@@ -125,7 +136,7 @@ ABcb::cpp11::AlgorithmExamples()
   std::clog << __func__ << " started..." << std::endl;
 
   const std::vector v{3, 9, 1, 4, 2, 5, 9};
-  std::cout << spy::ToString(v, pad + "v") << std::endl;
+  std::cout << ToString(v, pad + "v") << std::endl;
   const auto [minIt, maxIt] = // C++17 structured binding
     std::minmax_element(v.cbegin(), v.cend());
   std::cout << pad << pad << "v's min element is " << *minIt << ", at index " << (minIt - v.cbegin()) << '\n'

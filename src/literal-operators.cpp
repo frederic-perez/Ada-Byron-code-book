@@ -1,7 +1,7 @@
 #include "literal-operators.h"
 
 #include "aux-raw.h"
-#include "aux-spy.h"
+#include "aux-spy+.h"
 
 #include <algorithm>
 #include <iostream>

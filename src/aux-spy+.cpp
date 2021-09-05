@@ -11,7 +11,7 @@
 #include <boost/version.hpp>
 
 #include "aux-raw.h" // pad
-#include "aux-spy.h"
+#include "aux-spy+.h"
 #include "preprocessor-pool.h"
 
 namespace ABcb = Ada_Byron_code_book;

@@ -11,7 +11,7 @@
 #include "aux-raw-compiler-warnings-off++end.h"
 
 #include "aux-raw.h"
-#include "aux-spy.h"
+#include "aux-spy+.h"
 #include "euclidean.h"
 
 namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179

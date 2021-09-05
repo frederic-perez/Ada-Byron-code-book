@@ -31,7 +31,7 @@ endif ()
 set(SRC_LIST
   aux-raw.cpp aux-raw.h
   aux-raw-compiler-warnings-off++begin.h aux-raw-compiler-warnings-off++end.h
-  aux-spy.cpp aux-spy.h
+  aux-spy+.cpp aux-spy+.h
   algorithm-string-pool.cpp algorithm-string-pool.h
   cli-parser.cpp cli-parser.h
   concurrency.cpp concurrency.h

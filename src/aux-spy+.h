@@ -46,72 +46,6 @@ private:
   const std::string d_progname;
 };
 
-// Function that allows output of containers with basic, enum class values, glm::fvec3, etc.
-// - For basic/common types, it can be used directly, since operator<< is defined by C++ for
-//   those types.
-// - For enum class values, it requires the existence of
-//     std::ostream& operator<<(std::ostream&, MyEnumClass)
-//   which could be defined, for examples, as
-//     std::ostream& operator<<(std::ostream& a_os, MyEnumClass a_value) {
-//       a_os << as_string(a_value);
-//       return a_os;
-//     }
-// - For non-basic classes like, for example, glm::fvec3 (an instantiation of a template 
-//   struct), we need to define:
-//     namespace glm { // required by clang++
-//     std::ostream& operator<<(std::ostream& a_os, const fvec3& value) {
-//       a_os << to_string(value);
-//       return a_os;
-//     }
-//     } // namespace glm
-// Usage example: std::clog << ... << ToString(myContainer, "myContainer") << ...;
-//
-template <typename TContainer>
-std::string
-ToString(const TContainer& a_container, const std::string& a_containerName)
-{
-  std::ostringstream oss;
-  oss << (a_containerName.empty() ? "[unnamed]" : a_containerName) << " = ";
-  if (a_container.empty()) {
-    oss << "[0]{}";
-  } else {
-    const size_t N = a_container.size();
-    oss << "[" << N << "]{";
-    for (size_t i = 0; i < N; ++i) {
-      oss << a_container[i];
-      if (i < N - 1) {
-        oss << ", ";
-      }
-    }
-    oss << '}';
-  }
-  return oss.str();
-}
-
-// Function that allows output of old C arrays with basic, enum class values, etc.
-// (see comments for the function above)
-//
-template <typename T>
-std::string
-ToString(const T* a_oldCArray, size_t a_size, const std::string& a_name)
-{
-  std::ostringstream oss;
-  oss << (a_name.empty() ? "[unnamed]" : a_name) << " = ";
-  if (a_size == 0) {
-    oss << "[0]{}";
-  } else {
-    oss << "[" << a_size << "]{";
-    for (size_t i = 0; i < a_size; ++i) {
-      oss << a_oldCArray[i];
-      if (i < a_size - 1) {
-        oss << ", ";
-      }
-    }
-    oss << '}';
-  }
-  return oss.str();
-}
-
 template <typename TClock>
 class Timer : boost::noncopyable {
   //
@@ -173,3 +107,79 @@ TypeNameENH()
 }
 
 } // namespace Ada_Byron_code_book::spy
+
+// Function that allows output of containers with basic, enum class values, glm::fvec3, etc.
+// Notice that we define this in the global namespace—this is on purpose to try to avoid
+// name lookup problems (see 
+// https://stackoverflow.com/questions/5195512/namespaces-and-operator-resolution).
+// - For basic/common types, it can be used directly, since operator<< is defined by C++ for
+//   those types.
+// - For enum class values, it requires the existence of
+//     std::ostream& operator<<(std::ostream&, MyEnumClass)
+//   which could be defined, for examples, as
+//     std::ostream& operator<<(std::ostream& a_os, MyEnumClass a_value) {
+//       a_os << as_string(a_value);
+//       return a_os;
+//     }
+// - For non-basic classes like, for example, glm::fvec3 (an instantiation of a template
+//   struct), we need to define:
+//     namespace glm { // required by clang++
+//     std::ostream& operator<<(std::ostream& a_os, const fvec3& value) {
+//       a_os << to_string(value);
+//       return a_os;
+//     }
+//     } // namespace glm
+//   Another example: for a tuple, we could do something like this:
+//     using MyTuple = std::tuple<int, std::string, bool>;
+//     std::ostream& operator<<(std::ostream& a_os, const MyTuple& value) {
+//       a_os << '{' << std::get<0>(value) << ", " << std::get<1>(value) << ", "
+//            << std::get<2>(value) << '}';
+//       return a_os;
+//     }
+// Usage example: std::clog << ... << ToString(myContainer, "myContainer") << ...;
+//
+template <typename TContainer>
+std::string
+ToString(const TContainer& a_container, const std::string& a_containerName)
+{
+  std::ostringstream oss;
+  oss << (a_containerName.empty() ? "[unnamed]" : a_containerName) << " = ";
+  if (a_container.empty()) {
+    oss << "[0]{}";
+  } else {
+    const size_t N = a_container.size();
+    oss << "[" << N << "]{";
+    for (size_t i = 0; i < N; ++i) {
+      oss << a_container[i];
+      if (i < N - 1) {
+        oss << ", ";
+      }
+    }
+    oss << '}';
+  }
+  return oss.str();
+}
+
+// Function that allows output of old C arrays with basic, enum class values, etc.
+// (see comments for usage at the function above)
+//
+template <typename T>
+std::string
+ToString(const T* a_oldCArray, size_t a_size, const std::string& a_name)
+{
+  std::ostringstream oss;
+  oss << (a_name.empty() ? "[unnamed]" : a_name) << " = ";
+  if (a_size == 0) {
+    oss << "[0]{}";
+  } else {
+    oss << "[" << a_size << "]{";
+    for (size_t i = 0; i < a_size; ++i) {
+      oss << a_oldCArray[i];
+      if (i < a_size - 1) {
+        oss << ", ";
+      }
+    }
+    oss << '}';
+  }
+  return oss.str();
+}
