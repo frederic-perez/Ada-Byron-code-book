@@ -70,30 +70,34 @@ ABcb::cpp11::TestIfAConstParameterCanBeModified(const int a_int)
 namespace {
 
 // helper function to print a tuple of any size
-// from http://en.cppreference.com/w/cpp/utility/tuple/tuple
+// Based on http://en.cppreference.com/w/cpp/utility/tuple/tuple
 
 template <class Tuple, std::size_t N>
-struct TuplePrinter {
-  static void print(const Tuple& t)
-  {
-    TuplePrinter<Tuple, N - 1>::print(t);
-    std::cout << ", " << std::get<N - 1>(t);
+struct TupleToString {
+  static std::string toString(const Tuple& t) {
+    std::ostringstream oss;
+    oss << TupleToString<Tuple, N - 1>::toString(t) << ", " << std::get<N - 1>(t);
+    return oss.str();
   }
 };
 
 template <class Tuple>
-struct TuplePrinter<Tuple, 1> {
-  static void print(const Tuple& t) { std::cout << std::get<0>(t); }
+struct TupleToString<Tuple, 1> {
+  static std::string toString(const Tuple& t) {
+    std::ostringstream oss;
+    oss << std::get<0>(t);
+    return oss.str();
+  }
 };
 
 template <class... Args>
-void
-print(const std::tuple<Args...>& t)
+std::string
+ToString(const std::tuple<Args...>& t)
 {
+  std::ostringstream oss;
   const size_t N = sizeof...(Args);
-  std::cout << '{';
-  TuplePrinter<decltype(t), N>::print(t);
-  std::cout << '}';
+  oss << '{' << TupleToString<decltype(t), N>::toString(t) << '}';
+  return oss.str();
 }
 // end helper function
 
@@ -120,8 +124,7 @@ ABcb::cpp11::UsingTuple()
   std::cout << pad << "typeid of get<0>(myTuple) = " << typeid(std::get<0>(myTuple)).name() << std::endl;
   std::cout << pad << "typeid of get<1>(myTuple) = " << typeid(std::get<1>(myTuple)).name() << std::endl;
   std::cout << pad << "typeid of get<2>(myTuple) = " << typeid(std::get<2>(myTuple)).name() << std::endl;
-  std::cout << pad << "myTuple = " << myTuple << " should be equal to ";
-  print(myTuple);
+  std::cout << pad << "myTuple = " << myTuple << " should be equal to " << ToString(myTuple);
   std::cout << std::endl;
 
   const std::vector myTuples = {myTuple, {42, "foo", false}};
