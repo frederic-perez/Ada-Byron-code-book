@@ -108,6 +108,42 @@ TypeNameENH()
 
 } // namespace Ada_Byron_code_book::spy
 
+// ToString: helper function to get a string from the values of a tuple of any size
+// Based on http://en.cppreference.com/w/cpp/utility/tuple/tuple
+// Notice that we define this function in the global namespace
+
+template <class Tuple, std::size_t N>
+struct TupleToString {
+  static std::string toString(const Tuple& t)
+  {
+    std::ostringstream oss;
+    oss << TupleToString<Tuple, N - 1>::toString(t) << ", " << std::get<N - 1>(t);
+    return oss.str();
+  }
+};
+
+template <class Tuple>
+struct TupleToString<Tuple, 1> {
+  static std::string toString(const Tuple& t)
+  {
+    std::ostringstream oss;
+    oss << std::get<0>(t);
+    return oss.str();
+  }
+};
+
+template <class... Args>
+std::string
+ToString(const std::tuple<Args...>& t)
+{
+  std::ostringstream oss;
+  const size_t N = sizeof...(Args);
+  oss << '{' << TupleToString<decltype(t), N>::toString(t) << '}';
+  return oss.str();
+}
+
+// end helper function
+
 // Function that allows output of containers with basic, enum class values, glm::fvec3, etc.
 // Notice that we define this in the global namespace—this is on purpose to try to avoid
 // name lookup problems (see 
@@ -135,6 +171,10 @@ TypeNameENH()
 //       a_os << '{' << std::get<0>(value) << ", " << std::get<1>(value) << ", "
 //            << std::get<2>(value) << '}';
 //       return a_os;
+//     }
+//     or this very compact definition by using ToString for tuples:
+//     std::ostream& operator<<(std::ostream& a_os, const MyTuple& value) {
+//       return a_os << ToString(value);
 //     }
 // Usage example: std::clog << ... << ToString(myContainer, "myContainer") << ...;
 //

@@ -69,45 +69,12 @@ ABcb::cpp11::TestIfAConstParameterCanBeModified(const int a_int)
 
 namespace {
 
-// helper function to print a tuple of any size
-// Based on http://en.cppreference.com/w/cpp/utility/tuple/tuple
-
-template <class Tuple, std::size_t N>
-struct TupleToString {
-  static std::string toString(const Tuple& t) {
-    std::ostringstream oss;
-    oss << TupleToString<Tuple, N - 1>::toString(t) << ", " << std::get<N - 1>(t);
-    return oss.str();
-  }
-};
-
-template <class Tuple>
-struct TupleToString<Tuple, 1> {
-  static std::string toString(const Tuple& t) {
-    std::ostringstream oss;
-    oss << std::get<0>(t);
-    return oss.str();
-  }
-};
-
-template <class... Args>
-std::string
-ToString(const std::tuple<Args...>& t)
-{
-  std::ostringstream oss;
-  const size_t N = sizeof...(Args);
-  oss << '{' << TupleToString<decltype(t), N>::toString(t) << '}';
-  return oss.str();
-}
-// end helper function
-
 using MyTuple = std::tuple<int, std::string, bool>;
 
 std::ostream&
 operator<<(std::ostream& a_os, const MyTuple& value)
 {
-  a_os << '{' << std::get<0>(value) << ", " << std::get<1>(value) << ", " << std::get<2>(value) << '}';
-  return a_os;
+  return a_os << ToString(value);
 }
 
 } // namespace
