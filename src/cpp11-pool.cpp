@@ -88,9 +88,15 @@ ABcb::cpp11::UsingTuple()
   std::clog << pad << "The size of MyTuple is " << N << std::endl;
 
   const MyTuple myTuple{16, "Test", true};
-  std::cout << pad << "typeid of get<0>(myTuple) = " << typeid(std::get<0>(myTuple)).name() << std::endl;
-  std::cout << pad << "typeid of get<1>(myTuple) = " << typeid(std::get<1>(myTuple)).name() << std::endl;
-  std::cout << pad << "typeid of get<2>(myTuple) = " << typeid(std::get<2>(myTuple)).name() << std::endl;
+  std::cout << pad
+            << "spy::TypeNameENH of decltype(get<0>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<0>(myTuple))>()
+            << std::endl;
+  std::cout << pad
+            << "spy::TypeNameENH of decltype(get<1>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<1>(myTuple))>()
+            << std::endl;
+  std::cout << pad
+            << "spy::TypeNameENH of decltype(get<2>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<2>(myTuple))>()
+            << std::endl;
   std::cout << pad << "myTuple = " << myTuple << " should be equal to " << ToString(myTuple);
   std::cout << std::endl;
 

@@ -74,7 +74,8 @@ protected:
   typename TClock::time_point d_start;
 };
 
-// Consider this function instead of using typeid(-).name
+// Consider this function instead of using typeid(-).name,
+// with T being a type, or `decltype(variable)`, for example
 //
 template <class T>
 auto
