@@ -3,6 +3,7 @@
 
 #include <boost/assert.hpp>
 
+#include "aux-raw.h"
 #include "enum-class-iteration+.h"
 
 namespace Ada_Byron_code_book::enums {
@@ -81,16 +82,18 @@ using uint = unsigned int;
 
 namespace ABcb = Ada_Byron_code_book;
 
+using ABcb::raw::pad;
+
 void
 ABcb::enums::ExamplesOfEnumClassAsIntegral()
 {
   std::clog << __func__ << " started..." << std::endl;
 
   auto planet = Planet::Earth;
-  std::cout << "planet = Planet::Earth as string: " << as_string(planet)
+  std::cout << pad << "planet = Planet::Earth as string: " << as_string(planet)
             << "; static_cast<uint>(as_integral(planet)): " << static_cast<uint>(as_integral(planet)) << std::endl;
   planet = Planet::undefined;
-  std::cout << "planet = Planet::undefined as string: " << as_string(planet)
+  std::cout << pad << "planet = Planet::undefined as string: " << as_string(planet)
             << "; static_cast<uint>(as_integral(planet)): " << static_cast<uint>(as_integral(planet)) << std::endl;
 
   std::clog << __func__ << " finished." << std::endl;
@@ -103,22 +106,22 @@ ABcb::enums::ExamplesOfEnumClassIteration()
 
   using namespace std::string_literals;
 
-  std::cout << "all_defined_planets.size() = " << all_defined_planets.size() << "\n"
-            << "count_defined<Planet>() = " << count_defined<Planet>() << std::endl;
+  std::cout << pad << "all_defined_planets.size() = " << all_defined_planets.size() << "\n"
+            << pad << "count_defined<Planet>() = " << count_defined<Planet>() << std::endl;
   for (const auto planet : all_defined_planets) {
     const std::string planet_str = as_string(planet);
     if (planet != as_planet(planet_str))
       throw "Problem using planet"s;
-    std::cout << "planet as string: " << planet_str << std::endl;
+    std::cout << pad << "planet as string: " << planet_str << std::endl;
   }
 
-  std::cout << "all_defined_opposites.size() = " << all_defined_opposites.size() << "\n"
-    << "count_defined<Opposite>() = " << count_defined<Opposite>() << std::endl;
+  std::cout << pad << "all_defined_opposites.size() = " << all_defined_opposites.size() << "\n"
+    << pad << "count_defined<Opposite>() = " << count_defined<Opposite>() << std::endl;
   for (const auto opposite : all_defined_opposites) {
     const std::string opposite_str = as_string(opposite);
     if (opposite != as_opposite(opposite_str))
       throw "Problem using opposite"s;
-    std::cout << "opposite as string: " << opposite_str << std::endl;
+    std::cout << pad << "opposite as string: " << opposite_str << std::endl;
   }
 
   std::clog << __func__ << " finished." << std::endl;
