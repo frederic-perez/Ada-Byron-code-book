@@ -7,6 +7,7 @@
 #include <ostream>
 #include <sstream>
 #include <string>
+#include <string_view>
 #include <type_traits>
 
 #include <boost/noncopyable.hpp>
@@ -79,11 +80,11 @@ protected:
 //
 template <class T>
 auto
-TypeNameENH()
+TypeNameENH11() // Using C++11
 -> std::string
 {
   // Credits to
-  // http://stackoverflow.com/questions/81870/print-variable-type-in-c
+  // https://stackoverflow.com/questions/81870/print-variable-type-in-c
   //
   typedef typename std::remove_reference<T>::type TR;
   std::unique_ptr<char, void (*)(void*)> own(
@@ -105,6 +106,35 @@ TypeNameENH()
     r += "&&";
 #include "aux-raw-compiler-warnings-off++end.h"
   return r;
+}
+
+// Consider this function instead of using typeid(-).name,
+// with T being a type, or `decltype(variable)`, for example
+//
+template <typename T>
+constexpr auto
+TypeNameENH() // Using C++17
+{
+  // Credits to
+  // https://stackoverflow.com/questions/81870/is-it-possible-to-print-a-variables-type-in-standard-c/56766138#56766138
+  //
+  std::string_view name, prefix, suffix;
+#ifdef __clang__
+  name = __PRETTY_FUNCTION__;
+  prefix = "auto Ada_Byron_code_book::spy::TypeNameENH() [T = ";
+  suffix = "]";
+#elif defined(__GNUC__)
+  name = __PRETTY_FUNCTION__;
+  prefix = "constexpr auto Ada_Byron_code_book::spy::TypeNameENH() [with T = ";
+  suffix = "]";
+#elif defined(_MSC_VER)
+  name = __FUNCSIG__;
+  prefix = "auto __cdecl Ada_Byron_code_book::spy::TypeNameENH<";
+  suffix = ">(void)";
+#endif
+  name.remove_prefix(prefix.size());
+  name.remove_suffix(suffix.size());
+  return name;
 }
 
 } // namespace Ada_Byron_code_book::spy

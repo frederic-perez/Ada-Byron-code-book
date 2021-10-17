@@ -146,7 +146,7 @@ UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
             << std::flush;
 #include "aux-raw-compiler-warnings-off++begin.h"
   bool succeeded = true;
-  const std::string typeNameENHOfTargetT = ABcb::spy::TypeNameENH<TargetT>();
+  const auto typeNameENHOfTargetT = ABcb::spy::TypeNameENH<TargetT>();
   // if (a_source < boost::numeric::bounds<TargetT>::lowest()) { vs min()
   if (a_source < std::numeric_limits<TargetT>::lowest()) { // Now in C++
     std::cout << std::endl;
@@ -166,7 +166,7 @@ UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
 
   // Keep on using sourceObjectSelf from this point onwards
 
-  std::cout << "; target (" << ABcb::spy::TypeNameENH<TargetT>() << ") = " << static_cast<double>(target) << std::endl;
+  std::cout << "; target (" << typeNameENHOfTargetT << ") = " << static_cast<double>(target) << std::endl;
 }
 
 template <class SourceT, class TargetT>
@@ -191,7 +191,7 @@ ApplyBoostNumericCast(const SourceT a_source)
   std::cout << pad << __func__ << ": a_source (" << ABcb::spy::TypeNameENH<SourceT>() << ") = " << a_source
             << std::flush;
   TargetT target = 66;
-  const std::string typeNameOfTargetT = ABcb::spy::TypeNameENH<TargetT>();
+  const auto typeNameOfTargetT = ABcb::spy::TypeNameENH<TargetT>();
   try {
     target = boost::numeric_cast<TargetT>(a_source);
     std::cout << "; target (" << typeNameOfTargetT << ") = " << static_cast<long double>(target) << std::endl;
