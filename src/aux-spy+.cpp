@@ -10,7 +10,7 @@
 #include <boost/preprocessor.hpp>
 #include <boost/version.hpp>
 
-#include "aux-raw.h" // pad
+#include "aux-raw.h" // for pad
 #include "aux-spy+.h"
 #include "preprocessor-pool.h"
 

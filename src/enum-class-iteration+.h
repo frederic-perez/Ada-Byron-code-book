@@ -3,7 +3,7 @@
 
 #include <array>
 #include <string>
-#include <type_traits> // std::underlying_type
+#include <type_traits> // for std::underlying_type
 
 namespace Ada_Byron_code_book::enums {
 
