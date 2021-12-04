@@ -6,8 +6,8 @@
 #include <boost/preprocessor.hpp>
 
 #include "algorithm-string-pool.h"
-#include "aux-raw.h"
-#include "aux-spy+.h"
+#include "aux-raw.h" // for ExamplesOfRaw
+#include "aux-spy+.h" // for RunInfo, Timer
 #include "cli-parser.h"
 #include "concurrency.h"
 #include "conversions+casts++.h"

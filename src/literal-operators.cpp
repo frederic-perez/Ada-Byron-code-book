@@ -1,7 +1,7 @@
 #include "literal-operators.h"
 
-#include "aux-raw.h"
-#include "aux-spy+.h"
+#include "aux-raw.h" // for pad
+#include "aux-spy+.h" // for TypeNameENH
 
 #include <algorithm>
 #include <iostream>

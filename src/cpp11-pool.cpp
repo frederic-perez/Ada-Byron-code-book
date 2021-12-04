@@ -6,8 +6,8 @@
 #include <tuple>
 #include <vector>
 
-#include "aux-raw.h"
-#include "aux-spy+.h"
+#include "aux-raw.h" // for pad
+#include "aux-spy+.h" // for ToString, TypeNameENH
 #include "cpp11-pool.h"
 
 namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179

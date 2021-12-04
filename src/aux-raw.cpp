@@ -3,7 +3,7 @@
 #include <vector>
 
 #include "aux-raw.h"
-#include "aux-spy+.h"
+#include "aux-spy+.h" // for ToString
 
 namespace ABcb = Ada_Byron_code_book;
 
