@@ -1,4 +1,5 @@
 #include <iostream>
+#include <set>
 #include <string>
 #include <vector>
 
@@ -19,6 +20,11 @@ ABcb::raw::ExamplesOfRaw()
   std::cout << ToString(myVector, pad + "myVector (after construction)") << std::endl;
   ABcb::raw::WipeOut(myVector);
   std::cout << ToString(myVector, pad + "myVector (after WipeOut call)") << std::endl;
+
+  std::set<char> mySetOfChars{ 'A', 'B', 'C'};
+  std::cout << ToString(mySetOfChars, pad + "mySetOfChars (after construction)") << std::endl;
+  ABcb::raw::WipeOut(mySetOfChars);
+  std::cout << ToString(mySetOfChars, pad + "mySetOfChars (after WipeOut call)") << std::endl;
 
   std::clog << __func__ << " finished." << std::endl;
 }

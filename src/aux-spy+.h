@@ -220,11 +220,13 @@ ToString(const TContainer& a_container, const std::string& a_containerName)
   } else {
     const size_t N = a_container.size();
     oss << "[" << N << "]{";
-    for (size_t i = 0; i < N; ++i) {
-      oss << a_container[i];
+    size_t i = 0;
+    for (const auto element : a_container) { // this allows using set<T> as a parameter
+      oss << element;
       if (i < N - 1) {
         oss << ", ";
       }
+      ++i;
     }
     oss << '}';
   }
