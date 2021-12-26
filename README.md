@@ -14,10 +14,11 @@ I use to build binaries for these settings (sorted alphabetically)
 - Linux Ubuntu: g++ 4.8.2, clang++ 3.4.1 (discontinued in October 2019)
 - Microsoft Windows
   - 10 Pro:
-    - Visual Studio 16 2019 (started in July 2021)
+    - Microsoft Visual Studio Community 2022 v17 (started in December 2021)
+    - ~~Microsoft Visual Studio Community 2019 v16~~
   - 8.1 Pro:
-    - Visual Studio 14 2015 Win64 (started in July 2015; discontinued in October 2019)
-    - ~~Visual Studio 12 2013 Win64~~
+    - Microsoft Visual Studio Community 2015 v14 (started in July 2015; discontinued in October 2019)
+    - ~~Microsoft Visual Studio Community 2013 v12~~
 
 and for all of them we use
 
