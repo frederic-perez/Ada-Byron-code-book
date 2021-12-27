@@ -44,6 +44,7 @@ if("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
     string(APPEND CMAKE_CXX_FLAGS " "
       "-D_SCL_SECURE_NO_WARNINGS -D_CRT_SECURE_NO_WARNINGS "
       "/W4 /WX /EHa /wd4127 /wd4351 "
+      "/diagnostics:caret "
       "/permissive- "
       "/D${def_CMAKE_MYUSERNAME} /D${def_CMAKE_MYHOSTNAME}")
     # '- http://msdn.microsoft.com/en-US/library/thxezb7y.aspx:
