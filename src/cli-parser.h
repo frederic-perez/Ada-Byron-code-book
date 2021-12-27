@@ -24,7 +24,7 @@
   inline auto GetEnum(const std::string& a_text) -> Enum \
   { \
     size_t i = 1; \
-    for (; i < beyond && a_text != enumText[i]; ++i) \
+    for (; i < beyond and a_text != enumText[i]; ++i) \
       ; \
     return i < beyond ? static_cast<Enum>(i) : Enum::undefined; \
   } \
@@ -61,7 +61,7 @@ GetEnum(const std::string& a_text)
 -> Enum
 {
   // uint8_t i = first;
-  // for (; i <= last && a_text != enumText[i]; ++i);
+  // for (; i <= last and a_text != enumText[i]; ++i);
   // if (i <= last)
   //   return static_cast<Enum>(i);
   return Enum::undefined;

@@ -29,7 +29,7 @@ main(const int argc, char* argv[])
   namespace ABcb = Ada_Byron_code_book;
 
   bool succeeded = ABcb::cli::ParseCommandLine(argc, argv);
-  if (!succeeded)
+  if (not succeeded)
     return EXIT_FAILURE;
 
   std::cout << ABcb::spy::RunInfo(ABcb::cli::Argv0(), ABcb::cli::ProgramName()) << '\n'

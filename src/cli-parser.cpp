@@ -223,7 +223,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     // Load the file and tokenize it
     const std::string filename = vm["response-file"].as<std::string>();
     std::ifstream ifs(filename.c_str());
-    if (!ifs) {
+    if (not ifs) {
       std::cerr << progname << ": Error: Could not open the response file " << filename << "\n\n" << odFull << '\n';
       return false;
     }
@@ -259,7 +259,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
   }
 
   const bool succeeded = CheckArguments(vm);
-  if (!succeeded) {
+  if (not succeeded) {
     std::cerr << odFull;
     return false;
   }
@@ -346,7 +346,7 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
     }
   }
 
-  if (!suggestedWindowPosition.empty()) {
+  if (not suggestedWindowPosition.empty()) {
     if (suggestedWindowPosition.size() != 2) {
       std::ostringstream oss;
       oss << "Wrong suggested-window-position parameter ";
@@ -360,7 +360,7 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
   }
 
   if (a_vm.count("verbose") != 0) {
-    if (!ParseBoolean(verboseCLI.c_str(), verbose, "on", "off")) {
+    if (not ParseBoolean(verboseCLI.c_str(), verbose, "on", "off")) {
       return OutputErrorAndReturnFalse("Unknown verbose parameter");
     }
   }
@@ -391,7 +391,7 @@ ABcb::cli::ParsedCommandLine(std::ostream& a_os)
        << "  --platonic-solid " << GetString(platonicSolid) << '\n'
        << "  --color " << Color::GetString(color) << '\n'
        << "  --fruit " << Fruit::GetString(fruit) << '\n';
-  if (!suggestedWindowPosition.empty()) {
+  if (not suggestedWindowPosition.empty()) {
     a_os << "  --suggested-window-position ";
     for (auto position : suggestedWindowPosition) {
       a_os << position << ' ';

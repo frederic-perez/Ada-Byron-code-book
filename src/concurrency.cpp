@@ -136,7 +136,7 @@ Function(void* a_param)
 
   std::cout << pad << pad << __func__ << " is about to stop for barrier" << threadInfo << std::endl;
   const int rc = pthread_barrier_wait(&barrier); // Synchronization point
-  if (rc != 0 && rc != PTHREAD_BARRIER_SERIAL_THREAD) {
+  if (rc != 0 and rc != PTHREAD_BARRIER_SERIAL_THREAD) {
     std::cerr << pad << pad << __func__ << ": Error: Could not wait on barrier. Exiting.\n";
     exit(-1);
   }

@@ -32,17 +32,17 @@ ABcb::ExamplesOfIstringstreamFailingConversions()
   std::istringstream iss(string); // or parse(string)
   unsigned int i;
   iss >> i;
-  if (!iss.good()) // Note: if (iss.fail) does not work fine for our purposes
+  if (not iss.good()) // Note: if (iss.fail) does not work fine for our purposes
     std::cerr << "Error parsing first index\n";
   else {
     unsigned int j;
     iss >> j;
-    if (!iss.good())
+    if (not iss.good())
       std::cerr << pad << "Error parsing second index (expected behavior)\n";
     else {
       unsigned int k;
       iss >> k;
-      if (!iss.good())
+      if (not iss.good())
         std::cerr << "Error parsing third index (i=" << i << ", j=" << j
                   << "), but it should have failed for the second index\n";
       else
@@ -160,7 +160,7 @@ UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
   }
 #include "aux-raw-compiler-warnings-off++end.h"
 
-  if (!succeeded)
+  if (not succeeded)
     return;
   const TargetT target = static_cast<TargetT>(a_source);
 

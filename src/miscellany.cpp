@@ -86,7 +86,7 @@ ABcb::miscellany::ExamplesOfFactorial()
   //
   size_t n = 0;
   bool overflow = false;
-  while (!overflow) {
+  while (not overflow) {
     ++n;
     try {
       FactorialRecursive(n);

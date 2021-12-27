@@ -15,7 +15,7 @@
 
 std::string line;
 while (getline(fileI, line))
-  if (!line.empty()) {
+  if (not line.empty()) {
     std::istringstream parse(line);
     double x, y;
     parse >> x >> y;

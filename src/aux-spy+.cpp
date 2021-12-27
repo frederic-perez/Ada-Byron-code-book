@@ -204,11 +204,11 @@ Range(std::ostream& a_os)
 -> std::ostream&
 {
   static_assert(
-    !std::is_same<T, char>::value,
+    not std::is_same<T, char>::value,
     "Cannot instantiate with char (use Range_CastingToInt<T> instead)");
   static_assert(
     std::is_scalar<T>::value
-    || false == std::numeric_limits<T>::is_integer,
+    or false == std::numeric_limits<T>::is_integer,
     "Template parameter T is neither arithmetic nor floating point");
   a_os << "Range of `" << typeid(T).name()
        << "` = [" << boost::numeric::bounds<T>::lowest() << ", " << boost::numeric::bounds<T>::highest() << ']'
@@ -222,7 +222,7 @@ Range_CastingToInt(std::ostream& a_os)
 -> std::ostream&
 {
   static_assert(
-    std::is_scalar<T>::value || true == std::numeric_limits<T>::is_integer,
+    std::is_scalar<T>::value or true == std::numeric_limits<T>::is_integer,
     "Template parameter T is not suitable");
   a_os << "Range of `" << typeid(T).name()
        << "` (casting to int) = [" << boost::numeric_cast<int>(boost::numeric::bounds<T>::lowest()) << ", "

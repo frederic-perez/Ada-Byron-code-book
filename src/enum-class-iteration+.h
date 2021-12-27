@@ -35,7 +35,7 @@ template <typename T>
 struct test<T, decltype((void)+T{})> : std::true_type {};
 
 template <typename T>
-using is_enum_class = std::integral_constant<bool, !test<T>::value && std::is_enum<T>::value>;
+using is_enum_class = std::integral_constant<bool, not test<T>::value and std::is_enum<T>::value>;
 //
 // is_enum_class -- end
 

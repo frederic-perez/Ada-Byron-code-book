@@ -69,7 +69,7 @@ ABcb::ExamplesOfFileSystem(const std::string& a_filename)
 
   // "Testing" a_filename
 
-  if (!bf::exists(a_filename)) { // Bail out ASAP
+  if (not bf::exists(a_filename)) { // Bail out ASAP
     std::cout << " does not exist" << std::endl;
     std::clog << __func__ << " aborted." << std::endl;
     return;
