@@ -20,20 +20,20 @@ ABcb::miscellany::ExampleOfRawStringLiteral()
 }
 
 void
-ABcb::miscellany::Function(const int a_value)
+ABcb::miscellany::Function(const int value)
 // notice the "const" above
 {
-  std::cout << __func__ << ": a_value=" << a_value << std::endl;
+  std::cout << __func__ << ": value=" << value << std::endl;
 }
 
 size_t
-ABcb::miscellany::FactorialRecursive(const size_t a_n)
+ABcb::miscellany::FactorialRecursive(const size_t n)
 {
-  if (a_n <= 1)
+  if (n <= 1)
     return 1;
 
-  const size_t factorialRecursiveNMinus1 = FactorialRecursive(a_n - 1);
-  const size_t result = a_n * factorialRecursiveNMinus1;
+  const size_t factorialRecursiveNMinus1 = FactorialRecursive(n - 1);
+  const size_t result = n * factorialRecursiveNMinus1;
   static const size_t max = boost::numeric::bounds<size_t>::highest();
   //
   // Interesting information on std::overflow_error available at
@@ -41,12 +41,10 @@ ABcb::miscellany::FactorialRecursive(const size_t a_n)
   //
   // TODO: Study en.cppreference.com/w/cpp/error/overflow_error and apply it!
   //
-  const bool overflow =
-    // overflow of a * b \equiv a * b > max \equiv a > max/b
-    a_n > max / factorialRecursiveNMinus1;
-  if (overflow) {
+  if (const bool overflow = n > max / factorialRecursiveNMinus1; overflow) {
+    // '- overflow of a * b \equiv a * b > max \equiv a > max/b
     std::ostringstream oss;
-    oss << "Overflow trying to compute " << __func__ << '(' << a_n << ')';
+    oss << "Overflow trying to compute " << __func__ << '(' << n << ')';
     throw std::overflow_error(oss.str());
   }
 
@@ -85,8 +83,7 @@ ABcb::miscellany::ExamplesOfFactorial()
   // Using FactorialRecursive
   //
   size_t n = 0;
-  bool overflow = false;
-  while (not overflow) {
+  for (bool overflow = false; !overflow;) {
     ++n;
     try {
       FactorialRecursive(n);

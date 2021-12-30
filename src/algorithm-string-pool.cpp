@@ -140,8 +140,8 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
   ba::to_lower(narrow);
   Output("   narrow (after ba::to_lower)", narrow);
 
-  //std::transform(narrow.begin(), narrow.end(), narrow.begin(), ::tolower);
-  // '- warning C4244: '=': conversion from 'int' to 'char', possible loss of data
+  // std::transform(narrow.begin(), narrow.end(), narrow.begin(), ::tolower);
+  //  '- warning C4244: '=': conversion from 'int' to 'char', possible loss of data
   //
   // Thus, we resort to the solution proposed in 
   // https://developercommunity.visualstudio.com/content/problem/23811
