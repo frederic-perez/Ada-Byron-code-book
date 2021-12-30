@@ -57,13 +57,13 @@ ABcb::cpp11::TryBadCode()
 }
 
 void
-ABcb::cpp11::TestIfAConstParameterCanBeModified(const int a_int)
+ABcb::cpp11::TestIfAConstParameterCanBeModified(const int value)
 {
 #if defined(__GNUG__) || defined(WIN32)
-  int i = a_int;
+  int i = value;
   ++i; // Silly operations to avoid compiler warnings
 #else
-  a_int = 0; // Error in vs12, g++ 4.8.2, clang++ 3.4-1
+  value = 0; // Error in VS 2022, VS 2012, g++ 4.8.2, clang++ 3.4-1
 #endif
 }
 
@@ -141,17 +141,17 @@ ABcb::cpp11::MiscellanyExamples()
 
   std::cout << pad << "initializer_list-based range-for example: "
             << "for (int prime : { 2, 3, 5, 7 }) > ";
-  for (int prime : {2, 3, 5, 7}) // initializer_list-based range-for example
+  for (const auto prime : {2, 3, 5, 7}) // initializer_list-based range-for example
     std::cout << prime << ' ';
   std::cout << std::endl;
 
   // std::ratio stuff
   //
-  using ratioA = std::ratio<1, 3>;
-  using ratioB = std::ratio<2, 4>;
-  using sum = std::ratio_add<ratioA, ratioB>;
-  std::cout << pad << "std::ratio and std::ratio_add example: " << ratioA::num << "/" << ratioA::den << " + "
-            << ratioB::num << "/" << ratioB::den << " = " << sum::num << "/" << sum::den << " = "
+  using ratioOneThree = std::ratio<1, 3>;
+  using ratioTwoFour = std::ratio<2, 4>;
+  using sum = std::ratio_add<ratioOneThree, ratioTwoFour>;
+  std::cout << pad << "std::ratio and std::ratio_add example: " << ratioOneThree::num << "/" << ratioOneThree::den << " + "
+            << ratioTwoFour::num << "/" << ratioTwoFour::den << " = " << sum::num << "/" << sum::den << " = "
             << static_cast<double>(sum::num) / sum::den << std::endl;
 
   std::clog << __func__ << " finished." << std::endl;
