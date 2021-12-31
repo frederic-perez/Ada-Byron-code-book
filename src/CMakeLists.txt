@@ -15,6 +15,7 @@ find_package(Boost
     date_time
     filesystem
     locale
+    log
     program_options
     system
 )

@@ -3,6 +3,7 @@
 #include <sstream>
 #include <stdexcept>
 
+#include <boost/log/trivial.hpp>
 #include <boost/math/constants/constants.hpp>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/numeric/conversion/bounds.hpp>
@@ -15,15 +16,14 @@ namespace ABcb = Ada_Byron_code_book;
 void
 ABcb::miscellany::ExampleOfRawStringLiteral()
 {
-  std::cout << __func__ << ": "
-            << R"(C:\life\brian\foo.pdf)" << std::endl;
+  BOOST_LOG_TRIVIAL(info) << __func__ << ": " << R"(C:\life\brian\foo.pdf)";
 }
 
 void
 ABcb::miscellany::Function(const int value)
 // notice the "const" above (see header file with the function declaration)
 {
-  std::cout << __func__ << ": value=" << value << std::endl;
+  BOOST_LOG_TRIVIAL(info) << __func__ << ": value=" << value;
 }
 
 size_t
@@ -63,7 +63,7 @@ ABcb::miscellany::FactorialIterative(const size_t a_n)
 void
 ABcb::miscellany::ExamplesOfFactorial()
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   using ABcb::raw::pad;
 
@@ -75,7 +75,8 @@ ABcb::miscellany::ExamplesOfFactorial()
   std::ostringstream oss;
   oss.imbue(std::locale("")); // To add commas when outputting result
   oss << factorialCompileTime;
-  std::cout << pad << "FactorialCompileTime<" << N << ">::d_value = " << oss.str() << std::endl;
+  BOOST_LOG_TRIVIAL(info)
+    << pad << "FactorialCompileTime<" << N << ">::d_value = " << oss.str();
 
   static_assert(FactorialCompileTime<1>::d_value == 1);
   static_assert(FactorialCompileTime<4>::d_value == 24);
@@ -88,7 +89,7 @@ ABcb::miscellany::ExamplesOfFactorial()
     try {
       FactorialRecursive(n);
     } catch (const std::overflow_error& e) {
-      std::cerr << pad << __func__ << ": Exception caught: " << e.what() << '\n';
+      BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Exception caught: " << e.what();
       overflow = true;
     }
   }
@@ -97,19 +98,21 @@ ABcb::miscellany::ExamplesOfFactorial()
   const size_t factorialN = FactorialRecursive(n);
   oss.str("");
   oss << factorialN;
-  std::cout << pad << "FactorialRecursive(" << n << ")            = " << oss.str() << std::endl;
+  BOOST_LOG_TRIVIAL(info)
+    << pad << "FactorialRecursive(" << n << ")            = " << oss.str();
 
   // Using FactorialIterative
   //
   const size_t factorialIterative = FactorialIterative(n);
   oss.str("");
   oss << factorialIterative;
-  std::cout << pad << "FactorialIterative(" << n << ")            = " << oss.str() << std::endl;
+  BOOST_LOG_TRIVIAL(info)
+    << pad << "FactorialIterative(" << n << ")            = " << oss.str();
 
   static_assert(FactorialIterative(1) == 1);
   static_assert(FactorialIterative(4) == 24);
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }
 
 namespace {
@@ -126,7 +129,7 @@ AreaOfACircle(const T r)
 void
 ABcb::miscellany::ExamplesOfMultiprecision()
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   using ABcb::raw::pad;
 
@@ -136,16 +139,16 @@ ABcb::miscellany::ExamplesOfMultiprecision()
 
   const float r_f = 123.f / 100.f;
   const float a_f = AreaOfACircle(r_f);
-  std::cout << pad << std::setprecision(std::numeric_limits<float>::digits10) << a_f << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << std::setprecision(std::numeric_limits<float>::digits10) << a_f;
 
   const double r_d = 123. / 100.;
   const double a_d = AreaOfACircle(r_d);
-  std::cout << pad << std::setprecision(std::numeric_limits<double>::digits10) << a_d << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << std::setprecision(std::numeric_limits<double>::digits10) << a_d;
 
   using boost::multiprecision::cpp_dec_float_50;
   const cpp_dec_float_50 r_mp(cpp_dec_float_50(123) / 100);
   const cpp_dec_float_50 a_mp = AreaOfACircle(r_mp);
-  std::cout << pad << std::setprecision(std::numeric_limits<cpp_dec_float_50>::digits10) << a_mp << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << std::setprecision(std::numeric_limits<cpp_dec_float_50>::digits10) << a_mp;
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }
