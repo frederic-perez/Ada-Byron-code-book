@@ -21,7 +21,7 @@ ABcb::miscellany::ExampleOfRawStringLiteral()
 
 void
 ABcb::miscellany::Function(const int value)
-// notice the "const" above
+// notice the "const" above (see header file with the function declaration)
 {
   std::cout << __func__ << ": value=" << value << std::endl;
 }
