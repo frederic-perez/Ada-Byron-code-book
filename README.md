@@ -102,7 +102,8 @@ We strive to maintain a certain quality on the code by taking advantage of some 
 - Cppcheck - A tool for static C/C++ code analysis. Being myself a fan of portable apps, I particularly use the version from [PortableApps.com](https://portableapps.com/apps/development/cppcheck-portable).
 - “Analyze and Code Cleanup » Run Code Analysis on Only Ada-Byron-code-book” when using Microsoft Windows 10 Pro: Microsoft Visual Studio Community 2019 (Version 16)
 - “Product » Analyze” when using Apple OS X: Xcode 7.1.1 (LLVM, clang++) 64-bit
-- (Just starting...) In g++ and clang++, address/thread/memory sanitizer (ASan, TSan, MSan)—for example, for ASan, with the flags `-fsanitize=address -fno-omit-frame-pointer`. See [google/sanitizers repo](https://github.com/google/sanitizers).
+- In g++ and clang++, address/thread/memory sanitizer (ASan, TSan, MSan)—for example, for ASan, with the flags `-fsanitize=address -fno-omit-frame-pointer`. See [google/sanitizers repo](https://github.com/google/sanitizers).
+- [SonarLint](https://www.sonarlint.org/), a _Free_ and _Open Source_ IDE extension that identifies and helps you fix quality and security issues as you code. Like a spell checker, SonarLint squiggles flaws and provides real-time feedback and clear remediation guidance to deliver clean code from the get-go.
 
 Other tools related to code analysis:
 
