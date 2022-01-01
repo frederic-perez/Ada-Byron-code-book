@@ -115,10 +115,6 @@ GetHostName()
     return hostname; // iff like above
   }
 
-#  ifdef _WINDOWS
-#    pragma warning(default : 4996) // This function or variable may be unsafe
-#  endif
-
   return "UNKNOWN";
 #else
   //
@@ -183,14 +179,12 @@ ABcb::spy::LocalTime(std::ostream& a_os)
 -> std::ostream&
 {
   namespace pt = boost::posix_time;
-  const pt::ptime now = pt::second_clock::local_time();
 
-  std::ostringstream oss;
-  auto* const f = new pt::time_facet("%H:%M:%S");
-  oss.imbue(std::locale(oss.getloc(), f));
-  oss << now;
+  // From
+  // https://thispointer.com/get-current-date-time-in-c-example-using-boost-date-time-library/
+  const auto now = pt::second_clock::local_time();
+  a_os << now.time_of_day();
 
-  a_os << oss.str() << std::flush;
   return a_os;
 }
 
@@ -232,7 +226,6 @@ Range_CastingToInt(std::ostream& a_os)
 
 } // namespace
 
-// TODO: Refactor contents
 auto
 ABcb::spy::InfoOfSomeTypes(std::ostream& a_os)
 -> std::ostream&
@@ -266,7 +259,7 @@ auto
 GetArgv0Info(const std::string& a_argv0)
 -> std::string
 {
-  const bf::path fullArgv0 = bf::system_complete(bf::canonical(bf::path(a_argv0)));
+  const bf::path fullArgv0 = bf::system_complete(bf::canonical(bf::path(a_argv0, nullptr)));
 
   std::ostringstream oss;
   oss << "The full argv[0]:\n" << pad << "is " << fullArgv0 << ",\n";
@@ -299,9 +292,7 @@ GetArgv0Info(const std::string& a_argv0)
 
     // Hours, minutes and seconds
     //
-    auto* const f = new pt::time_facet("%H:%M:%S");
-    oss.imbue(std::locale(oss.getloc(), f));
-    oss << ", at " << thePtime;
+    oss << ", at " << thePtime.time_of_day();
   } else {
     oss << "(which does not seem to exist)";
   }
@@ -345,10 +336,6 @@ ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
 }
 
 template <typename TClock>
-ABcb::spy::Timer<TClock>::Timer() : d_start(TClock::now())
-{}
-
-template <typename TClock>
 auto
 ABcb::spy::Timer<TClock>::Elapsed() const
 -> typename TClock::duration
@@ -361,7 +348,7 @@ auto
 ABcb::spy::Timer<TClock>::Seconds() const
 -> double
 {
-  return Elapsed().count() * ((double)TClock::period::num / TClock::period::den);
+  return static_cast<double>(Elapsed().count()) * ((double)TClock::period::num / TClock::period::den);
 }
 
 template <typename TClock>
@@ -381,6 +368,7 @@ ABcb::spy::Timer<TClock>::Reset()
   d_start = TClock::now();
 }
 
-// template class ABcb::spy::Timer<std::chrono::system_clock>;
-// template class ABcb::spy::Timer<std::chrono::steady_clock>; // GCC duplicate?
+// Other possible instantiations:
+// - std::chrono::system_clock
+// - std::chrono::steady_clock << GCC duplicate?
 template class ABcb::spy::Timer<std::chrono::high_resolution_clock>;

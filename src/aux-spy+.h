@@ -64,15 +64,15 @@ class Timer : boost::noncopyable {
   // Timer<std::chrono::high_resolution_clock> t3;
   //
 public:
-  Timer();
+  Timer() = default;
   auto Elapsed() const -> typename TClock::duration;
   auto Seconds() const -> double;
   auto Seconds(size_t precision) const -> std::string;
 
   void Reset();
 
-protected:
-  typename TClock::time_point d_start;
+private:
+  typename TClock::time_point d_start = TClock::now();
 };
 
 // Consider this function instead of using typeid(-).name,
