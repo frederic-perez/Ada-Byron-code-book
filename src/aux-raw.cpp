@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include <boost/log/trivial.hpp>
+
 #include "aux-raw.h"
 #include "aux-spy+.h" // for ToString
 
@@ -11,20 +13,20 @@ namespace ABcb = Ada_Byron_code_book;
 void
 ABcb::raw::ExamplesOfRaw()
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   const double myCArray[] = {1., 2., 3.};
-  std::cout << ToString(myCArray, ABcb::raw::ArraySize(myCArray), pad + "myCArray (after construction)") << std::endl;
+  BOOST_LOG_TRIVIAL(info) << ToString(myCArray, ABcb::raw::ArraySize(myCArray), pad + "myCArray (after construction)");
 
   std::vector myVector{4, 3, 2, 1};
-  std::cout << ToString(myVector, pad + "myVector (after construction)") << std::endl;
+  BOOST_LOG_TRIVIAL(info) << ToString(myVector, pad + "myVector (after construction)");
   ABcb::raw::WipeOut(myVector);
-  std::cout << ToString(myVector, pad + "myVector (after WipeOut call)") << std::endl;
+  BOOST_LOG_TRIVIAL(info) << ToString(myVector, pad + "myVector (after WipeOut call)");
 
   std::set<char> mySetOfChars{ 'A', 'B', 'C'};
-  std::cout << ToString(mySetOfChars, pad + "mySetOfChars (after construction)") << std::endl;
+  BOOST_LOG_TRIVIAL(info) << ToString(mySetOfChars, pad + "mySetOfChars (after construction)");
   ABcb::raw::WipeOut(mySetOfChars);
-  std::cout << ToString(mySetOfChars, pad + "mySetOfChars (after WipeOut call)") << std::endl;
+  BOOST_LOG_TRIVIAL(info) << ToString(mySetOfChars, pad + "mySetOfChars (after WipeOut call)");
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }
