@@ -6,6 +6,7 @@
 #include "aux-raw-compiler-warnings-off++begin.h"
 // clang-format off
   #include <boost/algorithm/string.hpp>
+  #include <boost/log/trivial.hpp>
   #include <boost/numeric/conversion/bounds.hpp>
   #include <boost/numeric/conversion/cast.hpp>
   #include <boost/program_options.hpp>
@@ -37,10 +38,10 @@ GuruTest(const std::string& a_text)
     oss << '{' << boost::algorithm::join(definedStrings, ", ") << '}';
     const auto setOfDefinedStrings = oss.str();
 
-    std::cerr << pad << __func__ << ": " << message << '\n'
-              << pad << pad << "--guru arg " << setOfDefinedStrings << '\n';
+    BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": " << message;
+    BOOST_LOG_TRIVIAL(info) << pad << pad << "--guru arg " << setOfDefinedStrings;
   } else {
-    std::cout << pad << __func__ << ": Guru::Enum guru exists for text `" << a_text << "`" << std::endl;
+    BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": Guru::Enum guru exists for text `" << a_text << "`";
   }
 }
 
@@ -49,7 +50,7 @@ GuruTest(const std::string& a_text)
 void
 ABcb::GurusTest(const std::initializer_list<std::string> a_args)
 {
-  std::cout << __func__ << " called" << std::endl;
+  BOOST_LOG_TRIVIAL(info) << __func__ << " called";
   for (const auto& text : a_args) {
     GuruTest(text);
   }
@@ -205,15 +206,15 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
       // po::parse_command_line(argc, argv, odFull),
       vm);
     if (vm.count("help") != 0) {
-      std::cout << odFull << '\n';
+      BOOST_LOG_TRIVIAL(info) << odFull;
       return false;
     }
     if (vm.count("usage-examples") != 0) {
-      std::cout << "Usage parameter example(s):\n\n" << cli::usageParameterExamples << "\n\n" << odFull << '\n';
+      BOOST_LOG_TRIVIAL(info) << "Usage parameter example(s):\n\n" << cli::usageParameterExamples << "\n\n" << odFull;
       return false;
     }
   } catch (const std::exception& e) {
-    std::cerr << progname << ": Error: " << e.what() << "\n\n" << odFull << '\n';
+    BOOST_LOG_TRIVIAL(error) << progname << ": Error: " << e.what() << "\n\n" << odFull;
     return false;
   }
 
@@ -224,7 +225,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     const std::string filename = vm["response-file"].as<std::string>();
     std::ifstream ifs(filename.c_str());
     if (not ifs) {
-      std::cerr << progname << ": Error: Could not open the response file " << filename << "\n\n" << odFull << '\n';
+      BOOST_LOG_TRIVIAL(error) << progname << ": Error: Could not open the response file " << filename << "\n\n" << odFull;
       return false;
     }
     // Read the whole file into a string
@@ -246,7 +247,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
           .run(),
         vm);
     } catch (const std::exception& e) {
-      std::cerr << progname << ": Error: " << e.what() << "\n\n" << odFull << '\n';
+      BOOST_LOG_TRIVIAL(error) << progname << ": Error: " << e.what() << "\n\n" << odFull;
       return false;
     }
   }
@@ -254,13 +255,13 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
   try {
     po::notify(vm);
   } catch (const std::exception& e) {
-    std::cerr << progname << ": Error: " << e.what() << "\n\n" << odFull << '\n';
+    BOOST_LOG_TRIVIAL(error) << progname << ": Error: " << e.what() << "\n\n" << odFull;
     return false;
   }
 
   const bool succeeded = CheckArguments(vm);
   if (not succeeded) {
-    std::cerr << odFull;
+    BOOST_LOG_TRIVIAL(error) << odFull;
     return false;
   }
 
@@ -270,10 +271,10 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
 namespace {
 
 auto
-OutputErrorAndReturnFalse(const std::string& a_message)
+LogErrorAndReturnFalse(const std::string& a_message)
 -> bool
 {
-  std::cerr << progname << ": Error: " << a_message << "\n\n";
+  BOOST_LOG_TRIVIAL(error) << progname << ": Error: " << a_message;
   return false;
 }
 
@@ -303,7 +304,7 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 
   if (a_vm.count("input-positive-double") != 0) {
     if (inputPositiveDouble <= 0.) {
-      return OutputErrorAndReturnFalse("The input-positive-double parameter must be positive");
+      return LogErrorAndReturnFalse("The input-positive-double parameter must be positive");
     }
   }
 
@@ -315,7 +316,7 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
       oss << "Wrong input-ID parameter '" << inputUnsignedCharCLI << '\''
           << " (maximum allowed: " << static_cast<size_t>(boost::numeric::bounds<unsigned char>::highest()) << ')';
       const std::string message = oss.str();
-      return OutputErrorAndReturnFalse(message);
+      return LogErrorAndReturnFalse(message);
     }
   }
 
@@ -324,7 +325,7 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
     platonicSolid = PlatonicSolid::GetEnum(text);
     if (platonicSolid == PlatonicSolid::Enum::undefined) {
       const std::string message = "Unknown platonic-solid parameter '" + text + "'";
-      return OutputErrorAndReturnFalse(message);
+      return LogErrorAndReturnFalse(message);
     }
   }
 
@@ -333,7 +334,7 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
     color = Color::GetEnum(text);
     if (color == Color::Enum::undefined) {
       const std::string message = "Unknown color parameter '" + text + "'";
-      return OutputErrorAndReturnFalse(message);
+      return LogErrorAndReturnFalse(message);
     }
   }
 
@@ -342,7 +343,7 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
     fruit = Fruit::GetEnum(text);
     if (fruit == Fruit::Enum::undefined) {
       const std::string message = "Unknown fruit parameter '" + text + "'";
-      return OutputErrorAndReturnFalse(message);
+      return LogErrorAndReturnFalse(message);
     }
   }
 
@@ -355,13 +356,13 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
       }
       oss << "-- please, specify 2 (x, y) components";
       const std::string message = oss.str();
-      return OutputErrorAndReturnFalse(message);
+      return LogErrorAndReturnFalse(message);
     }
   }
 
   if (a_vm.count("verbose") != 0) {
     if (not ParseBoolean(verboseCLI.c_str(), verbose, "on", "off")) {
-      return OutputErrorAndReturnFalse("Unknown verbose parameter");
+      return LogErrorAndReturnFalse("Unknown verbose parameter");
     }
   }
 
