@@ -1,7 +1,5 @@
 // -- Examples on how to use boost::lexical_cast
 
-//#include <codecvt>
-#include <iostream>
 #include <limits>
 #include <sstream>
 #include <string>
@@ -9,6 +7,7 @@
 #include "aux-raw-compiler-warnings-off++begin.h"
 // clang-format off
   #include <boost/lexical_cast.hpp>
+  #include <boost/log/trivial.hpp>
 // clang-format on
 #include "aux-raw-compiler-warnings-off++end.h"
 
@@ -22,44 +21,44 @@ using ABcb::raw::pad;
 void
 ABcb::ExamplesOfIstringstreamFailingConversions()
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   // Old way, which so far does not work properly -- TODO: Fix this
 
   const std::string string = "14 -1 3";
-  std::cout << pad << "Parsing string \"" << string << "\" to unsigned ints i, j, k using std::istringstream >> "
-            << std::flush;
+  BOOST_LOG_TRIVIAL(info) << pad << "Parsing string \"" << string << "\" to unsigned ints i, j, k using std::istringstream >> ";
   std::istringstream iss(string); // or parse(string)
   unsigned int i;
   iss >> i;
   if (not iss.good()) // Note: if (iss.fail) does not work fine for our purposes
-    std::cerr << "Error parsing first index\n";
+    BOOST_LOG_TRIVIAL(error) << "Error parsing first index";
   else {
     unsigned int j;
     iss >> j;
     if (not iss.good())
-      std::cerr << pad << "Error parsing second index (expected behavior)\n";
+      BOOST_LOG_TRIVIAL(error) << pad << "Error parsing second index (expected behavior)";
     else {
       unsigned int k;
       iss >> k;
       if (not iss.good())
-        std::cerr << "Error parsing third index (i=" << i << ", j=" << j
-                  << "), but it should have failed for the second index\n";
+        BOOST_LOG_TRIVIAL(error)
+          << "Error parsing third index (i=" << i << ", j=" << j
+          << "), but it should have failed for the second index";
       else
-        std::cout << pad << "indices: " << i << ", " << j << ", " << k << std::endl;
+        BOOST_LOG_TRIVIAL(info) << pad << "indices: " << i << ", " << j << ", " << k;
     }
   }
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }
 
 void
 ABcb::ExamplesOfCpp11Conversions()
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   std::string string = "14 -1 67.89 3.1416 5e-7";
-  std::cout << pad << "Parsing string \"" << string << "\" >> " << std::flush;
+  BOOST_LOG_TRIVIAL(info) << pad << "Parsing string \"" << string << "\" >> ";
   std::string::size_type idx;
   const unsigned long ul = std::stoul(string, &idx);
   string = string.substr(idx);
@@ -70,16 +69,16 @@ ABcb::ExamplesOfCpp11Conversions()
   const double d1 = std::stod(string, &idx);
   string = string.substr(idx);
   const double d2 = std::stod(string); // Caution: idx is not updated here
-  std::cout << "std::stoul: " << ul << "; std::stoi: " << i << "; std::stof: " << f << "; std::stod: " << d1
-            << "; std::stod: " << d2 << std::endl;
+  BOOST_LOG_TRIVIAL(info)
+    << "std::stoul: " << ul << "; std::stoi: " << i << "; std::stof: " << f << "; std::stod: " << d1
+    << "; std::stod: " << d2;
 
   const std::string backToString = std::to_string(ul) + ' ' + std::to_string(i) + ' ' + std::to_string(f) + ' '
     + std::to_string(d1) + ' ' + std::to_string(d2);
-  std::cout << pad << "Back to string (using std::to_string): \"" << backToString << "\"" << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << "Back to string (using std::to_string): \"" << backToString << "\"";
   std::ostringstream oss;
   oss << ul << ' ' << i << ' ' << f << ' ' << d1 << ' ' << d2;
-  std::cout << pad << "Back to string (using std::ostringstream): \"" << oss.str() << "\" <-- Preferred way!"
-            << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << "Back to string (using std::ostringstream): \"" << oss.str() << "\" <-- Preferred way!";
 
   // From http://www.cplusplus.com/forum/general/125880/
   //
@@ -108,32 +107,32 @@ ABcb::ExamplesOfCpp11Conversions()
 
   // TODO: Add more examples from www.cplusplus.com/reference/string/
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }
 
 void
 ABcb::ExamplesOfBoostLexicalCast(const std::string& a_numberToConvert)
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   using boost::bad_lexical_cast;
   using boost::lexical_cast;
 
   const int valueIntS = stoi(a_numberToConvert);
-  std::cout << pad << "stoi(\"" << a_numberToConvert << "\") is " << valueIntS << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << "stoi(\"" << a_numberToConvert << "\") is " << valueIntS;
   const int valueIntL = lexical_cast<int>(a_numberToConvert);
-  std::cout << pad << "lexical_cast<int>(\"" << a_numberToConvert << "\") is " << valueIntL << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << "lexical_cast<int>(\"" << a_numberToConvert << "\") is " << valueIntL;
 
   const short valueShortS = static_cast<short>(stoi(a_numberToConvert));
-  std::cout << pad << "stoi(\"" << a_numberToConvert << "\") is " << valueShortS << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << "stoi(\"" << a_numberToConvert << "\") is " << valueShortS;
   try {
     const short valueShortL = lexical_cast<short>(a_numberToConvert);
-    std::cout << pad << "lexical_cast<short>(\"" << a_numberToConvert << "\") is " << valueShortL << std::endl;
+    BOOST_LOG_TRIVIAL(info) << pad << "lexical_cast<short>(\"" << a_numberToConvert << "\") is " << valueShortL;
   } catch (const boost::bad_lexical_cast& e) {
-    std::cerr << pad << "Exception caught: " << e.what() << '\n';
+    BOOST_LOG_TRIVIAL(error) << pad << "Exception caught: " << e.what();
   }
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }
 
 namespace {
@@ -142,20 +141,17 @@ template <class SourceT, class TargetT>
 void
 UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
 {
-  std::cout << pad << __func__ << ": a_source (" << ABcb::spy::TypeNameENH<SourceT>() << ") = " << a_source
-            << std::flush;
+  BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": a_source (" << ABcb::spy::TypeNameENH<SourceT>() << ") = " << a_source;
 #include "aux-raw-compiler-warnings-off++begin.h"
   bool succeeded = true;
   const auto typeNameENHOfTargetT = ABcb::spy::TypeNameENH<TargetT>();
   // if (a_source < boost::numeric::bounds<TargetT>::lowest()) { vs min()
   if (a_source < std::numeric_limits<TargetT>::lowest()) { // Now in C++
-    std::cout << std::endl;
-    std::cerr << pad << __func__ << ": Error: a_source too small to convert to " << typeNameENHOfTargetT << '\n';
+    BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Error: a_source too small to convert to " << typeNameENHOfTargetT;
     succeeded = false;
     //} else if (a_source > boost::numeric::bounds<TargetT>::highest()) {
   } else if (a_source > std::numeric_limits<TargetT>::max()) { // Use just C++
-    std::cout << std::endl;
-    std::cerr << pad << __func__ << ": Error: a_source too large to convert to " << typeNameENHOfTargetT << '\n';
+    BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Error: a_source too large to convert to " << typeNameENHOfTargetT;
     succeeded = false;
   }
 #include "aux-raw-compiler-warnings-off++end.h"
@@ -166,7 +162,7 @@ UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
 
   // Keep on using sourceObjectSelf from this point onwards
 
-  std::cout << "; target (" << typeNameENHOfTargetT << ") = " << static_cast<double>(target) << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << pad << ">> target (" << typeNameENHOfTargetT << ") = " << static_cast<double>(target);
 }
 
 template <class SourceT, class TargetT>
@@ -188,17 +184,16 @@ ApplyBoostNumericCast(const SourceT a_source)
 
 #include <boost/numeric/conversion/bounds.hpp>
 
-  std::cout << pad << __func__ << ": a_source (" << ABcb::spy::TypeNameENH<SourceT>() << ") = " << a_source
-            << std::flush;
+  BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": a_source (" << ABcb::spy::TypeNameENH<SourceT>() << ") = " << a_source;
   TargetT target = 66;
   const auto typeNameOfTargetT = ABcb::spy::TypeNameENH<TargetT>();
   try {
     target = boost::numeric_cast<TargetT>(a_source);
-    std::cout << "; target (" << typeNameOfTargetT << ") = " << static_cast<long double>(target) << std::endl;
+    BOOST_LOG_TRIVIAL(info) << pad << pad << ">> target (" << typeNameOfTargetT << ") = " << static_cast<long double>(target);
   } catch (const boost::numeric::bad_numeric_cast& e) {
-    std::cout << std::endl;
-    std::cerr << pad << __func__ << ": Error: Bad target (" << static_cast<long double>(target)
-              << ", which is the preset value) tried conversion (to " << typeNameOfTargetT << "): " << e.what() << '\n';
+    BOOST_LOG_TRIVIAL(error)
+      << pad << __func__ << ": Error: Bad target (" << static_cast<long double>(target)
+      << ", which is the preset value) tried conversion (to " << typeNameOfTargetT << "): " << e.what();
   }
 }
 
@@ -207,7 +202,7 @@ ApplyBoostNumericCast(const SourceT a_source)
 void
 ABcb::ExamplesOfBoostNumericCast()
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   int source = 123456;
   using SourceT = decltype(source);
@@ -229,5 +224,5 @@ ABcb::ExamplesOfBoostNumericCast()
   source = 1234567890;
   ApplyBoostNumericCast<SourceT, double>(source);
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }
