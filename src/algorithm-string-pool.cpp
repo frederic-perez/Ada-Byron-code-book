@@ -1,7 +1,6 @@
 // -- Examples on how to use boost::algorithm::string
 
 #include <algorithm>
-#include <iostream>
 #include <string>
 #include <vector>
 
