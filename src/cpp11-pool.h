@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <sstream>
 #include <string>
 
 namespace Ada_Byron_code_book::cpp11 {
@@ -15,18 +16,21 @@ void MiscellanyExamples();
 // Variadic template and related basic template
 
 template <typename T>
-void
-PrintList(T a_last)
+std::string
+ListToString(T a_last)
 {
-  std::cout << a_last << std::endl;
+  std::ostringstream oss;
+  oss << a_last;
+  return oss.str();
 }
 
 template <typename Arg1, typename... Args>
-void
-PrintList(Arg1 a_first, Args... a_rest)
+std::string
+ListToString(Arg1 a_first, Args... a_rest)
 {
-  std::cout << a_first << ", ";
-  PrintList(a_rest...);
+  std::ostringstream oss;
+  oss << a_first << ", " << ListToString(a_rest...);
+  return oss.str();
 }
 
 // Example of usage of the "override" keyword

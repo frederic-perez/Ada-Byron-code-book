@@ -1,10 +1,11 @@
 // -- Examples on how to use C++11 features, and some other stuff
 
 #include <algorithm>
-#include <iostream>
 #include <ratio>
 #include <tuple>
 #include <vector>
+
+#include <boost/log/trivial.hpp>
 
 #include "aux-raw.h" // for pad
 #include "aux-spy+.h" // for ToString, TypeNameENH
@@ -50,9 +51,9 @@ ABcb::cpp11::TryBadCode()
 
   int* const array = new int[100];
   delete[] array;
-  std::cout << __func__ << ": array[1] is " << array[1] << std::endl; // BOOM
+  BOOST_LOG_TRIVIAL(info) << __func__ << ": array[1] is " << array[1]; // BOOM
 #else
-  std::clog << __func__ << ": Note: ASAN_TEST was not defined" << std::endl;
+  BOOST_LOG_TRIVIAL(info) << __func__ << ": Note: ASAN_TEST was not defined";
 #endif
 }
 
@@ -82,41 +83,41 @@ operator<<(std::ostream& a_os, const MyTuple& value)
 void
 ABcb::cpp11::UsingTuple()
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   const size_t N = std::tuple_size<MyTuple>::value;
-  std::clog << pad << "The size of MyTuple is " << N << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << "The size of MyTuple is " << N;
 
   const MyTuple myTuple{16, "Test", true};
-  std::cout << pad
-            << "spy::TypeNameENH of decltype(get<0>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<0>(myTuple))>()
-            << std::endl;
-  std::cout << pad
-            << "spy::TypeNameENH of decltype(get<1>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<1>(myTuple))>()
-            << std::endl;
-  std::cout << pad
-            << "spy::TypeNameENH of decltype(get<2>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<2>(myTuple))>()
-            << std::endl;
-  std::cout << pad << "myTuple = " << myTuple << " should be equal to " << ToString(myTuple);
-  std::cout << std::endl;
+  BOOST_LOG_TRIVIAL(info)
+    << pad << "spy::TypeNameENH of decltype(get<0>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<0>(myTuple))>();
+  BOOST_LOG_TRIVIAL(info)
+    << pad << "spy::TypeNameENH of decltype(get<1>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<1>(myTuple))>();
+  BOOST_LOG_TRIVIAL(info)
+    << pad << "spy::TypeNameENH of decltype(get<2>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<2>(myTuple))>();
+  {
+    std::ostringstream oss;
+    oss << myTuple;
+    BOOST_LOG_TRIVIAL(info) << pad << "myTuple = " << oss.str() << " should be equal to " << ToString(myTuple);
+  }
 
   const std::vector myTuples = {myTuple, {42, "foo", false}};
-  std::cout << pad << ToString(myTuples, "myTuples") << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << ToString(myTuples, "myTuples");
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }
 
 void
 ABcb::cpp11::AlgorithmExamples()
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   const std::vector v{3, 9, 1, 4, 2, 5, 9};
-  std::cout << ToString(v, pad + "v") << std::endl;
+  BOOST_LOG_TRIVIAL(info) << ToString(v, pad + "v");
   const auto [minIt, maxIt] = // C++17 structured binding
     std::minmax_element(v.cbegin(), v.cend());
-  std::cout << pad << pad << "v's min element is " << *minIt << ", at index " << (minIt - v.cbegin()) << '\n'
-            << pad << pad << "v's max element is " << *maxIt << ", at index " << (maxIt - v.cbegin()) << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << pad << "v's min element is " << *minIt << ", at index " << minIt - v.cbegin();
+  BOOST_LOG_TRIVIAL(info) << pad << pad << "v's max element is " << *maxIt << ", at index " << maxIt - v.cbegin();
 
   const auto [f1, f2] = std::tuple(12.f, 7.f); // C++17 structured binding
   // '- Using the "Exception" of the
@@ -124,35 +125,40 @@ ABcb::cpp11::AlgorithmExamples()
   //    ES.10: Declare one name (only) per declaration
   const auto [min, max] = // C++17 structured binding
     std::minmax(f1, f2);
-  std::cout << pad << "f1 = " << f1 << ", f2 = " << f2 << '\n'
-            << pad << pad << "min of {f1, f2} = " << min << '\n'
-            << pad << pad << "max of {f1, f2} = " << max << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << "f1 = " << f1 << ", f2 = " << f2;
+  BOOST_LOG_TRIVIAL(info) << pad << pad << "min of {f1, f2} = " << min;
+  BOOST_LOG_TRIVIAL(info) << pad << pad << "max of {f1, f2} = " << max;
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }
 
 void
 ABcb::cpp11::MiscellanyExamples()
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
-  std::cout << pad << "PrintList (variadic template function): ";
-  PrintList(1, 2, 'c', "Hello, world!", 666.);
+  BOOST_LOG_TRIVIAL(info)
+    << pad << "ListToString (variadic template function): "
+    << ListToString(1, 2, 'c', "Hello, world!", 666.);
 
-  std::cout << pad << "initializer_list-based range-for example: "
-            << "for (int prime : { 2, 3, 5, 7 }) > ";
-  for (const auto prime : {2, 3, 5, 7}) // initializer_list-based range-for example
-    std::cout << prime << ' ';
-  std::cout << std::endl;
+  {
+    std::ostringstream oss;
+    for (const auto prime : { 2, 3, 5, 7 }) // initializer_list-based range-for example
+      oss << prime << ' ';
+    BOOST_LOG_TRIVIAL(info)
+      << pad << "initializer_list-based range-for example: "
+      << "for (const auto prime : { 2, 3, 5, 7 }) > " << oss.str();
+  }
 
   // std::ratio stuff
   //
   using ratioOneThree = std::ratio<1, 3>;
   using ratioTwoFour = std::ratio<2, 4>;
   using sum = std::ratio_add<ratioOneThree, ratioTwoFour>;
-  std::cout << pad << "std::ratio and std::ratio_add example: " << ratioOneThree::num << "/" << ratioOneThree::den << " + "
-            << ratioTwoFour::num << "/" << ratioTwoFour::den << " = " << sum::num << "/" << sum::den << " = "
-            << static_cast<double>(sum::num) / sum::den << std::endl;
+  BOOST_LOG_TRIVIAL(info)
+    << pad << "std::ratio and std::ratio_add example: " << ratioOneThree::num << "/" << ratioOneThree::den << " + "
+    << ratioTwoFour::num << "/" << ratioTwoFour::den << " = " << sum::num << "/" << sum::den << " = "
+    << static_cast<double>(sum::num) / sum::den;
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }
