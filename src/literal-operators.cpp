@@ -3,8 +3,9 @@
 #include "aux-raw.h" // for pad
 #include "aux-spy+.h" // for TypeNameENH
 
+#include <boost/log/trivial.hpp>
+
 #include <algorithm>
-#include <iostream>
 
 namespace ABcb = Ada_Byron_code_book;
 
@@ -19,8 +20,9 @@ ExampleOfSSuffixStringLiteral()
 
   const auto foo = "Hello, world!"s; // auto deduces std::string
   // '- See https://en.wikipedia.org/wiki/C%2B%2B14#Standard_user-defined_literals
-  std::clog << pad << "foo = `" << foo
-            << "`; spy::TypeNameENH of foo's decltype = " << ABcb::spy::TypeNameENH<decltype(foo)>() << std::endl;
+  BOOST_LOG_TRIVIAL(info)
+    << pad << "foo = `" << foo
+    << "`; spy::TypeNameENH of foo's decltype = " << ABcb::spy::TypeNameENH<decltype(foo)>();
 }
 
 void
@@ -34,8 +36,9 @@ ExampleOfUnsignedCharLiteral()
 #else
   const auto result = std::min(42_uchar, static_cast<unsigned char>(66)); // OK, same type
 #endif
-  std::clog << pad << "std::min(42_uchar, static_cast<unsigned char>(66)) returned (as size_t) "
-            << static_cast<size_t>(result) << std::endl;
+  BOOST_LOG_TRIVIAL(info)
+    << pad << "std::min(42_uchar, static_cast<unsigned char>(66)) returned (as size_t) "
+    << static_cast<size_t>(result);
 }
 
 } // namespace
@@ -43,10 +46,10 @@ ExampleOfUnsignedCharLiteral()
 void
 ABcb::literal_operators::Examples()
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   ExampleOfSSuffixStringLiteral();
   ExampleOfUnsignedCharLiteral();
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }
