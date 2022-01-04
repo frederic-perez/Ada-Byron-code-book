@@ -8,7 +8,6 @@
 
 #define XML_DATE_TRANSLATOR_20150325
 
-#include <iostream>
 #ifdef XML_DATE_TRANSLATOR_20150325
 #  include <locale>
 #endif
@@ -18,6 +17,7 @@
 #  include <boost/date_time/gregorian/gregorian.hpp>
 #endif
 #include <boost/filesystem.hpp>
+#include <boost/log/trivial.hpp>
 //#include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/version.hpp>
@@ -172,13 +172,14 @@ Write(const Flights& a_flights, std::ostream& a_ostream)
 bool
 Ada_Byron_code_book::ParseXML(const std::string& a_inputFilename, const std::string& a_outputFilename)
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+
   using raw::pad;
   namespace bf = boost::filesystem;
   if (bf::exists(a_inputFilename))
-    std::clog << pad << __func__ << ": Reading " << a_inputFilename << std::endl;
+    BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": Reading " << a_inputFilename;
   else {
-    std::cerr << pad << __func__ << ": " << a_inputFilename << " does not exist\n";
+    BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": " << a_inputFilename << " does not exist";
     return false;
   }
   try {
@@ -187,17 +188,18 @@ Ada_Byron_code_book::ParseXML(const std::string& a_inputFilename, const std::str
     try {
       Read(input, flights);
     } catch (const std::exception& e) {
-      std::cerr << pad << __func__ << ": Exception by 'Read' caught: " << e.what() << '\n';
+      BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Exception by 'Read' caught: " << e.what();
       return false;
     }
-    std::clog << pad << __func__ << ": Read(\"" << a_inputFilename << "\") finished" << std::endl;
+    BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": Read(\"" << a_inputFilename << "\") finished";
     std::ofstream output(a_outputFilename);
     Write(flights, output);
-    std::clog << pad << __func__ << ": Writing of \"" << a_outputFilename << "\" finished" << std::endl;
+    BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": Writing of \"" << a_outputFilename << "\" finished";
   } catch (...) {
-    std::cerr << pad << __func__ << ": Exception ... caught\n";
+    BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Exception ... caught";
     return false;
   }
-  std::clog << __func__ << " finished." << std::endl;
+
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
   return true;
 }

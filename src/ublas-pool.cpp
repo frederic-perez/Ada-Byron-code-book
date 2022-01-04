@@ -1,9 +1,8 @@
 // -- Examples on how to use boost::numeric::ublas
 
-#include <iostream>
-
 #include "aux-raw-compiler-warnings-off++begin.h"
 // clang-format off
+  #include <boost/log/trivial.hpp>
   #include <boost/numeric/ublas/io.hpp>
   #include <boost/numeric/ublas/matrix.hpp>
   #include <boost/numeric/ublas/vector.hpp>
@@ -47,19 +46,19 @@ operator^(const VectorD3& a_lhs, const VectorD3& a_rhs)
 double
 GetSliceLocation(const VectorD3& a_vecX, const VectorD3& a_vecY, const VectorD3& a_point)
 {
-  std::cout << pad << __func__ << ": a_vecX = " << a_vecX << '\n';
-  std::cout << pad << __func__ << ": a_vecY = " << a_vecY << '\n';
+  BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": a_vecX = " << a_vecX;
+  BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": a_vecY = " << a_vecY;
 #if defined(_MSC_VER) && (_MSC_VER >= 1900)
-  std::cout << pad << __func__ << ": a_point = " << a_point << '\n';
+  BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": a_point = " << a_point;
   return 666.; // TODO
 #else
   const VectorD3 vecZ = a_vecX ^ a_vecY;
-  std::cout << pad << __func__ << ": vecZ = " << vecZ << '\n';
+  BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": vecZ = " << vecZ;
 
   const MatrixD33 orientation(MatrixD33::array_type{
     a_vecX[0], a_vecY[0], vecZ[0], a_vecX[1], a_vecY[1], vecZ[1], a_vecX[2], a_vecY[2], vecZ[2]});
 
-  std::cout << pad << __func__ << ": orientation = " << orientation << '\n';
+  BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": orientation = " << orientation;
 
 #  if defined(_MSC_VER)
   const auto resultTmp2 = prod(a_point, orientation);
@@ -68,7 +67,7 @@ GetSliceLocation(const VectorD3& a_vecX, const VectorD3& a_vecY, const VectorD3&
 #  else
   const VectorD3 result = prod(a_point, orientation);
 #  endif
-  std::cout << pad << __func__ << ": result = " << result << '\n';
+  BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": result = " << result;
 
   return result[2];
 #endif
@@ -79,7 +78,7 @@ GetSliceLocation(const VectorD3& a_vecX, const VectorD3& a_vecY, const VectorD3&
 void
 ABcb::ExamplesOfUblas()
 {
-  std::clog << __func__ << " started..." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   // Simple example
 #if defined(_MSC_VER)
@@ -107,5 +106,5 @@ ABcb::ExamplesOfUblas()
     VectorD3::array_type{-95.202782, -71.037422, 206.67741});
 #endif
 
-  std::clog << __func__ << " finished." << std::endl;
+  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
 }

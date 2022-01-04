@@ -1,8 +1,8 @@
 #include <chrono>
 #include <iomanip>
-#include <iostream>
 #include <string>
 
+#include <boost/log/trivial.hpp>
 #include <boost/preprocessor.hpp>
 
 #include "algorithm-string-pool.h"
@@ -23,6 +23,8 @@
 #include "under-construction.h"
 #include "xml-parser.h"
 
+#define BOOST_LOG_END_OF_BLOCK BOOST_LOG_TRIVIAL(trace) << "----"
+
 int
 main(const int argc, char* argv[])
 {
@@ -32,8 +34,8 @@ main(const int argc, char* argv[])
   if (not succeeded)
     return EXIT_FAILURE;
 
-  std::cout << ABcb::spy::RunInfo(ABcb::cli::Argv0(), ABcb::cli::ProgramName()) << '\n'
-            << ABcb::cli::ParsedCommandLine << std::endl;
+  BOOST_LOG_TRIVIAL(info) << ABcb::spy::RunInfo(ABcb::cli::Argv0(), ABcb::cli::ProgramName());
+  BOOST_LOG_TRIVIAL(info) << ABcb::cli::ParsedCommandLine;
 
   ABcb::spy::Timer<std::chrono::high_resolution_clock> timerHQ;
 
@@ -42,47 +44,49 @@ main(const int argc, char* argv[])
   ABcb::cpp11::UsingTuple();
   ABcb::cpp11::AlgorithmExamples();
   ABcb::cpp11::MiscellanyExamples();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 
   ABcb::Euclidean::ExamplesOfVector();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 
   ABcb::raw::ExamplesOfRaw();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 
   const std::string exeFile = argv[0];
   ABcb::ExamplesOfFileSystem(exeFile);
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 
   ABcb::ExamplesOfIstringstreamFailingConversions();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
   ABcb::ExamplesOfCpp11Conversions();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
   const std::string inputValue = "1234567890";
   ABcb::ExamplesOfBoostLexicalCast(inputValue);
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
   ABcb::ExamplesOfBoostNumericCast();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 
   ABcb::ExamplesOfAlgorithmsString();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 
   ABcb::ExamplesOfPromotions();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 
   ABcb::ExamplesOfUblas();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 
   const std::string filenameIn = "input.xml";
   const std::string filenameOut = "output.xml";
   succeeded = ABcb::ParseXML(filenameIn, filenameOut);
-  std::clog << "Ada_Byron_code_book::ParseXML " << (succeeded ? "succeeded" : "failed") << ".\n" << std::endl;
+  BOOST_LOG_TRIVIAL(info)
+    << "Ada_Byron_code_book::ParseXML " << (succeeded ? "succeeded" : "failed") << ".";
+  BOOST_LOG_END_OF_BLOCK;
 
   ABcb::ExamplesOfConcurrencyUsingCpp11();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 #if !defined(_MSC_VER)
   ABcb::ExamplesOfConcurrencyUsingPOSIXThreads();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 #endif
 
   ABcb::GurusTest({"Bjarne_Stroustrup", "John_Doe", "Andrew_Koenig"});
@@ -91,30 +95,32 @@ main(const int argc, char* argv[])
   ABcb::miscellany::ExampleOfRawStringLiteral();
   ABcb::miscellany::ExamplesOfFactorial();
   ABcb::miscellany::ExamplesOfMultiprecision();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 
   ABcb::literal_operators::Examples();
-  std::cout << std::endl;
+  BOOST_LOG_END_OF_BLOCK;
 
   try {
     ABcb::enums::ExamplesOfEnumClassAsIntegral();
-    std::cout << std::endl;
+    BOOST_LOG_END_OF_BLOCK;
     ABcb::enums::ExamplesOfEnumClassIteration();
   } catch (const std::string& message) {
-    std::cerr << "Exception caught: " << message << "\n\n";
+    BOOST_LOG_TRIVIAL(error) << "Exception caught: " << message;
   }
 
   // Output final message and exit
   //
   const double timeElapsed = timerHQ.Seconds();
-  const auto previousPrecision = std::clog.precision(2);
+  std::ostringstream oss;
+  const auto previousPrecision = oss.precision(2);
   // '- Note: "auto" is recommended here to avoid potential problems with
   //    different compilers (eg. requiring "static_cast" to set the previous
   //    precision in vs12), since the standard states that the return type of
   //    setprecision is "unspecified"
-  std::clog << '\n'
-            << __func__ << " finishes. Time elapsed: " << timeElapsed << " seconds"
-            << std::setprecision(previousPrecision) << std::endl;
+  oss
+    << __func__ << " finishes. Time elapsed: " << timeElapsed << " seconds"
+    << std::setprecision(previousPrecision);
+  BOOST_LOG_TRIVIAL(info) << oss.str();
 
   return EXIT_SUCCESS;
 }
