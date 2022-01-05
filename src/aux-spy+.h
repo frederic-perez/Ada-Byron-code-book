@@ -10,27 +10,25 @@
 #include <string_view>
 #include <type_traits>
 
+#include <boost/log/trivial.hpp>
 #include <boost/noncopyable.hpp>
 
 //!? TODO: Possibly extend SpyLine with Boost's PP for extra information
 
-#define SpyLine std::cerr << "@@@@ " << __FILE__ << ':' << __func__ << ":L" << __LINE__ << '\n';
+#define SpyLine BOOST_LOG_TRIVIAL(trace) << "@@@@ " << __FILE__ << ':' << __func__ << ":L" << __LINE__;
 
 namespace Ada_Byron_code_book::spy {
 
-auto BoostVersion(std::ostream&) -> std::ostream&;
-auto ClangVersion(std::ostream&) -> std::ostream&;
-auto GNUGppVersion(std::ostream&) -> std::ostream&;
-auto VisualStudioCppCompilerVersion(std::ostream&) -> std::ostream&;
+std::string GetBoostVersion();
+std::string GetClangVersion();
+std::string GetGNUGppVersion();
+std::string GetVisualStudioCppCompilerVersion();
 
-auto HostName(std::ostream&) -> std::ostream&;
-auto UserName(std::ostream&) -> std::ostream&;
-auto LocalDate(std::ostream&) -> std::ostream&;
-auto LocalTime(std::ostream&) -> std::ostream&;
-auto InfoOfSomeTypes(std::ostream&) -> std::ostream&;
+std::string GetUserName();
+std::string GetLocalDate();
+std::string GetLocalTime();
 
-class RunInfo; // To be used like std::cout << RunInfo("my-progname") << ...
-auto operator<<(std::ostream&, const RunInfo&) -> std::ostream&;
+void LogInfoOfSomeTypes();
 
 class RunInfo : boost::noncopyable {
 public:
@@ -39,8 +37,7 @@ public:
     d_progname{ std::move(a_progname) }
   {}
 
-  auto GetArgv0() const -> const std::string& { return d_argv0; }
-  auto GetProgName() const -> const std::string& { return d_progname; }
+  void Log() const;
 
 private:
   const std::string d_argv0;
@@ -118,19 +115,18 @@ TypeNameENH() // Using C++17
   // Credits to
   // https://stackoverflow.com/questions/81870/is-it-possible-to-print-a-variables-type-in-standard-c/56766138#56766138
   //
-  std::string_view name, prefix, suffix;
 #ifdef __clang__
-  name = __PRETTY_FUNCTION__;
-  prefix = "auto Ada_Byron_code_book::spy::TypeNameENH() [T = ";
-  suffix = "]";
+  std::string_view name = __PRETTY_FUNCTION__;
+  std::string_view prefix = "auto Ada_Byron_code_book::spy::TypeNameENH() [T = ";
+  std::string_view suffix = "]";
 #elif defined(__GNUC__)
-  name = __PRETTY_FUNCTION__;
-  prefix = "constexpr auto Ada_Byron_code_book::spy::TypeNameENH() [with T = ";
-  suffix = "]";
+  std::string_view name = __PRETTY_FUNCTION__;
+  std::string_view prefix = "constexpr auto Ada_Byron_code_book::spy::TypeNameENH() [with T = ";
+  std::string_view suffix = "]";
 #elif defined(_MSC_VER)
-  name = __FUNCSIG__;
-  prefix = "auto __cdecl Ada_Byron_code_book::spy::TypeNameENH<";
-  suffix = ">(void)";
+  std::string_view name = __FUNCSIG__;
+  std::string_view prefix = "auto __cdecl Ada_Byron_code_book::spy::TypeNameENH<";
+  std::string_view suffix = ">(void)";
 #endif
   name.remove_prefix(prefix.size());
   name.remove_suffix(suffix.size());

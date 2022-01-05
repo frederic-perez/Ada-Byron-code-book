@@ -85,7 +85,7 @@ auto ProgramName() -> std::string;
 
 auto ParseCommandLine(int argc, char** argv) -> bool;
 
-auto ParsedCommandLine(std::ostream&) -> std::ostream&;
+void LogParsedCommandLine();
 
 } // namespace cli
 

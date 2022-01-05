@@ -9,6 +9,6 @@
 
 namespace Ada_Byron_code_book::spy {
 
-auto ListOfPreprocessorDefines(std::ostream&) -> std::ostream&;
+void LogListOfPreprocessorDefines();
 
 } // namespace Ada_Byron_code_book::spy

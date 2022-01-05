@@ -42,7 +42,7 @@ ABcb::ExamplesOfIstringstreamFailingConversions()
       iss >> k;
       if (not iss.good())
         BOOST_LOG_TRIVIAL(error)
-          << "Error parsing third index (i=" << i << ", j=" << j
+          << pad << "Error parsing third index (i=" << i << ", j=" << j
           << "), but it should have failed for the second index";
       else
         BOOST_LOG_TRIVIAL(info) << pad << "indices: " << i << ", " << j << ", " << k;
@@ -58,7 +58,7 @@ ABcb::ExamplesOfCpp11Conversions()
   BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
 
   std::string string = "14 -1 67.89 3.1416 5e-7";
-  BOOST_LOG_TRIVIAL(info) << pad << "Parsing string \"" << string << "\" >> ";
+  BOOST_LOG_TRIVIAL(info) << pad << "Parsing string \"" << string << "\"";
   std::string::size_type idx;
   const unsigned long ul = std::stoul(string, &idx);
   string = string.substr(idx);
@@ -70,7 +70,7 @@ ABcb::ExamplesOfCpp11Conversions()
   string = string.substr(idx);
   const double d2 = std::stod(string); // Caution: idx is not updated here
   BOOST_LOG_TRIVIAL(info)
-    << "std::stoul: " << ul << "; std::stoi: " << i << "; std::stof: " << f << "; std::stod: " << d1
+    << pad << pad << ">> std::stoul: " << ul << "; std::stoi: " << i << "; std::stof: " << f << "; std::stod: " << d1
     << "; std::stod: " << d2;
 
   const std::string backToString = std::to_string(ul) + ' ' + std::to_string(i) + ' ' + std::to_string(f) + ' '
@@ -86,7 +86,7 @@ ABcb::ExamplesOfCpp11Conversions()
   const std::u16string utf16 = u"Πυθαγόρας ὁ Σάμιος (Pythagoras of Samos)";
   // http://en.cppreference.com/w/cpp/locale/wstring_convert
   std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> codecvt;
-  std::cout << pad << codecvt.to_bytes(utf16) << std::endl;
+  BOOST_LOG_TRIVIAL(info) << pad << codecvt.to_bytes(utf16);
   */
   /* vs14 linker error
   const std::u16string utf16 = u"Πυθαγόρας ὁ Σάμιος";
@@ -99,7 +99,7 @@ ABcb::ExamplesOfCpp11Conversions()
   ograph << "the two UTF-16 strings contain: '" << codecvt.to_bytes(utf16)
           << "' and '" << codecvt.to_bytes(another_utf16) << "'";
 
-  std::cout << ograph.str() << '\n';
+  BOOST_LOG_TRIVIAL(info) << ograph.str();
   */
 
   // TODO: Study and go ahead with stuff from

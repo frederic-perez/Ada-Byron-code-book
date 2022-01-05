@@ -131,7 +131,7 @@ Read(std::istream& a_istream, Flights& a_flights)
       try {
         number = subtree.get<unsigned>("number");
       } catch (const std::exception& e) {
-        std::cerr << pad << __func__ << ": std::exception caught: " << e.what() << '\n';
+        BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": std::exception caught: " << e.what();
         throw; // rethrow the original exception, no slicing or anything
       }
       const Date date = subtree.get<Date>("date");

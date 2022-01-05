@@ -99,7 +99,6 @@ std::vector<size_t> suggestedWindowPosition;
 
 // 3) Informative output
 //
-std::string consoleOutputFilename;
 bool verbose = false;
 std::string verboseCLI;
 const std::string usageParameterExamples =
@@ -368,43 +367,42 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
   return true;
 }
 
-#define OutputWithCare(a_string) (a_string.empty() ? "[empty]" : a_string)
+#define LogWithCare(a_string) (a_string.empty() ? "[empty]" : a_string)
 
-auto
-ABcb::cli::ParsedCommandLine(std::ostream& a_os)
--> std::ostream&
+void
+ABcb::cli::LogParsedCommandLine()
 {
-  a_os << progname << " was called with the following options:\n\n";
+  BOOST_LOG_TRIVIAL(info) << progname << " was called with the following options:";
+  BOOST_LOG_TRIVIAL(info) << "";
 
   // 1) File selection
   //
-  a_os << "File selection:\n"
-       << "  --input-file " << OutputWithCare(filenameIn) << '\n';
-  a_os << '\n';
+  BOOST_LOG_TRIVIAL(info) << "File selection:";
+  BOOST_LOG_TRIVIAL(info) << "  --input-file " << LogWithCare(filenameIn);
+  BOOST_LOG_TRIVIAL(info) << "";
 
   // 2) Operation flags/parameters
   //
-  a_os << "Operation flags/parameters:\n";
-  a_os << "  --input-double " << inputDouble << '\n'
-       << "  --input-positive-double " << inputPositiveDouble << '\n'
-       << "  --input-ID " << inputUnsignedCharCLI << '\n'
-       << "  --platonic-solid " << GetString(platonicSolid) << '\n'
-       << "  --color " << Color::GetString(color) << '\n'
-       << "  --fruit " << Fruit::GetString(fruit) << '\n';
+  BOOST_LOG_TRIVIAL(info) << "Operation flags/parameters:";
+  BOOST_LOG_TRIVIAL(info) << "  --input-double " << inputDouble;
+  BOOST_LOG_TRIVIAL(info) << "  --input-positive-double " << inputPositiveDouble;
+  BOOST_LOG_TRIVIAL(info) << "  --input-ID " << inputUnsignedCharCLI;
+  BOOST_LOG_TRIVIAL(info) << "  --platonic-solid " << GetString(platonicSolid);
+  BOOST_LOG_TRIVIAL(info) << "  --color " << Color::GetString(color);
+  BOOST_LOG_TRIVIAL(info) << "  --fruit " << Fruit::GetString(fruit);
   if (not suggestedWindowPosition.empty()) {
-    a_os << "  --suggested-window-position ";
+    std::ostringstream oss;
+    oss << "  --suggested-window-position ";
     for (auto position : suggestedWindowPosition) {
-      a_os << position << ' ';
+      oss << position << ' ';
     }
-    a_os << '\n';
+    BOOST_LOG_TRIVIAL(info) << oss.str();
   }
-  a_os << '\n';
+  BOOST_LOG_TRIVIAL(info) << "";
 
   // 3) Informative output
   //
-  a_os << "Informative output:\n"
-       << "  --verbose " << (verbose ? "on" : "off") << '\n';
-
-  a_os << std::flush;
-  return a_os;
+  BOOST_LOG_TRIVIAL(info) << "Informative output:";
+  BOOST_LOG_TRIVIAL(info) << "  --verbose " << (verbose ? "on" : "off");
+  BOOST_LOG_TRIVIAL(info) << "";
 }

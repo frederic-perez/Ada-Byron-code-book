@@ -102,7 +102,7 @@ ABcb::ExamplesOfFileSystem(const std::string& a_filename)
     std::copy(
       bf::directory_iterator(currentDir),
       bf::directory_iterator(),
-      std::ostream_iterator<bf::directory_entry>(oss /*std::cout*/, space.c_str()));
+      std::ostream_iterator<bf::directory_entry>(oss, space.c_str()));
     // directory_iterator::value_type is directory_entry, which is converted
     // to a path by the path stream inserter
     BOOST_LOG_TRIVIAL(info)

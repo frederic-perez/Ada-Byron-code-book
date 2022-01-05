@@ -34,8 +34,8 @@ main(const int argc, char* argv[])
   if (not succeeded)
     return EXIT_FAILURE;
 
-  BOOST_LOG_TRIVIAL(info) << ABcb::spy::RunInfo(ABcb::cli::Argv0(), ABcb::cli::ProgramName());
-  BOOST_LOG_TRIVIAL(info) << ABcb::cli::ParsedCommandLine;
+  ABcb::spy::RunInfo(ABcb::cli::Argv0(), ABcb::cli::ProgramName()).Log();
+  ABcb::cli::LogParsedCommandLine();
 
   ABcb::spy::Timer<std::chrono::high_resolution_clock> timerHQ;
 
@@ -107,20 +107,9 @@ main(const int argc, char* argv[])
   } catch (const std::string& message) {
     BOOST_LOG_TRIVIAL(error) << "Exception caught: " << message;
   }
+  BOOST_LOG_END_OF_BLOCK;
 
-  // Output final message and exit
-  //
-  const double timeElapsed = timerHQ.Seconds();
-  std::ostringstream oss;
-  const auto previousPrecision = oss.precision(2);
-  // '- Note: "auto" is recommended here to avoid potential problems with
-  //    different compilers (eg. requiring "static_cast" to set the previous
-  //    precision in vs12), since the standard states that the return type of
-  //    setprecision is "unspecified"
-  oss
-    << __func__ << " finishes. Time elapsed: " << timeElapsed << " seconds"
-    << std::setprecision(previousPrecision);
-  BOOST_LOG_TRIVIAL(info) << oss.str();
+  BOOST_LOG_TRIVIAL(info) << __func__ << " finishes. Time elapsed: " << timerHQ.Seconds(2);
 
   return EXIT_SUCCESS;
 }

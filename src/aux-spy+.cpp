@@ -6,6 +6,7 @@
 #include <boost/date_time/c_local_time_adjustor.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/filesystem.hpp>
+#include <boost/log/trivial.hpp>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/version.hpp>
@@ -16,52 +17,52 @@
 
 namespace ABcb = Ada_Byron_code_book;
 
-auto
-ABcb::spy::BoostVersion(std::ostream& a_os)
--> std::ostream&
+std::string
+ABcb::spy::GetBoostVersion()
 {
-  return a_os << BOOST_VERSION / 100000 << '.' // major version
-              << BOOST_VERSION / 100 % 1000 << '.' // minor version
-              << BOOST_VERSION % 100 // patch level
-              << std::flush;
+  std::ostringstream oss;
+  oss << BOOST_VERSION / 100000 << '.' // major version
+    << BOOST_VERSION / 100 % 1000 << '.' // minor version
+    << BOOST_VERSION % 100; // patch level
+  return oss.str();
 }
 
-auto
-ABcb::spy::ClangVersion(std::ostream& a_os)
--> std::ostream&
+std::string
+ABcb::spy::GetClangVersion()
 {
-  return a_os
+  std::ostringstream oss;
+  oss
 #ifdef __clang__
-    << __clang_version__
+    << __clang_version__;
   //<< __clang_major__ << '.'
   //<< __clang_minor__ << '.'
   //<< __clang_patchlevel__
 #else
-    << "[not applicable]"
+    << "[not applicable]";
 #endif
-    << std::flush;
+  return oss.str();
 }
 
-auto
-ABcb::spy::GNUGppVersion(std::ostream& a_os)
--> std::ostream&
+std::string
+ABcb::spy::GetGNUGppVersion()
 {
-  return a_os
+  std::ostringstream oss;
+  oss
 #ifdef ADA_BYRON__GNUGPP_VERSION
     << ADA_BYRON__GNUGPP_VERSION / 10000 << '.' // major version
     << ADA_BYRON__GNUGPP_VERSION / 100 % 100 << '.' // minor version
-    << ADA_BYRON__GNUGPP_VERSION % 100 // patch level
+    << ADA_BYRON__GNUGPP_VERSION % 100; // patch level
 #else
-    << "[not applicable]"
+    << "[not applicable]";
 #endif
-    << std::flush;
+  return oss.str();
 }
 
-auto
-ABcb::spy::VisualStudioCppCompilerVersion(std::ostream& a_os)
--> std::ostream&
+std::string
+ABcb::spy::GetVisualStudioCppCompilerVersion()
 {
-  return a_os
+  std::ostringstream oss;
+  oss
 #ifdef _MSC_VER
     // See https://en.wikipedia.org/wiki/Visual_C%2B%2B for the "conversion"
     << _MSC_VER << " (Visual Studio "
@@ -84,11 +85,11 @@ ABcb::spy::VisualStudioCppCompilerVersion(std::ostream& a_os)
 #  else
     << "older than 2008"
 #  endif
-    << ")"
+    << ")";
 #else
-    << "[not applicable]"
+    << "[not applicable]";
 #endif
-    << std::flush;
+  return oss.str();
 }
 
 namespace {
@@ -129,18 +130,8 @@ GetHostName()
 
 } // namespace
 
-auto
-ABcb::spy::HostName(std::ostream& a_os)
--> std::ostream&
-{
-  return a_os << GetHostName() << std::flush;
-}
-
-namespace {
-
-auto
-GetUserName()
--> std::string
+std::string
+ABcb::spy::GetUserName()
 {
   const char* username = getenv("USER");
   if (username != nullptr) {
@@ -151,18 +142,8 @@ GetUserName()
   return username != nullptr ? username : "unknown-username"; // iff like above
 }
 
-} // namespace
-
-auto
-ABcb::spy::UserName(std::ostream& a_os)
--> std::ostream&
-{
-  return a_os << GetUserName() << std::flush;
-}
-
-auto
-ABcb::spy::LocalDate(std::ostream& a_os)
--> std::ostream&
+std::string
+ABcb::spy::GetLocalDate()
 {
   namespace pt = boost::posix_time;
   const pt::ptime now = pt::second_clock::local_time();
@@ -170,22 +151,21 @@ ABcb::spy::LocalDate(std::ostream& a_os)
   std::ostringstream oss;
   const pt::ptime::date_type date = now.date();
   oss << date.day_of_week() << ", " << date.month() << ' ' << date.day() << ", " << date.year();
-  a_os << oss.str() << std::flush;
-  return a_os;
+  return oss.str();
 }
 
-auto
-ABcb::spy::LocalTime(std::ostream& a_os)
--> std::ostream&
+std::string
+ABcb::spy::GetLocalTime()
 {
   namespace pt = boost::posix_time;
 
   // From
   // https://thispointer.com/get-current-date-time-in-c-example-using-boost-date-time-library/
   const auto now = pt::second_clock::local_time();
-  a_os << now.time_of_day();
+  std::ostringstream oss;
+  oss << now.time_of_day();
 
-  return a_os;
+  return oss.str();
 }
 
 namespace {
@@ -226,45 +206,43 @@ Range_CastingToInt(std::ostream& a_os)
 
 } // namespace
 
-auto
-ABcb::spy::InfoOfSomeTypes(std::ostream& a_os)
--> std::ostream&
+void
+ABcb::spy::LogInfoOfSomeTypes()
 {
+  BOOST_LOG_TRIVIAL(info) << "Info of some types:";
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(char) = " << sizeof(char) << " | " << Range_CastingToInt<char>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(wchar_t) = " << sizeof(wchar_t) << " | " << Range<wchar_t>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(char16_t) = " << sizeof(char16_t) << " | " << Range<char16_t>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(char32_t) = " << sizeof(char32_t) << " | " << Range<char32_t>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(int) = " << sizeof(int) << " | " << Range<int>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(short int) = " << sizeof(short int) << " | " << Range<short int>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(int64_t) = " << sizeof(int64_t) << " | " << Range<int64_t>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(float) = " << sizeof(float) << " | " << Range<float>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(double) = " << sizeof(double) << " | " << Range<double>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(long double) = " << sizeof(long double) << " | " << Range<long double>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(size_t) = " << sizeof(size_t) << " | " << Range<size_t>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(unsigned int) = " << sizeof(unsigned int) << " | " << Range<unsigned int>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(unsigned short) = " << sizeof(unsigned short) << " | " << Range<unsigned short>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(unsigned long) = " << sizeof(unsigned long) << " | " << Range<unsigned long>;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(uint64_t) = " << sizeof(uint64_t) << " | " << Range<uint64_t>;
   using boost::multiprecision::cpp_dec_float_50;
-  a_os << pad << "sizeof(char) = " << sizeof(char) << " | " << Range_CastingToInt<char> << '\n'
-       << pad << "sizeof(wchar_t) = " << sizeof(wchar_t) << " | " << Range<wchar_t> << '\n'
-       << pad << "sizeof(char16_t) = " << sizeof(char16_t) << " | " << Range<char16_t> << '\n'
-       << pad << "sizeof(char32_t) = " << sizeof(char32_t) << " | " << Range<char32_t> << '\n'
-       << pad << "sizeof(int) = " << sizeof(int) << " | " << Range<int> << '\n'
-       << pad << "sizeof(short int) = " << sizeof(short int) << " | " << Range<short int> << '\n'
-       << pad << "sizeof(int64_t) = " << sizeof(int64_t) << " | " << Range<int64_t> << '\n'
-       << pad << "sizeof(float) = " << sizeof(float) << " | " << Range<float> << '\n'
-       << pad << "sizeof(double) = " << sizeof(double) << " | " << Range<double> << '\n'
-       << pad << "sizeof(long double) = " << sizeof(long double) << " | " << Range<long double> << '\n'
-       << pad << "sizeof(size_t) = " << sizeof(size_t) << " | " << Range<size_t> << '\n'
-       << pad << "sizeof(unsigned int) = " << sizeof(unsigned int) << " | " << Range<unsigned int> << '\n'
-       << pad << "sizeof(unsigned short) = " << sizeof(unsigned short) << " | " << Range<unsigned short> << '\n'
-       << pad << "sizeof(unsigned long) = " << sizeof(unsigned long) << " | " << Range<unsigned long> << '\n'
-       << pad << "sizeof(uint64_t) = " << sizeof(uint64_t) << " | " << Range<uint64_t> << '\n'
-       << pad << "sizeof(boost::multiprecision::cpp_dec_float_50) = " << sizeof(cpp_dec_float_50) << " | "
-       << Range<cpp_dec_float_50> << '\n';
-  return a_os;
+  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(boost::multiprecision::cpp_dec_float_50) = " << sizeof(cpp_dec_float_50) << " | " << Range<cpp_dec_float_50>;
 }
 
 namespace {
 
 namespace bf = boost::filesystem;
 
-auto
-GetArgv0Info(const std::string& a_argv0)
--> std::string
+void
+LogArgv0Info(const std::string& a_argv0)
 {
   const bf::path fullArgv0 = bf::system_complete(bf::canonical(bf::path(a_argv0, nullptr)));
 
+  BOOST_LOG_TRIVIAL(info) << "The full argv[0]:";
+  BOOST_LOG_TRIVIAL(info) << pad << "is " << fullArgv0 << ",";
   std::ostringstream oss;
-  oss << "The full argv[0]:\n" << pad << "is " << fullArgv0 << ",\n";
   if (bf::exists(fullArgv0)) {
-    oss << pad << "which is" << (bf::is_regular(fullArgv0) ? "" : " not") << " a regular file, created by ";
+    oss << "which is" << (bf::is_regular(fullArgv0) ? "" : " not") << " a regular file, created by ";
 #if defined(CMAKE_MYUSERNAME)
     oss << BOOST_PP_STRINGIZE(CMAKE_MYUSERNAME);
 #else
@@ -296,12 +274,11 @@ GetArgv0Info(const std::string& a_argv0)
   } else {
     oss << "(which does not seem to exist)";
   }
-  return oss.str();
+  BOOST_LOG_TRIVIAL(info) << pad << oss.str();
 }
 
-auto
+std::string
 GetCurrentDirInfo()
--> std::string
 {
   const std::string dot = ".";
   const bf::path currentDir(dot);
@@ -313,26 +290,21 @@ GetCurrentDirInfo()
 
 } // namespace
 
-auto
-ABcb::spy::operator<<(std::ostream& a_os, const ABcb::spy::RunInfo& a_runInfo)
--> std::ostream&
+void
+ABcb::spy::RunInfo::Log() const
 {
-  const std::string argv0Info = GetArgv0Info(a_runInfo.GetArgv0());
-  const std::string currentDirInfo = GetCurrentDirInfo();
-
-  a_os << '\n'
-       << a_runInfo.GetProgName() << " was launched by " << UserName << " at " << HostName << " on " << LocalDate
-       << ", at " << LocalTime << '\n'
-       << argv0Info << '\n'
-       << currentDirInfo << '\n'
-       << "Using Boost version " << BoostVersion << '\n'
-       << "Using Clang version " << ClangVersion << '\n'
-       << "Using GNU g++ version " << GNUGppVersion << '\n'
-       << "Using Visual Studio C/C++ compiler version " << VisualStudioCppCompilerVersion << '\n'
-       << "List of preprocessor defines:\n"
-       << ListOfPreprocessorDefines << "Info of some types:\n"
-       << InfoOfSomeTypes;
-  return a_os;
+  BOOST_LOG_TRIVIAL(info)
+    << d_progname << " was launched by " << GetUserName() << " at " << GetHostName()
+    << " on " << GetLocalDate() << ", at " << GetLocalTime();
+  LogArgv0Info(d_argv0);
+  BOOST_LOG_TRIVIAL(info) << GetCurrentDirInfo();
+  BOOST_LOG_TRIVIAL(info) << "Using Boost version " << GetBoostVersion();
+  BOOST_LOG_TRIVIAL(info) << "Using Clang version " << GetClangVersion();
+  BOOST_LOG_TRIVIAL(info) << "Using GNU g++ version " << GetGNUGppVersion();
+  BOOST_LOG_TRIVIAL(info) << "Using Visual Studio C/C++ compiler version " << GetVisualStudioCppCompilerVersion();
+  LogListOfPreprocessorDefines();
+  LogInfoOfSomeTypes();
+  BOOST_LOG_TRIVIAL(info) << "";
 }
 
 template <typename TClock>
@@ -357,7 +329,7 @@ ABcb::spy::Timer<TClock>::Seconds(size_t precision) const
 -> std::string
 {
   std::ostringstream oss;
-  oss << std::fixed << std::setprecision(precision) << Seconds();
+  oss << std::fixed << std::setprecision(precision) << Seconds() << " seconds";
   return oss.str();
 }
 
