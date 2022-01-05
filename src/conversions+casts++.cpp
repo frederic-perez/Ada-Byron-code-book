@@ -30,17 +30,17 @@ ABcb::ExamplesOfIstringstreamFailingConversions()
   std::istringstream iss(string); // or parse(string)
   unsigned int i;
   iss >> i;
-  if (not iss.good()) // Note: if (iss.fail) does not work fine for our purposes
+  if (!iss.good()) // Note: `if (iss.fail)` does not work fine for our purposes
     BOOST_LOG_TRIVIAL(error) << "Error parsing first index";
   else {
     unsigned int j;
     iss >> j;
-    if (not iss.good())
+    if (!iss.good())
       BOOST_LOG_TRIVIAL(error) << pad << "Error parsing second index (expected behavior)";
     else {
       unsigned int k;
       iss >> k;
-      if (not iss.good())
+      if (!iss.good())
         BOOST_LOG_TRIVIAL(error)
           << pad << "Error parsing third index (i=" << i << ", j=" << j
           << "), but it should have failed for the second index";
@@ -80,15 +80,16 @@ ABcb::ExamplesOfCpp11Conversions()
   oss << ul << ' ' << i << ' ' << f << ' ' << d1 << ' ' << d2;
   BOOST_LOG_TRIVIAL(info) << pad << "Back to string (using std::ostringstream): \"" << oss.str() << "\" <-- Preferred way!";
 
+#if 0
   // From http://www.cplusplus.com/forum/general/125880/
   //
-  /* vs14 linker error
+  // vs14 linker error
   const std::u16string utf16 = u"Πυθαγόρας ὁ Σάμιος (Pythagoras of Samos)";
   // http://en.cppreference.com/w/cpp/locale/wstring_convert
   std::wstring_convert<std::codecvt_utf8_utf16<char16_t>, char16_t> codecvt;
   BOOST_LOG_TRIVIAL(info) << pad << codecvt.to_bytes(utf16);
-  */
-  /* vs14 linker error
+
+  // vs14 linker error
   const std::u16string utf16 = u"Πυθαγόρας ὁ Σάμιος";
   const std::u16string another_utf16 = u"(Pythagoras of Samos)";
 
@@ -100,7 +101,7 @@ ABcb::ExamplesOfCpp11Conversions()
           << "' and '" << codecvt.to_bytes(another_utf16) << "'";
 
   BOOST_LOG_TRIVIAL(info) << ograph.str();
-  */
+#endif
 
   // TODO: Study and go ahead with stuff from
   // http://en.cppreference.com/w/cpp/locale/codecvt_utf8_utf16
@@ -120,13 +121,13 @@ ABcb::ExamplesOfBoostLexicalCast(const std::string& a_numberToConvert)
 
   const int valueIntS = stoi(a_numberToConvert);
   BOOST_LOG_TRIVIAL(info) << pad << "stoi(\"" << a_numberToConvert << "\") is " << valueIntS;
-  const int valueIntL = lexical_cast<int>(a_numberToConvert);
+  const auto valueIntL = lexical_cast<int>(a_numberToConvert);
   BOOST_LOG_TRIVIAL(info) << pad << "lexical_cast<int>(\"" << a_numberToConvert << "\") is " << valueIntL;
 
-  const short valueShortS = static_cast<short>(stoi(a_numberToConvert));
+  const auto valueShortS = static_cast<short>(stoi(a_numberToConvert));
   BOOST_LOG_TRIVIAL(info) << pad << "stoi(\"" << a_numberToConvert << "\") is " << valueShortS;
   try {
-    const short valueShortL = lexical_cast<short>(a_numberToConvert);
+    const auto valueShortL = lexical_cast<short>(a_numberToConvert);
     BOOST_LOG_TRIVIAL(info) << pad << "lexical_cast<short>(\"" << a_numberToConvert << "\") is " << valueShortL;
   } catch (const boost::bad_lexical_cast& e) {
     BOOST_LOG_TRIVIAL(error) << pad << "Exception caught: " << e.what();
@@ -145,20 +146,18 @@ UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
 #include "aux-raw-compiler-warnings-off++begin.h"
   bool succeeded = true;
   const auto typeNameENHOfTargetT = ABcb::spy::TypeNameENH<TargetT>();
-  // if (a_source < boost::numeric::bounds<TargetT>::lowest()) { vs min()
-  if (a_source < std::numeric_limits<TargetT>::lowest()) { // Now in C++
+  if (a_source < std::numeric_limits<TargetT>::lowest()) { // Now in C++ (we used to use boost before)
     BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Error: a_source too small to convert to " << typeNameENHOfTargetT;
     succeeded = false;
-    //} else if (a_source > boost::numeric::bounds<TargetT>::highest()) {
   } else if (a_source > std::numeric_limits<TargetT>::max()) { // Use just C++
     BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Error: a_source too large to convert to " << typeNameENHOfTargetT;
     succeeded = false;
   }
 #include "aux-raw-compiler-warnings-off++end.h"
 
-  if (not succeeded)
+  if (!succeeded)
     return;
-  const TargetT target = static_cast<TargetT>(a_source);
+  const auto target = static_cast<TargetT>(a_source);
 
   // Keep on using sourceObjectSelf from this point onwards
 

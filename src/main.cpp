@@ -31,7 +31,7 @@ main(const int argc, char* argv[])
   namespace ABcb = Ada_Byron_code_book;
 
   bool succeeded = ABcb::cli::ParseCommandLine(argc, argv);
-  if (not succeeded)
+  if (!succeeded)
     return EXIT_FAILURE;
 
   ABcb::spy::RunInfo(ABcb::cli::Argv0(), ABcb::cli::ProgramName()).Log();

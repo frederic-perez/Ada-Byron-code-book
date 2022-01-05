@@ -30,7 +30,7 @@ std::string GetLocalTime();
 
 void LogInfoOfSomeTypes();
 
-class RunInfo : boost::noncopyable {
+class RunInfo : private boost::noncopyable {
 public:
   explicit RunInfo(std::string a_argv0, std::string a_progname)
   : d_argv0{ std::move(a_argv0) },
@@ -45,7 +45,7 @@ private:
 };
 
 template <typename TClock>
-class Timer : boost::noncopyable {
+class Timer : private boost::noncopyable {
   //
   // Based on the example under
   // http://www.boost.org/doc/libs/1_47_0/doc/html/chrono/users_guide.html
@@ -54,11 +54,11 @@ class Timer : boost::noncopyable {
   //
   // Notice that `chrono` is part of the standard since C++11.
   //
-  // Examples
-  // --------
-  // Timer<std::chrono::system_clock> t1;
-  // Timer<std::chrono::steady_clock> t2; // GCC duplicate?
-  // Timer<std::chrono::high_resolution_clock> t3;
+  // Some possible instantiations
+  // ----------------------------
+  // - std::chrono::system_clock
+  // - std::chrono::steady_clock // GCC duplicate?
+  // - std::chrono::high_resolution_clock
   //
 public:
   Timer() = default;
@@ -92,7 +92,7 @@ TypeNameENH11() // Using C++11
 #endif
     std::free);
   std::string r = own != nullptr ? own.get() : typeid(TR).name();
-#include "aux-raw-compiler-warnings-off++begin.h"
+//#include "aux-raw-compiler-warnings-off++begin.h"
   if (std::is_const<TR>::value)
     r += " const";
   if (std::is_volatile<TR>::value)
@@ -101,7 +101,7 @@ TypeNameENH11() // Using C++11
     r += "&";
   else if (std::is_rvalue_reference<T>::value)
     r += "&&";
-#include "aux-raw-compiler-warnings-off++end.h"
+//#include "aux-raw-compiler-warnings-off++end.h"
   return r;
 }
 
