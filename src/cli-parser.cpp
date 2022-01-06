@@ -131,7 +131,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
 -> bool
 {
   argv0 = argv[0];
-  if ((progname = (char*)strrchr(argv[0], ABcb::raw::SystemSlash())) == NULL) {
+  if ((progname = strrchr(argv[0], ABcb::raw::SystemSlash())) == nullptr) {
     progname = argv[0];
   } else {
     ++progname;
@@ -222,7 +222,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     // Load the file and tokenize it
     const std::string filename = vm["response-file"].as<std::string>();
     std::ifstream ifs(filename.c_str());
-    if (not ifs) {
+    if (!ifs) {
       B_LOG_ERROR << progname << ": Error: Could not open the response file " << filename << "\n\n" << odFull;
       return false;
     }
@@ -258,7 +258,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
   }
 
   const bool succeeded = CheckArguments(vm);
-  if (not succeeded) {
+  if (!succeeded) {
     B_LOG_ERROR << odFull;
     return false;
   }
@@ -345,7 +345,7 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
     }
   }
 
-  if (not suggestedWindowPosition.empty()) {
+  if (!suggestedWindowPosition.empty()) {
     if (suggestedWindowPosition.size() != 2) {
       std::ostringstream oss;
       oss << "Wrong suggested-window-position parameter ";
@@ -390,7 +390,7 @@ ABcb::cli::LogParsedCommandLine()
   B_LOG_INFO << "  --platonic-solid " << GetString(platonicSolid);
   B_LOG_INFO << "  --color " << Color::GetString(color);
   B_LOG_INFO << "  --fruit " << Fruit::GetString(fruit);
-  if (not suggestedWindowPosition.empty()) {
+  if (!suggestedWindowPosition.empty()) {
     std::ostringstream oss;
     oss << "  --suggested-window-position ";
     for (auto position : suggestedWindowPosition) {

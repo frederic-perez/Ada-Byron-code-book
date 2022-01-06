@@ -138,7 +138,7 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
   ba::to_lower(narrow);
   DoLog("   narrow (after ba::to_lower)", narrow);
 
-  // std::transform(narrow.begin(), narrow.end(), narrow.begin(), ::tolower);
+  // std::transform(narrow.begin(), narrow.end(), narrow.begin(), ::tolower); @SuppressWarnings("RSPEC-125")
   //  '- warning C4244: '=': conversion from 'int' to 'char', possible loss of data
   //
   // Thus, we resort to the solution proposed in 
