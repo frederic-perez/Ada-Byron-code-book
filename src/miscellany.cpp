@@ -2,27 +2,27 @@
 #include <sstream>
 #include <stdexcept>
 
-#include <boost/log/trivial.hpp>
 #include <boost/math/constants/constants.hpp>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/numeric/conversion/bounds.hpp>
 
 #include "aux-raw.h"
 #include "miscellany.h"
+#include "log.h"
 
 namespace ABcb = Ada_Byron_code_book;
 
 void
 ABcb::miscellany::ExampleOfRawStringLiteral()
 {
-  BOOST_LOG_TRIVIAL(info) << __func__ << ": " << R"(C:\life\brian\foo.pdf)";
+  B_LOG_INFO << __func__ << ": " << R"(C:\life\brian\foo.pdf)";
 }
 
 void
 ABcb::miscellany::Function(const int value)
 // notice the "const" above (see header file with the function declaration)
 {
-  BOOST_LOG_TRIVIAL(info) << __func__ << ": value=" << value;
+  B_LOG_INFO << __func__ << ": value=" << value;
 }
 
 size_t
@@ -62,7 +62,7 @@ ABcb::miscellany::FactorialIterative(const size_t a_n)
 void
 ABcb::miscellany::ExamplesOfFactorial()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   using ABcb::raw::pad;
 
@@ -74,7 +74,7 @@ ABcb::miscellany::ExamplesOfFactorial()
   std::ostringstream oss;
   oss.imbue(std::locale("")); // To add commas when outputting result
   oss << factorialCompileTime;
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "FactorialCompileTime<" << N << ">::d_value = " << oss.str();
 
   static_assert(FactorialCompileTime<1>::d_value == 1);
@@ -88,7 +88,7 @@ ABcb::miscellany::ExamplesOfFactorial()
     try {
       FactorialRecursive(n);
     } catch (const std::overflow_error& e) {
-      BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Exception caught: " << e.what();
+      B_LOG_ERROR << pad << __func__ << ": Exception caught: " << e.what();
       overflow = true;
     }
   }
@@ -97,7 +97,7 @@ ABcb::miscellany::ExamplesOfFactorial()
   const size_t factorialN = FactorialRecursive(n);
   oss.str("");
   oss << factorialN;
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "FactorialRecursive(" << n << ")            = " << oss.str();
 
   // Using FactorialIterative
@@ -105,13 +105,13 @@ ABcb::miscellany::ExamplesOfFactorial()
   const size_t factorialIterative = FactorialIterative(n);
   oss.str("");
   oss << factorialIterative;
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "FactorialIterative(" << n << ")            = " << oss.str();
 
   static_assert(FactorialIterative(1) == 1);
   static_assert(FactorialIterative(4) == 24);
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }
 
 namespace {
@@ -128,7 +128,7 @@ AreaOfACircle(const T r)
 void
 ABcb::miscellany::ExamplesOfMultiprecision()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   using ABcb::raw::pad;
 
@@ -138,16 +138,16 @@ ABcb::miscellany::ExamplesOfMultiprecision()
 
   const float r_f = 123.f / 100.f;
   const float a_f = AreaOfACircle(r_f);
-  BOOST_LOG_TRIVIAL(info) << pad << std::setprecision(std::numeric_limits<float>::digits10) << a_f;
+  B_LOG_INFO << pad << std::setprecision(std::numeric_limits<float>::digits10) << a_f;
 
   const double r_d = 123. / 100.;
   const double a_d = AreaOfACircle(r_d);
-  BOOST_LOG_TRIVIAL(info) << pad << std::setprecision(std::numeric_limits<double>::digits10) << a_d;
+  B_LOG_INFO << pad << std::setprecision(std::numeric_limits<double>::digits10) << a_d;
 
   using boost::multiprecision::cpp_dec_float_50;
   const cpp_dec_float_50 r_mp(cpp_dec_float_50(123) / 100);
   const cpp_dec_float_50 a_mp = AreaOfACircle(r_mp);
-  BOOST_LOG_TRIVIAL(info) << pad << std::setprecision(std::numeric_limits<cpp_dec_float_50>::digits10) << a_mp;
+  B_LOG_INFO << pad << std::setprecision(std::numeric_limits<cpp_dec_float_50>::digits10) << a_mp;
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }

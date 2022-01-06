@@ -12,13 +12,13 @@
 // clang-format off
   #include <boost/algorithm/string.hpp>
   #include <boost/locale.hpp>
-  #include <boost/log/trivial.hpp>
   #include <boost/range/algorithm/remove_if.hpp>
 // clang format on
 #include "aux-raw-compiler-warnings-off++end.h"
 
 #include "algorithm-string-pool.h"
 #include "aux-raw.h"
+#include "log.h"
 
 namespace {
 
@@ -26,14 +26,14 @@ void
 DoLog(const std::string& a_description, const std::string& a_value)
 {
   using Ada_Byron_code_book::raw::pad;
-  BOOST_LOG_TRIVIAL(info) << pad << a_description << ": \"" << a_value << "\"";
+  B_LOG_INFO << pad << a_description << ": \"" << a_value << "\"";
 }
 
 void
 DoLog(const std::string& a_description, const std::wstring& a_value)
 {
   using Ada_Byron_code_book::raw::pad;
-  BOOST_LOG_TRIVIAL(info) << pad << a_description << ": \"" << a_value << "\"";
+  B_LOG_INFO << pad << a_description << ": \"" << a_value << "\"";
 }
 
 void
@@ -75,11 +75,11 @@ ourToLower(std::string& a_text)
 void
 Ada_Byron_code_book::ExamplesOfAlgorithmsString()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   using Ada_Byron_code_book::raw::pad;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(char) = " << sizeof(char);
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(wchar_t) = " << sizeof(wchar_t);
+  B_LOG_INFO << pad << "sizeof(char) = " << sizeof(char);
+  B_LOG_INFO << pad << "sizeof(wchar_t) = " << sizeof(wchar_t);
 
   namespace bl = boost::locale;
   std::locale loc("");
@@ -87,7 +87,7 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
   std::locale conv_loc = boost::locale::util::create_info(loc, loc.name());
   // See
   // www.boost.org/doc/libs/1_57_0/libs/locale/doc/html/locale_information.html
-  BOOST_LOG_TRIVIAL(info) << pad << "locale: The name code is `" << std::use_facet<bl::info>(conv_loc).name() << "`";
+  B_LOG_INFO << pad << "locale: The name code is `" << std::use_facet<bl::info>(conv_loc).name() << "`";
 
   std::string name = "  Alan Turing 42  ";
   DoLog("%% name (original)", name);
@@ -128,7 +128,7 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
   //    std::string::operator==:
   //    Simpler, shorter, faster, easier to maintain. Period.
 
-  BOOST_LOG_TRIVIAL(info) << pad << "   special == \"" << specialK << "\" is " << std::boolalpha << equal;
+  B_LOG_INFO << pad << "   special == \"" << specialK << "\" is " << std::boolalpha << equal;
 
   // Unicode character table: http://unicode-table.com/en/#basic-latin
 
@@ -155,7 +155,7 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
     bl::to_lower(narrow);
     DoLog("   narrow (after bl::to_lower)", narrow);
   } catch (const std::bad_cast& e) {
-    BOOST_LOG_TRIVIAL(error) << pad << "   Error (bl::to_lower): " << e.what();
+    B_LOG_ERROR << pad << "   Error (bl::to_lower): " << e.what();
   }
 
   const wchar_t* raw_utf16{L"CAF\u00C9 BJ\u00D6RK"};
@@ -180,5 +180,5 @@ Ada_Byron_code_book::ExamplesOfAlgorithmsString()
   const std::string instanceCleaned = ba::join(tokens, ",");
   DoLog("   line (after blanks around commas removal)", instanceCleaned);
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }

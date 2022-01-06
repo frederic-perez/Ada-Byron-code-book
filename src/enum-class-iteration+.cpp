@@ -1,10 +1,10 @@
 #include <cassert> // TODO: Use Boost instead of the good old <cassert>
 
 #include <boost/assert.hpp>
-#include <boost/log/trivial.hpp>
 
 #include "aux-raw.h"
 #include "enum-class-iteration+.h"
+#include "log.h"
 
 namespace Ada_Byron_code_book::enums {
 
@@ -76,44 +76,44 @@ using ABcb::raw::pad;
 void
 ABcb::enums::ExamplesOfEnumClassAsIntegral()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   auto planet = Planet::Earth;
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "planet = Planet::Earth as string: " << as_string(planet)
     << "; static_cast<uint>(as_integral(planet)): " << static_cast<uint>(as_integral(planet));
   planet = Planet::undefined;
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "planet = Planet::undefined as string: " << as_string(planet)
     << "; static_cast<uint>(as_integral(planet)): " << static_cast<uint>(as_integral(planet));
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }
 
 void
 ABcb::enums::ExamplesOfEnumClassIteration()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   using namespace std::string_literals;
 
-  BOOST_LOG_TRIVIAL(info) << pad << "all_defined_planets.size() = " << all_defined_planets.size();
-  BOOST_LOG_TRIVIAL(info) << pad << "count_defined<Planet>() = " << count_defined<Planet>();
+  B_LOG_INFO << pad << "all_defined_planets.size() = " << all_defined_planets.size();
+  B_LOG_INFO << pad << "count_defined<Planet>() = " << count_defined<Planet>();
   for (const auto planet : all_defined_planets) {
     const std::string planet_str = as_string(planet);
     if (planet != as_planet(planet_str))
       throw "Problem using planet"s;
-    BOOST_LOG_TRIVIAL(info) << pad << "planet as string: " << planet_str;
+    B_LOG_INFO << pad << "planet as string: " << planet_str;
   }
 
-  BOOST_LOG_TRIVIAL(info) << pad << "all_defined_opposites.size() = " << all_defined_opposites.size();
-  BOOST_LOG_TRIVIAL(info) << pad << "count_defined<Opposite>() = " << count_defined<Opposite>();
+  B_LOG_INFO << pad << "all_defined_opposites.size() = " << all_defined_opposites.size();
+  B_LOG_INFO << pad << "count_defined<Opposite>() = " << count_defined<Opposite>();
   for (const auto opposite : all_defined_opposites) {
     const std::string opposite_str = as_string(opposite);
     if (opposite != as_opposite(opposite_str))
       throw "Problem using opposite"s;
-    BOOST_LOG_TRIVIAL(info) << pad << "opposite as string: " << opposite_str;
+    B_LOG_INFO << pad << "opposite as string: " << opposite_str;
   }
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }

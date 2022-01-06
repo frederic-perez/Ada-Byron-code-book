@@ -17,12 +17,12 @@
 #  include <boost/date_time/gregorian/gregorian.hpp>
 #endif
 #include <boost/filesystem.hpp>
-#include <boost/log/trivial.hpp>
 //#include <boost/property_tree/ptree.hpp>
 #include <boost/property_tree/xml_parser.hpp>
 #include <boost/version.hpp>
 
 #include "aux-raw.h" // for pad
+#include "log.h"
 #include "xml-parser.h"
 
 #ifdef XML_DATE_TRANSLATOR_20150325
@@ -131,7 +131,7 @@ Read(std::istream& a_istream, Flights& a_flights)
       try {
         number = subtree.get<unsigned>("number");
       } catch (const std::exception& e) {
-        BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": std::exception caught: " << e.what();
+        B_LOG_ERROR << pad << __func__ << ": std::exception caught: " << e.what();
         throw; // rethrow the original exception, no slicing or anything
       }
       const Date date = subtree.get<Date>("date");
@@ -172,14 +172,14 @@ Write(const Flights& a_flights, std::ostream& a_ostream)
 bool
 Ada_Byron_code_book::ParseXML(const std::string& a_inputFilename, const std::string& a_outputFilename)
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   using raw::pad;
   namespace bf = boost::filesystem;
   if (bf::exists(a_inputFilename))
-    BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": Reading " << a_inputFilename;
+    B_LOG_INFO << pad << __func__ << ": Reading " << a_inputFilename;
   else {
-    BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": " << a_inputFilename << " does not exist";
+    B_LOG_ERROR << pad << __func__ << ": " << a_inputFilename << " does not exist";
     return false;
   }
   try {
@@ -188,18 +188,18 @@ Ada_Byron_code_book::ParseXML(const std::string& a_inputFilename, const std::str
     try {
       Read(input, flights);
     } catch (const std::exception& e) {
-      BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Exception by 'Read' caught: " << e.what();
+      B_LOG_ERROR << pad << __func__ << ": Exception by 'Read' caught: " << e.what();
       return false;
     }
-    BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": Read(\"" << a_inputFilename << "\") finished";
+    B_LOG_INFO << pad << __func__ << ": Read(\"" << a_inputFilename << "\") finished";
     std::ofstream output(a_outputFilename);
     Write(flights, output);
-    BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": Writing of \"" << a_outputFilename << "\" finished";
+    B_LOG_INFO << pad << __func__ << ": Writing of \"" << a_outputFilename << "\" finished";
   } catch (...) {
-    BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Exception ... caught";
+    B_LOG_ERROR << pad << __func__ << ": Exception ... caught";
     return false;
   }
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
   return true;
 }

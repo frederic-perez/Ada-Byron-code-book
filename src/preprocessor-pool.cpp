@@ -1,8 +1,7 @@
 #include <string>
 
-#include <boost/log/trivial.hpp>
-
 #include "aux-raw.h"
+#include "log.h"
 #include "preprocessor-pool.h"
 
 namespace ABcb = Ada_Byron_code_book;
@@ -60,22 +59,22 @@ ABcb::spy::LogListOfPreprocessorDefines()
     false;
 #endif
 
-  BOOST_LOG_TRIVIAL(info) << "List of preprocessor defines:";
-  BOOST_LOG_TRIVIAL(info) << std::boolalpha << pad << "defined(__clang__): " << definedClang;
-  BOOST_LOG_TRIVIAL(info) << pad << "defined(WIN32): " << definedWIN32;
-  BOOST_LOG_TRIVIAL(info) << pad << "defined(_WIN32): " << defined_WIN32;
-  BOOST_LOG_TRIVIAL(info) << pad << "defined(_WIN64): " << defined_WIN64;
-  BOOST_LOG_TRIVIAL(info) << pad << "defined(macintosh): " << defined_macintosh;
-  BOOST_LOG_TRIVIAL(info) << pad << "defined(__APPLE__): " << defined_APPLE;
-  BOOST_LOG_TRIVIAL(info) << pad << "defined(__APPLE_CC__): " << defined_APPLE_CC;
-  BOOST_LOG_TRIVIAL(info) << pad << "defined(NDEBUG): " << definedNDEBUG;
+  B_LOG_INFO << "List of preprocessor defines:";
+  B_LOG_INFO << std::boolalpha << pad << "defined(__clang__): " << definedClang;
+  B_LOG_INFO << pad << "defined(WIN32): " << definedWIN32;
+  B_LOG_INFO << pad << "defined(_WIN32): " << defined_WIN32;
+  B_LOG_INFO << pad << "defined(_WIN64): " << defined_WIN64;
+  B_LOG_INFO << pad << "defined(macintosh): " << defined_macintosh;
+  B_LOG_INFO << pad << "defined(__APPLE__): " << defined_APPLE;
+  B_LOG_INFO << pad << "defined(__APPLE_CC__): " << defined_APPLE_CC;
+  B_LOG_INFO << pad << "defined(NDEBUG): " << definedNDEBUG;
 #ifdef __GNUG__
-  BOOST_LOG_TRIVIAL(info) << pad << "__GNUG__ = " << __GNUG__;
+  B_LOG_INFO << pad << "__GNUG__ = " << __GNUG__;
 #endif
 #ifdef _MSC_VER
-  BOOST_LOG_TRIVIAL(info) << pad << "_MSC_VER = " << _MSC_VER;
+  B_LOG_INFO << pad << "_MSC_VER = " << _MSC_VER;
 #endif
 #ifdef ADA_BYRON__GNUGPP_VERSION
-  BOOST_LOG_TRIVIAL(info) << pad << "ADA_BYRON__GNUGPP_VERSION = " << ADA_BYRON__GNUGPP_VERSION;
+  B_LOG_INFO << pad << "ADA_BYRON__GNUGPP_VERSION = " << ADA_BYRON__GNUGPP_VERSION;
 #endif
 }

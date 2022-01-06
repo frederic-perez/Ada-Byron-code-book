@@ -6,13 +6,13 @@
 #include <boost/date_time/c_local_time_adjustor.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/filesystem.hpp>
-#include <boost/log/trivial.hpp>
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/preprocessor.hpp>
 #include <boost/version.hpp>
 
 #include "aux-raw.h" // for pad
 #include "aux-spy+.h"
+#include "log.h"
 #include "preprocessor-pool.h"
 
 namespace ABcb = Ada_Byron_code_book;
@@ -209,24 +209,24 @@ Range_CastingToInt(std::ostream& a_os)
 void
 ABcb::spy::LogInfoOfSomeTypes()
 {
-  BOOST_LOG_TRIVIAL(info) << "Info of some types:";
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(char) = " << sizeof(char) << " | " << Range_CastingToInt<char>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(wchar_t) = " << sizeof(wchar_t) << " | " << Range<wchar_t>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(char16_t) = " << sizeof(char16_t) << " | " << Range<char16_t>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(char32_t) = " << sizeof(char32_t) << " | " << Range<char32_t>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(int) = " << sizeof(int) << " | " << Range<int>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(short int) = " << sizeof(short int) << " | " << Range<short int>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(int64_t) = " << sizeof(int64_t) << " | " << Range<int64_t>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(float) = " << sizeof(float) << " | " << Range<float>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(double) = " << sizeof(double) << " | " << Range<double>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(long double) = " << sizeof(long double) << " | " << Range<long double>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(size_t) = " << sizeof(size_t) << " | " << Range<size_t>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(unsigned int) = " << sizeof(unsigned int) << " | " << Range<unsigned int>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(unsigned short) = " << sizeof(unsigned short) << " | " << Range<unsigned short>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(unsigned long) = " << sizeof(unsigned long) << " | " << Range<unsigned long>;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(uint64_t) = " << sizeof(uint64_t) << " | " << Range<uint64_t>;
+  B_LOG_INFO << "Info of some types:";
+  B_LOG_INFO << pad << "sizeof(char) = " << sizeof(char) << " | " << Range_CastingToInt<char>;
+  B_LOG_INFO << pad << "sizeof(wchar_t) = " << sizeof(wchar_t) << " | " << Range<wchar_t>;
+  B_LOG_INFO << pad << "sizeof(char16_t) = " << sizeof(char16_t) << " | " << Range<char16_t>;
+  B_LOG_INFO << pad << "sizeof(char32_t) = " << sizeof(char32_t) << " | " << Range<char32_t>;
+  B_LOG_INFO << pad << "sizeof(int) = " << sizeof(int) << " | " << Range<int>;
+  B_LOG_INFO << pad << "sizeof(short int) = " << sizeof(short int) << " | " << Range<short int>;
+  B_LOG_INFO << pad << "sizeof(int64_t) = " << sizeof(int64_t) << " | " << Range<int64_t>;
+  B_LOG_INFO << pad << "sizeof(float) = " << sizeof(float) << " | " << Range<float>;
+  B_LOG_INFO << pad << "sizeof(double) = " << sizeof(double) << " | " << Range<double>;
+  B_LOG_INFO << pad << "sizeof(long double) = " << sizeof(long double) << " | " << Range<long double>;
+  B_LOG_INFO << pad << "sizeof(size_t) = " << sizeof(size_t) << " | " << Range<size_t>;
+  B_LOG_INFO << pad << "sizeof(unsigned int) = " << sizeof(unsigned int) << " | " << Range<unsigned int>;
+  B_LOG_INFO << pad << "sizeof(unsigned short) = " << sizeof(unsigned short) << " | " << Range<unsigned short>;
+  B_LOG_INFO << pad << "sizeof(unsigned long) = " << sizeof(unsigned long) << " | " << Range<unsigned long>;
+  B_LOG_INFO << pad << "sizeof(uint64_t) = " << sizeof(uint64_t) << " | " << Range<uint64_t>;
   using boost::multiprecision::cpp_dec_float_50;
-  BOOST_LOG_TRIVIAL(info) << pad << "sizeof(boost::multiprecision::cpp_dec_float_50) = " << sizeof(cpp_dec_float_50) << " | " << Range<cpp_dec_float_50>;
+  B_LOG_INFO << pad << "sizeof(boost::multiprecision::cpp_dec_float_50) = " << sizeof(cpp_dec_float_50) << " | " << Range<cpp_dec_float_50>;
 }
 
 namespace {
@@ -238,8 +238,8 @@ LogArgv0Info(const std::string& a_argv0)
 {
   const bf::path fullArgv0 = bf::system_complete(bf::canonical(bf::path(a_argv0, nullptr)));
 
-  BOOST_LOG_TRIVIAL(info) << "The full argv[0]:";
-  BOOST_LOG_TRIVIAL(info) << pad << "is " << fullArgv0 << ",";
+  B_LOG_INFO << "The full argv[0]:";
+  B_LOG_INFO << pad << "is " << fullArgv0 << ",";
   std::ostringstream oss;
   if (bf::exists(fullArgv0)) {
     oss << "which is" << (bf::is_regular(fullArgv0) ? "" : " not") << " a regular file, created by ";
@@ -274,7 +274,7 @@ LogArgv0Info(const std::string& a_argv0)
   } else {
     oss << "(which does not seem to exist)";
   }
-  BOOST_LOG_TRIVIAL(info) << pad << oss.str();
+  B_LOG_INFO << pad << oss.str();
 }
 
 std::string
@@ -293,18 +293,18 @@ GetCurrentDirInfo()
 void
 ABcb::spy::RunInfo::Log() const
 {
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << d_progname << " was launched by " << GetUserName() << " at " << GetHostName()
     << " on " << GetLocalDate() << ", at " << GetLocalTime();
   LogArgv0Info(d_argv0);
-  BOOST_LOG_TRIVIAL(info) << GetCurrentDirInfo();
-  BOOST_LOG_TRIVIAL(info) << "Using Boost version " << GetBoostVersion();
-  BOOST_LOG_TRIVIAL(info) << "Using Clang version " << GetClangVersion();
-  BOOST_LOG_TRIVIAL(info) << "Using GNU g++ version " << GetGNUGppVersion();
-  BOOST_LOG_TRIVIAL(info) << "Using Visual Studio C/C++ compiler version " << GetVisualStudioCppCompilerVersion();
+  B_LOG_INFO << GetCurrentDirInfo();
+  B_LOG_INFO << "Using Boost version " << GetBoostVersion();
+  B_LOG_INFO << "Using Clang version " << GetClangVersion();
+  B_LOG_INFO << "Using GNU g++ version " << GetGNUGppVersion();
+  B_LOG_INFO << "Using Visual Studio C/C++ compiler version " << GetVisualStudioCppCompilerVersion();
   LogListOfPreprocessorDefines();
   LogInfoOfSomeTypes();
-  BOOST_LOG_TRIVIAL(info) << "";
+  B_LOG_INFO << "";
 }
 
 template <typename TClock>

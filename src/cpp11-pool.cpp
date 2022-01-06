@@ -5,11 +5,10 @@
 #include <tuple>
 #include <vector>
 
-#include <boost/log/trivial.hpp>
-
 #include "aux-raw.h" // for pad
 #include "aux-spy+.h" // for ToString, TypeNameENH
 #include "cpp11-pool.h"
+#include "log.h"
 
 namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179
 
@@ -51,9 +50,9 @@ ABcb::cpp11::TryBadCode()
 
   int* const array = new int[100];
   delete[] array;
-  BOOST_LOG_TRIVIAL(info) << __func__ << ": array[1] is " << array[1]; // BOOM
+  B_LOG_INFO << __func__ << ": array[1] is " << array[1]; // BOOM
 #else
-  BOOST_LOG_TRIVIAL(info) << __func__ << ": Note: ASAN_TEST was not defined";
+  B_LOG_INFO << __func__ << ": Note: ASAN_TEST was not defined";
 #endif
 }
 
@@ -83,41 +82,41 @@ operator<<(std::ostream& a_os, const MyTuple& value)
 void
 ABcb::cpp11::UsingTuple()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   const size_t N = std::tuple_size<MyTuple>::value;
-  BOOST_LOG_TRIVIAL(info) << pad << "The size of MyTuple is " << N;
+  B_LOG_INFO << pad << "The size of MyTuple is " << N;
 
   const MyTuple myTuple{16, "Test", true};
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "spy::TypeNameENH of decltype(get<0>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<0>(myTuple))>();
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "spy::TypeNameENH of decltype(get<1>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<1>(myTuple))>();
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "spy::TypeNameENH of decltype(get<2>(myTuple)) = " << spy::TypeNameENH<decltype(std::get<2>(myTuple))>();
   {
     std::ostringstream oss;
     oss << myTuple;
-    BOOST_LOG_TRIVIAL(info) << pad << "myTuple = " << oss.str() << " should be equal to " << ToString(myTuple);
+    B_LOG_INFO << pad << "myTuple = " << oss.str() << " should be equal to " << ToString(myTuple);
   }
 
   const std::vector myTuples = {myTuple, {42, "foo", false}};
-  BOOST_LOG_TRIVIAL(info) << pad << ToString(myTuples, "myTuples");
+  B_LOG_INFO << pad << ToString(myTuples, "myTuples");
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }
 
 void
 ABcb::cpp11::AlgorithmExamples()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   const std::vector v{3, 9, 1, 4, 2, 5, 9};
-  BOOST_LOG_TRIVIAL(info) << ToString(v, pad + "v");
+  B_LOG_INFO << ToString(v, pad + "v");
   const auto [minIt, maxIt] = // C++17 structured binding
     std::minmax_element(v.cbegin(), v.cend());
-  BOOST_LOG_TRIVIAL(info) << pad << pad << "v's min element is " << *minIt << ", at index " << minIt - v.cbegin();
-  BOOST_LOG_TRIVIAL(info) << pad << pad << "v's max element is " << *maxIt << ", at index " << maxIt - v.cbegin();
+  B_LOG_INFO << pad << pad << "v's min element is " << *minIt << ", at index " << minIt - v.cbegin();
+  B_LOG_INFO << pad << pad << "v's max element is " << *maxIt << ", at index " << maxIt - v.cbegin();
 
   const auto [f1, f2] = std::tuple(12.f, 7.f); // C++17 structured binding
   // '- Using the "Exception" of the
@@ -125,19 +124,19 @@ ABcb::cpp11::AlgorithmExamples()
   //    ES.10: Declare one name (only) per declaration
   const auto [min, max] = // C++17 structured binding
     std::minmax(f1, f2);
-  BOOST_LOG_TRIVIAL(info) << pad << "f1 = " << f1 << ", f2 = " << f2;
-  BOOST_LOG_TRIVIAL(info) << pad << pad << "min of {f1, f2} = " << min;
-  BOOST_LOG_TRIVIAL(info) << pad << pad << "max of {f1, f2} = " << max;
+  B_LOG_INFO << pad << "f1 = " << f1 << ", f2 = " << f2;
+  B_LOG_INFO << pad << pad << "min of {f1, f2} = " << min;
+  B_LOG_INFO << pad << pad << "max of {f1, f2} = " << max;
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }
 
 void
 ABcb::cpp11::MiscellanyExamples()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "ListToString (variadic template function): "
     << ListToString(1, 2, 'c', "Hello, world!", 666.);
 
@@ -145,7 +144,7 @@ ABcb::cpp11::MiscellanyExamples()
     std::ostringstream oss;
     for (const auto prime : { 2, 3, 5, 7 }) // initializer_list-based range-for example
       oss << prime << ' ';
-    BOOST_LOG_TRIVIAL(info)
+    B_LOG_INFO
       << pad << "initializer_list-based range-for example: "
       << "for (const auto prime : { 2, 3, 5, 7 }) > " << oss.str();
   }
@@ -155,10 +154,10 @@ ABcb::cpp11::MiscellanyExamples()
   using ratioOneThree = std::ratio<1, 3>;
   using ratioTwoFour = std::ratio<2, 4>;
   using sum = std::ratio_add<ratioOneThree, ratioTwoFour>;
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "std::ratio and std::ratio_add example: " << ratioOneThree::num << "/" << ratioOneThree::den << " + "
     << ratioTwoFour::num << "/" << ratioTwoFour::den << " = " << sum::num << "/" << sum::den << " = "
     << static_cast<double>(sum::num) / sum::den;
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }

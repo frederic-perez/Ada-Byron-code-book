@@ -11,10 +11,9 @@
 #  include <pthread.h> // From 3rd party library POSIX threads
 #endif
 
-#include <boost/log/trivial.hpp>
-
 #include "aux-raw.h"
 #include "concurrency.h"
+#include "log.h"
 
 namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179
 
@@ -29,7 +28,7 @@ run(const size_t a_n)
 {
   m.lock();
   for (size_t i = 0; i < 4; ++i)
-    BOOST_LOG_TRIVIAL(info) << pad << pad << a_n << ": " << i;
+    B_LOG_INFO << pad << pad << a_n << ": " << i;
   m.unlock();
 }
 
@@ -37,7 +36,7 @@ run(const size_t a_n)
 void
 ExampleOf3ThreadsAndMutex()
 {
-  BOOST_LOG_TRIVIAL(trace) << pad << __func__ << " started...";
+  B_LOG_TRACE << pad << __func__ << " started...";
   std::thread t1(run, 1);
   std::thread t2(run, 2);
   std::thread t3(run, 3);
@@ -45,7 +44,7 @@ ExampleOf3ThreadsAndMutex()
   t1.join();
   t2.join();
   t3.join();
-  BOOST_LOG_TRIVIAL(trace) << pad << __func__ << " finished.";
+  B_LOG_TRACE << pad << __func__ << " finished.";
 }
 
 // From C++1 slides by Alex Sinkayov
@@ -78,7 +77,7 @@ ExampleOfFutureAndAsync()
   std::ostringstream oss;
   oss.imbue(std::locale("")); // To add commas when outputting result
   oss << result;
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "std::future and std::async example: "
     << "GetFibonacci30() + GetFibonacci40() = " << oss.str();
 }
@@ -88,12 +87,12 @@ ExampleOfFutureAndAsync()
 void
 ABcb::ExamplesOfConcurrencyUsingCpp11()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   ExampleOf3ThreadsAndMutex();
   ExampleOfFutureAndAsync();
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }
 
 #if !defined(_MSC_VER)
@@ -114,11 +113,11 @@ namespace POSIX {
 void
 Waiter(size_t a_threadNumber)
 {
-  BOOST_LOG_TRIVIAL(trace)
+  B_LOG_TRACE
     << pad << pad << __func__ << " starts to wait for 5 seconds [thread #" << a_threadNumber
     << ", thread_self()=" << pthread_self() << "]...";
   std::this_thread::sleep_for(std::chrono::milliseconds(5000));
-  BOOST_LOG_TRIVIAL(trace)
+  B_LOG_TRACE
     << pad << pad << __func__ << " is about to end (sleeping time finished)";
 }
 
@@ -134,36 +133,36 @@ Function(void* a_param)
   const std::string threadInfo = oss.str();
 
   if (threadNumber == 3) {
-    BOOST_LOG_TRIVIAL(info) << pad << pad << __func__ << " is about to call Waiter" << threadInfo;
+    B_LOG_INFO << pad << pad << __func__ << " is about to call Waiter" << threadInfo;
     Waiter(threadNumber);
   }
 
-  BOOST_LOG_TRIVIAL(info) << pad << pad << __func__ << " is about to stop for barrier" << threadInfo;
+  B_LOG_INFO << pad << pad << __func__ << " is about to stop for barrier" << threadInfo;
   const int rc = pthread_barrier_wait(&barrier); // Synchronization point
   if (rc != 0 and rc != PTHREAD_BARRIER_SERIAL_THREAD) {
-    BOOST_LOG_TRIVIAL(error) << pad << pad << __func__ << ": Error: Could not wait on barrier. Exiting.";
+    B_LOG_ERROR << pad << pad << __func__ << ": Error: Could not wait on barrier. Exiting.";
     exit(-1);
   }
-  BOOST_LOG_TRIVIAL(info) << pad << pad << __func__ << " exited from barrier" << threadInfo;
+  B_LOG_INFO << pad << pad << __func__ << " exited from barrier" << threadInfo;
   return nullptr;
 }
 
 void*
 LogThreadSelf(void*)
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << pad << pad << __func__ << " called [thread_self()=" << pthread_self() << ']';
+  B_LOG_TRACE << __func__ << pad << pad << __func__ << " called [thread_self()=" << pthread_self() << ']';
   return nullptr;
 }
 
 void
 ExampleOfPthreadsBarrierCreateAndJoin()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   const size_t NumberOfThreads = 6;
 
   if (pthread_barrier_init(&barrier, nullptr, NumberOfThreads)) {
-    BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Failed to initialize the barrier. Exiting.";
+    B_LOG_ERROR << pad << __func__ << ": Failed to initialize the barrier. Exiting.";
     return;
   }
 
@@ -173,16 +172,16 @@ ExampleOfPthreadsBarrierCreateAndJoin()
   for (auto thread : threads)
     pthread_join(thread, nullptr);
 
-  BOOST_LOG_TRIVIAL(info) << pad << __func__ << " starts to wait for 1 second...";
+  B_LOG_INFO << pad << __func__ << " starts to wait for 1 second...";
   std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-  BOOST_LOG_TRIVIAL(info) << " (finished)";
+  B_LOG_INFO << " (finished)";
 
   for (auto thread : threads)
     pthread_create(&thread, nullptr, LogThreadSelf, nullptr);
   for (auto thread : threads)
     pthread_join(thread, nullptr);
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }
 
 } // namespace POSIX
@@ -190,11 +189,11 @@ ExampleOfPthreadsBarrierCreateAndJoin()
 void
 ABcb::ExamplesOfConcurrencyUsingPOSIXThreads()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   POSIX::ExampleOfPthreadsBarrierCreateAndJoin();
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }
 
 #endif // !defined(_MSC_VER)

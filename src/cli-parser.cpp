@@ -5,7 +5,6 @@
 #include "aux-raw-compiler-warnings-off++begin.h"
 // clang-format off
   #include <boost/algorithm/string.hpp>
-  #include <boost/log/trivial.hpp>
   #include <boost/numeric/conversion/bounds.hpp>
   #include <boost/numeric/conversion/cast.hpp>
   #include <boost/program_options.hpp>
@@ -15,6 +14,7 @@
 
 #include "aux-raw.h"
 #include "cli-parser.h"
+#include "log.h"
 
 namespace ABcb = Ada_Byron_code_book;
 
@@ -37,10 +37,10 @@ GuruTest(const std::string& a_text)
     oss << '{' << boost::algorithm::join(definedStrings, ", ") << '}';
     const auto setOfDefinedStrings = oss.str();
 
-    BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": " << message;
-    BOOST_LOG_TRIVIAL(info) << pad << pad << "--guru arg " << setOfDefinedStrings;
+    B_LOG_ERROR << pad << __func__ << ": " << message;
+    B_LOG_INFO << pad << pad << "--guru arg " << setOfDefinedStrings;
   } else {
-    BOOST_LOG_TRIVIAL(info) << pad << __func__ << ": Guru::Enum guru exists for text `" << a_text << "`";
+    B_LOG_INFO << pad << __func__ << ": Guru::Enum guru exists for text `" << a_text << "`";
   }
 }
 
@@ -49,7 +49,7 @@ GuruTest(const std::string& a_text)
 void
 ABcb::GurusTest(const std::initializer_list<std::string> a_args)
 {
-  BOOST_LOG_TRIVIAL(info) << __func__ << " called";
+  B_LOG_INFO << __func__ << " called";
   for (const auto& text : a_args) {
     GuruTest(text);
   }
@@ -204,15 +204,15 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
       // po::parse_command_line(argc, argv, odFull),
       vm);
     if (vm.count("help") != 0) {
-      BOOST_LOG_TRIVIAL(info) << odFull;
+      B_LOG_INFO << odFull;
       return false;
     }
     if (vm.count("usage-examples") != 0) {
-      BOOST_LOG_TRIVIAL(info) << "Usage parameter example(s):\n\n" << cli::usageParameterExamples << "\n\n" << odFull;
+      B_LOG_INFO << "Usage parameter example(s):\n\n" << cli::usageParameterExamples << "\n\n" << odFull;
       return false;
     }
   } catch (const std::exception& e) {
-    BOOST_LOG_TRIVIAL(error) << progname << ": Error: " << e.what() << "\n\n" << odFull;
+    B_LOG_ERROR << progname << ": Error: " << e.what() << "\n\n" << odFull;
     return false;
   }
 
@@ -223,7 +223,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     const std::string filename = vm["response-file"].as<std::string>();
     std::ifstream ifs(filename.c_str());
     if (not ifs) {
-      BOOST_LOG_TRIVIAL(error) << progname << ": Error: Could not open the response file " << filename << "\n\n" << odFull;
+      B_LOG_ERROR << progname << ": Error: Could not open the response file " << filename << "\n\n" << odFull;
       return false;
     }
     // Read the whole file into a string
@@ -245,7 +245,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
           .run(),
         vm);
     } catch (const std::exception& e) {
-      BOOST_LOG_TRIVIAL(error) << progname << ": Error: " << e.what() << "\n\n" << odFull;
+      B_LOG_ERROR << progname << ": Error: " << e.what() << "\n\n" << odFull;
       return false;
     }
   }
@@ -253,13 +253,13 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
   try {
     po::notify(vm);
   } catch (const std::exception& e) {
-    BOOST_LOG_TRIVIAL(error) << progname << ": Error: " << e.what() << "\n\n" << odFull;
+    B_LOG_ERROR << progname << ": Error: " << e.what() << "\n\n" << odFull;
     return false;
   }
 
   const bool succeeded = CheckArguments(vm);
   if (not succeeded) {
-    BOOST_LOG_TRIVIAL(error) << odFull;
+    B_LOG_ERROR << odFull;
     return false;
   }
 
@@ -272,7 +272,7 @@ auto
 LogErrorAndReturnFalse(const std::string& a_message)
 -> bool
 {
-  BOOST_LOG_TRIVIAL(error) << progname << ": Error: " << a_message;
+  B_LOG_ERROR << progname << ": Error: " << a_message;
   return false;
 }
 
@@ -372,37 +372,37 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 void
 ABcb::cli::LogParsedCommandLine()
 {
-  BOOST_LOG_TRIVIAL(info) << progname << " was called with the following options:";
-  BOOST_LOG_TRIVIAL(info) << "";
+  B_LOG_INFO << progname << " was called with the following options:";
+  B_LOG_INFO << "";
 
   // 1) File selection
   //
-  BOOST_LOG_TRIVIAL(info) << "File selection:";
-  BOOST_LOG_TRIVIAL(info) << "  --input-file " << LogWithCare(filenameIn);
-  BOOST_LOG_TRIVIAL(info) << "";
+  B_LOG_INFO << "File selection:";
+  B_LOG_INFO << "  --input-file " << LogWithCare(filenameIn);
+  B_LOG_INFO << "";
 
   // 2) Operation flags/parameters
   //
-  BOOST_LOG_TRIVIAL(info) << "Operation flags/parameters:";
-  BOOST_LOG_TRIVIAL(info) << "  --input-double " << inputDouble;
-  BOOST_LOG_TRIVIAL(info) << "  --input-positive-double " << inputPositiveDouble;
-  BOOST_LOG_TRIVIAL(info) << "  --input-ID " << inputUnsignedCharCLI;
-  BOOST_LOG_TRIVIAL(info) << "  --platonic-solid " << GetString(platonicSolid);
-  BOOST_LOG_TRIVIAL(info) << "  --color " << Color::GetString(color);
-  BOOST_LOG_TRIVIAL(info) << "  --fruit " << Fruit::GetString(fruit);
+  B_LOG_INFO << "Operation flags/parameters:";
+  B_LOG_INFO << "  --input-double " << inputDouble;
+  B_LOG_INFO << "  --input-positive-double " << inputPositiveDouble;
+  B_LOG_INFO << "  --input-ID " << inputUnsignedCharCLI;
+  B_LOG_INFO << "  --platonic-solid " << GetString(platonicSolid);
+  B_LOG_INFO << "  --color " << Color::GetString(color);
+  B_LOG_INFO << "  --fruit " << Fruit::GetString(fruit);
   if (not suggestedWindowPosition.empty()) {
     std::ostringstream oss;
     oss << "  --suggested-window-position ";
     for (auto position : suggestedWindowPosition) {
       oss << position << ' ';
     }
-    BOOST_LOG_TRIVIAL(info) << oss.str();
+    B_LOG_INFO << oss.str();
   }
-  BOOST_LOG_TRIVIAL(info) << "";
+  B_LOG_INFO << "";
 
   // 3) Informative output
   //
-  BOOST_LOG_TRIVIAL(info) << "Informative output:";
-  BOOST_LOG_TRIVIAL(info) << "  --verbose " << (verbose ? "on" : "off");
-  BOOST_LOG_TRIVIAL(info) << "";
+  B_LOG_INFO << "Informative output:";
+  B_LOG_INFO << "  --verbose " << (verbose ? "on" : "off");
+  B_LOG_INFO << "";
 }

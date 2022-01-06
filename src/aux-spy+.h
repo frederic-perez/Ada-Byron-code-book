@@ -10,12 +10,7 @@
 #include <string_view>
 #include <type_traits>
 
-#include <boost/log/trivial.hpp>
 #include <boost/noncopyable.hpp>
-
-//!? TODO: Possibly extend SpyLine with Boost's PP for extra information
-
-#define SpyLine BOOST_LOG_TRIVIAL(trace) << "@@@@ " << __FILE__ << ':' << __func__ << ":L" << __LINE__;
 
 namespace Ada_Byron_code_book::spy {
 

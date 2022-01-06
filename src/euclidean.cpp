@@ -6,7 +6,6 @@
 
 #include "aux-raw-compiler-warnings-off++begin.h"
 // clang-format off
-  #include <boost/log/trivial.hpp>
   #include <boost/math/constants/constants.hpp>
 // clang-format on
 #include "aux-raw-compiler-warnings-off++end.h"
@@ -14,6 +13,7 @@
 #include "aux-raw.h" // for pad
 #include "aux-spy+.h" // for TypeNameENH
 #include "euclidean.h"
+#include "log.h"
 
 namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179
 
@@ -259,12 +259,12 @@ template <class Vector>
 void
 DoAndLogStuff(const Vector& a_vector, const std::string& a_vectorName)
 {
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << a_vectorName << " typeid name = " << typeid(a_vector).name();
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << a_vectorName
     << " spy::TypeNameENH of its decltype = " << ABcb::spy::TypeNameENH<decltype(a_vector)>();
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << a_vectorName << " = " << a_vector << " | " << a_vectorName << "[0] = " << a_vector[0]
     << " | Norm() = " << a_vector.Norm() << " | ElementsSum() = " << a_vector.ElementsSum()
     << " | ElementsAvg() = " << a_vector.ElementsAvg() << " | /2 = " << a_vector / 2.
@@ -276,7 +276,7 @@ DoAndLogStuff(const Vector& a_vector, const std::string& a_vectorName)
 void
 ABcb::Euclidean::ExamplesOfVector()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
 #undef ADA_BYRON_CHECK_STATIC_ASSERT_COMPILER_ERROR_20151009
 #if defined(ADA_BYRON_CHECK_STATIC_ASSERT_COMPILER_ERROR_20151009)
@@ -299,20 +299,20 @@ ABcb::Euclidean::ExamplesOfVector()
 
   try {
     const Vector2 vector2faulty{1., 2., 3};
-    BOOST_LOG_TRIVIAL(error) << pad << "Error: vector2faulty successfully created (?!)";
+    B_LOG_ERROR << pad << "Error: vector2faulty successfully created (?!)";
   } catch (const std::length_error& e) {
-    BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Error caught (creating vector2faulty): " << e.what();
+    B_LOG_ERROR << pad << __func__ << ": Error caught (creating vector2faulty): " << e.what();
   }
 
   try {
     const Vector2 vector2{1., 2.};
-    BOOST_LOG_TRIVIAL(info)
+    B_LOG_INFO
       << pad << "vector2 = " << vector2;
       // << "vector2[66] = " << vector2[66] << "; " // undefined behavior
-    BOOST_LOG_TRIVIAL(info)
+    B_LOG_INFO
       << pad << "vector2.at(66) = " << vector2.at(66);
   } catch (const std::out_of_range& e) {
-    BOOST_LOG_TRIVIAL(error) << pad << __func__ << ": Error caught (access out of range): " << e.what();
+    B_LOG_ERROR << pad << __func__ << ": Error caught (access out of range): " << e.what();
   }
 
   const Vector2 vector2{2., 3.};
@@ -323,13 +323,13 @@ ABcb::Euclidean::ExamplesOfVector()
   DoAndLogStuff(vector2Self, "vector2_assignment_operator");
 
   const double dotProduct = vector2 * vector2Self;
-  BOOST_LOG_TRIVIAL(info) << pad << "Dot product: " << vector2 << " * " << vector2Self << " = " << dotProduct;
+  B_LOG_INFO << pad << "Dot product: " << vector2 << " * " << vector2Self << " = " << dotProduct;
 
   Vector3 vector3a{5., 7., 11.};
   DoAndLogStuff(vector3a, "vector3a");
   vector3a.Normalize();
   DoAndLogStuff(vector3a, "vector3a (normalized)");
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "vector3a's azimuth angle = " << vector3a.ComputeAzimuthAngle()
     << "; polar angle = " << vector3a.ComputePolarAngle();
 
@@ -353,7 +353,7 @@ ABcb::Euclidean::ExamplesOfVector()
   vector3Qa = vector3Qa * 2.; // No need for ... * static_cast<long double>(2.);
   vector3Qa.Normalize();
   DoAndLogStuff(vector3Qa, "vector3Qa (normalized)");
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "vector3Qa's azimuth angle = " << vector3Qa.ComputeAzimuthAngle()
     << "; polar angle = " << vector3Qa.ComputePolarAngle();
 
@@ -371,7 +371,7 @@ ABcb::Euclidean::ExamplesOfVector()
   vector3HQa = vector3HQa * 2.;
   vector3HQa.Normalize();
   DoAndLogStuff(vector3HQa, "vector3HQa (normalized)");
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << "vector3HQa's azimuth angle = " << vector3HQa.ComputeAzimuthAngle()
     << "; polar angle = " << vector3HQa.ComputePolarAngle();
 
@@ -381,5 +381,5 @@ ABcb::Euclidean::ExamplesOfVector()
   const Vector3HQ vector3HQcross = vector3HQa ^ vector3HQb;
   DoAndLogStuff(vector3HQcross, "vector3HQcross");
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }

@@ -41,6 +41,7 @@ set(SRC_LIST
   enum-class-iteration+.cpp enum-class-iteration+.h
   euclidean.cpp euclidean.h
   literal-operators.cpp literal-operators.h
+  log.h
   main.cpp
   miscellany.cpp miscellany.h
   filesystem-pool.cpp filesystem-pool.h

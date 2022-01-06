@@ -2,9 +2,8 @@
 
 #include <typeinfo>
 
-#include <boost/log/trivial.hpp>
-
 #include "aux-raw.h"
+#include "log.h"
 #include "promotions-pool.h"
 
 namespace ABcb = Ada_Byron_code_book;
@@ -16,7 +15,7 @@ template <typename T>
 void
 Log(const std::string& a_message, const T a_t)
 {
-  BOOST_LOG_TRIVIAL(info)
+  B_LOG_INFO
     << pad << a_message << " = " << a_t << " is of type \'" << typeid(a_t).name() << '\'';
 }
 
@@ -25,7 +24,7 @@ Log(const std::string& a_message, const T a_t)
 void
 ABcb::ExamplesOfPromotions()
 {
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " started...";
+  B_LOG_TRACE_STARTED
 
   Log("1.F + 2U", 1.F + 2U);
   Log("1. + 2U", 1. + 2U);
@@ -39,5 +38,5 @@ ABcb::ExamplesOfPromotions()
   Log("0 - static_cast<int>(2U)", 0 - static_cast<int>(2U));
   Log("0 - size_t(2)", 0 - size_t(2));
 
-  BOOST_LOG_TRIVIAL(trace) << __func__ << " finished.";
+  B_LOG_TRACE_FINISHED
 }
