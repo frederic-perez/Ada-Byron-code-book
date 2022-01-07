@@ -30,14 +30,14 @@ main(const int argc, char* argv[])
 {
   namespace ABcb = Ada_Byron_code_book;
 
-  const auto argv0AndProgramName = ABcb::cli::ParseCommandLine(argc, argv);
-  if (!argv0AndProgramName)
+  if (const auto pair = ABcb::cli::ParseCommandLine(argc, argv); pair.has_value()) {
+    const auto argv0 = pair.value().first;
+    const auto programName = pair.value().second;
+    ABcb::spy::RunInfo(argv0, programName).Log();
+    ABcb::cli::LogParsedCommandLine(programName);
+  } else {
     return EXIT_FAILURE;
-
-  const std::string argv0 = (argv0AndProgramName)->first;
-  const std::string programName = (argv0AndProgramName)->second;
-  ABcb::spy::RunInfo(argv0, programName).Log();
-  ABcb::cli::LogParsedCommandLine(programName);
+  }
 
   ABcb::spy::Timer<std::chrono::high_resolution_clock> timerHQ;
 
