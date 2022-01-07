@@ -3,7 +3,9 @@
 #include <array>
 #include <cstdint>
 #include <initializer_list>
+#include <optional>
 #include <string>
+#include <utility> // for pair
 #include <vector>
 
 #include <boost/preprocessor.hpp>
@@ -80,12 +82,10 @@ using ConcreteType = EnumENH<FooBar, 3, "string">; //, fooBarText>;
 
 namespace cli {
 
-auto Argv0() -> std::string;
-auto ProgramName() -> std::string;
+auto ParseCommandLine(int argc, char** argv) -> std::optional<std::pair<std::string, std::string>>;
+// '- when succeeding, it returns argv0 and programName
 
-auto ParseCommandLine(int argc, char** argv) -> bool;
-
-void LogParsedCommandLine();
+void LogParsedCommandLine(const std::string& programName);
 
 } // namespace cli
 

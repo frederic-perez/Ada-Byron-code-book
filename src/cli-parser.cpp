@@ -57,28 +57,11 @@ ABcb::GurusTest(const std::initializer_list<std::string> a_args)
 
 namespace {
 
-char* argv0 = nullptr;
-char* progname = nullptr;
-
 ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(PlatonicSolid, (tetrahedron)(octahedron)(icosahedron)(hexahedron)(dodecahedron));
 ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Color, (red)(green)(blue));
 ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Fruit, (apple)(orange)(pear));
 
 } // namespace
-
-auto
-ABcb::cli::Argv0()
--> std::string
-{
-  return argv0;
-}
-
-auto
-ABcb::cli::ProgramName()
--> std::string
-{
-  return progname;
-}
 
 namespace Ada_Byron_code_book::cli {
 
@@ -128,9 +111,10 @@ GetSetOfDefinedString(const std::vector<std::string>& a_definedStrings)
 
 auto
 ABcb::cli::ParseCommandLine(const int argc, char** argv)
--> bool
+->std::optional<std::pair<std::string, std::string>>
 {
-  argv0 = argv[0];
+  char* argv0 = argv[0];
+  char* progname = nullptr;
   if ((progname = strrchr(argv[0], ABcb::raw::SystemSlash())) == nullptr) {
     progname = argv[0];
   } else {
@@ -205,15 +189,15 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
       vm);
     if (vm.count("help") != 0) {
       B_LOG_INFO << odFull;
-      return false;
+      return {};
     }
     if (vm.count("usage-examples") != 0) {
       B_LOG_INFO << "Usage parameter example(s):\n\n" << cli::usageParameterExamples << "\n\n" << odFull;
-      return false;
+      return {};
     }
   } catch (const std::exception& e) {
     B_LOG_ERROR << progname << ": Error: " << e.what() << "\n\n" << odFull;
-    return false;
+    return {};
   }
 
   // 4) Response file
@@ -224,7 +208,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     std::ifstream ifs(filename.c_str());
     if (!ifs) {
       B_LOG_ERROR << progname << ": Error: Could not open the response file " << filename << "\n\n" << odFull;
-      return false;
+      return {};
     }
     // Read the whole file into a string
     std::ostringstream oss;
@@ -246,7 +230,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
         vm);
     } catch (const std::exception& e) {
       B_LOG_ERROR << progname << ": Error: " << e.what() << "\n\n" << odFull;
-      return false;
+      return {};
     }
   }
 
@@ -254,16 +238,16 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     po::notify(vm);
   } catch (const std::exception& e) {
     B_LOG_ERROR << progname << ": Error: " << e.what() << "\n\n" << odFull;
-    return false;
+    return {};
   }
 
   const bool succeeded = CheckArguments(vm);
   if (!succeeded) {
     B_LOG_ERROR << odFull;
-    return false;
+    return {};
   }
 
-  return true;
+  return std::make_pair(argv0, progname);
 }
 
 namespace {
@@ -272,7 +256,7 @@ auto
 LogErrorAndReturnFalse(const std::string& a_message)
 -> bool
 {
-  B_LOG_ERROR << progname << ": Error: " << a_message;
+  B_LOG_ERROR << ": Error: " << a_message;
   return false;
 }
 
@@ -370,7 +354,7 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 #define LogWithCare(a_string) (a_string.empty() ? "[empty]" : a_string)
 
 void
-ABcb::cli::LogParsedCommandLine()
+ABcb::cli::LogParsedCommandLine(const std::string& progname)
 {
   B_LOG_INFO << progname << " was called with the following options:";
   B_LOG_INFO << "";

@@ -30,12 +30,14 @@ main(const int argc, char* argv[])
 {
   namespace ABcb = Ada_Byron_code_book;
 
-  bool succeeded = ABcb::cli::ParseCommandLine(argc, argv);
-  if (!succeeded)
+  const auto argv0AndProgramName = ABcb::cli::ParseCommandLine(argc, argv);
+  if (!argv0AndProgramName)
     return EXIT_FAILURE;
 
-  ABcb::spy::RunInfo(ABcb::cli::Argv0(), ABcb::cli::ProgramName()).Log();
-  ABcb::cli::LogParsedCommandLine();
+  const std::string argv0 = (argv0AndProgramName)->first;
+  const std::string programName = (argv0AndProgramName)->second;
+  ABcb::spy::RunInfo(argv0, programName).Log();
+  ABcb::cli::LogParsedCommandLine(programName);
 
   ABcb::spy::Timer<std::chrono::high_resolution_clock> timerHQ;
 
@@ -77,7 +79,7 @@ main(const int argc, char* argv[])
 
   const std::string filenameIn = "input.xml";
   const std::string filenameOut = "output.xml";
-  succeeded = ABcb::ParseXML(filenameIn, filenameOut);
+  bool succeeded = ABcb::ParseXML(filenameIn, filenameOut);
   B_LOG_INFO
     << "Ada_Byron_code_book::ParseXML " << (succeeded ? "succeeded" : "failed") << ".";
   B_LOG_END_OF_BLOCK
