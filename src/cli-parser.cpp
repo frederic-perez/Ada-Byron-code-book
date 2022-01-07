@@ -247,7 +247,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     return {};
   }
 
-  return std::make_pair(argv0, progname);
+  return { { argv0, progname } };
 }
 
 namespace {
