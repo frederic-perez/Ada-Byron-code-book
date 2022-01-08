@@ -241,8 +241,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     return {};
   }
 
-  const bool succeeded = CheckArguments(vm);
-  if (!succeeded) {
+  if (const auto succeeded = CheckArguments(vm); !succeeded) {
     B_LOG_ERROR << odFull;
     return {};
   }
@@ -284,10 +283,8 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
     return false; // force a error so the usage is shown automatically
   }
 
-  if (a_vm.count("input-positive-double") != 0) {
-    if (inputPositiveDouble <= 0.) {
-      return LogErrorAndReturnFalse("The input-positive-double parameter must be positive");
-    }
+  if (a_vm.count("input-positive-double") != 0 and inputPositiveDouble <= 0.) {
+    return LogErrorAndReturnFalse("The input-positive-double parameter must be positive");
   }
 
   if (a_vm.count("input-ID") != 0) {
@@ -329,23 +326,19 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
     }
   }
 
-  if (!suggestedWindowPosition.empty()) {
-    if (suggestedWindowPosition.size() != 2) {
-      std::ostringstream oss;
-      oss << "Wrong suggested-window-position parameter ";
-      for (auto position : suggestedWindowPosition) {
-        oss << position << ' ';
-      }
-      oss << "-- please, specify 2 (x, y) components";
-      const std::string message = oss.str();
-      return LogErrorAndReturnFalse(message);
+  if (!suggestedWindowPosition.empty() and suggestedWindowPosition.size() != 2) {
+    std::ostringstream oss;
+    oss << "Wrong suggested-window-position parameter ";
+    for (auto position : suggestedWindowPosition) {
+      oss << position << ' ';
     }
+    oss << "-- please, specify 2 (x, y) components";
+    const std::string message = oss.str();
+    return LogErrorAndReturnFalse(message);
   }
 
-  if (a_vm.count("verbose") != 0) {
-    if (not ParseBoolean(verboseCLI.c_str(), verbose, "on", "off")) {
-      return LogErrorAndReturnFalse("Unknown verbose parameter");
-    }
+  if (a_vm.count("verbose") != 0 and not ParseBoolean(verboseCLI.c_str(), verbose, "on", "off")) {
+    return LogErrorAndReturnFalse("Unknown verbose parameter");
   }
 
   return true;
