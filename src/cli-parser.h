@@ -97,6 +97,13 @@ public:
   void LogParsedCommandLine() const;
 
 private:
+  void SetArgv0AndProgramName(char** argv);
+
+  void Add_1_File_selection_to_options(boost::program_options::options_description&);
+  void Add_2_Operation_flags_slash_parameters_to_options(boost::program_options::options_description&);
+  void Add_3_Informative_output_to_options(boost::program_options::options_description&);
+  void Add_4_Response_file_to_options(boost::program_options::options_description&) const;
+
   bool CheckArguments(const boost::program_options::variables_map&);
 
   char* d_argv0 = nullptr;

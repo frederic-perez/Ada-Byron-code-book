@@ -77,9 +77,8 @@ GetSetOfDefinedString(const std::vector<std::string>& a_definedStrings)
 
 } // namespace Ada_Byron_code_book::cli
 
-auto
-ABcb::cli::Parser::ParseCommandLine(int argc, char** argv)
--> std::optional<std::pair<std::string, std::string>>
+void
+ABcb::cli::Parser::SetArgv0AndProgramName(char** argv)
 {
   d_argv0 = argv[0];
   if ((d_program_name = strrchr(argv[0], ABcb::raw::SystemSlash())) == nullptr) {
@@ -87,63 +86,99 @@ ABcb::cli::Parser::ParseCommandLine(int argc, char** argv)
   } else {
     ++d_program_name;
   }
+}
+
+void
+ABcb::cli::Parser::Add_1_File_selection_to_options(
+  boost::program_options::options_description& odFull)
+{
+  namespace po = boost::program_options;
+
+  // 1) File selection
+  //
+  po::options_description od("File selection");
+  po::options_description odReq("  Mandatory", 160, 80);
+  po::options_description odOpt("  Optional", 160, 80);
+  odReq.add_options()("input-file", po::value<std::string>(&d_filenameIn)->required(), "<filename>");
+  od.add(odReq);
+  od.add(odOpt);
+  odFull.add(od);
+}
+
+void
+ABcb::cli::Parser::Add_2_Operation_flags_slash_parameters_to_options(
+  boost::program_options::options_description& odFull)
+{
+  namespace po = boost::program_options;
+
+  // 2) Operation flags/parameters
+  //
+  po::options_description od("Operation flags/parameters", 160, 80);
+  od.add_options()("input-double", po::value<double>(&d_inputDouble), "<double> # \texample to get any double value")(
+    "input-positive-double",
+    po::value<double>(&d_inputPositiveDouble),
+    "<positive double> # \texample to check the input is positive")(
+    "input-ID",
+    po::value<size_t>(&d_inputUnsignedCharCLI),
+    "<unsigned char> # \texample to get an ID--number--as an unsigned char")(
+    "platonic-solid",
+    po::value<std::string>(), // po::value<PlatonicSolid>(&d_platonicSolid),
+    GetSetOfDefinedString(PlatonicSolid::GetDefinedStrings()).c_str())(
+    "color", po::value<std::string>(), GetSetOfDefinedString(Color::GetDefinedStrings()).c_str())(
+    "fruit",
+    po::value<std::string>(),
+    GetSetOfDefinedString(Fruit::GetDefinedStrings()).c_str())(
+    "suggested-window-position", // multitoken example
+    po::value<decltype(d_suggestedWindowPosition)>(&d_suggestedWindowPosition)->multitoken(),
+    "<x> <y>  # \tIn pixels, with (1, 1) being the top-left corner");
+  odFull.add(od);
+}
+
+void
+ABcb::cli::Parser::Add_3_Informative_output_to_options(
+  boost::program_options::options_description& odFull)
+{
+  namespace po = boost::program_options;
+
+  // 3) Informative output
+  //
+  po::options_description od("Informative output", 160, 80);
+  od.add_options()("help", "# \tOutput help on the usage, then exit")(
+    "verbose", po::value<std::string>(&d_verboseCLI), "{on, off}")(
+    "usage-examples", "# \tOutput example parameters, help on the usage, then exit");
+  odFull.add(od);
+}
+
+void
+ABcb::cli::Parser::Add_4_Response_file_to_options(
+  boost::program_options::options_description& odFull) const
+{
+  namespace po = boost::program_options;
+
+  // 4) Response file
+  //
+  po::options_description od("Response file", 160, 80);
+  od.add_options()(
+    "response-file",
+    po::value<std::string>(),
+    "# \tConfiguration file which uses the same syntax as the command line");
+  odFull.add(od);
+}
+
+auto
+ABcb::cli::Parser::ParseCommandLine(int argc, char** argv)
+-> std::optional<std::pair<std::string, std::string>>
+{
+  SetArgv0AndProgramName(argv);
 
   namespace po = boost::program_options;
   const std::string usageTitle = std::string("Usage: ") + d_program_name + " [OPTIONS]...";
   po::options_description odFull(usageTitle);
 
-  { // 1) File selection
-    //
-    po::options_description od("File selection");
-    po::options_description odReq("  Mandatory", 160, 80);
-    po::options_description odOpt("  Optional", 160, 80);
-    odReq.add_options()("input-file", po::value<std::string>(&d_filenameIn)->required(), "<filename>");
-    od.add(odReq);
-    od.add(odOpt);
-    odFull.add(od);
-  }
-
-  { // 2) Operation flags/parameters
-    //
-    po::options_description od("Operation flags/parameters", 160, 80);
-    od.add_options()("input-double", po::value<double>(&d_inputDouble), "<double> # \texample to get any double value")(
-      "input-positive-double",
-      po::value<double>(&d_inputPositiveDouble),
-      "<positive double> # \texample to check the input is positive")(
-      "input-ID",
-      po::value<size_t>(&d_inputUnsignedCharCLI),
-      "<unsigned char> # \texample to get an ID--number--as an unsigned char")(
-      "platonic-solid",
-      po::value<std::string>(), // po::value<PlatonicSolid>(&d_platonicSolid),
-      GetSetOfDefinedString(PlatonicSolid::GetDefinedStrings()).c_str())(
-      "color", po::value<std::string>(), GetSetOfDefinedString(Color::GetDefinedStrings()).c_str())(
-      "fruit",
-      po::value<std::string>(),
-      GetSetOfDefinedString(Fruit::GetDefinedStrings()).c_str())(
-      "suggested-window-position", // multitoken example
-      po::value<decltype(d_suggestedWindowPosition)>(&d_suggestedWindowPosition)->multitoken(),
-      "<x> <y>  # \tIn pixels, with (1, 1) being the top-left corner");
-    odFull.add(od);
-  }
-
-  { // 3) Informative output
-    //
-    po::options_description od("Informative output", 160, 80);
-    od.add_options()("help", "# \tOutput help on the usage, then exit")(
-      "verbose", po::value<std::string>(&d_verboseCLI), "{on, off}")(
-      "usage-examples", "# \tOutput example parameters, help on the usage, then exit");
-    odFull.add(od);
-  }
-
-  { // 4) Response file
-    //
-    po::options_description od("Response file", 160, 80);
-    od.add_options()(
-      "response-file",
-      po::value<std::string>(),
-      "# \tConfiguration file which uses the same syntax as the command line");
-    odFull.add(od);
-  }
+  Add_1_File_selection_to_options(odFull);
+  Add_2_Operation_flags_slash_parameters_to_options(odFull);
+  Add_3_Informative_output_to_options(odFull);
+  Add_4_Response_file_to_options(odFull);
 
   po::variables_map vm;
   try {
@@ -187,7 +222,6 @@ ABcb::cli::Parser::ParseCommandLine(int argc, char** argv)
     std::vector<std::string> args;
     copy(tokenizerObject.begin(), tokenizerObject.end(), back_inserter(args));
     // Parse the file and store the options
-    namespace po = boost::program_options;
     try {
       po::store(
         po::command_line_parser(args)
