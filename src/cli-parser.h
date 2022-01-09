@@ -9,6 +9,7 @@
 #include <vector>
 
 #include <boost/preprocessor.hpp>
+#include <boost/program_options.hpp>
 
 #define ABcb_TO_STR(unused, data, elem) BOOST_PP_STRINGIZE(elem),
 
@@ -43,6 +44,10 @@
   } \
 \
   } // namespace namespaceName
+
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(PlatonicSolid, (tetrahedron)(octahedron)(icosahedron)(hexahedron)(dodecahedron));
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Color, (red)(green)(blue));
+ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Fruit, (apple)(orange)(pear));
 
 namespace Ada_Byron_code_book {
 
@@ -82,10 +87,42 @@ using ConcreteType = EnumENH<FooBar, 3, "string">; //, fooBarText>;
 
 namespace cli {
 
-auto ParseCommandLine(int argc, char** argv) -> std::optional<std::pair<std::string, std::string>>;
-// '- when succeeding, it returns argv0 and programName
+class Parser {
+public:
+  Parser() = default;
 
-void LogParsedCommandLine(const std::string& programName);
+  auto ParseCommandLine(int argc, char** argv) -> std::optional<std::pair<std::string, std::string>>;
+  // '- when succeeding, it returns argv0 and programName
+
+  void LogParsedCommandLine() const;
+
+private:
+  bool CheckArguments(const boost::program_options::variables_map&);
+
+  char* d_argv0 = nullptr;
+  char* d_program_name = nullptr;
+
+  // 1) File selection
+  //
+  std::string d_filenameIn;
+
+  // 2) Operation flags/parameters
+  //
+  double d_inputDouble = 42.666;
+  double d_inputPositiveDouble = .8;
+  size_t d_inputUnsignedCharCLI;
+  unsigned char d_inputUnsignedChar;
+  PlatonicSolid::Enum d_platonicSolid = PlatonicSolid::Enum::undefined;
+  Color::Enum d_color = Color::Enum::undefined;
+  Fruit::Enum d_fruit = Fruit::Enum::undefined;
+  std::vector<size_t> d_suggestedWindowPosition;
+
+  // 3) Informative output
+  //
+  bool d_verbose = false;
+  std::string d_verboseCLI;
+  static const std::string d_usageParameterExamples;
+};
 
 } // namespace cli
 

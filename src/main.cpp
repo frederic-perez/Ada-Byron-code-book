@@ -30,10 +30,11 @@ main(const int argc, char* argv[])
 {
   namespace ABcb = Ada_Byron_code_book;
 
-  if (const auto pair = ABcb::cli::ParseCommandLine(argc, argv); pair.has_value()) {
+  ABcb::cli::Parser parser;
+  if (const auto pair = parser.ParseCommandLine(argc, argv); pair.has_value()) {
     const auto& [argv0, programName] = pair.value();
     ABcb::spy::RunInfo(argv0, programName).Log();
-    ABcb::cli::LogParsedCommandLine(programName);
+    parser.LogParsedCommandLine();
   } else {
     return EXIT_FAILURE;
   }

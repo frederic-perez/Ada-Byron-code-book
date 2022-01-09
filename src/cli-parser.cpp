@@ -7,7 +7,6 @@
   #include <boost/algorithm/string.hpp>
   #include <boost/numeric/conversion/bounds.hpp>
   #include <boost/numeric/conversion/cast.hpp>
-  #include <boost/program_options.hpp>
   #include <boost/tokenizer.hpp>
 // clang-format on
 #include "aux-raw-compiler-warnings-off++end.h"
@@ -55,36 +54,7 @@ ABcb::GurusTest(const std::initializer_list<std::string> a_args)
   }
 }
 
-namespace {
-
-ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(PlatonicSolid, (tetrahedron)(octahedron)(icosahedron)(hexahedron)(dodecahedron));
-ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Color, (red)(green)(blue));
-ABcb_DEFINE_NAMESPACE_WITH_ENUM_TOOLS(Fruit, (apple)(orange)(pear));
-
-} // namespace
-
-namespace Ada_Byron_code_book::cli {
-
-// 1) File selection
-//
-std::string filenameIn;
-
-// 2) Operation flags/parameters
-//
-double inputDouble = 42.666;
-double inputPositiveDouble = .8;
-size_t inputUnsignedCharCLI;
-unsigned char inputUnsignedChar;
-PlatonicSolid::Enum platonicSolid = PlatonicSolid::Enum::undefined;
-Color::Enum color = Color::Enum::undefined;
-Fruit::Enum fruit = Fruit::Enum::undefined;
-std::vector<size_t> suggestedWindowPosition;
-
-// 3) Informative output
-//
-bool verbose = false;
-std::string verboseCLI;
-const std::string usageParameterExamples =
+const std::string ABcb::cli::Parser::d_usageParameterExamples =
   "  --input-file C:\\\\tmp\\\\input.txt --input-positive-double 0.8"
   " --platonic-solid octahedron"
   "\n\n" // ie. a new example starts here
@@ -93,9 +63,7 @@ const std::string usageParameterExamples =
   "\n\n" // ie. a new example starts here
   "  --input-file C:\\\\tmp\\\\input3.txt --input-positive-double 2.5";
 
-// Helping function
-//
-auto CheckArguments(const boost::program_options::variables_map&) -> bool;
+namespace Ada_Byron_code_book::cli {
 
 // Miscellany
 
@@ -110,19 +78,18 @@ GetSetOfDefinedString(const std::vector<std::string>& a_definedStrings)
 } // namespace Ada_Byron_code_book::cli
 
 auto
-ABcb::cli::ParseCommandLine(const int argc, char** argv)
-->std::optional<std::pair<std::string, std::string>>
+ABcb::cli::Parser::ParseCommandLine(int argc, char** argv)
+-> std::optional<std::pair<std::string, std::string>>
 {
-  char* argv0 = argv[0];
-  char* progname = nullptr;
-  if ((progname = strrchr(argv[0], ABcb::raw::SystemSlash())) == nullptr) {
-    progname = argv[0];
+  d_argv0 = argv[0];
+  if ((d_program_name = strrchr(argv[0], ABcb::raw::SystemSlash())) == nullptr) {
+    d_program_name = argv[0];
   } else {
-    ++progname;
+    ++d_program_name;
   }
 
   namespace po = boost::program_options;
-  const std::string usageTitle = std::string("Usage: ") + progname + " [OPTIONS]...";
+  const std::string usageTitle = std::string("Usage: ") + d_program_name + " [OPTIONS]...";
   po::options_description odFull(usageTitle);
 
   { // 1) File selection
@@ -130,7 +97,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     po::options_description od("File selection");
     po::options_description odReq("  Mandatory", 160, 80);
     po::options_description odOpt("  Optional", 160, 80);
-    odReq.add_options()("input-file", po::value<std::string>(&filenameIn)->required(), "<filename>");
+    odReq.add_options()("input-file", po::value<std::string>(&d_filenameIn)->required(), "<filename>");
     od.add(odReq);
     od.add(odOpt);
     odFull.add(od);
@@ -139,22 +106,22 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
   { // 2) Operation flags/parameters
     //
     po::options_description od("Operation flags/parameters", 160, 80);
-    od.add_options()("input-double", po::value<double>(&inputDouble), "<double> # \texample to get any double value")(
+    od.add_options()("input-double", po::value<double>(&d_inputDouble), "<double> # \texample to get any double value")(
       "input-positive-double",
-      po::value<double>(&inputPositiveDouble),
+      po::value<double>(&d_inputPositiveDouble),
       "<positive double> # \texample to check the input is positive")(
       "input-ID",
-      po::value<size_t>(&inputUnsignedCharCLI),
+      po::value<size_t>(&d_inputUnsignedCharCLI),
       "<unsigned char> # \texample to get an ID--number--as an unsigned char")(
       "platonic-solid",
-      po::value<std::string>(), // po::value<PlatonicSolid>(&platonicSolid),
+      po::value<std::string>(), // po::value<PlatonicSolid>(&d_platonicSolid),
       GetSetOfDefinedString(PlatonicSolid::GetDefinedStrings()).c_str())(
       "color", po::value<std::string>(), GetSetOfDefinedString(Color::GetDefinedStrings()).c_str())(
       "fruit",
       po::value<std::string>(),
       GetSetOfDefinedString(Fruit::GetDefinedStrings()).c_str())(
       "suggested-window-position", // multitoken example
-      po::value<decltype(suggestedWindowPosition)>(&suggestedWindowPosition)->multitoken(),
+      po::value<decltype(d_suggestedWindowPosition)>(&d_suggestedWindowPosition)->multitoken(),
       "<x> <y>  # \tIn pixels, with (1, 1) being the top-left corner");
     odFull.add(od);
   }
@@ -163,7 +130,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     //
     po::options_description od("Informative output", 160, 80);
     od.add_options()("help", "# \tOutput help on the usage, then exit")(
-      "verbose", po::value<std::string>(&verboseCLI), "{on, off}")(
+      "verbose", po::value<std::string>(&d_verboseCLI), "{on, off}")(
       "usage-examples", "# \tOutput example parameters, help on the usage, then exit");
     odFull.add(od);
   }
@@ -192,11 +159,11 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
       return {};
     }
     if (vm.count("usage-examples") != 0) {
-      B_LOG_INFO << "Usage parameter example(s):\n\n" << cli::usageParameterExamples << "\n\n" << odFull;
+      B_LOG_INFO << "Usage parameter example(s):\n\n" << d_usageParameterExamples << "\n\n" << odFull;
       return {};
     }
   } catch (const std::exception& e) {
-    B_LOG_ERROR << progname << ": Error: " << e.what() << "\n\n" << odFull;
+    B_LOG_ERROR << d_program_name << ": Error: " << e.what() << "\n\n" << odFull;
     return {};
   }
 
@@ -207,7 +174,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     const std::string filename = vm["response-file"].as<std::string>();
     std::ifstream ifs(filename.c_str());
     if (!ifs) {
-      B_LOG_ERROR << progname << ": Error: Could not open the response file " << filename << "\n\n" << odFull;
+      B_LOG_ERROR << d_program_name << ": Error: Could not open the response file " << filename << "\n\n" << odFull;
       return {};
     }
     // Read the whole file into a string
@@ -229,7 +196,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
           .run(),
         vm);
     } catch (const std::exception& e) {
-      B_LOG_ERROR << progname << ": Error: " << e.what() << "\n\n" << odFull;
+      B_LOG_ERROR << d_program_name << ": Error: " << e.what() << "\n\n" << odFull;
       return {};
     }
   }
@@ -237,7 +204,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
   try {
     po::notify(vm);
   } catch (const std::exception& e) {
-    B_LOG_ERROR << progname << ": Error: " << e.what() << "\n\n" << odFull;
+    B_LOG_ERROR << d_program_name << ": Error: " << e.what() << "\n\n" << odFull;
     return {};
   }
 
@@ -246,7 +213,7 @@ ABcb::cli::ParseCommandLine(const int argc, char** argv)
     return {};
   }
 
-  return { { argv0, progname } };
+  return { { d_argv0, d_program_name } };
 }
 
 namespace {
@@ -276,23 +243,24 @@ ParseBoolean(const char* a_optarg, bool& a_field, const std::string& a_on, const
 } // namespace
 
 auto
-ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
+ABcb::cli::Parser::CheckArguments(
+  const boost::program_options::variables_map& a_vm)
 -> bool
 {
   if (a_vm.count("help") != 0) {
     return false; // force a error so the usage is shown automatically
   }
 
-  if (a_vm.count("input-positive-double") != 0 and inputPositiveDouble <= 0.) {
+  if (a_vm.count("input-positive-double") != 0 and d_inputPositiveDouble <= 0.) {
     return LogErrorAndReturnFalse("The input-positive-double parameter must be positive");
   }
 
   if (a_vm.count("input-ID") != 0) {
     try {
-      inputUnsignedChar = boost::numeric_cast<unsigned char>(inputUnsignedCharCLI);
+      d_inputUnsignedChar = boost::numeric_cast<unsigned char>(d_inputUnsignedCharCLI);
     } catch (const boost::numeric::bad_numeric_cast&) {
       std::ostringstream oss;
-      oss << "Wrong input-ID parameter '" << inputUnsignedCharCLI << '\''
+      oss << "Wrong input-ID parameter '" << d_inputUnsignedCharCLI << '\''
           << " (maximum allowed: " << static_cast<size_t>(boost::numeric::bounds<unsigned char>::highest()) << ')';
       const std::string message = oss.str();
       return LogErrorAndReturnFalse(message);
@@ -301,8 +269,8 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 
   if (a_vm.count("platonic-solid") != 0) {
     const auto& text = a_vm["platonic-solid"].as<std::string>();
-    platonicSolid = PlatonicSolid::GetEnum(text);
-    if (platonicSolid == PlatonicSolid::Enum::undefined) {
+    d_platonicSolid = PlatonicSolid::GetEnum(text);
+    if (d_platonicSolid == PlatonicSolid::Enum::undefined) {
       const std::string message = "Unknown platonic-solid parameter '" + text + "'";
       return LogErrorAndReturnFalse(message);
     }
@@ -310,8 +278,8 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 
   if (a_vm.count("color") != 0) {
     const auto& text = a_vm["color"].as<std::string>();
-    color = Color::GetEnum(text);
-    if (color == Color::Enum::undefined) {
+    d_color = Color::GetEnum(text);
+    if (d_color == Color::Enum::undefined) {
       const std::string message = "Unknown color parameter '" + text + "'";
       return LogErrorAndReturnFalse(message);
     }
@@ -319,17 +287,17 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 
   if (a_vm.count("fruit") != 0) {
     const auto& text = a_vm["fruit"].as<std::string>();
-    fruit = Fruit::GetEnum(text);
-    if (fruit == Fruit::Enum::undefined) {
+    d_fruit = Fruit::GetEnum(text);
+    if (d_fruit == Fruit::Enum::undefined) {
       const std::string message = "Unknown fruit parameter '" + text + "'";
       return LogErrorAndReturnFalse(message);
     }
   }
 
-  if (!suggestedWindowPosition.empty() and suggestedWindowPosition.size() != 2) {
+  if (!d_suggestedWindowPosition.empty() and d_suggestedWindowPosition.size() != 2) {
     std::ostringstream oss;
     oss << "Wrong suggested-window-position parameter ";
-    for (auto position : suggestedWindowPosition) {
+    for (auto position : d_suggestedWindowPosition) {
       oss << position << ' ';
     }
     oss << "-- please, specify 2 (x, y) components";
@@ -337,7 +305,7 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
     return LogErrorAndReturnFalse(message);
   }
 
-  if (a_vm.count("verbose") != 0 and not ParseBoolean(verboseCLI.c_str(), verbose, "on", "off")) {
+  if (a_vm.count("verbose") != 0 and not ParseBoolean(d_verboseCLI.c_str(), d_verbose, "on", "off")) {
     return LogErrorAndReturnFalse("Unknown verbose parameter");
   }
 
@@ -347,30 +315,30 @@ ABcb::cli::CheckArguments(const boost::program_options::variables_map& a_vm)
 #define LogWithCare(a_string) (a_string.empty() ? "[empty]" : a_string)
 
 void
-ABcb::cli::LogParsedCommandLine(const std::string& progname)
+ABcb::cli::Parser::LogParsedCommandLine() const
 {
-  B_LOG_INFO << progname << " was called with the following options:";
+  B_LOG_INFO << d_program_name << " was called with the following options:";
   B_LOG_INFO << "";
 
   // 1) File selection
   //
   B_LOG_INFO << "File selection:";
-  B_LOG_INFO << "  --input-file " << LogWithCare(filenameIn);
+  B_LOG_INFO << "  --input-file " << LogWithCare(d_filenameIn);
   B_LOG_INFO << "";
 
   // 2) Operation flags/parameters
   //
   B_LOG_INFO << "Operation flags/parameters:";
-  B_LOG_INFO << "  --input-double " << inputDouble;
-  B_LOG_INFO << "  --input-positive-double " << inputPositiveDouble;
-  B_LOG_INFO << "  --input-ID " << inputUnsignedCharCLI;
-  B_LOG_INFO << "  --platonic-solid " << GetString(platonicSolid);
-  B_LOG_INFO << "  --color " << Color::GetString(color);
-  B_LOG_INFO << "  --fruit " << Fruit::GetString(fruit);
-  if (!suggestedWindowPosition.empty()) {
+  B_LOG_INFO << "  --input-double " << d_inputDouble;
+  B_LOG_INFO << "  --input-positive-double " << d_inputPositiveDouble;
+  B_LOG_INFO << "  --input-ID " << d_inputUnsignedCharCLI;
+  B_LOG_INFO << "  --platonic-solid " << GetString(d_platonicSolid);
+  B_LOG_INFO << "  --color " << Color::GetString(d_color);
+  B_LOG_INFO << "  --fruit " << Fruit::GetString(d_fruit);
+  if (!d_suggestedWindowPosition.empty()) {
     std::ostringstream oss;
     oss << "  --suggested-window-position ";
-    for (auto position : suggestedWindowPosition) {
+    for (auto position : d_suggestedWindowPosition) {
       oss << position << ' ';
     }
     B_LOG_INFO << oss.str();
@@ -380,6 +348,6 @@ ABcb::cli::LogParsedCommandLine(const std::string& progname)
   // 3) Informative output
   //
   B_LOG_INFO << "Informative output:";
-  B_LOG_INFO << "  --verbose " << (verbose ? "on" : "off");
+  B_LOG_INFO << "  --verbose " << (d_verbose ? "on" : "off");
   B_LOG_INFO << "";
 }
