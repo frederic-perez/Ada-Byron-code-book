@@ -76,6 +76,13 @@ ABcb::ExamplesOfFileSystem(const std::string& a_filename)
 
   B_LOG_INFO << pad << '\"' << a_filename << '\"' << " has a file_size of " << bf::file_size(a_filename) << " bytes";
 
+  // "Split" a_filename
+
+  const auto directory = bf::path(a_filename, nullptr).remove_filename().string();
+  const auto raw_filename = bf::path(a_filename, nullptr).filename().string();
+  B_LOG_INFO << pad << '\"' << a_filename << '\"' << " » directory = \"" << directory << "\"";
+  B_LOG_INFO << pad << '\"' << a_filename << '\"' << " » raw_filename = \"" << raw_filename << "\"";
+
   bf::path myPath1("/usr/include/assert.h");
   B_LOG_INFO << pad << "Path " << myPath1;
   if (myPath1.has_extension()) {
