@@ -4,7 +4,6 @@
 
 #define BOOST_LIB_DIAGNOSTIC
 
-#include <boost/filesystem.hpp>
 #include <boost/system/config.hpp>
 
 #include "aux-raw.h"
@@ -81,7 +80,7 @@ DoSomeStdStuff(const std::string& a_label, sf::path& a_path)
 } // namespace
 
 void
-ABcb::ExamplesOfBoostFileSystem(const std::string& a_filename)
+ABcb::ExamplesOfBoostFileSystem(const bf::path& a_filename)
 {
   B_LOG_TRACE_STARTED
 
@@ -105,8 +104,8 @@ ABcb::ExamplesOfBoostFileSystem(const std::string& a_filename)
     // conventions of the operating system. The specifics of how this path is
     // determined are implementation defined.
     B_LOG_INFO << pad << "temp_directory_path() returned " << tempDirectoryPath.string();
-  } catch (...) {
-    B_LOG_ERROR << __func__ << ": Error: Could not get temporary folder";
+  } catch (const bf::filesystem_error& e) {
+    B_LOG_ERROR << __func__ << ": boost::filesystem::filesystem_error caught: " << e.what();
   }
 
   // "Testing" an invented file (random file)
@@ -120,18 +119,18 @@ ABcb::ExamplesOfBoostFileSystem(const std::string& a_filename)
   // "Testing" a_filename
 
   if (not bf::exists(a_filename)) { // Bail out ASAP
-    B_LOG_ERROR << a_filename << " does not exist. Aborted.";
+    B_LOG_ERROR << a_filename.string() << " does not exist. Aborted.";
     return;
   }
 
-  B_LOG_INFO << pad << '\"' << a_filename << '\"' << " has a file_size of " << bf::file_size(a_filename) << " bytes";
+  B_LOG_INFO << pad << '\"' << a_filename.string() << '\"' << " has a file_size of " << bf::file_size(a_filename) << " bytes";
 
   // "Split" a_filename
 
-  const auto directory = bf::path(a_filename, nullptr).remove_filename().string();
-  const auto raw_filename = bf::path(a_filename, nullptr).filename().string();
-  B_LOG_INFO << pad << '\"' << a_filename << '\"' << " » directory = \"" << directory << "\"";
-  B_LOG_INFO << pad << '\"' << a_filename << '\"' << " » raw_filename = \"" << raw_filename << "\"";
+  const auto directory = bf::path(a_filename).remove_filename().string();
+  const auto raw_filename = a_filename.filename().string();
+  B_LOG_INFO << pad << '\"' << a_filename.string() << '\"' << " » directory = \"" << directory << "\"";
+  B_LOG_INFO << pad << '\"' << a_filename.string() << '\"' << " » raw_filename = \"" << raw_filename << "\"";
 
   bf::path myPath1("/usr/include/assert.h");
   B_LOG_INFO << pad << "Path " << myPath1.string();
@@ -146,24 +145,30 @@ ABcb::ExamplesOfBoostFileSystem(const std::string& a_filename)
 
   // "Testing" the current directory
 
-  const std::string dot = ".";
-  const bf::path currentDir(dot);
-  const bool isDirectory = bf::is_directory(currentDir);
-  B_LOG_INFO << pad << "is_directory(" << currentDir.string() << ") = " << std::boolalpha << isDirectory;
-  const bf::path fullPathCD = bf::system_complete(dot);
-  B_LOG_INFO << pad << "full path of " << currentDir.string() << " = " << fullPathCD.string();
+  const auto currentPath = bf::current_path();
+  const bool isDirectory = bf::is_directory(currentPath);
+  B_LOG_INFO << pad << "is_directory(" << currentPath.string() << ") = " << std::boolalpha << isDirectory;
+  const bf::path fullPathCD = bf::system_complete(currentPath);
+  B_LOG_INFO << pad << "full path of " << currentPath.string() << " = " << fullPathCD.string();
 
   if (isDirectory) {
     const std::string space = " ";
     std::ostringstream oss;
     std::copy(
-      bf::directory_iterator(currentDir),
+      bf::directory_iterator(currentPath),
       bf::directory_iterator(),
       std::ostream_iterator<bf::directory_entry>(oss, space.c_str()));
     // directory_iterator::value_type is directory_entry, which is converted
     // to a path by the path stream inserter
-    B_LOG_INFO << pad << "Directory " << currentDir.string() << " contents: " << oss.str();
+    B_LOG_INFO << pad << "Directory " << currentPath.string() << " contents: " << oss.str();
   }
+
+  B_LOG_INFO << pad << "currentPath is currently " << bf::current_path().string();
+  bf::current_path(bf::temp_directory_path());
+  B_LOG_INFO << pad << "currentPath has been changed to " << bf::current_path().string();
+  bf::current_path(currentPath);
+  B_LOG_INFO << pad << "currentPath has been changed again to " << bf::current_path().string();
+
   B_LOG_TRACE_FINISHED
 }
 
@@ -224,7 +229,7 @@ ABcb::ExamplesOfStdFileSystem(const std::filesystem::path& a_filename)
     return;
   }
 
-  B_LOG_INFO << pad << '\"' << a_filename << '\"' << " has a file_size of " << sf::file_size(a_filename) << " bytes";
+  B_LOG_INFO << pad << '\"' << a_filename.string() << '\"' << " has a file_size of " << sf::file_size(a_filename) << " bytes";
 
   // "Split" a_filename
 
@@ -246,23 +251,29 @@ ABcb::ExamplesOfStdFileSystem(const std::filesystem::path& a_filename)
 
   // "Testing" the current directory
 
-  const std::string dot = ".";
-  const sf::path currentDir(dot);
-  const bool isDirectory = sf::is_directory(currentDir);
-  B_LOG_INFO << pad << "is_directory(" << currentDir.string() << ") = " << std::boolalpha << isDirectory;
-  const sf::path fullPathCD = sf::absolute(dot); // ported from old bf::system_complete(dot);
-  B_LOG_INFO << pad << "full path of " << currentDir.string() << " = " << fullPathCD.string();
+  const auto currentPath = sf::current_path();
+  const bool isDirectory = sf::is_directory(currentPath);
+  B_LOG_INFO << pad << "is_directory(" << currentPath.string() << ") = " << std::boolalpha << isDirectory;
+  const sf::path fullPathCD = sf::absolute(currentPath); // ported from old bf::system_complete(dot);
+  B_LOG_INFO << pad << "full path of " << currentPath.string() << " = " << fullPathCD.string();
 
   if (isDirectory) {
     const std::string space = " ";
     std::ostringstream oss;
     std::copy(
-      sf::directory_iterator(currentDir),
+      sf::directory_iterator(currentPath),
       sf::directory_iterator(),
       std::ostream_iterator<sf::directory_entry>(oss, space.c_str()));
     // directory_iterator::value_type is directory_entry, which is converted
     // to a path by the path stream inserter
-    B_LOG_INFO << pad << "Directory " << currentDir.string()  << " contents: " << oss.str();
+    B_LOG_INFO << pad << "Directory " << currentPath.string()  << " contents: " << oss.str();
   }
+
+  B_LOG_INFO << pad << "currentPath is currently " << sf::current_path().string();
+  sf::current_path(sf::temp_directory_path());
+  B_LOG_INFO << pad << "currentPath has been changed to " << sf::current_path().string();
+  sf::current_path(currentPath);
+  B_LOG_INFO << pad << "currentPath has been changed again to " << sf::current_path().string();
+
   B_LOG_TRACE_FINISHED
 }
