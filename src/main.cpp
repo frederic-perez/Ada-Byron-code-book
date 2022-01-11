@@ -55,7 +55,8 @@ main(const int argc, char* argv[])
   B_LOG_END_OF_BLOCK
 
   const std::string exeFile = argv[0];
-  ABcb::ExamplesOfFileSystem(exeFile);
+  ABcb::ExamplesOfBoostFileSystem(exeFile);
+  ABcb::ExamplesOfStdFileSystem(std::filesystem::path(exeFile));
   B_LOG_END_OF_BLOCK
 
   ABcb::ExamplesOfIstringstreamFailingConversions();

@@ -48,6 +48,9 @@ SystemSlash()
   return '\\';
 #endif
 }
+
+std::string RandomString(size_t length);
+
 void ExamplesOfRaw();
 
 const std::string pad = "  ";
