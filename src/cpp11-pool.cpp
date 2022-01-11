@@ -13,6 +13,7 @@
 namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179
 
 using ABcb::raw::pad;
+using ABcb::raw::pad2x;
 
 void
 ABcb::cpp11::TryBadCode()
@@ -115,8 +116,8 @@ ABcb::cpp11::AlgorithmExamples()
   B_LOG_INFO << ToString(v, pad + "v");
   const auto [minIt, maxIt] = // C++17 structured binding
     std::minmax_element(v.cbegin(), v.cend());
-  B_LOG_INFO << pad << pad << "v's min element is " << *minIt << ", at index " << minIt - v.cbegin();
-  B_LOG_INFO << pad << pad << "v's max element is " << *maxIt << ", at index " << maxIt - v.cbegin();
+  B_LOG_INFO << pad2x << "v's min element is " << *minIt << ", at index " << minIt - v.cbegin();
+  B_LOG_INFO << pad2x << "v's max element is " << *maxIt << ", at index " << maxIt - v.cbegin();
 
   const auto [f1, f2] = std::tuple(12.f, 7.f); // C++17 structured binding
   // '- Using the "Exception" of the
@@ -125,8 +126,8 @@ ABcb::cpp11::AlgorithmExamples()
   const auto [min, max] = // C++17 structured binding
     std::minmax(f1, f2);
   B_LOG_INFO << pad << "f1 = " << f1 << ", f2 = " << f2;
-  B_LOG_INFO << pad << pad << "min of {f1, f2} = " << min;
-  B_LOG_INFO << pad << pad << "max of {f1, f2} = " << max;
+  B_LOG_INFO << pad2x << "min of {f1, f2} = " << min;
+  B_LOG_INFO << pad2x << "max of {f1, f2} = " << max;
 
   B_LOG_TRACE_FINISHED
 }

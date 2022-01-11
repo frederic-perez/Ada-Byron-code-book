@@ -26,6 +26,7 @@ void
 GuruTest(const std::string& a_text)
 {
   using ABcb::raw::pad;
+  using ABcb::raw::pad2x;
 
   const Guru::Enum guru = Guru::GetEnum(a_text);
   if (guru == Guru::Enum::undefined) {
@@ -37,7 +38,7 @@ GuruTest(const std::string& a_text)
     const auto setOfDefinedStrings = oss.str();
 
     B_LOG_ERROR << pad << __func__ << ": " << message;
-    B_LOG_INFO << pad << pad << "--guru arg " << setOfDefinedStrings;
+    B_LOG_INFO << pad2x << "--guru arg " << setOfDefinedStrings;
   } else {
     B_LOG_INFO << pad << __func__ << ": Guru::Enum guru exists for text `" << a_text << "`";
   }

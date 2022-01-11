@@ -13,6 +13,7 @@
 
 namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;
+using ABcb::raw::pad2x;
 
 namespace bf = boost::filesystem;
 namespace sf = std::filesystem;
@@ -24,27 +25,27 @@ DoSomeBoostStuff(const std::string& a_label, bf::path& a_path)
 {
   B_LOG_INFO << pad << a_label << ": " << a_path.string();
 
-  B_LOG_INFO << pad << pad << "» empty: " << a_path.empty();
-  B_LOG_INFO << pad << pad << "» is_absolute: " << a_path.is_absolute();
-  B_LOG_INFO << pad << pad << "» is_relative: " << a_path.is_relative();
+  B_LOG_INFO << pad2x << "» empty: " << a_path.empty();
+  B_LOG_INFO << pad2x << "» is_absolute: " << a_path.is_absolute();
+  B_LOG_INFO << pad2x << "» is_relative: " << a_path.is_relative();
 
-  B_LOG_INFO << pad << pad << "» has_filename: " << a_path.has_filename();
-  B_LOG_INFO << pad << pad << "» filename: " << a_path.filename();
+  B_LOG_INFO << pad2x << "» has_filename: " << a_path.has_filename();
+  B_LOG_INFO << pad2x << "» filename: " << a_path.filename();
 
-  B_LOG_INFO << pad << pad << "» has_extension: " << a_path.has_extension();
-  B_LOG_INFO << pad << pad << "» extension: " << a_path.extension();
+  B_LOG_INFO << pad2x << "» has_extension: " << a_path.has_extension();
+  B_LOG_INFO << pad2x << "» extension: " << a_path.extension();
 
-  B_LOG_INFO << pad << pad << "» has_parent_path: " << a_path.has_parent_path();
-  B_LOG_INFO << pad << pad << "» parent_path: " << a_path.parent_path().string();
+  B_LOG_INFO << pad2x << "» has_parent_path: " << a_path.has_parent_path();
+  B_LOG_INFO << pad2x << "» parent_path: " << a_path.parent_path().string();
 
-  B_LOG_INFO << pad << pad << "» has_root_path: " << a_path.has_root_path();
-  B_LOG_INFO << pad << pad << "» root_path: " << a_path.root_path().string();
+  B_LOG_INFO << pad2x << "» has_root_path: " << a_path.has_root_path();
+  B_LOG_INFO << pad2x << "» root_path: " << a_path.root_path().string();
 
-  B_LOG_INFO << pad << pad << "» lexically_normal: " << a_path.lexically_normal().string();
+  B_LOG_INFO << pad2x << "» lexically_normal: " << a_path.lexically_normal().string();
 
   a_path.make_preferred();
   B_LOG_INFO
-    << pad << pad << "becomes (after make_preferred) " << a_path.string()
+    << pad2x << "becomes (after make_preferred) " << a_path.string()
     << " which " << (bf::exists(a_path) ? "exists" : "does not exist");
 }
 
@@ -53,27 +54,27 @@ DoSomeStdStuff(const std::string& a_label, sf::path& a_path)
 {
   B_LOG_INFO << pad << a_label << ": " << a_path.string();
 
-  B_LOG_INFO << pad << pad << "» empty: " << a_path.empty();
-  B_LOG_INFO << pad << pad << "» is_absolute: " << a_path.is_absolute();
-  B_LOG_INFO << pad << pad << "» is_relative: " << a_path.is_relative();
+  B_LOG_INFO << pad2x << "» empty: " << a_path.empty();
+  B_LOG_INFO << pad2x << "» is_absolute: " << a_path.is_absolute();
+  B_LOG_INFO << pad2x << "» is_relative: " << a_path.is_relative();
 
-  B_LOG_INFO << pad << pad << "» has_filename: " << a_path.has_filename();
-  B_LOG_INFO << pad << pad << "» filename: " << a_path.filename();
+  B_LOG_INFO << pad2x << "» has_filename: " << a_path.has_filename();
+  B_LOG_INFO << pad2x << "» filename: " << a_path.filename();
 
-  B_LOG_INFO << pad << pad << "» has_extension: " << a_path.has_extension();
-  B_LOG_INFO << pad << pad << "» extension: " << a_path.extension();
+  B_LOG_INFO << pad2x << "» has_extension: " << a_path.has_extension();
+  B_LOG_INFO << pad2x << "» extension: " << a_path.extension();
 
-  B_LOG_INFO << pad << pad << "» has_parent_path: " << a_path.has_parent_path();
-  B_LOG_INFO << pad << pad << "» parent_path: " << a_path.parent_path().string();
+  B_LOG_INFO << pad2x << "» has_parent_path: " << a_path.has_parent_path();
+  B_LOG_INFO << pad2x << "» parent_path: " << a_path.parent_path().string();
 
-  B_LOG_INFO << pad << pad << "» has_root_path: " << a_path.has_root_path();
-  B_LOG_INFO << pad << pad << "» root_path: " << a_path.root_path().string();
+  B_LOG_INFO << pad2x << "» has_root_path: " << a_path.has_root_path();
+  B_LOG_INFO << pad2x << "» root_path: " << a_path.root_path().string();
 
-  B_LOG_INFO << pad << pad << "» lexically_normal: " << a_path.lexically_normal().string();
+  B_LOG_INFO << pad2x << "» lexically_normal: " << a_path.lexically_normal().string();
 
   a_path.make_preferred();
   B_LOG_INFO
-    << pad << pad << "becomes (after make_preferred) " << a_path.string()
+    << pad2x << "becomes (after make_preferred) " << a_path.string()
     << " which " << (sf::exists(a_path) ? "exists" : "does not exist");
 }
 
@@ -135,13 +136,13 @@ ABcb::ExamplesOfBoostFileSystem(const std::string& a_filename)
   bf::path myPath1("/usr/include/assert.h");
   B_LOG_INFO << pad << "Path " << myPath1.string();
   if (myPath1.has_extension()) {
-    B_LOG_INFO << pad << pad << "has the extension " << myPath1.extension().string();
+    B_LOG_INFO << pad2x << "has the extension " << myPath1.extension().string();
     myPath1.replace_extension(".new_extension");
     B_LOG_INFO
-      << pad << pad << "Path " << myPath1.string()
+      << pad2x << "Path " << myPath1.string()
       << " now (after replace_extension) has the extension " << myPath1.extension().string();
   } else
-    B_LOG_INFO << pad << pad << "does not have any extension";
+    B_LOG_INFO << pad2x << "does not have any extension";
 
   // "Testing" the current directory
 
@@ -235,13 +236,13 @@ ABcb::ExamplesOfStdFileSystem(const std::filesystem::path& a_filename)
   sf::path myPath1("/usr/include/assert.h");
   B_LOG_INFO << pad << "Path " << myPath1.string();
   if (myPath1.has_extension()) {
-    B_LOG_INFO << pad << pad << "has the extension " << myPath1.extension().string();
+    B_LOG_INFO << pad2x << "has the extension " << myPath1.extension().string();
     myPath1.replace_extension(".new_extension");
     B_LOG_INFO
-      << pad << pad << "Path " << myPath1.string()
+      << pad2x << "Path " << myPath1.string()
       << " now (after replace_extension) has the extension " << myPath1.extension().string();
   } else
-    B_LOG_INFO << pad << pad << "does not have any extension";
+    B_LOG_INFO << pad2x << "does not have any extension";
 
   // "Testing" the current directory
 

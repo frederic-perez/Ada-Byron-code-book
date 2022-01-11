@@ -54,5 +54,6 @@ std::string RandomString(size_t length);
 void ExamplesOfRaw();
 
 const std::string pad = "  ";
+const auto pad2x = pad + pad;
 
 } // namespace Ada_Byron_code_book::raw

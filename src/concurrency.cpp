@@ -18,6 +18,7 @@
 namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179
 
 using ABcb::raw::pad;
+using ABcb::raw::pad2x;
 
 namespace {
 
@@ -28,7 +29,7 @@ run(const size_t a_n)
 {
   m.lock();
   for (size_t i = 0; i < 4; ++i)
-    B_LOG_INFO << pad << pad << a_n << ": " << i;
+    B_LOG_INFO << pad2x << a_n << ": " << i;
   m.unlock();
 }
 
@@ -114,11 +115,11 @@ void
 Waiter(size_t a_threadNumber)
 {
   B_LOG_TRACE
-    << pad << pad << __func__ << " starts to wait for 5 seconds [thread #" << a_threadNumber
+    << pad2x << __func__ << " starts to wait for 5 seconds [thread #" << a_threadNumber
     << ", thread_self()=" << pthread_self() << "]...";
   std::this_thread::sleep_for(std::chrono::milliseconds(5000));
   B_LOG_TRACE
-    << pad << pad << __func__ << " is about to end (sleeping time finished)";
+    << pad2x << __func__ << " is about to end (sleeping time finished)";
 }
 
 pthread_barrier_t barrier;
@@ -133,24 +134,24 @@ Function(void* a_param)
   const std::string threadInfo = oss.str();
 
   if (threadNumber == 3) {
-    B_LOG_INFO << pad << pad << __func__ << " is about to call Waiter" << threadInfo;
+    B_LOG_INFO << pad2x << __func__ << " is about to call Waiter" << threadInfo;
     Waiter(threadNumber);
   }
 
-  B_LOG_INFO << pad << pad << __func__ << " is about to stop for barrier" << threadInfo;
+  B_LOG_INFO << pad2x << __func__ << " is about to stop for barrier" << threadInfo;
   const int rc = pthread_barrier_wait(&barrier); // Synchronization point
   if (rc != 0 and rc != PTHREAD_BARRIER_SERIAL_THREAD) {
-    B_LOG_ERROR << pad << pad << __func__ << ": Error: Could not wait on barrier. Exiting.";
+    B_LOG_ERROR << pad2x << __func__ << ": Error: Could not wait on barrier. Exiting.";
     exit(-1);
   }
-  B_LOG_INFO << pad << pad << __func__ << " exited from barrier" << threadInfo;
+  B_LOG_INFO << pad2x << __func__ << " exited from barrier" << threadInfo;
   return nullptr;
 }
 
 void*
 LogThreadSelf(void*)
 {
-  B_LOG_TRACE << __func__ << pad << pad << __func__ << " called [thread_self()=" << pthread_self() << ']';
+  B_LOG_TRACE << __func__ << pad2x << __func__ << " called [thread_self()=" << pthread_self() << ']';
   return nullptr;
 }
 

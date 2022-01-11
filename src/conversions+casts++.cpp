@@ -17,6 +17,7 @@
 
 namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;
+using ABcb::raw::pad2x;
 
 void
 ABcb::ExamplesOfIstringstreamFailingConversions()
@@ -70,7 +71,7 @@ ABcb::ExamplesOfCpp11Conversions()
   string = string.substr(idx);
   const double d2 = std::stod(string); // Caution: idx is not updated here
   B_LOG_INFO
-    << pad << pad << ">> std::stoul: " << ul << "; std::stoi: " << i << "; std::stof: " << f << "; std::stod: " << d1
+    << pad2x << ">> std::stoul: " << ul << "; std::stoi: " << i << "; std::stof: " << f << "; std::stod: " << d1
     << "; std::stod: " << d2;
 
   const std::string backToString = std::to_string(ul) + ' ' + std::to_string(i) + ' ' + std::to_string(f) + ' '
@@ -161,7 +162,7 @@ UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
 
   // Keep on using sourceObjectSelf from this point onwards
 
-  B_LOG_INFO << pad << pad << ">> target (" << typeNameENHOfTargetT << ") = " << static_cast<double>(target);
+  B_LOG_INFO << pad2x << ">> target (" << typeNameENHOfTargetT << ") = " << static_cast<double>(target);
 }
 
 template <class SourceT, class TargetT>
@@ -188,7 +189,7 @@ ApplyBoostNumericCast(const SourceT a_source)
   const auto typeNameOfTargetT = ABcb::spy::TypeNameENH<TargetT>();
   try {
     target = boost::numeric_cast<TargetT>(a_source);
-    B_LOG_INFO << pad << pad << ">> target (" << typeNameOfTargetT << ") = " << static_cast<long double>(target);
+    B_LOG_INFO << pad2x << ">> target (" << typeNameOfTargetT << ") = " << static_cast<long double>(target);
   } catch (const boost::numeric::bad_numeric_cast& e) {
     B_LOG_ERROR
       << pad << __func__ << ": Error: Bad target (" << static_cast<long double>(target)
