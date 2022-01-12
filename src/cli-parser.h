@@ -11,6 +11,8 @@
 #include <boost/preprocessor.hpp>
 #include <boost/program_options.hpp>
 
+#include "literal-operators.h"
+
 #define ABcb_TO_STR(unused, data, elem) BOOST_PP_STRINGIZE(elem),
 
 // Code originarily based on
@@ -85,6 +87,8 @@ const std::array fooBarText{"undefined", "foo", "bar"};
 using ConcreteType = EnumENH<FooBar, 3, "string">; //, fooBarText>;
 #endif
 
+using Ada_Byron_code_book::literal_operators::operator"" _uchar;
+
 namespace cli {
 
 class Parser {
@@ -117,12 +121,12 @@ private:
   //
   double d_inputDouble = 42.666;
   double d_inputPositiveDouble = .8;
-  size_t d_inputUnsignedCharCLI;
-  unsigned char d_inputUnsignedChar;
+  size_t d_inputUnsignedCharCLI = 0;
+  unsigned char d_inputUnsignedChar = 0_uchar;
   PlatonicSolid::Enum d_platonicSolid = PlatonicSolid::Enum::undefined;
   Color::Enum d_color = Color::Enum::undefined;
   Fruit::Enum d_fruit = Fruit::Enum::undefined;
-  std::vector<size_t> d_suggestedWindowPosition;
+  std::vector<size_t> d_suggestedWindowPosition{ 0, 0 };
 
   // 3) Informative output
   //

@@ -176,29 +176,30 @@ ToString(const std::tuple<Args...>& t)
 //     std::ostream& operator<<(std::ostream&, MyEnumClass)
 //   which could be defined, for examples, as
 //     std::ostream& operator<<(std::ostream& a_os, MyEnumClass a_value) {
-//       a_os << as_string(a_value);
-//       return a_os;
+//       a_os << as_string(a_value); // NOSONAR
+//       return a_os; // NOSONAR
 //     }
 // - For non-basic classes like, for example, glm::fvec3 (an instantiation of a template
 //   struct), we need to define:
 //     namespace glm { // required by clang++
 //     std::ostream& operator<<(std::ostream& a_os, const fvec3& value) {
-//       a_os << to_string(value);
-//       return a_os;
+//       a_os << to_string(value); // NOSONAR
+//       return a_os; // NOSONAR
 //     }
 //     } // namespace glm
 //   Another example: for a tuple, we could do something like this:
-//     using MyTuple = std::tuple<int, std::string, bool>;
+//     using MyTuple = std::tuple<int, std::string, bool>; // NOSONAR
 //     std::ostream& operator<<(std::ostream& a_os, const MyTuple& value) {
 //       a_os << '{' << std::get<0>(value) << ", " << std::get<1>(value) << ", "
-//            << std::get<2>(value) << '}';
-//       return a_os;
+//            << std::get<2>(value) << '}'; // NOSONAR
+//       return a_os; // NOSONAR
 //     }
 //     or this very compact definition by using ToString for tuples:
 //     std::ostream& operator<<(std::ostream& a_os, const MyTuple& value) {
-//       return a_os << ToString(value);
+//       return a_os << ToString(value); // NOSONAR
 //     }
-// Usage example: std::clog << ... << ToString(myContainer, "myContainer") << ...;
+// Usage example:
+//   std::clog << ... << ToString(myContainer, "myContainer") << ...; // NOSONAR
 //
 template <typename TContainer>
 std::string
