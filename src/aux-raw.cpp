@@ -1,4 +1,5 @@
 #include <algorithm> // for std::generate_n
+#include <random>
 #include <set>
 #include <string>
 #include <vector>
@@ -9,22 +10,27 @@
 
 namespace ABcb = Ada_Byron_code_book;
 
-// From
+// Originarily (but later modified) from
 // https://stackoverflow.com/questions/440133/
 //   how-do-i-create-a-random-alpha-numeric-string-in-c/12468109#12468109
 //
 std::string
 ABcb::raw::RandomString(size_t length)
 {
-  auto randchar = []() -> char
+  auto randchar = []()
   {
     const char charset[] =
       "0123456789"
       "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
       "abcdefghijklmnopqrstuvwxyz";
-    const size_t max_index = sizeof(charset) - 1;
-    return charset[rand() % max_index];
+
+    // From https://en.cppreference.com/w/cpp/numeric/random/uniform_int_distribution
+    std::random_device rd; // Will be used to obtain a seed for the random number engine
+    std::mt19937 generator(rd()); // Standard mersenne_twister_engine seeded with rd()
+    std::uniform_int_distribution<size_t> distribution(0, sizeof(charset) - 2);
+    return charset[distribution(generator)];
   };
+
   std::string str(length, 0);
   std::generate_n(str.begin(), length, randchar);
   return str;
@@ -48,7 +54,7 @@ ABcb::raw::ExamplesOfRaw()
   ABcb::raw::WipeOut(mySetOfChars);
   B_LOG_INFO << ToString(mySetOfChars, pad + "mySetOfChars (after WipeOut call)");
 
-  B_LOG_INFO << "RandomString(8) returned \"" << RandomString(8) << "\"";
+  B_LOG_INFO << "RandomString(32) returned \"" << RandomString(32) << "\"";
 
   B_LOG_TRACE_FINISHED
 }
