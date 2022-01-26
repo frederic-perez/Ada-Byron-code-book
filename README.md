@@ -22,8 +22,9 @@ I use to build binaries for these settings (sorted alphabetically)
 
 and for all of them we use
 
+- [Boost](https://www.boost.org/) Version 1.78.0 (December 8th, 2021 03:45 GMT)
 - [Boost](https://www.boost.org/) Version 1.76.0 (April 16th, 2021 21:05 GMT)
-- [Boost](https://www.boost.org/) Version 1.75.0 (December 11th, 2020 19:50 GMT)
+- ~~Boost Version 1.75.0 (December 11th, 2020 19:50 GMT)~~
 - ~~Boost Version 1.59.0 (August 13th, 2015 15:23 GMT)~~
 - ~~Boost Version 1.58.0 (April 17th, 2015 07:53 GMT)~~
 - ~~Boost Version 1.57.0 (November 3rd, 2014 21:55 GMT)~~
