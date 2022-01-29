@@ -112,25 +112,23 @@ Other tools related to code analysis:
 
 ### Commits
 
-When committing changes, we now favor using emojis that convey information (see, for example, [gitmoji](https://gitmoji.dev/)). In the past we used common prefixes—see for example a [list of ITK changes](https://www.kitware.com/itk-4-7-2-has-been-released/). From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix) and an [ITK Git entry](https://itk.org/Wiki/ITK/Git/Develop):
+When committing changes, we now favor using emojis that convey information (see, for example, [gitmoji](https://gitmoji.dev/)). In the past we used common prefixes—see for example a [list of ITK changes](https://www.kitware.com/itk-4-7-2-has-been-released/). From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix):
 
 | Prefix | What          |
 | ------ |:--------------|
-| BUG    | Fixing a runtime issue (crash, segmentation fault, exception) or incorrect result |
-| COMP   | Fix for a compilation issue (including minor C++ or C++11 improvements), error or warning  |
-| DOC    | Documentation change |
-| ENH    | New functionality added to the project |
-| PERF   | Performance improvement |
-| STYLE  | No logic impact (indentation, comments) |
-| WIP    | Work in progress |
+| BUG   | a change made to fix a runtime issue (crash, segmentation fault, exception, or incorrect result |
+| COMP  | a fix for a compilation issue, error or warning |
+| ENH   | new functionality added to the project |
+| PERF  | a performance improvement |
+| STYLE | a change that does not impact the logic or execution of the code (improve coding style, comments, documentation) |
 
 Example commit messages:
 
-- Bad: BUG: Check pointer validity before dereferencing -> implementation detail, self-explanatory (by looking at the code)
+- Bad: BUG: Check pointer validity before dereferencing -> _implementation detail, self-explanatory_ (by looking at the code)
 - Good: BUG: Fix crash in Module X when clicking Apply button
-- Bad: ENH: More work in qSlicerXModuleWidget -> more work is too vague, qSlicerXModuleWidget is too low level
+- Bad: ENH: More work in qSlicerXModuleWidget -> more work is _too vague_, qSlicerXModuleWidget is too _low level_
 - Good: ENH: Add float image outputs in module X
-- Bad: COMP: Typo in cmake variable -> implementation detail, self-explanatory
+- Bad: COMP: Typo in cmake variable -> _implementation detail, self-explanatory_
 - Good: COMP: Fix compilation error with Numpy on Visual Studio
 
 ### Online compilers
