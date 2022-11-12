@@ -137,7 +137,7 @@ Example commit messages:
 - [Coliru](https://coliru.stacked-crooked.com/)
 - [Compiler Explorer (Godbolt)](https://godbolt.org/)
 - [cppinsights.io](https://cppinsights.io/)
-- The site [&lt;Coding Ground&gt;](https://www.tutorialspoint.com/codingground.htm) includes a [C++ online compiler](https://www.tutorialspoint.com/compile_cpp_online.php)
+- The site [&lt;Coding Ground&gt;](https://www.tutorialspoint.com/codingground.htm) includes a [C++ online compiler](https://www.tutorialspoint.com/online_cpp_compiler.php)
 - [Rextester](https://rextester.com/l/cpp_online_compiler_visual)
 - [Wandbox](https://wandbox.org/)
 
