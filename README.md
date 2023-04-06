@@ -112,15 +112,16 @@ Other tools related to code analysis:
 
 ### Commits
 
-When committing changes, we now favor using emojis that convey information (see, for example, [gitmoji](https://gitmoji.dev/)). In the past we used common prefixes—see for example a [list of ITK changes](https://www.kitware.com/itk-4-7-2-has-been-released/). From an [Slicer entry](https://www.slicer.org/slicerWiki/index.php/Documentation/4.1/Developers/Style_Guide#Commit_message_prefix):
+When committing changes, we now favor using emojis that convey information (see, for example, [gitmoji](https://gitmoji.dev/)). In the past we used common prefixes—see for example a [list of ITK changes](https://www.kitware.com/itk-4-7-2-has-been-released/). From the [Slicer’s style guide](https://slicer.readthedocs.io/en/latest/developer_guide/style_guide.html):
 
 | Prefix | What          |
 | ------ |:--------------|
-| BUG   | a change made to fix a runtime issue (crash, segmentation fault, exception, or incorrect result |
+| BUG   | a change made to fix a runtime issue (crash, segmentation fault, exception, or incorrect result) |
 | COMP  | a fix for a compilation issue, error or warning |
+| DOC   | a documentation change |
 | ENH   | new functionality added to the project |
 | PERF  | a performance improvement |
-| STYLE | a change that does not impact the logic or execution of the code (improve coding style, comments, documentation) |
+| STYLE | a change that does not impact the logic or execution of the code (improve coding style, comments) |
 
 Example commit messages:
 
