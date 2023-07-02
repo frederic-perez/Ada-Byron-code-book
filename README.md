@@ -108,7 +108,7 @@ We strive to maintain a certain quality on the code by taking advantage of some 
 
 Other tools related to code analysis:
 
-- TODO (try this): [C-Reduce](http://embed.cs.utah.edu/creduce/) _“takes a large C or C++ program that has a property of interest (such as triggering a compiler bug) and automatically produces a much smaller C/C++ program that has the same property.”_
+- TODO (try this): [C-Reduce](https://github.com/csmith-project/creduce) _“takes a large C or C++ program that has a property of interest (such as triggering a compiler bug) and automatically produces a much smaller C/C++ program that has the same property.”_
 
 ### Commits
 
