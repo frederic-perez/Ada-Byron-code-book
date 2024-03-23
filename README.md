@@ -81,7 +81,7 @@ Guidelines:
 
 C++ compilers:
 
-- [https://www.stroustrup.com/compilers.html](http://www.stroustrup.com/compilers.html), by Bjarne Stroustrup
+- [stroustrup.com/compilers.html](https://www.stroustrup.com/compilers.html), by Bjarne Stroustrup
 
 A list of interesting libraries or toolkits:
 
