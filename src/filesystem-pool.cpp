@@ -89,10 +89,10 @@ ABcb::ExamplesOfBoostFileSystem(const bf::path& a_filename)
   const auto slash = bf::path::preferred_separator;
   B_LOG_INFO << pad << "path::preferred_separator (system slash) is \'" << slash << '\'';
 
-  bf::path path1 = bf::path("C:\\Windows", nullptr) / "System32"; // operator/
+  bf::path path1 = bf::path("C:\\Windows") / "System32"; // operator/
   DoSomeBoostStuff("path1", path1);
 
-  bf::path path2 = bf::path("/usr", nullptr) / "include" / "." / "clang"; // operator/
+  bf::path path2 = bf::path("/usr") / "include" / "." / "clang"; // operator/
   DoSomeBoostStuff("path2", path2);
 
   // Geting temporary directory path (temporary folder)
@@ -111,7 +111,7 @@ ABcb::ExamplesOfBoostFileSystem(const bf::path& a_filename)
   // "Testing" an invented file (random file)
 
   const bf::path randomPath =
-    bf::unique_path(bf::path("invented-filename-to-check-if-it-exists-%%%%-%%%%-%%%%-%%%%.yuk", nullptr));
+    bf::unique_path(bf::path("invented-filename-to-check-if-it-exists-%%%%-%%%%-%%%%-%%%%.yuk"));
   B_LOG_INFO
     << pad << '\"' << randomPath.string() << '\"'
     << (bf::exists(randomPath) ? " exists" : " does not exist");

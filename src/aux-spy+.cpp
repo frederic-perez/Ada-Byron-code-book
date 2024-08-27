@@ -236,13 +236,13 @@ namespace bf = boost::filesystem;
 void
 LogArgv0Info(const std::string& a_argv0)
 {
-  const bf::path fullArgv0 = bf::system_complete(bf::canonical(bf::path(a_argv0, nullptr)));
+  const bf::path fullArgv0 = bf::system_complete(bf::canonical(bf::path(a_argv0)));
 
   B_LOG_INFO << "The full argv[0]:";
   B_LOG_INFO << pad << "is " << fullArgv0 << ",";
   std::ostringstream oss;
   if (bf::exists(fullArgv0)) {
-    oss << "which is" << (bf::is_regular(fullArgv0) ? "" : " not") << " a regular file, created by ";
+    oss << "which is" << (bf::is_regular_file(fullArgv0) ? "" : " not") << " a regular file, created by ";
 #if defined(CMAKE_MYUSERNAME)
     oss << BOOST_PP_STRINGIZE(CMAKE_MYUSERNAME);
 #else

@@ -7,6 +7,7 @@
 #include "aux-raw-compiler-warnings-off++begin.h"
 // clang-format off
   #include <boost/lexical_cast.hpp>
+  #include <boost/numeric/conversion/cast.hpp> // for boost::numeric_cast
 // clang-format on
 #include "aux-raw-compiler-warnings-off++end.h"
 
@@ -181,8 +182,6 @@ ApplyBoostNumericCast(const SourceT a_source)
   Note: Another possibility would be using std::stod (from <string>)
 
   */
-
-#include <boost/numeric/conversion/bounds.hpp>
 
   B_LOG_INFO << pad << __func__ << ": a_source (" << ABcb::spy::TypeNameENH<SourceT>() << ") = " << a_source;
   TargetT target = 66;
