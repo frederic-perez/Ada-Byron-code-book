@@ -11,7 +11,7 @@
 #include <boost/preprocessor.hpp>
 #include <boost/program_options.hpp>
 
-#include "literal-operators.h"
+#include "literal-operators.hpp"
 
 #define ABcb_TO_STR(unused, data, elem) BOOST_PP_STRINGIZE(elem),
 

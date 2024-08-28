@@ -8,17 +8,17 @@
 #  include <atlstr.h>
 #endif
 
-#include "aux-raw-compiler-warnings-off++begin.h"
+#include "aux-raw-compiler-warnings-off++begin.hpp"
 // clang-format off
   #include <boost/algorithm/string.hpp>
   #include <boost/locale.hpp>
   #include <boost/range/algorithm/remove_if.hpp>
 // clang format on
-#include "aux-raw-compiler-warnings-off++end.h"
+#include "aux-raw-compiler-warnings-off++end.hpp"
 
-#include "algorithm-string-pool.h"
-#include "aux-raw.h"
-#include "log.h"
+#include "algorithm-string-pool.hpp"
+#include "aux-raw.hpp"
+#include "log.hpp"
 
 namespace {
 

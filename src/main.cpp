@@ -4,24 +4,24 @@
 
 #include <boost/preprocessor.hpp>
 
-#include "algorithm-string-pool.h"
-#include "aux-raw.h" // for ExamplesOfRaw
-#include "aux-spy+.h" // for RunInfo, Timer
-#include "cli-parser.h"
-#include "concurrency.h"
-#include "conversions+casts++.h"
-#include "cpp11-pool.h"
-#include "enum-class-iteration+.h"
-#include "euclidean.h"
-#include "filesystem-pool.h"
-#include "literal-operators.h"
-#include "log.h"
-#include "miscellany.h"
-#include "preprocessor-pool.h"
-#include "promotions-pool.h"
-#include "ublas-pool.h"
-#include "under-construction.h"
-#include "xml-parser.h"
+#include "algorithm-string-pool.hpp"
+#include "aux-raw.hpp" // for ExamplesOfRaw
+#include "aux-spy+.hpp" // for RunInfo, Timer
+#include "cli-parser.hpp"
+#include "concurrency.hpp"
+#include "conversions+casts++.hpp"
+#include "cpp11-pool.hpp"
+#include "enum-class-iteration+.hpp"
+#include "euclidean.hpp"
+#include "filesystem-pool.hpp"
+#include "literal-operators.hpp"
+#include "log.hpp"
+#include "miscellany.hpp"
+#include "preprocessor-pool.hpp"
+#include "promotions-pool.hpp"
+#include "ublas-pool.hpp"
+#include "under-construction.hpp"
+#include "xml-parser.hpp"
 
 #define B_LOG_END_OF_BLOCK B_LOG_TRACE << "----";
 

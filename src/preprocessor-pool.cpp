@@ -1,8 +1,8 @@
 #include <string>
 
-#include "aux-raw.h"
-#include "log.h"
-#include "preprocessor-pool.h"
+#include "aux-raw.hpp"
+#include "log.hpp"
+#include "preprocessor-pool.hpp"
 
 namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;

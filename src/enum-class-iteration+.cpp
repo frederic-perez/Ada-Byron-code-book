@@ -2,9 +2,9 @@
 
 #include <boost/assert.hpp>
 
-#include "aux-raw.h"
-#include "enum-class-iteration+.h"
-#include "log.h"
+#include "aux-raw.hpp"
+#include "enum-class-iteration+.hpp"
+#include "log.hpp"
 
 namespace Ada_Byron_code_book::enums {
 

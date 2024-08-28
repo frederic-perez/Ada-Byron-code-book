@@ -10,10 +10,10 @@
 #include <boost/preprocessor.hpp>
 #include <boost/version.hpp>
 
-#include "aux-raw.h" // for pad
-#include "aux-spy+.h"
-#include "log.h"
-#include "preprocessor-pool.h"
+#include "aux-raw.hpp" // for pad
+#include "aux-spy+.hpp"
+#include "log.hpp"
+#include "preprocessor-pool.hpp"
 
 namespace ABcb = Ada_Byron_code_book;
 

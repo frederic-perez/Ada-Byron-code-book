@@ -7,12 +7,12 @@
 #include <type_traits>
 #include <vector>
 
-#include "aux-raw-compiler-warnings-off++begin.h"
+#include "aux-raw-compiler-warnings-off++begin.hpp"
 // clang-format off
   #include <boost/algorithm/string.hpp>
   #include <boost/multiprecision/cpp_dec_float.hpp>
 // clang-format on
-#include "aux-raw-compiler-warnings-off++end.h"
+#include "aux-raw-compiler-warnings-off++end.hpp"
 
 namespace Ada_Byron_code_book::Euclidean {
 

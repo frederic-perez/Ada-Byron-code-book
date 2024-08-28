@@ -4,16 +4,16 @@
 #include <numeric>
 #include <sstream> // for std::ostringstream
 
-#include "aux-raw-compiler-warnings-off++begin.h"
+#include "aux-raw-compiler-warnings-off++begin.hpp"
 // clang-format off
   #include <boost/math/constants/constants.hpp>
 // clang-format on
-#include "aux-raw-compiler-warnings-off++end.h"
+#include "aux-raw-compiler-warnings-off++end.hpp"
 
-#include "aux-raw.h" // for pad
-#include "aux-spy+.h" // for TypeNameENH
-#include "euclidean.h"
-#include "log.h"
+#include "aux-raw.hpp" // for pad
+#include "aux-spy+.hpp" // for TypeNameENH
+#include "euclidean.hpp"
+#include "log.hpp"
 
 namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179
 

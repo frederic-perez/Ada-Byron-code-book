@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 
-#include "aux-raw.h"
-#include "aux-spy+.h" // for ToString
-#include "log.h"
+#include "aux-raw.hpp"
+#include "aux-spy+.hpp" // for ToString
+#include "log.hpp"
 
 namespace ABcb = Ada_Byron_code_book;
 

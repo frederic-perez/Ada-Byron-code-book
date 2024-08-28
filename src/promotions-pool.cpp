@@ -2,9 +2,9 @@
 
 #include <typeinfo>
 
-#include "aux-raw.h"
-#include "log.h"
-#include "promotions-pool.h"
+#include "aux-raw.hpp"
+#include "log.hpp"
+#include "promotions-pool.hpp"
 
 namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;

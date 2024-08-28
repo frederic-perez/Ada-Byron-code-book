@@ -1,8 +1,8 @@
-#include "literal-operators.h"
+#include "literal-operators.hpp"
 
-#include "aux-raw.h" // for pad
-#include "aux-spy+.h" // for TypeNameENH
-#include "log.h"
+#include "aux-raw.hpp" // for pad
+#include "aux-spy+.hpp" // for TypeNameENH
+#include "log.hpp"
 
 #include <algorithm>
 

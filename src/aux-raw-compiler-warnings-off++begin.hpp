@@ -3,24 +3,24 @@
 // since we want these preprocessor command to be included in <<every>> client
 // file that does include this file.
 
-//! Companion file to ...++begin.h is ...++end.h
+//! Companion file to ...++begin.hpp is ...++end.hpp
 //
 // Right usage of these headers
 // ============================
-// #include <aux-raw-compiler-warnings-off++begin.h>
+// #include <aux-raw-compiler-warnings-off++begin.hpp>
 //   #include ...
-// #include <aux-raw-compiler-warnings-on++end.h>
+// #include <aux-raw-compiler-warnings-on++end.hpp>
 //
 // Wrong usage of these headers
 // ============================
-// #include <aux-raw-compiler-warnings-off++end.h>
+// #include <aux-raw-compiler-warnings-off++end.hpp>
 //   #include ...
-// #include <aux-raw-compiler-warnings-off++begin.h>
+// #include <aux-raw-compiler-warnings-off++begin.hpp>
 
 // Stuff to forbid a bad usage of these headers
 //
 #if defined(AuxRawCompilerWarningsOffBegin)
-#  error AuxRawCompilerWarningsOffBegin already defined--two ++begin.h includes?
+#  error AuxRawCompilerWarningsOffBegin already defined--two ++begin.hpp includes?
 #else
 #  define AuxRawCompilerWarningsOffBegin
 #endif

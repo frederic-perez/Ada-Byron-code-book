@@ -30,26 +30,26 @@ else ()
 endif ()
 
 set(SRC_LIST
-  aux-raw.cpp aux-raw.h
-  aux-raw-compiler-warnings-off++begin.h aux-raw-compiler-warnings-off++end.h
-  aux-spy+.cpp aux-spy+.h
-  algorithm-string-pool.cpp algorithm-string-pool.h
-  cli-parser.cpp cli-parser.h
-  concurrency.cpp concurrency.h
-  conversions+casts++.cpp conversions+casts++.h
-  cpp11-pool.cpp cpp11-pool.h
-  enum-class-iteration+.cpp enum-class-iteration+.h
-  euclidean.cpp euclidean.h
-  literal-operators.cpp literal-operators.h
-  log.h
+  aux-raw.cpp aux-raw.hpp
+  aux-raw-compiler-warnings-off++begin.hpp aux-raw-compiler-warnings-off++end.hpp
+  aux-spy+.cpp aux-spy+.hpp
+  algorithm-string-pool.cpp algorithm-string-pool.hpp
+  cli-parser.cpp cli-parser.hpp
+  concurrency.cpp concurrency.hpp
+  conversions+casts++.cpp conversions+casts++.hpp
+  cpp11-pool.cpp cpp11-pool.hpp
+  enum-class-iteration+.cpp enum-class-iteration+.hpp
+  euclidean.cpp euclidean.hpp
+  literal-operators.cpp literal-operators.hpp
+  log.hpp
   main.cpp
-  miscellany.cpp miscellany.h
-  filesystem-pool.cpp filesystem-pool.h
-  preprocessor-pool.cpp preprocessor-pool.h
-  promotions-pool.cpp promotions-pool.h
-  ublas-pool.cpp ublas-pool.h
-  under-construction.cpp under-construction.h
-  xml-parser.cpp xml-parser.h
+  miscellany.cpp miscellany.hpp
+  filesystem-pool.cpp filesystem-pool.hpp
+  preprocessor-pool.cpp preprocessor-pool.hpp
+  promotions-pool.cpp promotions-pool.hpp
+  ublas-pool.cpp ublas-pool.hpp
+  under-construction.cpp under-construction.hpp
+  xml-parser.cpp xml-parser.hpp
 )
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})

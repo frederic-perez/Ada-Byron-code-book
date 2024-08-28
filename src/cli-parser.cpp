@@ -2,18 +2,18 @@
 #include <sstream> // for std::ostringstream
 #include <vector>
 
-#include "aux-raw-compiler-warnings-off++begin.h"
+#include "aux-raw-compiler-warnings-off++begin.hpp"
 // clang-format off
   #include <boost/algorithm/string.hpp>
   #include <boost/numeric/conversion/bounds.hpp>
   #include <boost/numeric/conversion/cast.hpp>
   #include <boost/tokenizer.hpp>
 // clang-format on
-#include "aux-raw-compiler-warnings-off++end.h"
+#include "aux-raw-compiler-warnings-off++end.hpp"
 
-#include "aux-raw.h"
-#include "cli-parser.h"
-#include "log.h"
+#include "aux-raw.hpp"
+#include "cli-parser.hpp"
+#include "log.hpp"
 
 namespace ABcb = Ada_Byron_code_book;
 

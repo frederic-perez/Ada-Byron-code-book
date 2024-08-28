@@ -6,9 +6,9 @@
 
 #include <boost/system/config.hpp>
 
-#include "aux-raw.h"
-#include "filesystem-pool.h"
-#include "log.h"
+#include "aux-raw.hpp"
+#include "filesystem-pool.hpp"
+#include "log.hpp"
 
 namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;

@@ -1,16 +1,16 @@
 // -- Examples on how to use boost::numeric::ublas
 
-#include "aux-raw-compiler-warnings-off++begin.h"
+#include "aux-raw-compiler-warnings-off++begin.hpp"
 // clang-format off
   #include <boost/numeric/ublas/io.hpp>
   #include <boost/numeric/ublas/matrix.hpp>
   #include <boost/numeric/ublas/vector.hpp>
 // clang-format on
-#include "aux-raw-compiler-warnings-off++end.h"
+#include "aux-raw-compiler-warnings-off++end.hpp"
 
-#include "aux-raw.h"
-#include "log.h"
-#include "ublas-pool.h"
+#include "aux-raw.hpp"
+#include "log.hpp"
+#include "ublas-pool.hpp"
 
 namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;

@@ -11,9 +11,9 @@
 #  include <pthread.h> // From 3rd party library POSIX threads
 #endif
 
-#include "aux-raw.h"
-#include "concurrency.h"
-#include "log.h"
+#include "aux-raw.hpp"
+#include "concurrency.hpp"
+#include "log.hpp"
 
 namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179
 

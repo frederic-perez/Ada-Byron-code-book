@@ -6,9 +6,9 @@
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/numeric/conversion/bounds.hpp>
 
-#include "aux-raw.h"
-#include "miscellany.h"
-#include "log.h"
+#include "aux-raw.hpp"
+#include "miscellany.hpp"
+#include "log.hpp"
 
 namespace ABcb = Ada_Byron_code_book;
 

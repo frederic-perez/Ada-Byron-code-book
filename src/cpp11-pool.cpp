@@ -5,10 +5,10 @@
 #include <tuple>
 #include <vector>
 
-#include "aux-raw.h" // for pad
-#include "aux-spy+.h" // for ToString, TypeNameENH
-#include "cpp11-pool.h"
-#include "log.h"
+#include "aux-raw.hpp" // for pad
+#include "aux-spy+.hpp" // for ToString, TypeNameENH
+#include "cpp11-pool.hpp"
+#include "log.hpp"
 
 namespace ABcb = Ada_Byron_code_book; // Stroustrup C++ PL, p. 179
 

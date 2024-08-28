@@ -1,10 +1,10 @@
-//! IMPORTANT: See notes in the companion header file ...-off++begin.h
+//! IMPORTANT: See notes in the companion header file ...-off++begin.hpp
 //!            (They are not replicated here for maintenance reasons.)
 
 // Stuff to forbid a bad usage of these headers
 //
 #if !defined(AuxRawCompilerWarningsOffBegin)
-#  error File ...++begin.h has to be included BEFORE the ...++end.h file
+#  error File ...++begin.hpp has to be included BEFORE the ...++end.hpp file
 #else
 #  undef AuxRawCompilerWarningsOffBegin
 #endif

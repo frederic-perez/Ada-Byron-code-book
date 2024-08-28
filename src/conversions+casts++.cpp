@@ -4,17 +4,17 @@
 #include <sstream>
 #include <string>
 
-#include "aux-raw-compiler-warnings-off++begin.h"
+#include "aux-raw-compiler-warnings-off++begin.hpp"
 // clang-format off
   #include <boost/lexical_cast.hpp>
   #include <boost/numeric/conversion/cast.hpp> // for boost::numeric_cast
 // clang-format on
-#include "aux-raw-compiler-warnings-off++end.h"
+#include "aux-raw-compiler-warnings-off++end.hpp"
 
-#include "aux-raw.h"
-#include "aux-spy+.h" // for TypeNameENH
-#include "conversions+casts++.h"
-#include "log.h"
+#include "aux-raw.hpp"
+#include "aux-spy+.hpp" // for TypeNameENH
+#include "conversions+casts++.hpp"
+#include "log.hpp"
 
 namespace ABcb = Ada_Byron_code_book;
 using ABcb::raw::pad;
@@ -145,7 +145,7 @@ void
 UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
 {
   B_LOG_INFO << pad << __func__ << ": a_source (" << ABcb::spy::TypeNameENH<SourceT>() << ") = " << a_source;
-#include "aux-raw-compiler-warnings-off++begin.h"
+#include "aux-raw-compiler-warnings-off++begin.hpp"
   bool succeeded = true;
   const auto typeNameENHOfTargetT = ABcb::spy::TypeNameENH<TargetT>();
   if (a_source < std::numeric_limits<TargetT>::lowest()) { // Now in C++ (we used to use boost before)
@@ -155,7 +155,7 @@ UseStdNumericLimitsPlusStaticCast_FAILS_SOMETIMES(const SourceT a_source)
     B_LOG_ERROR << pad << __func__ << ": Error: a_source too large to convert to " << typeNameENHOfTargetT;
     succeeded = false;
   }
-#include "aux-raw-compiler-warnings-off++end.h"
+#include "aux-raw-compiler-warnings-off++end.hpp"
 
   if (!succeeded)
     return;
