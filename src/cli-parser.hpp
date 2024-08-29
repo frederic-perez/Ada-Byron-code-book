@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ADA_BYRON_CODE_BOOK__CLI_PARSER_HPP
+#define ADA_BYRON_CODE_BOOK__CLI_PARSER_HPP
 
 #include <array>
 #include <cstdint>
@@ -138,3 +139,5 @@ private:
 } // namespace cli
 
 } // namespace Ada_Byron_code_book
+
+#endif // ADA_BYRON_CODE_BOOK__CLI_PARSER_HPP

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ADA_BYRON_CODE_BOOK__PREPROCESSOR_POOL_HPP
+#define ADA_BYRON_CODE_BOOK__PREPROCESSOR_POOL_HPP
 
 #include <ostream>
 
@@ -12,3 +13,5 @@ namespace Ada_Byron_code_book::spy {
 void LogListOfPreprocessorDefines();
 
 } // namespace Ada_Byron_code_book::spy
+
+#endif // ADA_BYRON_CODE_BOOK__PREPROCESSOR_POOL_HPP

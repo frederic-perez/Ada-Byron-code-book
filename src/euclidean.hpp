@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ADA_BYRON_CODE_BOOK__EUCLIDEAN_HPP
+#define ADA_BYRON_CODE_BOOK__EUCLIDEAN_HPP
 
 // TODO: Move #includes to .cpp
 // TODO: Study #include <type_traits> possibilities
@@ -126,3 +127,5 @@ using Vector3Q = Vector<long double, 3>;
 using Vector3HQ = Vector<boost::multiprecision::cpp_dec_float_50, 3>;
 
 } // namespace Ada_Byron_code_book::Euclidean
+
+#endif // ADA_BYRON_CODE_BOOK__EUCLIDEAN_HPP

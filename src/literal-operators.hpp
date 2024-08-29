@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ADA_BYRON_CODE_BOOK__LITERAL_OPERATORS_HPP
+#define ADA_BYRON_CODE_BOOK__LITERAL_OPERATORS_HPP
 
 namespace Ada_Byron_code_book::literal_operators {
 
@@ -13,3 +14,5 @@ constexpr unsigned char operator"" _uchar(unsigned long long arg) noexcept
 }
 
 } // namespace Ada_Byron_code_book::literal_operators
+
+#endif // ADA_BYRON_CODE_BOOK__LITERAL_OPERATORS_HPP

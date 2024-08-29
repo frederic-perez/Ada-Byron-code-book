@@ -1,12 +1,5 @@
-#pragma once
-// '- This pragma works for
-// - Windows 8.1:
-//   - Visual Studio 2013 (vs12)
-// - Ubuntu (virtual machine):
-//   - g++ 4.8.2
-//   - clang++ 3.4-1ubuntu3 (based on LLVM 3.4)
-// - Apple OS X Yosemite
-//   - Xcode 6.1 with Apple LLVM 6.0 (clang-600.0.54) (based on LLVM 3.5svn)
+#ifndef ADA_BYRON_CODE_BOOK__LOG_HPP
+#define ADA_BYRON_CODE_BOOK__LOG_HPP
 
 #include <boost/log/trivial.hpp>
 
@@ -23,3 +16,5 @@
 //!? TODO: Possibly extend LogLine with Boost's PP for extra information
 
 #define LogLine B_LOG_TRACE << "@@@@ " << __FILE__ << ':' << __func__ << ":L" << __LINE__;
+
+#endif // ADA_BYRON_CODE_BOOK__LOG_HPP

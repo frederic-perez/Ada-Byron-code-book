@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ADA_BYRON_CODE_BOOK__MISCELLANY_HPP
+#define ADA_BYRON_CODE_BOOK__MISCELLANY_HPP
 
 namespace Ada_Byron_code_book::miscellany {
 
@@ -36,3 +37,5 @@ void ExamplesOfFactorial();
 void ExamplesOfMultiprecision();
 
 } // namespace Ada_Byron_code_book::miscellany
+
+#endif // ADA_BYRON_CODE_BOOK__MISCELLANY_HPP

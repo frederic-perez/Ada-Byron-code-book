@@ -1,5 +1,5 @@
-#ifndef CPP_PLAYGROUND_ENUM_CLASS_ITERATION_PLUS_H
-#define CPP_PLAYGROUND_ENUM_CLASS_ITERATION_PLUS_H
+#ifndef ADA_BYRON_CODE_BOOK__ENUM_CLASS_ITERATION_PLUS_HPP
+#define ADA_BYRON_CODE_BOOK__ENUM_CLASS_ITERATION_PLUS_HPP
 
 #include <array>
 #include <string>
@@ -86,4 +86,4 @@ void ExamplesOfEnumClassIteration();
 
 } // namespace Ada_Byron_code_book::enums
 
-#endif // CPP_PLAYGROUND_ENUM_CLASS_ITERATION_PLUS_H
+#endif // ADA_BYRON_CODE_BOOK__ENUM_CLASS_ITERATION_PLUS_HPP

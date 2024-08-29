@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ADA_BYRON_CODE_BOOK__AUX_SPY_PLUS_HPP
+#define ADA_BYRON_CODE_BOOK__AUX_SPY_PLUS_HPP
 
 #if !defined(_MSC_VER)
 #  include <cxxabi.h>
@@ -248,3 +249,5 @@ ToString(const T* a_oldCArray, size_t a_size, const std::string& a_name)
   }
   return oss.str();
 }
+
+#endif // ADA_BYRON_CODE_BOOK__AUX_SPY_PLUS_HPP

@@ -1,5 +1,10 @@
 // Note: Do not even think about doing
-// #pragma once
+//   #pragma once
+// or something like
+//   #ifndef ..._HPP
+//   #define ..._HPP
+//   ...
+//   #endif
 // since we want these preprocessor command to be included in <<every>> client
 // file that does include this file.
 

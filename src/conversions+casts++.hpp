@@ -1,6 +1,7 @@
 // -- Examples on how to use boost::lexical_cast and more
 
-#pragma once
+#ifndef ADA_BYRON_CODE_BOOK__CONVERSIONS_PLUS_CASTS_PLUS_PLUS_HPP
+#define ADA_BYRON_CODE_BOOK__CONVERSIONS_PLUS_CASTS_PLUS_PLUS_HPP
 
 #include <string>
 
@@ -12,3 +13,5 @@ void ExamplesOfBoostLexicalCast(const std::string& a_numberToConvert);
 void ExamplesOfBoostNumericCast();
 
 } // namespace Ada_Byron_code_book
+
+#endif // ADA_BYRON_CODE_BOOK__CONVERSIONS_PLUS_CASTS_PLUS_PLUS_HPP

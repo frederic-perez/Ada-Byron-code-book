@@ -1,6 +1,7 @@
 // -- Examples on how to use some C++11 functionalities
 
-#pragma once
+#ifndef ADA_BYRON_CODE_BOOK__CPP11_POOL_HPP
+#define ADA_BYRON_CODE_BOOK__CPP11_POOL_HPP
 
 #include <sstream>
 #include <string>
@@ -49,3 +50,5 @@ class Derived : public Base {
 };
 
 } // namespace Ada_Byron_code_book::cpp11
+
+#endif // ADA_BYRON_CODE_BOOK__CPP11_POOL_HPP

@@ -1,3 +1,4 @@
-#pragma once
+#ifndef ADA_BYRON_CODE_BOOK__UNDER_CONSTRUCTION_HPP
+#define ADA_BYRON_CODE_BOOK__UNDER_CONSTRUCTION_HPP
 
-// TODO: (iss) Parse point cloud (ASCII) file as a 1st example (3DI)
+#endif // ADA_BYRON_CODE_BOOK__UNDER_CONSTRUCTION_HPP

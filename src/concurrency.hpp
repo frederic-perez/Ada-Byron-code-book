@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ADA_BYRON_CODE_BOOK__CONCURRENCY_HPP
+#define ADA_BYRON_CODE_BOOK__CONCURRENCY_HPP
 
 namespace Ada_Byron_code_book {
 
@@ -17,3 +18,5 @@ void ExamplesOfConcurrencyUsingPOSIXThreads();
 #endif
 
 } // namespace Ada_Byron_code_book
+
+#endif // ADA_BYRON_CODE_BOOK__CONCURRENCY_HPP
