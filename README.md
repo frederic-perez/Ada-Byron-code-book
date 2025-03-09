@@ -91,7 +91,6 @@ A list of interesting libraries or toolkits:
 Some questions, and code:
 
 - StackOverflow’s [questions tagged C++](https://stackoverflow.com/questions/tagged/c%2b%2b)
-- [C++ Code Examples](https://cpp.hotexamples.com/) from HotExamples
 
 And finally, a list of good programming practices and other interesting programming books:
 
